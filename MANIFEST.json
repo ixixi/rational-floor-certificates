@@ -62,9 +62,9 @@
       "sha256": "46768b4a18361c00226584a7eb1640641410b4c88c4acc04cd642e9838da50a1"
     },
     {
-      "bytes": 892957,
+      "bytes": 892977,
       "path": "paper-en.pdf",
-      "sha256": "7488db15c5d2d230684fd2c335444121ee03c69ada3bc1911f841017c90dbc71"
+      "sha256": "bbcdaae89f24b195e424f68aa6bd0c6df8465db2975d6d1349b0ed43faaa6b23"
     },
     {
       "bytes": 1163336,
@@ -222,9 +222,9 @@
       "sha256": "c18308c2e1590ad7f81a6ef927b6b41d8cbaac5308797cda1ffe2259335c80e2"
     },
     {
-      "bytes": 261119,
+      "bytes": 261178,
       "path": "sources/paper.tex",
-      "sha256": "5bebd1f325bd9a9e7c1f9b91b913cfd3083dec7861fee7ab93a8c387ea9c3e4a"
+      "sha256": "7827cda807fbaebae9cdddd29e1b00124919087141e66aaa1f8ad4c45f7a2354"
     },
     {
       "bytes": 5790,
@@ -1067,9 +1067,9 @@
       "sha256": "f64a1ef0ec9ca0f261fb5be9524a445ddc533d33ef43db158ffca7e1b0cec5a9"
     },
     {
-      "bytes": 204773,
+      "bytes": 204832,
       "path": "supplement/manuscript/paper.md",
-      "sha256": "eceb457aa55f7fff07418ca4ff220bfeab1cdf563ee43b59d784d4689f545897"
+      "sha256": "fbe87483ecdb61ce3fe45585ba6001091d01abc711e74d53ae0945c553b19e78"
     },
     {
       "bytes": 8046,
@@ -1091,5 +1091,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "5b710c51410e55bfdbb117e3b2de23ad98bb800b7653f7228e7a91c1780f3643"
+  "source_sha256": "ec27db508391b71acfef196968b87f0e70c53ff07408528b7c90de1416942cbd"
 }
