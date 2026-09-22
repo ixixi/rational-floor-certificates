@@ -12,6 +12,11 @@
       "sha256": "901b46117be28800c13c40129db75bd83fc4cd53f00cf3a1fb36a33e359fb749"
     },
     {
+      "bytes": 761,
+      "path": "CITATION.cff",
+      "sha256": "6bb1eb87d9dfa1775abe33cbfeb682328b2cea98b63e3827995cb14dc60faaab"
+    },
+    {
       "bytes": 1500,
       "path": "Dockerfile",
       "sha256": "f4ee6d1f2a3e7b9ec33523be7144ddc613af8777d5c4243ea8989f9f81d33127"
@@ -1086,5 +1091,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "f14b877ef959ce8f664d3cfedf5322a4069201b5f21b85cc3ff0e86869fc0c1f"
+  "source_sha256": "5b710c51410e55bfdbb117e3b2de23ad98bb800b7653f7228e7a91c1780f3643"
 }

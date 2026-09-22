@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated preprint. このリポジトリを利用する場合は、関連するプレプリントを引用してください。"
+title: "rational-floor-certificates"
+type: software
+authors:
+  - family-names: "Odagiri"
+    given-names: "Yuri"
+version: "1.0.0"
+date-released: "2026-09-22"
+repository-code: "https://github.com/ixixi/rational-floor-certificates"
+url: "https://github.com/ixixi/rational-floor-certificates"
+
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Odagiri"
+      given-names: "Yuri"
+  title: "Finite graph certificates for composite terms in rational floor sequences"
+  year: 2026
+  doi: "10.5281/zenodo.22887589"
+  publisher:
+    name: "Zenodo"
