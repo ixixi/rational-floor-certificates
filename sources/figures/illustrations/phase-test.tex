@@ -1,0 +1,25 @@
+\begin{tikzpicture}[paperfig]
+\foreach \x/\s in {0/L,7/R}{
+ \begin{scope}[xshift=\x cm]
+ \node[fnode] (\s u) at (0,0) {$u$};
+ \node[fnode] (\s v) at (3.3,0) {$v$};
+ \node[below=3pt of \s u] {$h(u)=0$};
+ \node[below=3pt of \s v] {$h(v)=1$};
+ \draw[fedge] (\s u) to[bend left=30] node[flabel,above] {$2$} (\s v);
+ \draw[fedge] (\s v) to[bend left=30] node[flabel,below] {$4$} (\s u);
+ \node at (1.65,-1.35) {$\delta(u\to v)=0,\quad\delta(v\to u)=2$};
+ \node at (1.65,-1.85) {$d=2$};
+ \end{scope}
+}
+\node[ftitle] at(1.65,1.3){\figtext{Certified cycle}{認証される閉路}};
+\node[ftitle] at(8.65,1.3){\figtext{One extra edge}{辺を一本追加}};
+\draw[fedge,dashed] (Ru) to node[flabel,above] {$4$} (Rv);
+\node[fbox,text width=5.2cm] at (1.65,-2.85)
+ {$\lambda(0)=2,\quad\lambda(1)=4$\\[3pt]
+ \figtext{Output: $242424\ldots$ (up to shift)}{出力：$242424\ldots$（開始位相を除く）}};
+\node[fbox,text width=5.2cm] at (8.65,-2.85)
+ {$\lambda(0)=2\ \text{\figtext{and}{かつ}}\ \lambda(0)=4$\\[3pt]
+ \figtext{Conflict at phase $0$; not certified}{位相 $0$ で不整合：認証されない}};
+\node[align=center,text width=12cm] at (5.15,-4)
+ {\figtext{In both panels, $h$ is the total word length of a chosen path from the root $u$.}{両図とも、$h$ は根 $u$ から選んだ経路の総語長である。}};
+\end{tikzpicture}

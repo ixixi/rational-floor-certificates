@@ -1,0 +1,28 @@
+\begin{tikzpicture}[paperfig]
+\node[fbox,text width=11.5cm] (orbit) at (0,0)
+ {\figtext{Assume a true orbit eventually avoids the chosen primes}{真の軌道が選んだ素数を最終的にすべて回避すると仮定}\\
+ $Q_n=\lfloor\xi(a/b)^n\rfloor,\qquad c_n=bQ_{n+1}-aQ_n$};
+\node[fbox,text width=10cm] (graph) at (0,-1.45)
+ {\figtext{Finite outer graph: every such orbit gives a walk}{有限外側グラフ：そのような軌道はすべてウォークを与える}\\
+ \figtext{congruence + cell compatibility + carry alphabet}{合同条件＋セル整合条件＋キャリー集合}};
+\draw[fedge] (orbit)--(graph);
+\node[fbox,text width=10cm] (remove) at (0,-3)
+ {\figtext{Decompose into SCCs; test all internal letters}{SCC分解し、内部辺の全文字について位相判定}\\
+ \figtext{Remove certified cyclic SCCs and acyclic parts}{認証された巡回SCCと非巡回部分を除去}};
+\draw[fedge] (graph)--(remove);
+\node[fbox,text width=5cm] (ref) at (-3.2,-5.2)
+ {\textbf{\figtext{One-step method}{一段階法}}\\[4pt]
+ $K\longmapsto fK$\\\figtext{Refine retained cells; rebuild edges}{残存セルを細分し、辺を再構成}};
+\node[fbox,text width=5cm] (word) at (3.2,-5.2)
+ {\textbf{\figtext{Word method}{語ラベル法}}\\[4pt]
+ $K\ \text{\figtext{fixed}{は固定}}$\\\figtext{Contract paths; lift by the next prime}{経路を縮約し、次の素数で持ち上げ}};
+\draw[fedge] (remove.south) -- ++(0,-.32) -| (ref.north);
+\draw[fedge] (remove.south) -- ++(0,-.32) -| (word.north);
+\draw[fedge,dashed] (ref.west) -- ++(-.5,0) |- (remove.west);
+\draw[fedge,dashed] (word.east) -- ++(.5,0) |- (remove.east);
+\node[fbox,text width=11.5cm] (empty) at (0,-7.2)
+ {\figtext{If the retained graph becomes empty: contradiction}{残存グラフが空になれば矛盾}\\
+ \figtext{A true prime-avoiding tail survives every prescribed operation}{真の素数回避軌道の尾部は各操作を生き残る}};
+\draw[fedge] (ref.south)-- ++(0,-.35) -| ([xshift=-3.2cm]empty.north);
+\draw[fedge] (word.south)-- ++(0,-.35) -| ([xshift=3.2cm]empty.north);
+\end{tikzpicture}

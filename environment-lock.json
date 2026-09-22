@@ -1,0 +1,1413 @@
+{
+  "container_observed": {
+    "architecture": "x86_64",
+    "gcc": "12.2.0",
+    "packages": [
+      {
+        "name": "adduser",
+        "version": "3.134"
+      },
+      {
+        "name": "apt",
+        "version": "2.6.1"
+      },
+      {
+        "name": "base-files",
+        "version": "12.4+deb12u15"
+      },
+      {
+        "name": "base-passwd",
+        "version": "3.6.1"
+      },
+      {
+        "name": "bash",
+        "version": "5.2.15-2+b13"
+      },
+      {
+        "name": "binutils",
+        "version": "2.40-2"
+      },
+      {
+        "name": "binutils-common:amd64",
+        "version": "2.40-2"
+      },
+      {
+        "name": "binutils-x86-64-linux-gnu",
+        "version": "2.40-2"
+      },
+      {
+        "name": "bsdutils",
+        "version": "1:2.38.1-5+deb12u3"
+      },
+      {
+        "name": "ca-certificates",
+        "version": "20250419~deb12u1"
+      },
+      {
+        "name": "coreutils",
+        "version": "9.1-1"
+      },
+      {
+        "name": "cpp",
+        "version": "4:12.2.0-3"
+      },
+      {
+        "name": "cpp-12",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "curl",
+        "version": "7.88.1-10+deb12u15"
+      },
+      {
+        "name": "dash",
+        "version": "0.5.12-2"
+      },
+      {
+        "name": "debconf",
+        "version": "1.5.82"
+      },
+      {
+        "name": "debian-archive-keyring",
+        "version": "2023.3+deb12u2"
+      },
+      {
+        "name": "debianutils",
+        "version": "5.7-0.5~deb12u1"
+      },
+      {
+        "name": "diffutils",
+        "version": "1:3.8-4"
+      },
+      {
+        "name": "dpkg",
+        "version": "1.21.23"
+      },
+      {
+        "name": "e2fsprogs",
+        "version": "1.47.0-2+b2"
+      },
+      {
+        "name": "elan",
+        "version": "1.4.2-5"
+      },
+      {
+        "name": "findutils",
+        "version": "4.9.0-4"
+      },
+      {
+        "name": "fontconfig-config",
+        "version": "2.14.1-4"
+      },
+      {
+        "name": "fonts-dejavu-core",
+        "version": "2.37-6"
+      },
+      {
+        "name": "fonts-lmodern",
+        "version": "2.005-1"
+      },
+      {
+        "name": "g++",
+        "version": "4:12.2.0-3"
+      },
+      {
+        "name": "g++-12",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "gcc",
+        "version": "4:12.2.0-3"
+      },
+      {
+        "name": "gcc-12",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "gcc-12-base:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "git",
+        "version": "1:2.39.5-0+deb12u3"
+      },
+      {
+        "name": "git-man",
+        "version": "1:2.39.5-0+deb12u3"
+      },
+      {
+        "name": "gpgv",
+        "version": "2.2.40-1.1+deb12u2"
+      },
+      {
+        "name": "grep",
+        "version": "3.8-5"
+      },
+      {
+        "name": "gzip",
+        "version": "1.12-1"
+      },
+      {
+        "name": "hostname",
+        "version": "3.23+nmu1"
+      },
+      {
+        "name": "init-system-helpers",
+        "version": "1.65.2+deb12u1"
+      },
+      {
+        "name": "libacl1:amd64",
+        "version": "2.3.1-3"
+      },
+      {
+        "name": "libapache-pom-java",
+        "version": "29-2"
+      },
+      {
+        "name": "libapt-pkg6.0:amd64",
+        "version": "2.6.1"
+      },
+      {
+        "name": "libasan8:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libatomic1:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libattr1:amd64",
+        "version": "1:2.5.1-4"
+      },
+      {
+        "name": "libaudit-common",
+        "version": "1:3.0.9-1"
+      },
+      {
+        "name": "libaudit1:amd64",
+        "version": "1:3.0.9-1"
+      },
+      {
+        "name": "libbinutils:amd64",
+        "version": "2.40-2"
+      },
+      {
+        "name": "libblkid1:amd64",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "libbrotli1:amd64",
+        "version": "1.0.9-2+b6"
+      },
+      {
+        "name": "libbsd0:amd64",
+        "version": "0.11.7-2"
+      },
+      {
+        "name": "libbz2-1.0:amd64",
+        "version": "1.0.8-5+b1"
+      },
+      {
+        "name": "libc-bin",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "name": "libc-dev-bin",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "name": "libc6:amd64",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "name": "libc6-dev:amd64",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "name": "libcairo2:amd64",
+        "version": "1.16.0-7"
+      },
+      {
+        "name": "libcap-ng0:amd64",
+        "version": "0.8.3-1+b3"
+      },
+      {
+        "name": "libcap2:amd64",
+        "version": "1:2.66-4+deb12u3+b1"
+      },
+      {
+        "name": "libcc1-0:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libcom-err2:amd64",
+        "version": "1.47.0-2+b2"
+      },
+      {
+        "name": "libcommons-logging-java",
+        "version": "1.2-3"
+      },
+      {
+        "name": "libcommons-parent-java",
+        "version": "56-1"
+      },
+      {
+        "name": "libcrypt-dev:amd64",
+        "version": "1:4.4.33-2"
+      },
+      {
+        "name": "libcrypt1:amd64",
+        "version": "1:4.4.33-2"
+      },
+      {
+        "name": "libctf-nobfd0:amd64",
+        "version": "2.40-2"
+      },
+      {
+        "name": "libctf0:amd64",
+        "version": "2.40-2"
+      },
+      {
+        "name": "libcurl3-gnutls:amd64",
+        "version": "7.88.1-10+deb12u15"
+      },
+      {
+        "name": "libcurl4:amd64",
+        "version": "7.88.1-10+deb12u15"
+      },
+      {
+        "name": "libdb5.3:amd64",
+        "version": "5.3.28+dfsg2-1"
+      },
+      {
+        "name": "libdebconfclient0:amd64",
+        "version": "0.270"
+      },
+      {
+        "name": "libdeflate0:amd64",
+        "version": "1.14-1"
+      },
+      {
+        "name": "libedit2:amd64",
+        "version": "3.1-20221030-2"
+      },
+      {
+        "name": "liberror-perl",
+        "version": "0.17029-2"
+      },
+      {
+        "name": "libexpat1:amd64",
+        "version": "2.5.0-1+deb12u3"
+      },
+      {
+        "name": "libext2fs2:amd64",
+        "version": "1.47.0-2+b2"
+      },
+      {
+        "name": "libffi8:amd64",
+        "version": "3.4.4-1"
+      },
+      {
+        "name": "libfontbox-java",
+        "version": "1:1.8.16-2"
+      },
+      {
+        "name": "libfontconfig1:amd64",
+        "version": "2.14.1-4"
+      },
+      {
+        "name": "libfontenc1:amd64",
+        "version": "1:1.1.4-1"
+      },
+      {
+        "name": "libfreetype6:amd64",
+        "version": "2.12.1+dfsg-5+deb12u4"
+      },
+      {
+        "name": "libgcc-12-dev:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libgcc-s1:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libgcrypt20:amd64",
+        "version": "1.10.1-3+deb12u1"
+      },
+      {
+        "name": "libgdbm-compat4:amd64",
+        "version": "1.23-3"
+      },
+      {
+        "name": "libgdbm6:amd64",
+        "version": "1.23-3"
+      },
+      {
+        "name": "libglib2.0-0:amd64",
+        "version": "2.74.6-2+deb12u9"
+      },
+      {
+        "name": "libgmp10:amd64",
+        "version": "2:6.2.1+dfsg1-1.1"
+      },
+      {
+        "name": "libgnutls30:amd64",
+        "version": "3.7.9-2+deb12u7"
+      },
+      {
+        "name": "libgomp1:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libgpg-error0:amd64",
+        "version": "1.46-1"
+      },
+      {
+        "name": "libgprofng0:amd64",
+        "version": "2.40-2"
+      },
+      {
+        "name": "libgraphite2-3:amd64",
+        "version": "1.3.14-1+deb12u1"
+      },
+      {
+        "name": "libgssapi-krb5-2:amd64",
+        "version": "1.20.1-2+deb12u5"
+      },
+      {
+        "name": "libharfbuzz0b:amd64",
+        "version": "6.0.0+dfsg-3"
+      },
+      {
+        "name": "libhogweed6:amd64",
+        "version": "3.8.1-2"
+      },
+      {
+        "name": "libice6:amd64",
+        "version": "2:1.0.10-1"
+      },
+      {
+        "name": "libicu72:amd64",
+        "version": "72.1-3+deb12u1"
+      },
+      {
+        "name": "libidn2-0:amd64",
+        "version": "2.3.3-1+b1"
+      },
+      {
+        "name": "libisl23:amd64",
+        "version": "0.25-1.1"
+      },
+      {
+        "name": "libitm1:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libjansson4:amd64",
+        "version": "2.14-2"
+      },
+      {
+        "name": "libjbig0:amd64",
+        "version": "2.1-6.1"
+      },
+      {
+        "name": "libjpeg62-turbo:amd64",
+        "version": "1:2.1.5-2"
+      },
+      {
+        "name": "libjs-jquery",
+        "version": "3.6.1+dfsg+~3.5.14-1"
+      },
+      {
+        "name": "libk5crypto3:amd64",
+        "version": "1.20.1-2+deb12u5"
+      },
+      {
+        "name": "libkeyutils1:amd64",
+        "version": "1.6.3-2"
+      },
+      {
+        "name": "libkpathsea6:amd64",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "libkrb5-3:amd64",
+        "version": "1.20.1-2+deb12u5"
+      },
+      {
+        "name": "libkrb5support0:amd64",
+        "version": "1.20.1-2+deb12u5"
+      },
+      {
+        "name": "liblcms2-2:amd64",
+        "version": "2.14-2+deb12u1"
+      },
+      {
+        "name": "libldap-2.5-0:amd64",
+        "version": "2.5.13+dfsg-5"
+      },
+      {
+        "name": "liblerc4:amd64",
+        "version": "4.0.0+ds-2"
+      },
+      {
+        "name": "liblsan0:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "liblz4-1:amd64",
+        "version": "1.9.4-1"
+      },
+      {
+        "name": "liblzma5:amd64",
+        "version": "5.4.1-1+deb12u2"
+      },
+      {
+        "name": "libmd0:amd64",
+        "version": "1.0.4-2"
+      },
+      {
+        "name": "libmount1:amd64",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "libmpc3:amd64",
+        "version": "1.3.1-1"
+      },
+      {
+        "name": "libmpfr6:amd64",
+        "version": "4.2.0-1"
+      },
+      {
+        "name": "libncurses6:amd64",
+        "version": "6.4-4"
+      },
+      {
+        "name": "libncursesw6:amd64",
+        "version": "6.4-4"
+      },
+      {
+        "name": "libnettle8:amd64",
+        "version": "3.8.1-2"
+      },
+      {
+        "name": "libnghttp2-14:amd64",
+        "version": "1.52.0-1+deb12u3"
+      },
+      {
+        "name": "libnsl-dev:amd64",
+        "version": "1.3.0-2"
+      },
+      {
+        "name": "libnsl2:amd64",
+        "version": "1.3.0-2"
+      },
+      {
+        "name": "libnspr4:amd64",
+        "version": "2:4.35-1"
+      },
+      {
+        "name": "libnss3:amd64",
+        "version": "2:3.87.1-1+deb12u4"
+      },
+      {
+        "name": "libopenjp2-7:amd64",
+        "version": "2.5.0-2+deb12u3"
+      },
+      {
+        "name": "libp11-kit0:amd64",
+        "version": "0.24.1-2"
+      },
+      {
+        "name": "libpam-modules:amd64",
+        "version": "1.5.2-6+deb12u2"
+      },
+      {
+        "name": "libpam-modules-bin",
+        "version": "1.5.2-6+deb12u2"
+      },
+      {
+        "name": "libpam-runtime",
+        "version": "1.5.2-6+deb12u2"
+      },
+      {
+        "name": "libpam0g:amd64",
+        "version": "1.5.2-6+deb12u2"
+      },
+      {
+        "name": "libpaper-utils",
+        "version": "1.1.29"
+      },
+      {
+        "name": "libpaper1:amd64",
+        "version": "1.1.29"
+      },
+      {
+        "name": "libpcre2-8-0:amd64",
+        "version": "10.42-1+deb12u1"
+      },
+      {
+        "name": "libpdfbox-java",
+        "version": "1:1.8.16-2"
+      },
+      {
+        "name": "libperl5.36:amd64",
+        "version": "5.36.0-7+deb12u3"
+      },
+      {
+        "name": "libpixman-1-0:amd64",
+        "version": "0.42.2-1"
+      },
+      {
+        "name": "libpng16-16:amd64",
+        "version": "1.6.39-2+deb12u5"
+      },
+      {
+        "name": "libpoppler126:amd64",
+        "version": "22.12.0-2+deb12u3"
+      },
+      {
+        "name": "libpsl5:amd64",
+        "version": "0.21.2-1"
+      },
+      {
+        "name": "libptexenc1:amd64",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "libpython3-stdlib:amd64",
+        "version": "3.11.2-1+b1"
+      },
+      {
+        "name": "libpython3.11-minimal:amd64",
+        "version": "3.11.2-6+deb12u8"
+      },
+      {
+        "name": "libpython3.11-stdlib:amd64",
+        "version": "3.11.2-6+deb12u8"
+      },
+      {
+        "name": "libquadmath0:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libreadline8:amd64",
+        "version": "8.2-1.3"
+      },
+      {
+        "name": "librtmp1:amd64",
+        "version": "2.4+20151223.gitfa8646d.1-2+b2"
+      },
+      {
+        "name": "libruby:amd64",
+        "version": "1:3.1"
+      },
+      {
+        "name": "libruby3.1:amd64",
+        "version": "3.1.2-7+deb12u1"
+      },
+      {
+        "name": "libsasl2-2:amd64",
+        "version": "2.1.28+dfsg-10"
+      },
+      {
+        "name": "libsasl2-modules-db:amd64",
+        "version": "2.1.28+dfsg-10"
+      },
+      {
+        "name": "libseccomp2:amd64",
+        "version": "2.5.4-1+deb12u1"
+      },
+      {
+        "name": "libselinux1:amd64",
+        "version": "3.4-1+b6"
+      },
+      {
+        "name": "libsemanage-common",
+        "version": "3.4-1"
+      },
+      {
+        "name": "libsemanage2:amd64",
+        "version": "3.4-1+b5"
+      },
+      {
+        "name": "libsepol2:amd64",
+        "version": "3.4-2.1"
+      },
+      {
+        "name": "libsm6:amd64",
+        "version": "2:1.2.3-1"
+      },
+      {
+        "name": "libsmartcols1:amd64",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "libsqlite3-0:amd64",
+        "version": "3.40.1-2+deb12u2"
+      },
+      {
+        "name": "libss2:amd64",
+        "version": "1.47.0-2+b2"
+      },
+      {
+        "name": "libssh2-1:amd64",
+        "version": "1.10.0-3+b1"
+      },
+      {
+        "name": "libssl3:amd64",
+        "version": "3.0.20-1~deb12u2"
+      },
+      {
+        "name": "libstdc++-12-dev:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libstdc++6:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libsynctex2:amd64",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "libsystemd0:amd64",
+        "version": "252.39-1~deb12u2"
+      },
+      {
+        "name": "libtasn1-6:amd64",
+        "version": "4.19.0-2+deb12u1"
+      },
+      {
+        "name": "libteckit0:amd64",
+        "version": "2.5.11+ds1-1+b1"
+      },
+      {
+        "name": "libtexlua53-5:amd64",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "libtexluajit2:amd64",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "libtiff6:amd64",
+        "version": "4.5.0-6+deb12u4"
+      },
+      {
+        "name": "libtinfo6:amd64",
+        "version": "6.4-4"
+      },
+      {
+        "name": "libtirpc-common",
+        "version": "1.3.3+ds-1"
+      },
+      {
+        "name": "libtirpc-dev:amd64",
+        "version": "1.3.3+ds-1"
+      },
+      {
+        "name": "libtirpc3:amd64",
+        "version": "1.3.3+ds-1"
+      },
+      {
+        "name": "libtsan2:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libubsan1:amd64",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "name": "libudev1:amd64",
+        "version": "252.39-1~deb12u2"
+      },
+      {
+        "name": "libunistring2:amd64",
+        "version": "1.0-2"
+      },
+      {
+        "name": "libuuid1:amd64",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "libwebp7:amd64",
+        "version": "1.2.4-0.2+deb12u1"
+      },
+      {
+        "name": "libx11-6:amd64",
+        "version": "2:1.8.4-2+deb12u2"
+      },
+      {
+        "name": "libx11-data",
+        "version": "2:1.8.4-2+deb12u2"
+      },
+      {
+        "name": "libxau6:amd64",
+        "version": "1:1.0.9-1"
+      },
+      {
+        "name": "libxaw7:amd64",
+        "version": "2:1.0.14-1"
+      },
+      {
+        "name": "libxcb-render0:amd64",
+        "version": "1.15-1"
+      },
+      {
+        "name": "libxcb-shm0:amd64",
+        "version": "1.15-1"
+      },
+      {
+        "name": "libxcb1:amd64",
+        "version": "1.15-1"
+      },
+      {
+        "name": "libxdmcp6:amd64",
+        "version": "1:1.1.2-3"
+      },
+      {
+        "name": "libxext6:amd64",
+        "version": "2:1.3.4-1+b1"
+      },
+      {
+        "name": "libxi6:amd64",
+        "version": "2:1.8-1+b1"
+      },
+      {
+        "name": "libxmu6:amd64",
+        "version": "2:1.1.3-3"
+      },
+      {
+        "name": "libxpm4:amd64",
+        "version": "1:3.5.12-1.1+deb12u1"
+      },
+      {
+        "name": "libxrender1:amd64",
+        "version": "1:0.9.10-1.1"
+      },
+      {
+        "name": "libxt6:amd64",
+        "version": "1:1.2.1-1.1"
+      },
+      {
+        "name": "libxxhash0:amd64",
+        "version": "0.8.1-1"
+      },
+      {
+        "name": "libyaml-0-2:amd64",
+        "version": "0.2.5-1"
+      },
+      {
+        "name": "libzstd1:amd64",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
+        "name": "libzzip-0-13:amd64",
+        "version": "0.13.72+dfsg.1-1.1"
+      },
+      {
+        "name": "linux-libc-dev:amd64",
+        "version": "6.1.180-1"
+      },
+      {
+        "name": "lmodern",
+        "version": "2.005-1"
+      },
+      {
+        "name": "login",
+        "version": "1:4.13+dfsg1-1+deb12u2"
+      },
+      {
+        "name": "logsave",
+        "version": "1.47.0-2+b2"
+      },
+      {
+        "name": "mawk",
+        "version": "1.3.4.20200120-3.1"
+      },
+      {
+        "name": "media-types",
+        "version": "10.0.0"
+      },
+      {
+        "name": "mount",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "ncurses-base",
+        "version": "6.4-4"
+      },
+      {
+        "name": "ncurses-bin",
+        "version": "6.4-4"
+      },
+      {
+        "name": "openssl",
+        "version": "3.0.20-1~deb12u2"
+      },
+      {
+        "name": "passwd",
+        "version": "1:4.13+dfsg1-1+deb12u2"
+      },
+      {
+        "name": "perl",
+        "version": "5.36.0-7+deb12u3"
+      },
+      {
+        "name": "perl-base",
+        "version": "5.36.0-7+deb12u3"
+      },
+      {
+        "name": "perl-modules-5.36",
+        "version": "5.36.0-7+deb12u3"
+      },
+      {
+        "name": "poppler-data",
+        "version": "0.4.12-1"
+      },
+      {
+        "name": "poppler-utils",
+        "version": "22.12.0-2+deb12u3"
+      },
+      {
+        "name": "preview-latex-style",
+        "version": "12.2-1"
+      },
+      {
+        "name": "python3",
+        "version": "3.11.2-1+b1"
+      },
+      {
+        "name": "python3-distutils",
+        "version": "3.11.2-3"
+      },
+      {
+        "name": "python3-lib2to3",
+        "version": "3.11.2-3"
+      },
+      {
+        "name": "python3-minimal",
+        "version": "3.11.2-1+b1"
+      },
+      {
+        "name": "python3-pip-whl",
+        "version": "23.0.1+dfsg-1"
+      },
+      {
+        "name": "python3-setuptools-whl",
+        "version": "66.1.1-1+deb12u2"
+      },
+      {
+        "name": "python3-venv",
+        "version": "3.11.2-1+b1"
+      },
+      {
+        "name": "python3.11",
+        "version": "3.11.2-6+deb12u8"
+      },
+      {
+        "name": "python3.11-minimal",
+        "version": "3.11.2-6+deb12u8"
+      },
+      {
+        "name": "python3.11-venv",
+        "version": "3.11.2-6+deb12u8"
+      },
+      {
+        "name": "rake",
+        "version": "13.0.6-3"
+      },
+      {
+        "name": "readline-common",
+        "version": "8.2-1.3"
+      },
+      {
+        "name": "rpcsvc-proto",
+        "version": "1.4.3-1"
+      },
+      {
+        "name": "ruby",
+        "version": "1:3.1"
+      },
+      {
+        "name": "ruby-net-telnet",
+        "version": "0.2.0-1"
+      },
+      {
+        "name": "ruby-rubygems",
+        "version": "3.3.15-2+deb12u1"
+      },
+      {
+        "name": "ruby-sdbm:amd64",
+        "version": "1.0.0-5+b1"
+      },
+      {
+        "name": "ruby-webrick",
+        "version": "1.8.1-1"
+      },
+      {
+        "name": "ruby-xmlrpc",
+        "version": "0.3.2-2"
+      },
+      {
+        "name": "ruby3.1",
+        "version": "3.1.2-7+deb12u1"
+      },
+      {
+        "name": "rubygems-integration",
+        "version": "1.18"
+      },
+      {
+        "name": "sed",
+        "version": "4.9-1+deb12u1"
+      },
+      {
+        "name": "sensible-utils",
+        "version": "0.0.17+nmu1"
+      },
+      {
+        "name": "sysvinit-utils",
+        "version": "3.06-4"
+      },
+      {
+        "name": "t1utils",
+        "version": "1.41-4"
+      },
+      {
+        "name": "tar",
+        "version": "1.34+dfsg-1.2+deb12u1"
+      },
+      {
+        "name": "tex-common",
+        "version": "6.18"
+      },
+      {
+        "name": "texlive-base",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "texlive-binaries",
+        "version": "2022.20220321.62855-5.1+deb12u2"
+      },
+      {
+        "name": "texlive-fonts-recommended",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "texlive-lang-cjk",
+        "version": "2022.20230122-1"
+      },
+      {
+        "name": "texlive-lang-japanese",
+        "version": "2022.20230122-1"
+      },
+      {
+        "name": "texlive-latex-base",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "texlive-latex-extra",
+        "version": "2022.20230122-4"
+      },
+      {
+        "name": "texlive-latex-recommended",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "texlive-luatex",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "texlive-pictures",
+        "version": "2022.20230122-3"
+      },
+      {
+        "name": "tzdata",
+        "version": "2026b-0+deb12u1"
+      },
+      {
+        "name": "ucf",
+        "version": "3.0043+nmu1+deb12u1"
+      },
+      {
+        "name": "usr-is-merged",
+        "version": "37~deb12u1"
+      },
+      {
+        "name": "util-linux",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "util-linux-extra",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "name": "x11-common",
+        "version": "1:7.7+23"
+      },
+      {
+        "name": "xdg-utils",
+        "version": "1.1.3-4.1"
+      },
+      {
+        "name": "xfonts-encodings",
+        "version": "1:1.0.4-2.2"
+      },
+      {
+        "name": "xfonts-utils",
+        "version": "1:7.7+6"
+      },
+      {
+        "name": "zlib1g:amd64",
+        "version": "1:1.2.13.dfsg-1"
+      }
+    ],
+    "python": "3.11.2",
+    "tex_and_pdf_checks": [
+      {
+        "detail": "6.8.0; lock requires 6.8.0",
+        "name": "pypdf"
+      },
+      {
+        "detail": "pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian)",
+        "name": "pdflatex"
+      },
+      {
+        "detail": "This is LuaHBTeX, Version 1.15.0 (TeX Live 2022/Debian)",
+        "name": "lualatex"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "c8bf939ae935d62d4ced49e4e8f9f4f5ff3dd4a4bc8e0abd4991f5737caee4f7"
+        },
+        "name": "amsart.cls"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "d2877369dcb4bfe7b1b6bba1a3d96c46e93366459c9b46576f1b221009bbe359"
+        },
+        "name": "lmodern.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "8c6ef506917e6d648f447e2252234fde083489000ad62cff2ef2620c11847154"
+        },
+        "name": "fvextra.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "6aee9d932d3d4193475830c34f23ecb3394851f22c1e5d705ca5b30c1dff1fa6"
+        },
+        "name": "luatexja-fontspec.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "d5d36ad74051ad36288242b51438e2d9a5db2bd6c063b9b5704d0931fbc9f439"
+        },
+        "name": "geometry.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "3fe694a5406f84847143e56ba1841385364277cfe7694a9f4bc0072ca8656abc"
+        },
+        "name": "booktabs.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "5ae673ce2a80fb868c954373252294d9e6469feeb78b445182772fd043eb0914"
+        },
+        "name": "needspace.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "5cf09de8dd52b5e77a12145d4987ab4df75a304174d224aa9562eed3dd141ef3"
+        },
+        "name": "xurl.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "f99264db05ae2e7399b74d8e4751bb134ad2b2cf5b73b92132e9fb3fea6a5f27"
+        },
+        "name": "hyperref.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "6e39ff4fdf9f126aff28880a7dd59fccc0e6735409d92ca455cdd2a4f2b4db53"
+        },
+        "name": "tikz.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "519e4cb820918bd7988ce6f7d80d0eb53381cfab09a5e26001918c6f6594a3be"
+        },
+        "name": "standalone.cls"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "e7af17749c12fa519db4442f49085f7086323e1786881e6d279978042c480ea4"
+        },
+        "name": "HaranoAjiMincho-Regular.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "6a744b2381ed8f113886556bf8067dd32ae649dbabd3929507085e230a30fa98"
+        },
+        "name": "HaranoAjiMincho-Bold.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "14797e82825bbcafcf8a9897bb0348fb0f7ffd42d1406ef5665fe5bcd0757520"
+        },
+        "name": "HaranoAjiGothic-Medium.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "0a0091d89ff2ea15a3229e45684f80e03df2094226644e660fbfa624c44ff853"
+        },
+        "name": "HaranoAjiGothic-Bold.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "1ab40332a969892c7ed6cb010193b5276ccef1da6798bcbd1a465fee23d29334"
+        },
+        "name": "lmromancaps10-regular.otf"
+      },
+      {
+        "detail": {
+          "available": false,
+          "conditional_compatibility_branch": true,
+          "note": "Recent LuaTeX-ja patch; older TeX distributions use the source compatibility branch."
+        },
+        "name": "lltjp-fancyvrb.sty"
+      }
+    ],
+    "tex_live": "2022/Debian"
+  },
+  "lean": {
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "toolchain": "leanprover/lean4:v4.29.1",
+    "transitive_lock": "supplement/lean/lake-manifest.json"
+  },
+  "pdf_reproducibility": "A fixed source date is used. Different TeX, font, and Poppler versions can change PDF/SVG bytes. The container environment differs from the publication host. The TeX Live 2022 container also has different PDF text-extraction mappings for some mathematical glyphs; rendered glyphs and extraction identity are different checks.",
+  "publication_host": {
+    "observed": [
+      {
+        "detail": "3.10.12",
+        "name": "python"
+      },
+      {
+        "detail": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+        "name": "g++"
+      },
+      {
+        "detail": "6.8.0; lock requires 6.8.0",
+        "name": "pypdf"
+      },
+      {
+        "detail": "4.15.0",
+        "name": "typing_extensions"
+      },
+      {
+        "detail": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+        "name": "pdflatex"
+      },
+      {
+        "detail": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+        "name": "lualatex"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "c8bf939ae935d62d4ced49e4e8f9f4f5ff3dd4a4bc8e0abd4991f5737caee4f7"
+        },
+        "name": "amsart.cls"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "d2877369dcb4bfe7b1b6bba1a3d96c46e93366459c9b46576f1b221009bbe359"
+        },
+        "name": "lmodern.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "e91f5114fb99355111835093f4f736fa1d4887fafd09910a65db0dd1ac347fab"
+        },
+        "name": "fvextra.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "875ea6d1128dfed26309e6fe028710fb54220e52d60ce4aa60e05a0d92c56519"
+        },
+        "name": "lltjp-fancyvrb.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "b1daa7a27d32b59680ce8aded5b351c5194afcacf1af92fe47ffe620925694e3"
+        },
+        "name": "luatexja-fontspec.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "d541ce56a3f45e2462be958ec62a50404213f26b241c7d7ad3e812685d38f5d8"
+        },
+        "name": "geometry.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "3fe694a5406f84847143e56ba1841385364277cfe7694a9f4bc0072ca8656abc"
+        },
+        "name": "booktabs.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "7ba1b3fbfa0c29b103f531acdbd8d1e73cf50d543d48c0b3fcc99beb59ba20f9"
+        },
+        "name": "needspace.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "5cf09de8dd52b5e77a12145d4987ab4df75a304174d224aa9562eed3dd141ef3"
+        },
+        "name": "xurl.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "da65dca8a44a4946284e6344ed731c9c1c6629bf7bd636b176a0cb2ea50af0cb"
+        },
+        "name": "hyperref.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "6e39ff4fdf9f126aff28880a7dd59fccc0e6735409d92ca455cdd2a4f2b4db53"
+        },
+        "name": "tikz.sty"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "fe43e6a36997c58615429505ded27fded60e5de98972ccc89c1501c8f4f3655f"
+        },
+        "name": "standalone.cls"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "66ef3270e68690612e8bf982acfad0e8b40212ce64661cce2bb6d3a98ac84717"
+        },
+        "name": "HaranoAjiMincho-Regular.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "6ca49317c76fa6e83bb3db4ce88c75deabe44ccefaa9f0e4a9f7f13b8de0a498"
+        },
+        "name": "HaranoAjiMincho-Bold.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "dfde7017fee3063b7148cce0d79b2083be4587f22cf7743f9f097424af39f5b2"
+        },
+        "name": "HaranoAjiGothic-Medium.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "0daf46b82128d54d1cc32ab07c4ef512feb9504c076ad78bbd554ef1be735182"
+        },
+        "name": "HaranoAjiGothic-Bold.otf"
+      },
+      {
+        "detail": {
+          "available": true,
+          "sha256": "1ab40332a969892c7ed6cb010193b5276ccef1da6798bcbd1a465fee23d29334"
+        },
+        "name": "lmromancaps10-regular.otf"
+      },
+      {
+        "detail": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+        "name": "pdflatex"
+      },
+      {
+        "detail": "pdftocairo version 22.02.0",
+        "name": "pdftocairo"
+      },
+      {
+        "detail": "TeX file lookup",
+        "name": "tikz.sty"
+      },
+      {
+        "detail": "TeX file lookup",
+        "name": "standalone.cls"
+      },
+      {
+        "detail": {
+          "actual": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+          "expected": "leanprover/lean4:v4.29.1"
+        },
+        "name": "Lean toolchain"
+      },
+      {
+        "detail": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+        "name": "lake"
+      },
+      {
+        "detail": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+        "name": "mathlib lock"
+      }
+    ],
+    "platform": {
+      "machine": "x86_64",
+      "system": "Linux"
+    }
+  },
+  "python": {
+    "declared_range": ">=3.10,<3.14",
+    "finite_computation_packages": [],
+    "locks": [
+      "uv.lock",
+      "requirements-pdf.txt"
+    ],
+    "pdf_packages": {
+      "pypdf": "6.8.0",
+      "typing_extensions": "4.15.0 (Python < 3.11)"
+    }
+  },
+  "schema_version": 1,
+  "system": {
+    "container_base": "debian:bookworm-slim@sha256:3783cc01769c7b2b1b83a5c5ad96c815348e28ed7da68e2e3687004faa906251",
+    "cxx_standard": "C++17",
+    "debian_snapshot": "20260901T000000Z",
+    "dockerfile": "Dockerfile",
+    "os_requirement": "Linux with /proc and POSIX process/resource controls"
+  },
+  "verification_scope": "Environment and preflight checks are separate from full finite reproduction and Lean proof checking."
+}

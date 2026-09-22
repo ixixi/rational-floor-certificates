@@ -1,0 +1,26 @@
+\begin{tikzpicture}[paperfig]
+\begin{scope}[x=2.3cm,y=2.3cm]
+\draw[fedge] (.65,.65)--(2.35,.65);
+\node at (1.65,.27) {$u=K\theta_n$};
+\draw[fedge] (.65,.65)--(.65,2.35) node[above] {$v=K\theta_{n+1}$};
+\fill[black!5] (1,1) rectangle (2,2);
+\draw (1,2)--(1,1)--(2,1);
+\draw[dashed] (1,2)--(2,2)--(2,1);
+\draw[femph] (1.2,1)--(1.6,2);
+\fill[figblue] (1.2,1) circle(1.4pt);
+\draw[figblue,fill=white,line width=.8pt] (1.6,2) circle(1.7pt);
+\node[flabel,rotate=63.435] at (1.4,1.52) {$5u-2v=4$};
+\foreach \x in {1,2}{\draw (\x,.62)--(\x,.68);\node[below] at(\x,.62){$\x$};}
+\foreach \y in {1,2}{\draw (.62,\y)--(.68,\y);\node[left] at(.62,\y){$\y$};}
+\end{scope}
+\node[align=left,anchor=west,text width=6.5cm] at (6,4.3)
+ {$a=5,\ b=2,\ K=4$\\[4pt]
+ $j=k=1,\quad e=1$\\[8pt]
+ $[j,j+1)\times[k,k+1)$\\[4pt]
+ \figtext{Solid: included lower boundaries}{実線：含まれる下側境界}\\
+ \figtext{Dashed: excluded upper boundaries}{破線：含まれない上側境界}};
+\node[fbox,align=center,text width=6.3cm] at (9.2,1.8)
+ {$aj-b(k+1)<eK<a(j+1)-bk$\\[5pt]
+ $1<4<8$\\[4pt]
+ \figtext{Both endpoint bounds are strict}{両端の不等号は厳密}};
+\end{tikzpicture}

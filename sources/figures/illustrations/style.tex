@@ -1,0 +1,15 @@
+% Shared paper illustrations. Load in the preamble.
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,patterns,shapes.geometric}
+\providecommand{\figtext}[2]{\ifdefined\FigureJapanese#2\else#1\fi}
+\definecolor{figblue}{RGB}{30,70,110}
+\definecolor{figgray}{RGB}{105,105,105}
+\tikzset{
+  paperfig/.style={font=\fontsize{9}{11}\selectfont,>=Stealth,line width=.65pt},
+  fbox/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,fill=white},
+  fnode/.style={draw,circle,minimum size=6mm,inner sep=1pt,fill=white},
+  fedge/.style={->},
+  femph/.style={draw=figblue,line width=1.05pt},
+  flabel/.style={fill=white,inner sep=1.5pt,align=center},
+  ftitle/.style={font=\fontsize{9.5}{12}\selectfont\bfseries,align=center}
+}

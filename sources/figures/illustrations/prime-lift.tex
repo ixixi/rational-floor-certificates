@@ -1,0 +1,18 @@
+\begin{tikzpicture}[paperfig]
+\node[align=center] at(5.2,1.5)
+ {$a=5,\quad b=2,\quad p=7,\quad w=(-1,1)$\\[5pt]
+ $q_{i+1}=4(5q_i+c_i)\pmod7$};
+\node[ftitle,anchor=west] at(-1.3,0){\figtext{Keep}{保持}};
+\node[fnode] (a) at(1,0){$1$};\node[fnode] (b) at(5,0){$2$};\node[fnode] (c) at(9,0){$2$};
+\draw[fedge] (a)--node[flabel,above] {$c_0=-1$}(b);
+\draw[fedge] (b)--node[flabel,above] {$c_1=1$}(c);
+\node[below=5pt] at(5,-.3){$q_0,q_1,q_2\ne0$};
+\node[ftitle,anchor=west] at(-1.3,-2){\figtext{Discard}{除去}};
+\node[fnode] (d) at(1,-2){$3$};\node[fnode,fill=black!12,double] (e) at(5,-2){$0$};\node[fnode] (f) at(9,-2){$4$};
+\draw[fedge,dashed] (d)--node[flabel,above] {$c_0=-1$}(e);
+\draw[fedge,dashed] (e)--node[flabel,above] {$c_1=1$}(f);
+\node[below=5pt] at(5,-2.3){$q_0,q_2\ne0,\qquad q_1=0$};
+\node[fbox,text width=11.5cm] at(5,-3.85)
+ {\figtext{Endpoint checks alone would retain the second edge incorrectly.}{端点だけの検査では、二つ目の辺を誤って保持してしまう。}\\
+ \figtext{Inspect all intermediate residues, including the last one.}{最後の剰余を含む、すべての中間剰余を検査する。}};
+\end{tikzpicture}

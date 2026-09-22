@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "tex_preamble": "style.tex",
+  "tex_japanese_switch": "\\def\\FigureJapanese{1}",
+  "path_base": "figures/illustrations",
+  "figures": [
+    {
+      "id": "certificate-flow",
+      "kind": "conceptual schematic",
+      "section": "1",
+      "anchor_en": "## 2. Carries and nonperiodicity",
+      "tex": "certificate-flow.tex",
+      "svg": "certificate-flow.svg",
+      "lead_en": "The two finite certification procedures share the same tail-preservation argument, summarized below.",
+      "lead_ja": "二つの有限認証手順は、以下に示す尾部保存の議論を共有する。",
+      "caption_en": "Logical flow of the one-step and word methods. Arrows from an orbit to a graph express inclusion in an outer approximation. The two branches use different operations: cell refinement in the one-step method, and contraction followed by prime lifting at fixed cell count in the word method. Dashed arrows indicate iteration.",
+      "caption_ja": "一段階法と語ラベル法の論理的な流れ。軌道からグラフへの矢印は外側近似への包含を表す。一段階法ではセル細分を、語ラベル法ではセル数を固定した縮約と素数による持ち上げを用いる。破線矢印は反復を表す。"
+    },
+    {
+      "id": "cell-intersection",
+      "kind": "exact rational example",
+      "section": "3.1",
+      "anchor_en": "### 3.2 Components with periodic output",
+      "tex": "cell-intersection.tex",
+      "svg": "cell-intersection.svg",
+      "lead_en": "A single compatible cell pair illustrates why both inequalities in (E3) are strict.",
+      "lead_ja": "整合する一組のセルを見ると、(E3)の両方の不等号が厳密である理由が分かる。",
+      "caption_en": "Cell compatibility for \\(a=5,b=2,K=4,j=k=1,e=1\\). The line meets the half-open square along \\(u=(4+2v)/5\\), \\(1\\le v<2\\). The lower endpoint is included and the upper endpoint is excluded. The cell-pair test is local; it does not assert the existence of a full orbit.",
+      "caption_ja": "\\(a=5,b=2,K=4,j=k=1,e=1\\)におけるセル整合条件。直線は半開正方形と、\\(u=(4+2v)/5\\), \\(1\\le v<2\\)の部分で交わる。下端は含まれ、上端は含まれない。セル対の判定は局所的であり、軌道全体の存在を主張するものではない。"
+    },
+    {
+      "id": "cell-refinement",
+      "kind": "exact rational example",
+      "section": "3.3",
+      "anchor_en": "## 4. Word-labelled certificates",
+      "tex": "cell-refinement.tex",
+      "svg": "cell-refinement.svg",
+      "lead_en": "Cell refinement preserves the cell containing each true orbit point, as the following example shows.",
+      "lead_ja": "次の例のように、セル細分は各真の軌道点を含むセルを保存する。",
+      "caption_en": "The cell \\([1/4,1/2)\\) at \\(K=4\\) splits into cells \\(3,4,5\\) at \\(fK=12\\). The point \\(\\theta=2/5\\) belongs to cell \\(4\\). The residue coordinate is unchanged. This is an inclusion for true orbit states, not a lifting assertion for arbitrary graph walks.",
+      "caption_ja": "\\(K=4\\)のセル\\([1/4,1/2)\\)は、\\(fK=12\\)ではセル\\(3,4,5\\)に分かれる。点\\(\\theta=2/5\\)はセル\\(4\\)に入る。剰余座標は変わらない。これは真の軌道状態についての包含であり、任意のグラフ上のウォークが持ち上がるという主張ではない。"
+    },
+    {
+      "id": "phase-test",
+      "kind": "exact abstract word-graph examples",
+      "section": "4.2",
+      "anchor_en": "### 4.3 Exact contraction of deterministic paths",
+      "tex": "phase-test.tex",
+      "svg": "phase-test.svg",
+      "lead_en": "The phase test can be read as a consistency check on letters assigned to cyclic positions.",
+      "lead_ja": "位相判定は、巡回する位置に割り当てた文字の整合性を調べる操作として読める。",
+      "caption_en": "Two abstract word graphs with one-letter labels. In both panels, \\(h(u)=0,h(v)=1\\) are total word lengths of paths from root \\(u\\), and \\(d=2\\). The left cycle is certified. Adding the dashed edge on the right creates two different letters at phase zero, so the full test fails. These examples illustrate the criterion, not the particular carry alphabet for \\(5/2\\).",
+      "caption_ja": "一文字のラベルを持つ二つの抽象的な語グラフ。両図とも、\\(h(u)=0,h(v)=1\\)は根\\(u\\)からの経路の総語長であり、\\(d=2\\)となる。左の閉路は認証される。右では破線の辺を追加すると位相ゼロに異なる二文字が置かれ、完全な判定は失敗する。これらは判定法の例であり、\\(5/2\\)の特定のキャリー集合の例ではない。"
+    },
+    {
+      "id": "word-contraction",
+      "kind": "exact abstract word-graph example",
+      "section": "4.3",
+      "anchor_en": "### 4.4 Lifting by a new prime",
+      "tex": "word-contraction.tex",
+      "svg": "word-contraction.svg",
+      "lead_en": "Contraction changes the segmentation of the output word while preserving every letter and its order.",
+      "lead_ja": "縮約は出力語の区切りを変えるが、すべての文字とその順序を保存する。",
+      "caption_en": "An exact contraction. The vertex \\(x\\) has one outgoing edge; \\(u\\) and \\(v\\) are macro vertices because each has two outgoing edges. The words \\((-1)\\) and \\((1,3)\\) concatenate to \\((-1,1,3)\\), whose length remains three. All other edges are retained. Line styles identify corresponding edges.",
+      "caption_ja": "正確な縮約の例。頂点\\(x\\)の出辺は一本であり、\\(u\\)と\\(v\\)はそれぞれ二本の出辺を持つためマクロ頂点である。語\\((-1)\\)と\\((1,3)\\)は\\((-1,1,3)\\)に連結され、その語長は三のまま保たれる。他の辺はすべて保持される。線種で対応する辺を示す。"
+    },
+    {
+      "id": "prime-lift",
+      "kind": "exact finite-field example",
+      "section": "4.4",
+      "anchor_en": "### 4.5 The finite success theorem",
+      "tex": "prime-lift.tex",
+      "svg": "prime-lift.svg",
+      "lead_en": "Checking an entire word under a prime lift requires every intermediate residue, not just its endpoints.",
+      "lead_ja": "素数による持ち上げで語全体を検査するには、端点だけでなく、すべての中間剰余が必要である。",
+      "caption_en": "Two lifts of the same word \\((-1,1)\\) for \\(a=5,b=2,p=7\\), where \\(2^{-1}=4\\pmod7\\). Starting at residue \\(1\\) gives \\(1,2,2\\), so the edge survives. Starting at \\(3\\) gives \\(3,0,4\\), so it is discarded even though both endpoints are nonzero. Every displayed residue follows from integer arithmetic modulo seven.",
+      "caption_ja": "\\(a=5,b=2,p=7\\)で同じ語\\((-1,1)\\)を持ち上げた二例。\\(2^{-1}=4\\pmod7\\)である。開始剰余\\(1\\)からは\\(1,2,2\\)となり辺が残る。開始剰余\\(3\\)からは\\(3,0,4\\)となり、両端が非零でも辺は除去される。表示した剰余はすべて法七の整数演算で求まる。"
+    },
+    {
+      "id": "initial-graph",
+      "kind": "complete computed small graph",
+      "section": "5.3",
+      "anchor_en": "**Table 5.** The twelve initial edges for \\(5/2\\), \\(K=4\\), as pairs\n(carry, target cell).",
+      "tex": "initial-graph.tex",
+      "svg": "initial-graph.svg",
+      "lead_en": "The initial four-cell graph is small enough to display completely, grouped by carry label.",
+      "lead_ja": "初期の四セルグラフは、キャリーラベルごとに分ければ全体を描ける。",
+      "caption_en": "All twelve edges of the initial \\(5/2\\) graph at \\(K=4\\), separated into three panels by carry \\(c\\). Each panel uses the same four vertices; the panels are overlaid to recover the full graph. The edges are enumerated by the strict integer inequality shown below them and agree with Table 5.",
+      "caption_ja": "\\(K=4\\)における\\(5/2\\)初期グラフの全十二辺を、キャリー\\(c\\)ごとの三図に分けて示す。各図の四頂点は共通であり、三図を重ねるとグラフ全体になる。辺は図の下に記した厳密な整数不等式から列挙され、表5と一致する。"
+    },
+    {
+      "id": "stage-counts",
+      "kind": "plot of verified table data",
+      "section": "5.3",
+      "anchor_en": "### 5.4 Proofs of Theorem 1 and Corollary 2",
+      "tex": "stage-counts.tex",
+      "svg": "stage-counts.svg",
+      "lead_en": "The vertex counts show how growth under lifting alternates with reduction inside each stage.",
+      "lead_ja": "頂点数の推移から、持ち上げによる拡大と各段階内での削減の様子が分かる。",
+      "caption_en": "Vertex counts from Table 6. The ordinate is \\(\\log_{10}(N+1)\\), so the final empty output \\(N=0\\) is visible at height zero. Solid circles show input counts, dashed squares counts after removal, and dotted diamonds counts after contraction. Connecting segments guide the eye; they do not assert monotone decay across stages. All input cyclic SCCs are certified at stage nine.",
+      "caption_ja": "表6の頂点数。縦軸は\\(\\log_{10}(N+1)\\)であり、最終的な空の出力\\(N=0\\)を高さゼロに表示できる。実線と丸は入力、破線と四角は除去後、点線と菱形は縮約後の頂点数を表す。点を結ぶ線は推移を見やすくするためのもので、段階間の単調減少を意味しない。段階九では入力の巡回SCCすべてが認証される。"
+    },
+    {
+      "id": "rank-certificate",
+      "kind": "conceptual DAG plus verified certificate summary",
+      "section": "6.2",
+      "anchor_en": "### 6.3 The certificate for 7/5",
+      "tex": "rank-certificate.tex",
+      "svg": "rank-certificate.svg",
+      "lead_en": "The ranks count blocks and periodic blocks along paths, whereas the period records the output inside a block.",
+      "lead_ja": "ランクは経路上のブロック数や周期ブロック数を数え、周期はブロック内の出力を表す。",
+      "caption_en": "An illustrative condensation DAG distinguishes three quantities: \\(\\rho\\) is the maximum number of blocks on a path ending at a block, \\(\\eta\\) is the maximum number of periodic blocks on such a path, and \\(d_B\\) is an internal output period. The five-block diagram is schematic. The separate box records the actual \\(7/5\\) certificate values from Table 7; those values do not describe the five-block example.",
+      "caption_ja": "SCC凝縮DAGの概念例で三つの量を区別する。\\(\\rho\\)は当該ブロックで終わる経路上の最大ブロック数、\\(\\eta\\)はそのような経路上の最大周期ブロック数、\\(d_B\\)は内部出力の周期である。五ブロックの図は模式図である。別枠には表7の実際の\\(7/5\\)証明書の値を記しており、これらの値は五ブロックの例の値ではない。"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+K,vertices,edges,cyclic_components,certified_components,remaining_vertices
+32,30720,55440,17,16,1363
+128,5452,9512,3,2,952
+512,3808,6281,1,0,944
+2048,3776,5951,15,15,0
