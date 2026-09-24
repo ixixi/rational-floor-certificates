@@ -7,6 +7,11 @@
       "sha256": "1bc9e9715ca99e66de507eb240df1b71670263b182f9a0fc575131c13ebb5ea3"
     },
     {
+      "bytes": 904,
+      "path": ".github/workflows/pages.yml",
+      "sha256": "801df809b17375077f75ed6685ce6aff77a5c76d9bf5fe3ed1d73efb5292cf9f"
+    },
+    {
       "bytes": 80,
       "path": ".gitignore",
       "sha256": "901b46117be28800c13c40129db75bd83fc4cd53f00cf3a1fb36a33e359fb749"
@@ -27,9 +32,9 @@
       "sha256": "9a46f10600e1fecadc30583d617801d45633bc07afed8bda64c8533902f2e338"
     },
     {
-      "bytes": 6907,
+      "bytes": 7423,
       "path": "README.md",
-      "sha256": "ff5d564c6d116a2abb51bdc7542a3d143b41494ce0250a2dc1d334e1b1ed64c9"
+      "sha256": "3c243c5b5694a3886f5d495c55be75a130470d9c4dc3c6dceab1dfc0a824c9da"
     },
     {
       "bytes": 9387,
@@ -100,6 +105,11 @@
       "bytes": 686,
       "path": "requirements-pdf.txt",
       "sha256": "f129c1fdc6d3ac2779156096968025ac7f138fd0dfd9a8ddc15df9cf084087a7"
+    },
+    {
+      "bytes": 293744,
+      "path": "slides/paper-animation-ja.html",
+      "sha256": "a766b65033b14c9f39630ce49a1b9774bf6551c65d800e6a8dd716eb2b8a0bd1"
     },
     {
       "bytes": 13373600,
@@ -1096,5 +1106,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "9d2b9e10911a03370297b7dd7784cd0def6c9543ba72ecbd98a128a6e686b4b7"
+  "source_sha256": "90da7c56c8aadf0353490522a8738e1833e78fd0b3739a9363b77643527465ff"
 }
