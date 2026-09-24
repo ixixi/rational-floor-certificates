@@ -68,6 +68,14 @@ h1 { font-family: var(--disp); font-weight: 900; font-size: clamp(22px, 3vw, 32p
 #bCC[aria-pressed="false"] { opacity: .45; }
 #bVoice[aria-pressed="true"] { color: var(--accent); }
 #bVoice:disabled { opacity: .3; cursor: not-allowed; }
+.vol { display: inline-flex; align-items: center; gap: 2px; }
+.vol input { width: 84px; height: 24px; margin: 0 6px 0 0; accent-color: var(--accent); cursor: pointer; background: transparent; }
+.vol input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.vol.muted input { opacity: .45; }
+@media (max-width: 640px) { .vol input { display: none; } }
+/* fill the browser window (the default); real fullscreen starts with the first click on play */
+.player.fill { position: fixed; inset: 0; z-index: 50; }
+body.filled { overflow: hidden; }
 .player.fs { max-width: none; width: 100vw; height: 100vh; border-radius: 0; display: flex; flex-direction: column; background: #000; }
 .player.fs .screen { flex: 1 1 auto; aspect-ratio: auto; width: auto; height: auto; min-height: 0; display: grid; place-items: center; background: #000; }
 .player.fs .screen { overflow: hidden; flex: 1 1 0; }
@@ -131,7 +139,7 @@ a.toc-h:hover { background: #16233a; }
         <select id="speed" aria-label="再生速度">
           <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
         </select>
-        <button id="bVoice" aria-label="音声" aria-pressed="true"></button>
+        <span class="vol"><button id="bVoice" aria-label="音声" aria-pressed="true"></button><input type="range" id="vol" min="0" max="1" step="0.05" value="1" aria-label="音量"></span>
         <button id="bCC" aria-label="字幕の表示" aria-pressed="true"></button>
         <button id="bFull" aria-label="全画面"></button>
       </div>
@@ -147,15 +155,16 @@ a.toc-h:hover { background: #16233a; }
       <h2>この動画について</h2>
       <p>論文 <i>Finite graph certificates for composite terms in rational floor sequences</i>（Yuri Odagiri）の解説スライドの第1章〜第3章（1ステップ法）を、アニメーションにしたものです。第4章の語ラベル法から先は扱いません。</p>
       <p>第3章の実際の計算（30720 頂点から始めて 4 段で空になる計算）は、このページのプログラムが開くたびに計算し直して表示しています。数値は論文の表1・表2・表3と一致します。</p>
-      <p>ナレーション音声（Gemini 3.8 Flash TTS で作成）が字幕と同期して流れます。スピーカーのボタンでミュートできます。音声ファイルを読み込めない環境（HTML だけを手元で開いた場合など）では、ブラウザの音声合成で字幕を読み上げ、読み終わるまで次の字幕に進みません。</p>
+      <p>ナレーション音声（Gemini 3.8 Flash TTS で作成）が字幕と同期して流れます。スピーカーのボタンでミュート、横のスライダー（または ↑ ↓ キー）で音量を調節できます。最初はウィンドウいっぱいに表示し、再生を始めると全画面になります（全画面ボタンか F キーで、目次のあるページ表示に戻れます）。音声ファイルを読み込めない環境（HTML だけを手元で開いた場合など）では、ブラウザの音声合成で字幕を読み上げ、読み終わるまで次の字幕に進みません。</p>
       <div class="legend" aria-label="色の意味"><span class="cQ">整数部分・あまり</span><span class="cT">小数部分・セル</span><span class="cC">繰り上がり</span><span class="cH">割り切れる項・素数</span><span class="cO">認証・成立</span><span class="cB">矛盾・除去</span></div>
       <div class="keys">
         <kbd>Space</kbd><span>再生 / 一時停止</span>
         <kbd>← →</kbd><span>前 / 次の字幕へ</span>
         <kbd>Shift + ← →</kbd><span>前 / 次の場面へ</span>
-        <kbd>F</kbd><span>全画面</span>
+        <kbd>F</kbd><span>全画面 / ページ表示の切り替え</span>
         <kbd>C</kbd><span>字幕の表示 / 非表示</span>
         <kbd>V</kbd><span>音声のオン / ミュート</span>
+        <kbd>↑ ↓</kbd><span>音量</span>
       </div>
       <p class="cite">論文: DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> ／ ソースと再現資料: <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">github.com/ixixi/rational-floor-certificates</a></p>
     </section>
@@ -4560,6 +4569,8 @@ function toSpeech(src) {
   return out;
 }
 
+let VOLUME = 1; const volume = () => VOLUME; // 0..1, shared by the recorded track and speech synthesis
+
 /* recorded narration: one MP3 aligned with the whole timeline; while it plays, it is the clock */
 const Track = (() => {
   const src = window.NARR_SRC || 'paper-animation-ja-narration.mp3';
@@ -4601,7 +4612,7 @@ const Narr = (() => {
     try {
       parts.forEach((part, i) => {
         const u = new SpeechSynthesisUtterance(part);
-        u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1;
+        u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = volume();
         try { u.voice = voice; } catch (e) { /* keep the default ja-JP voice */ }
         if (i === parts.length - 1) u.onend = () => { if (my === token) speaking = false; };
         u.onerror = () => { if (my === token) speaking = false; };
@@ -4695,7 +4706,7 @@ function arrangeScenes() {
 const Player = (() => {
   const $ = id => document.getElementById(id);
   let canvas, ctx, g, TOTAL = 0, T = 0, playing = false, speed = 1, last = 0, dirty = true, captionsOn = true;
-  let soundOn = true, holdSince = 0, audioBlocked = false, audioBroken = false;
+  let soundOn = true, holdSince = 0, audioBlocked = false, audioBroken = false, fillMode = true, fsTried = false, wasReallyFull = false;
   let scale = 1, curBeatKey = '', dragging = false, wasPlaying = false, ready = false;
 
   function locate(TT) {
@@ -4813,6 +4824,29 @@ const Player = (() => {
     requestAnimationFrame(frame);
   }
 
+  function applyVolume() {
+    const a = Track.el(); if (a) { a.volume = VOLUME; a.muted = !soundOn; }
+    syncVoiceBtnLater();
+  }
+  function setVolume(v) {
+    VOLUME = clamp(v, 0, 1); $('vol').value = String(VOLUME);
+    try { localStorage.setItem('anim-volume', String(VOLUME)); } catch (e) { /* storage unavailable */ }
+    applyVolume();
+  }
+  function syncVoiceBtnLater() { if (window.__syncVoiceBtn) window.__syncVoiceBtn(); }
+  function syncFs() {
+    const on = fillMode || !!document.fullscreenElement;
+    $('player').classList.toggle('fs', on); $('player').classList.toggle('fill', fillMode && !document.fullscreenElement);
+    document.body.classList.toggle('filled', fillMode);
+    $('bFull').innerHTML = on ? ICON.unfull : ICON.full;
+    $('bFull').setAttribute('aria-label', on ? 'ページ表示に戻る' : '全画面'); $('bFull').title = on ? 'ページ表示に戻る（F）' : '全画面（F）';
+    capW = 0; setTimeout(resize, 50);
+  }
+  function setFill(v) { fillMode = v; syncFs(); }
+  function enterFullscreen() {
+    const p = $('player'); fsTried = true;
+    try { const r = (p.requestFullscreen || p.webkitRequestFullscreen)?.call(p); r?.catch?.(() => {}); } catch (e) { /* not allowed: stay window-filling */ }
+  }
   function seek(TT) {
     T = clamp(TT, 0, TOTAL - 0.001); dirty = true; Narr.cancel(); if (playing) curBeatKey = '';
     const a = Track.usable() ? Track.el() : null;
@@ -4827,11 +4861,11 @@ const Player = (() => {
   }
   function audioPlay() {
     const a = Track.usable() ? Track.el() : null; if (!a) return;
-    a.playbackRate = speed; a.muted = !soundOn;
+    a.playbackRate = speed; applyVolume();
     if (Math.abs(a.currentTime - T) > 0.25) { try { a.currentTime = T; } catch (e) { /* ignore */ } }
     const pr = a.play(); if (pr && pr.catch) pr.catch(() => { audioBlocked = true; });
   }
-  function play() { if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; holdSince = 0; audioBlocked = false; $('bigplay').hidden = true; audioPlay(); speakCurrent(); }
+  function play() { if (fillMode && !fsTried && !document.fullscreenElement) enterFullscreen(); if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; holdSince = 0; audioBlocked = false; $('bigplay').hidden = true; audioPlay(); speakCurrent(); }
   function pause() { playing = false; dirty = true; Narr.cancel(); const a = Track.el(); if (a) a.pause(); }
   function toggle() { playing ? pause() : play(); }
   function beatStep(dir) {
@@ -4883,24 +4917,29 @@ const Player = (() => {
     $('bNext').addEventListener('click', () => sceneStep(1));
     $('speed').addEventListener('change', e => { speed = +e.target.value; const a = Track.el(); if (a) a.playbackRate = speed; if (playing) speakCurrent(); });
     $('bVoice').addEventListener('click', () => {
-      if (Track.usable()) { soundOn = !soundOn; const a = Track.el(); a.muted = !soundOn; syncVoiceBtn(); return; }
-      if (!Narr.available()) return; soundOn = !soundOn; Narr.set(soundOn); if (playing) speakCurrent();
+      if (!soundOn && VOLUME === 0) setVolume(0.5); // unmuting at volume 0 would stay silent
+      soundOn = !soundOn; applyVolume();
+      if (!Track.usable()) { Narr.set(soundOn); if (playing) speakCurrent(); }
     });
+    $('vol').addEventListener('input', e => { setVolume(+e.target.value); if (!soundOn && VOLUME > 0) { soundOn = true; applyVolume(); if (!Track.usable()) Narr.set(true); } });
     function syncVoiceBtn() {
-      const b = $('bVoice'); const rec = Track.usable(); const av = rec || Narr.available(); const on = av && soundOn;
+      const b = $('bVoice'); const rec = Track.usable(); const av = rec || Narr.available(); const on = av && soundOn && VOLUME > 0;
+      b.parentNode.classList.toggle('muted', !on); $('vol').disabled = !av;
       b.disabled = !av; b.setAttribute('aria-pressed', String(on));
       b.innerHTML = on ? ICON.voiceOn : ICON.voiceOff;
-      b.title = av ? (on ? '音声：オン（V）' : '音声：ミュート中（V）') : 'この端末には日本語の音声がないため、読み上げは使えません';
+      b.title = av ? (on ? `音声：オン（音量 ${Math.round(VOLUME * 100)}%、V でミュート）` : '音声：ミュート中（V）') : 'この端末には日本語の音声がないため、読み上げは使えません';
     }
-    Narr.onChange(syncVoiceBtn);
+    Narr.onChange(syncVoiceBtn); window.__syncVoiceBtn = syncVoiceBtn;
     Track.onChange(() => { if (!Track.usable()) { Narr.set(soundOn); if (playing) speakCurrent(); } syncVoiceBtn(); });
     $('bCC').addEventListener('click', () => { captionsOn = !captionsOn; $('player').classList.toggle('no-cc', !captionsOn); $('bCC').setAttribute('aria-pressed', String(captionsOn)); });
     $('bFull').addEventListener('click', () => {
-      const p = $('player');
-      if (document.fullscreenElement) document.exitFullscreen?.();
-      else (p.requestFullscreen?.() || p.webkitRequestFullscreen?.())?.catch?.(() => {});
+      if (document.fullscreenElement || fillMode) { setFill(false); if (document.fullscreenElement) document.exitFullscreen?.(); }
+      else { setFill(true); enterFullscreen(); }
     });
-    document.addEventListener('fullscreenchange', () => { $('player').classList.toggle('fs', !!document.fullscreenElement); setTimeout(resize, 50); });
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && fillMode && wasReallyFull) setFill(false); // Esc leaves to the normal page
+      wasReallyFull = !!document.fullscreenElement; syncFs();
+    });
     const scrub = $('scrub');
     const posToT = e => { const r = scrub.getBoundingClientRect(); return clamp((e.clientX - r.left) / r.width) * TOTAL; };
     scrub.addEventListener('pointerdown', e => { dragging = true; wasPlaying = playing; playing = false; scrub.setPointerCapture(e.pointerId); seek(posToT(e)); });
@@ -4925,6 +4964,7 @@ const Player = (() => {
       else if (k === 'f' || k === 'F') { $('bFull').click(); }
       else if (k === 'c' || k === 'C') { $('bCC').click(); }
       else if (k === 'v' || k === 'V') { $('bVoice').click(); }
+      else if (k === 'ArrowUp' || k === 'ArrowDown') { e.preventDefault(); setVolume(Math.round((VOLUME + (k === 'ArrowUp' ? 0.1 : -0.1)) * 20) / 20); if (VOLUME > 0 && !soundOn) $('bVoice').click(); }
       else if (k === 'Home') { seek(0); } else if (k === 'End') { seek(TOTAL - 0.01); }
     });
     const ro = new ResizeObserver(resize); ro.observe($('screen')); ro.observe(canvas);
@@ -4955,6 +4995,9 @@ const Player = (() => {
     $('bPlay').innerHTML = ICON.play; $('bPrev').innerHTML = ICON.prev; $('bNext').innerHTML = ICON.next;
     $('bBack').innerHTML = ICON.back; $('bFwd').innerHTML = ICON.fwd; $('bFull').innerHTML = ICON.full; $('bCC').innerHTML = ICON.cc;
     $('bigplay').innerHTML = ICON.bigplay;
+    let saved = null; try { saved = localStorage.getItem('anim-volume'); } catch (e) { /* storage unavailable */ }
+    setVolume(saved != null && isFinite(+saved) ? +saved : 1);
+    setFill(true);
     await loadFonts();
     fitCaption(true);
     clearLayoutCache();
@@ -4968,7 +5011,7 @@ const Player = (() => {
       total: () => TOTAL, scenes: SCENES, seek: TT => { T = TT; dirty = true; },
       renderAt: TT => { const r = renderAt(TT); updateCaption(r.s, r.t); return { idx: r.s.idx, t: r.t }; },
       ready: () => ready, caption: () => $('capText').textContent,
-      speech: () => SCENES.map(sc => sc.beats.map(b => toSpeech(b[0]))), state: () => ({ T, playing, narr: Narr.isOn(), busy: Narr.busy(), track: Track.usable(), at: Track.el() ? Track.el().currentTime : null, muted: Track.el() ? Track.el().muted : null, rs: Track.el() ? Track.el().readyState : null, blocked: audioBlocked }),
+      speech: () => SCENES.map(sc => sc.beats.map(b => toSpeech(b[0]))), state: () => ({ T, playing, narr: Narr.isOn(), busy: Narr.busy(), track: Track.usable(), at: Track.el() ? Track.el().currentTime : null, muted: Track.el() ? Track.el().muted : null, avol: Track.el() ? Track.el().volume : null, rs: Track.el() ? Track.el().readyState : null, blocked: audioBlocked }),
       seekTo: TT => seek(TT), setSpeed: v => { const e = $('speed'); e.value = String(v); e.dispatchEvent(new Event('change')); },
       play, pause,
     };
@@ -4983,6 +5026,7 @@ const ICON = {
   next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.6 5H18v14h-2.4zM5 5.5v13L14.5 12z" fill="currentColor"/></svg>',
   back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 6.5 7 12l5.5 5.5M18 6.5 12.5 12l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   fwd: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.5 17 12l-5.5 5.5M6 6.5 11.5 12 6 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  unfull: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
   full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
   cc: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   voiceOn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
