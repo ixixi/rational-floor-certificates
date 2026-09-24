@@ -1,0 +1,47 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Zen+Kaku+Gothic+New:wght@500;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@600&display=block">
+<style>
+html,body{margin:0}
+body{width:1200px;height:630px;overflow:hidden;background:radial-gradient(900px 520px at 78% 10%,#16284a 0%,rgba(22,40,74,0) 70%),linear-gradient(160deg,#0b1424,#070c16);color:#e8eef8;font-family:"Zen Kaku Gothic New",sans-serif;position:relative}
+.grid{position:absolute;inset:0;background-image:radial-gradient(rgba(140,170,220,.10) 1.2px,transparent 1.3px);background-size:28px 28px}
+.wrap{position:absolute;left:72px;top:58px;right:72px}
+.eyebrow{display:flex;align-items:center;gap:14px;font-weight:700;font-size:24px;letter-spacing:.14em;color:#8fa3c2}
+.eyebrow img{width:46px;height:46px}
+h1{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:64px;line-height:1.2;margin:26px 0 0;letter-spacing:.01em}
+.sub{margin-top:18px;font-size:29px;color:#a6b5cc;font-weight:500}
+.sub b{color:#ffb454;font-weight:700}
+.formula{position:absolute;right:80px;top:362px;font-family:"STIX Two Text",serif;font-size:56px;color:#dfe8f6;display:flex;align-items:center;gap:14px}
+.fl{display:inline-flex;align-items:center;padding:4px 16px 10px;position:relative}
+.fl:before,.fl:after{content:"";position:absolute;bottom:0;top:0;width:12px;border-bottom:3.5px solid #dfe8f6}
+.fl:before{left:0;border-left:3.5px solid #dfe8f6}
+.fl:after{right:0;border-right:3.5px solid #dfe8f6}
+.lbl{position:absolute;left:74px;bottom:166px;font-size:21px;color:#7182a0}
+.lbl b{color:#ffd45c;font-weight:700}
+.formula i{font-style:italic}
+.row{position:absolute;left:72px;bottom:66px;display:flex;gap:12px;align-items:flex-end}
+.chip{width:98px;height:88px;border-radius:14px;border:2.5px solid #2a3a57;background:rgba(18,28,48,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"JetBrains Mono",monospace}
+.chip .n{font-family:"STIX Two Text",serif;font-style:italic;font-size:17px;color:#7182a0}
+.chip .v{font-weight:600;font-size:34px;color:#5eaeff;margin-top:2px}
+.chip.c{border-color:#ffd45c;background:rgba(60,48,20,.55)}
+.chip.c .v{color:#ffd45c}
+.more{font-size:34px;color:#7182a0;margin:0 6px 26px}
+.pill{position:absolute;right:76px;bottom:80px;display:flex;align-items:center;gap:12px;padding:14px 26px;border-radius:999px;background:#ffb454;color:#1a1204;font-weight:700;font-size:27px}
+.pill svg{width:26px;height:26px}
+</style></head><body><div class="grid"></div>
+<div class="wrap">
+  <div class="eyebrow"><img src="favicon.svg">論文解説アニメーション ・ 第1〜3章</div>
+  <h1>有理数の底の床関数列に<br>現れる合成数</h1>
+  <div class="sub">有限グラフの「証明書」で、<b>無限にある</b>ことを確かめる</div>
+</div>
+<div class="formula"><span><i>Q</i><sub style="font-size:.6em"><i>n</i></sub></span><span>=</span><span class="fl"><i>ξ</i>&thinsp;(7/5)<sup style="font-size:.6em;position:relative;top:-.2em"><i>n</i></sup></span></div>
+<div class="lbl"><i style="font-family:STIX Two Text,serif">ξ</i> = 1 のときの項（<b>黄色</b>は合成数）</div>
+<div class="row">
+  <div class="chip c"><span class="n">n = 12</span><span class="v">56</span></div>
+  <div class="chip"><span class="n">n = 13</span><span class="v">79</span></div>
+  <div class="chip c"><span class="n">n = 14</span><span class="v">111</span></div>
+  <div class="chip c"><span class="n">n = 15</span><span class="v">155</span></div>
+  <div class="chip c"><span class="n">n = 16</span><span class="v">217</span></div>
+  <div class="more">…</div>
+</div>
+<div class="pill"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>ナレーション付き ・ 約40分</div>
+</body></html>
