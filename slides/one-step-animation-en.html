@@ -6,6 +6,8 @@
 <title>The One-Step Method | Composite terms of ⌊ξ(7/5)ⁿ⌋</title>
 <meta name="description" content="An animated, narrated explanation of the one-step method: why every sequence ⌊ξ(7/5)ⁿ⌋ has infinitely many terms divisible by 2, 3, 5, 11 or 13, proved by a finite graph computation (about 20 minutes).">
 <link rel="canonical" href="https://ixixi.github.io/rational-floor-certificates/en/one-step/">
+<link rel="alternate" hreflang="en" href="https://ixixi.github.io/rational-floor-certificates/en/one-step/">
+<link rel="alternate" hreflang="ja" href="https://ixixi.github.io/rational-floor-certificates/ja/one-step/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E %3Crect width='64' height='64' rx='14' fill='%230d1626'/%3E %3Cpath d='M16 12v39h10M48 12v39H38' fill='none' stroke='%235eaeff' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E %3Cpath d='M32 27.5v9' stroke='%23ffb454' stroke-width='3' stroke-linecap='round' stroke-dasharray='3.5 4'/%3E %3Ccircle cx='32' cy='20' r='6.5' fill='%23ffb454'/%3E %3Ccircle cx='32' cy='45' r='4.5' fill='%235eaeff'/%3E %3C/svg%3E" type="image/svg+xml">
 <link rel="icon" href="https://ixixi.github.io/rational-floor-certificates/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="https://ixixi.github.io/rational-floor-certificates/apple-touch-icon.png">
@@ -184,7 +186,7 @@ a.toc-h:hover { background: #16181d; }
         <kbd>V</kbd><span>narration on / muted</span>
         <kbd>↑ ↓</kbd><span>volume</span>
       </div>
-      <p class="cite">Paper: DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> · Sources and reproduction: <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">github.com/ixixi/rational-floor-certificates</a> · <a href="https://ixixi.github.io/rational-floor-certificates/ja/explainer/">Japanese explainer (chapters 1–3)</a></p>
+      <p class="cite">Paper: DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> · Sources and reproduction: <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">github.com/ixixi/rational-floor-certificates</a> · <a href="https://ixixi.github.io/rational-floor-certificates/ja/one-step/" hreflang="ja" lang="ja">日本語版</a> · <a href="https://ixixi.github.io/rational-floor-certificates/ja/explainer/">Japanese explainer (chapters 1–3)</a></p>
     </section>
   </div>
 </div>
@@ -1781,7 +1783,7 @@ scene({
         g.num('.' + d.th.toFixed(6).slice(2), x, 530, { size: 30, color: C.T, alpha: a * 0.8, align: 'c' });
         g.tex(`\\cA{n = ${n}}`, x, 400, { size: 30, alpha: a * 0.8 });
       }
-      g.tex('\\ldots', 250 + 9 * 190 - 40, 470, { size: 46, color: C.greyB, alpha: ta0 });
+      g.tex('\\ldots', 250 + 8 * 190 + 110, 470, { size: 46, color: C.greyB, alpha: ta0 });
       g.tex('\\text{What should we keep?}', 960, 760, { size: 58, alpha: sp(t, S.at(0, 'What should'), 0.8) * ta0 });
     }
     const toRing = sp(t, B[5] + 0.2, 1.8);
@@ -2430,11 +2432,11 @@ scene({
     const at = i => (i === 0 ? B[0] + 0.3 : i <= 2 ? S.at(0, i === 1 ? 'walk' : 'surviving') : i < 8 ? S.at(1, 'Refining') + (i - 3) * 0.55 : S.at(2, 'empty set'));
     items.forEach(([tx, col], i) => {
       const a = sp(t, at(i), 0.6) * (1 - sp(t, B[3], 0.6) * 0.75);
-      g.tex(tx, xs[i], y, { size: 52, color: col, alpha: a });
+      g.tex(tx, i === 8 ? xs[i] - 40 : xs[i], y, { size: 52, color: col, alpha: a, align: i === 8 ? 'l' : 'c' });
       if (i > 0) {
         const lab = i === 1 ? '\\subset' : i % 2 === 0 ? '\\text{prune}' : '\\text{refine}';
         if (i === 1) g.tex('\\subset', (xs[0] + xs[1]) / 2 + 10, y, { size: 52, alpha: a });
-        else { g.arrow(xs[i - 1] + 45, y, xs[i] - 55, y, { lw: 3, tip: 16, color: C.greyB, alpha: a, p: a }); g.tex(lab, (xs[i - 1] + xs[i]) / 2, y - 55, { size: 28, color: C.greyB, alpha: a }); }
+        else { g.arrow(xs[i - 1] + 45, y, xs[i] - 55, y, { lw: 3, tip: 16, color: C.greyB, alpha: a, p: sp(t, at(i), 0.6) }); g.tex(lab, (xs[i - 1] + xs[i]) / 2, y - 55, { size: 28, color: C.greyB, alpha: a }); }
       }
     });
     g.tex('W_t = \\text{states of stage } t, \\quad U_t = \\text{survivors}', 960, 470, { size: 40, color: C.greyB, alpha: sp(t, B[0] + 1.2, 0.8) * (1 - sp(t, B[3], 0.6)) });
@@ -2744,6 +2746,7 @@ function mathToHTML(src) {
       if (name in MATH_SYM) { const v = MATH_SYM[name]; return /[≤≥≠≡→↦⇒∈∉×≈±]/.test(v) ? `<span class="mo">${v}</span>` : v; }
       return esc(name);
     }
+    if (ch === '{') { i++; const out = seq('}'); i++; return out; }
     i++;
     if (/[A-Za-z]/.test(ch)) return `<i>${ch}</i>`;
     if (ch === '-') return '−';
