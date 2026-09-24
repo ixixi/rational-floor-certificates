@@ -6,6 +6,8 @@ on:
     paths:
       - slides/paper-animation-ja.html
       - slides/paper-animation-ja-narration.mp3
+      - slides/one-step-animation-en.html
+      - slides/one-step-animation-en-narration.mp3
       - site/**
       - .github/workflows/pages.yml
   workflow_dispatch:
@@ -34,6 +36,11 @@ jobs:
           cp slides/paper-animation-ja.html _site/ja/explainer/index.html
           cp slides/paper-animation-ja-narration.mp3 _site/ja/explainer/paper-animation-ja-narration.mp3
           cp site/og-explainer-ja.png _site/ja/explainer/og.png
+          # the English animation of the one-step method lives under en/one-step/
+          mkdir -p _site/en/one-step
+          cp slides/one-step-animation-en.html _site/en/one-step/index.html
+          cp slides/one-step-animation-en-narration.mp3 _site/en/one-step/one-step-animation-en-narration.mp3
+          cp site/og-one-step-en.png _site/en/one-step/og.png
           # icons shared by the whole site
           cp site/favicon.svg site/favicon.ico site/apple-touch-icon.png _site/
           # until the project page exists, the top page only points to the explainer
@@ -50,7 +57,7 @@ jobs:
           <meta http-equiv="refresh" content="0; url=ja/explainer/">
           </head>
           <body>
-          <p><a href="ja/explainer/">日本語の解説アニメーション</a> · <a href="https://github.com/ixixi/rational-floor-certificates">GitHub</a></p>
+          <p><a href="ja/explainer/">日本語の解説アニメーション</a> · <a href="en/one-step/">The one-step method (English animation)</a> · <a href="https://github.com/ixixi/rational-floor-certificates">GitHub</a></p>
           </body>
           </html>
           HTML
