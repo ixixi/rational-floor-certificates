@@ -66,6 +66,8 @@ h1 { font-family: var(--disp); font-weight: 900; font-size: clamp(22px, 3vw, 32p
 .ctrls .now { flex: 1 1 180px; min-width: 0; font-size: 13.5px; color: var(--ink3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ctrls select { background: #121d31; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; height: 32px; padding: 0 6px; font: inherit; font-size: 13px; }
 #bCC[aria-pressed="false"] { opacity: .45; }
+#bVoice[aria-pressed="true"] { color: var(--accent); }
+#bVoice:disabled { opacity: .3; cursor: not-allowed; }
 .player.fs { max-width: none; width: 100vw; height: 100vh; border-radius: 0; display: flex; flex-direction: column; background: #000; }
 .player.fs .screen { flex: 1 1 auto; aspect-ratio: auto; width: auto; height: auto; min-height: 0; display: grid; place-items: center; background: #000; }
 .player.fs .screen canvas { width: min(100vw, calc((100vh - 150px) * 16 / 9)); height: auto; aspect-ratio: 16 / 9; }
@@ -126,6 +128,7 @@ a.toc-h:hover { background: #16233a; }
         <select id="speed" aria-label="再生速度">
           <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
         </select>
+        <button id="bVoice" aria-label="読み上げ" aria-pressed="false"></button>
         <button id="bCC" aria-label="字幕の表示" aria-pressed="true"></button>
         <button id="bFull" aria-label="全画面"></button>
       </div>
@@ -141,6 +144,7 @@ a.toc-h:hover { background: #16233a; }
       <h2>この動画について</h2>
       <p>論文 <i>Finite graph certificates for composite terms in rational floor sequences</i>（Yuri Odagiri）の解説スライドの第1章〜第3章（1ステップ法）を、アニメーションにしたものです。第4章の語ラベル法から先は扱いません。</p>
       <p>第3章の実際の計算（30720 頂点から始めて 4 段で空になる計算）は、このページのプログラムが開くたびに計算し直して表示しています。数値は論文の表1・表2・表3と一致します。</p>
+      <p>スピーカーのボタンで、字幕をブラウザの音声合成で読み上げます（日本語の音声がある端末のみ。数式は機械的な読み方になります）。読み上げ中は、読み終わるまで次の字幕に進みません。</p>
       <div class="legend" aria-label="色の意味"><span class="cQ">整数部分・あまり</span><span class="cT">小数部分・セル</span><span class="cC">繰り上がり</span><span class="cH">割り切れる項・素数</span><span class="cO">認証・成立</span><span class="cB">矛盾・除去</span></div>
       <div class="keys">
         <kbd>Space</kbd><span>再生 / 一時停止</span>
@@ -148,6 +152,7 @@ a.toc-h:hover { background: #16233a; }
         <kbd>Shift + ← →</kbd><span>前 / 次の場面へ</span>
         <kbd>F</kbd><span>全画面</span>
         <kbd>C</kbd><span>字幕の表示 / 非表示</span>
+        <kbd>V</kbd><span>読み上げのオン / オフ</span>
       </div>
       <p class="cite">論文: DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> ／ ソースと再現資料: <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">github.com/ixixi/rational-floor-certificates</a></p>
     </section>
@@ -3657,6 +3662,101 @@ function capHTML(src) {
   return h(tree, false);
 }
 
+/* ---------- narration text (speech synthesis) ---------- */
+const SP_LET = { a: 'エー', b: 'ビー', c: 'シー', d: 'ディー', e: 'イー', f: 'エフ', g: 'ジー', h: 'エイチ', i: 'アイ', j: 'ジェイ', k: 'ケー', l: 'エル', m: 'エム', n: 'エヌ', o: 'オー', p: 'ピー', q: 'キュー', r: 'アール', s: 'エス', t: 'ティー', u: 'ユー', v: 'ブイ', w: 'ダブリュー', x: 'エックス', y: 'ワイ', z: 'ゼット' };
+const SP_GREEK = { 'ξ': 'グザイ', 'θ': 'シータ', 'σ': 'シグマ', 'ρ': 'ロー', 'φ': 'ファイ', 'η': 'イータ', 'γ': 'ガンマ', 'λ': 'ラムダ', 'δ': 'デルタ' };
+const SP_OP = { '=': ' イコール ', '<': ' 小なり ', '>': ' 大なり ', '≤': ' 小なりイコール ', '≥': ' 大なりイコール ', '≡': ' 合同 ', '+': ' プラス ', '−': ' マイナス ', '×': ' かける ', '·': ' ', '→': ' から ', '⇒': ' ならば ', '≈': ' およそ ', ',': '、', '…': ' ', '|': ' ', '(': ' ', ')': ' ', '[': ' ', ']': ' ', '{': ' ', '}': ' ', ';': '、', ':': ' ', '∀': ' すべての ', '∃': ' ある ', '∣': ' ' };
+const SP_WORD = { gcd: 'ジーシーディー', mod: 'モッド', max: 'マックス', min: 'ミン' };
+function toSpeech(src) {
+  const T = n => {
+    switch (n.k) {
+      case 'row': return n.kids.map(T).join('');
+      case 'txt': return n.s;
+      case 'col': case 'bold': case 'thin': case 'mtext': return T(n.body);
+      case 'sp': return ' ';
+      case 'op': return ' ' + (SP_WORD[n.s] || n.s) + ' ';
+      case 'math': return n.kids.map(A).join('');
+      default: return A(n);
+    }
+  };
+  const tight = x => x.replace(/\s+/g, '');
+  const A = n => {
+    switch (n.k) {
+      case 'ch': {
+        const c = n.s;
+        if (/^[0-9.]$/.test(c)) return c;
+        if (/^[A-Za-z]{2,}$/.test(c)) return ' ' + (SP_WORD[c] || c) + ' ';
+        if (/^[A-Za-z]$/.test(c)) return ' ' + SP_LET[c.toLowerCase()] + ' ';
+        if (SP_GREEK[c]) return ' ' + SP_GREEK[c] + ' ';
+        if (c in SP_OP) return SP_OP[c];
+        return c;
+      }
+      case 'scr': {
+        let out = n.base.k === 'ch' ? A(n.base) : T(n.base);
+        if (n.sub) out += ' ' + tight(T(n.sub)) + ' ';
+        if (n.sup) out += ' の ' + tight(T(n.sup)) + ' じょう ';
+        return out;
+      }
+      case 'frac': return ' ' + tight(T(n.den)) + '分の' + tight(T(n.num)) + ' ';
+      case 'floor': return ' ' + T(n.body).trim() + ' の床関数 ';
+      case 'paren': return ' ' + T(n.body) + ' ';
+      default: return T(n);
+    }
+  };
+  let out = T(parseRich(String(src)));
+  out = out.replace(/（グザイ）|（シータ）/g, '')
+    .replace(/\(E([123])\)/g, ' イー$1 ')
+    .replace(/\(ii\)/g, ' に ').replace(/\(i\)/g, ' いち ')
+    .replace(/SCC/g, 'エスシーシー')
+    .replace(/[ξθσφρ]/g, c => ' ' + SP_GREEK[c] + ' ')
+    .replace(/×/g, ' かける ').replace(/−/g, ' マイナス ').replace(/…/g, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([、。！？「」（）])\s*/g, '$1')
+    .trim();
+  return out;
+}
+
+const Narr = (() => {
+  const ok = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
+  let voice = null, on = false, speaking = false, token = 0, safety = 0, onChange = () => {};
+  function pick() {
+    if (!ok) return null;
+    let vs = []; try { vs = speechSynthesis.getVoices().filter(v => /^ja/i.test(v.lang)); } catch (e) { return null; }
+    const pref = ['Google 日本語', 'Nanami', 'Kyoko', 'Otoya', 'Haruka', 'Ayumi', 'Sayaka', 'Ichiro'];
+    for (const p of pref) { const v = vs.find(v => v.name.includes(p)); if (v) return v; }
+    return vs[0] || null;
+  }
+  function refresh() { voice = pick(); if (!voice && on) { on = false; cancel(); } onChange(); }
+  if (ok) { refresh(); try { speechSynthesis.addEventListener('voiceschanged', refresh); } catch (e) { speechSynthesis.onvoiceschanged = refresh; } }
+  function cancel() { token++; speaking = false; if (ok) { try { speechSynthesis.cancel(); } catch (e) { /* ignore */ } } }
+  function speak(src, rate) {
+    if (!ok || !on || !voice) return;
+    cancel();
+    const my = token; const text = toSpeech(src);
+    const parts = text.split(/(?<=[。！？])/).map(x => x.trim()).filter(Boolean);
+    if (!parts.length) return;
+    speaking = true; safety = performance.now() + (text.length * 0.3 + 5) * 1000 / Math.max(0.5, rate);
+    try {
+      parts.forEach((part, i) => {
+        const u = new SpeechSynthesisUtterance(part);
+        u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1;
+        try { u.voice = voice; } catch (e) { /* keep the default ja-JP voice */ }
+        if (i === parts.length - 1) u.onend = () => { if (my === token) speaking = false; };
+        u.onerror = () => { if (my === token) speaking = false; };
+        speechSynthesis.speak(u);
+      });
+    } catch (e) { speaking = false; }
+  }
+  return {
+    available: () => ok && !!voice,
+    isOn: () => on,
+    set: v => { on = !!v && ok && !!voice; if (!on) cancel(); onChange(); },
+    busy: () => { if (speaking && performance.now() > safety) speaking = false; return on && speaking; },
+    speak, cancel,
+    onChange: fn => { onChange = fn; fn(); },
+  };
+})();
+
 /* ---------- background ---------- */
 let bgCanvas = null;
 function makeBackground(pw, ph, scale) {
@@ -3746,8 +3846,11 @@ const Player = (() => {
       const el = $('capText');
       el.innerHTML = capHTML(s.beats[b][0]);
       el.classList.remove('in'); void el.offsetWidth; el.classList.add('in');
+      if (playing && Narr.isOn()) Narr.speak(s.beats[b][0], narrRate());
     }
   }
+  function narrRate() { return clamp(speed * 1.05, 0.7, 2); }
+  function speakCurrent() { if (!Narr.isOn()) return; const { s, t } = locate(T); Narr.speak(s.beats[beatIndex(s, t)][0], narrRate()); }
   function updateUI(s) {
     const f = TOTAL ? T / TOTAL : 0;
     $('fill').style.width = (f * 100).toFixed(3) + '%';
@@ -3766,8 +3869,13 @@ const Player = (() => {
 
   function frame(now) {
     if (playing) {
-      const dt = Math.min(0.1, (now - last) / 1000); T += dt * speed;
-      if (T >= TOTAL) { T = TOTAL - 0.001; playing = false; }
+      const dt = Math.min(0.1, (now - last) / 1000); let nt = T + dt * speed;
+      if (Narr.busy()) { // wait for the narration of the current caption before moving on
+        const { s, t } = locate(T); const b = beatIndex(s, t); const end = s.start + s.B[b + 1] - 0.05;
+        if (nt > end) nt = Math.max(T, end);
+      }
+      T = nt;
+      if (T >= TOTAL) { T = TOTAL - 0.001; playing = false; Narr.cancel(); }
       dirty = true;
     }
     last = now;
@@ -3778,9 +3886,9 @@ const Player = (() => {
     requestAnimationFrame(frame);
   }
 
-  function seek(TT) { T = clamp(TT, 0, TOTAL - 0.001); dirty = true; }
-  function play() { if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; $('bigplay').hidden = true; }
-  function pause() { playing = false; dirty = true; }
+  function seek(TT) { T = clamp(TT, 0, TOTAL - 0.001); dirty = true; Narr.cancel(); if (playing) curBeatKey = ''; }
+  function play() { if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; $('bigplay').hidden = true; speakCurrent(); }
+  function pause() { playing = false; dirty = true; Narr.cancel(); }
   function toggle() { playing ? pause() : play(); }
   function beatStep(dir) {
     const { s, t } = locate(T); const b = beatIndex(s, t);
@@ -3829,7 +3937,14 @@ const Player = (() => {
     $('bFwd').addEventListener('click', () => beatStep(1));
     $('bPrev').addEventListener('click', () => sceneStep(-1));
     $('bNext').addEventListener('click', () => sceneStep(1));
-    $('speed').addEventListener('change', e => { speed = +e.target.value; });
+    $('speed').addEventListener('change', e => { speed = +e.target.value; if (playing) speakCurrent(); });
+    $('bVoice').addEventListener('click', () => { if (!Narr.available()) return; Narr.set(!Narr.isOn()); if (playing) speakCurrent(); });
+    Narr.onChange(() => {
+      const b = $('bVoice'); const av = Narr.available(), on = Narr.isOn();
+      b.disabled = !av; b.setAttribute('aria-pressed', String(on));
+      b.innerHTML = on ? ICON.voiceOn : ICON.voiceOff;
+      b.title = av ? (on ? '読み上げ：オン（V）' : '読み上げ：オフ（V）') : 'この端末には日本語の音声がないため、読み上げは使えません';
+    });
     $('bCC').addEventListener('click', () => { captionsOn = !captionsOn; $('player').classList.toggle('no-cc', !captionsOn); $('bCC').setAttribute('aria-pressed', String(captionsOn)); });
     $('bFull').addEventListener('click', () => {
       const p = $('player');
@@ -3860,6 +3975,7 @@ const Player = (() => {
       else if (k === 'PageDown' || k === ']') { e.preventDefault(); sceneStep(1); }
       else if (k === 'f' || k === 'F') { $('bFull').click(); }
       else if (k === 'c' || k === 'C') { $('bCC').click(); }
+      else if (k === 'v' || k === 'V') { $('bVoice').click(); }
       else if (k === 'Home') { seek(0); } else if (k === 'End') { seek(TOTAL - 0.01); }
     });
     const ro = new ResizeObserver(resize); ro.observe($('screen')); ro.observe(canvas);
@@ -3902,6 +4018,8 @@ const Player = (() => {
       total: () => TOTAL, scenes: SCENES, seek: TT => { T = TT; dirty = true; },
       renderAt: TT => { const r = renderAt(TT); updateCaption(r.s, r.t); return { idx: r.s.idx, t: r.t }; },
       ready: () => ready, caption: () => $('capText').textContent,
+      speech: () => SCENES.map(sc => sc.beats.map(b => toSpeech(b[0]))), state: () => ({ T, playing, narr: Narr.isOn(), busy: Narr.busy() }),
+      play, pause,
     };
   }
   return { init };
@@ -3916,6 +4034,8 @@ const ICON = {
   fwd: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.5 17 12l-5.5 5.5M6 6.5 11.5 12 6 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
   cc: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  voiceOn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  voiceOff: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
   bigplay: '<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="38" fill="rgba(10,17,29,.72)" stroke="currentColor" stroke-width="2.5"/><path d="M32 25v30l24-15z" fill="currentColor"/></svg>',
 };
 

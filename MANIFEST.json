@@ -102,9 +102,9 @@
       "sha256": "f129c1fdc6d3ac2779156096968025ac7f138fd0dfd9a8ddc15df9cf084087a7"
     },
     {
-      "bytes": 241550,
+      "bytes": 249213,
       "path": "slides/paper-animation-ja.html",
-      "sha256": "7f08b321665e17299a66d94c4f2812e1a23866836eae7642743fd0387dd3fdc0"
+      "sha256": "e34ad8d19a2c514600415c4dbbf0ae66a734afecd787503bacf95bc15cd1dc3e"
     },
     {
       "bytes": 13373600,
@@ -1101,5 +1101,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "f548babd32b64bed5150dc72fe5edd0919a0ee19bd985837eb61138dfc27f68b"
+  "source_sha256": "abda06d6835659ec395919e9c9af1123c0f8841055c7e40c51cabfdb30d46cb7"
 }
