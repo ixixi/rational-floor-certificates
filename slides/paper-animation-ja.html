@@ -34,7 +34,7 @@ h1 { font-family: var(--disp); font-weight: 900; font-size: clamp(22px, 3vw, 32p
 .bigplay svg { width: 100%; height: 100%; }
 .loading { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); font-size: 13px; color: var(--ink3); letter-spacing: .05em; }
 .player.ready .loading { display: none; }
-.caption { background: linear-gradient(#0c1424, #0a1120); border-top: 1px solid var(--line); min-height: 3.6em; padding: .7em 1.2em; display: flex; align-items: center; justify-content: center; text-align: center; font-size: clamp(15px, 1.55vw, 21px); line-height: 1.65; font-weight: 500; }
+.caption { box-sizing: border-box; background: linear-gradient(#0c1424, #0a1120); border-top: 1px solid var(--line); min-height: 3.6em; padding: .7em 1.2em; display: flex; align-items: center; justify-content: center; text-align: center; font-size: clamp(15px, 1.55vw, 21px); line-height: 1.65; font-weight: 500; }
 .caption .beat { max-width: 52em; text-wrap: pretty; }
 .caption .beat.in { animation: capin .35s ease-out; }
 @keyframes capin { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -4706,7 +4706,25 @@ const Player = (() => {
   }
   function beatIndex(s, t) { let b = 0; for (let i = 0; i < s.beats.length; i++) if (t >= s.B[i] - 1e-6) b = i; return b; }
 
+  // the caption box is as tall as the longest caption at the current width, so the player never changes height
+  let capW = 0, capMeas = null;
+  function fitCaption(force) {
+    const cap = $('caption'); const w = cap.clientWidth;
+    if (!w || (w === capW && !force)) return;
+    capW = w;
+    if (!capMeas) {
+      capMeas = document.createElement('div'); capMeas.className = 'caption'; capMeas.setAttribute('aria-hidden', 'true');
+      capMeas.style.cssText = 'position:absolute;left:-10000px;top:0;visibility:hidden;height:auto;';
+      capMeas.innerHTML = '<span class="beat"></span>'; cap.parentNode.appendChild(capMeas);
+    }
+    capMeas.style.width = w + 'px';
+    const sp = capMeas.firstChild; let h = 0;
+    for (const sc of SCENES) for (const b of sc.beats) { sp.innerHTML = capHTML(b[0]); h = Math.max(h, capMeas.offsetHeight); }
+    cap.style.height = Math.ceil(h) + 'px';
+  }
+
   function resize() {
+    fitCaption();
     if ($('player').classList.contains('fs')) {
       // fit the 16:9 stage inside the space left above the caption and the controls
       const box = $('screen').getBoundingClientRect();
@@ -4938,10 +4956,11 @@ const Player = (() => {
     $('bBack').innerHTML = ICON.back; $('bFwd').innerHTML = ICON.fwd; $('bFull').innerHTML = ICON.full; $('bCC').innerHTML = ICON.cc;
     $('bigplay').innerHTML = ICON.bigplay;
     await loadFonts();
+    fitCaption(true);
     clearLayoutCache();
     if (window.PREP) { try { PREP.forEach(f => f()); } catch (e) { console.error(e); } }
     ready = true; dirty = true; $('player').classList.add('ready');
-    if (document.fonts) document.fonts.addEventListener?.('loadingdone', () => { clearLayoutCache(); dirty = true; });
+    if (document.fonts) document.fonts.addEventListener?.('loadingdone', () => { clearLayoutCache(); fitCaption(true); dirty = true; });
     const h = (location.hash || '').replace('#', '');
     if (/^s\d+$/.test(h)) { const k = +h.slice(1); if (SCENES[k]) T = SCENES[k].start; }
     requestAnimationFrame(t => { last = t; frame(t); });
