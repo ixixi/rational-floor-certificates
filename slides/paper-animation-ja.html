@@ -131,7 +131,7 @@ a.toc-h:hover { background: #16233a; }
         <select id="speed" aria-label="再生速度">
           <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
         </select>
-        <button id="bVoice" aria-label="読み上げ" aria-pressed="false"></button>
+        <button id="bVoice" aria-label="音声" aria-pressed="true"></button>
         <button id="bCC" aria-label="字幕の表示" aria-pressed="true"></button>
         <button id="bFull" aria-label="全画面"></button>
       </div>
@@ -147,7 +147,7 @@ a.toc-h:hover { background: #16233a; }
       <h2>この動画について</h2>
       <p>論文 <i>Finite graph certificates for composite terms in rational floor sequences</i>（Yuri Odagiri）の解説スライドの第1章〜第3章（1ステップ法）を、アニメーションにしたものです。第4章の語ラベル法から先は扱いません。</p>
       <p>第3章の実際の計算（30720 頂点から始めて 4 段で空になる計算）は、このページのプログラムが開くたびに計算し直して表示しています。数値は論文の表1・表2・表3と一致します。</p>
-      <p>スピーカーのボタンで、字幕をブラウザの音声合成で読み上げます（日本語の音声がある端末のみ。数式は機械的な読み方になります）。読み上げ中は、読み終わるまで次の字幕に進みません。</p>
+      <p>ナレーション音声（Gemini 3.8 Flash TTS で作成）が字幕と同期して流れます。スピーカーのボタンでミュートできます。音声ファイルを読み込めない環境（HTML だけを手元で開いた場合など）では、ブラウザの音声合成で字幕を読み上げ、読み終わるまで次の字幕に進みません。</p>
       <div class="legend" aria-label="色の意味"><span class="cQ">整数部分・あまり</span><span class="cT">小数部分・セル</span><span class="cC">繰り上がり</span><span class="cH">割り切れる項・素数</span><span class="cO">認証・成立</span><span class="cB">矛盾・除去</span></div>
       <div class="keys">
         <kbd>Space</kbd><span>再生 / 一時停止</span>
@@ -155,7 +155,7 @@ a.toc-h:hover { background: #16233a; }
         <kbd>Shift + ← →</kbd><span>前 / 次の場面へ</span>
         <kbd>F</kbd><span>全画面</span>
         <kbd>C</kbd><span>字幕の表示 / 非表示</span>
-        <kbd>V</kbd><span>読み上げのオン / オフ</span>
+        <kbd>V</kbd><span>音声のオン / ミュート</span>
       </div>
       <p class="cite">論文: DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> ／ ソースと再現資料: <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">github.com/ixixi/rational-floor-certificates</a></p>
     </section>
@@ -4213,6 +4213,215 @@ scene({
   },
 });
 
+/* ---- narration.js ---- */
+/* narration lengths (s) per caption, measured from the Gemini TTS clips */
+const NARR_DUR = {
+"ある数に $\\frac{7}{5}$ を掛けては、小数点以下を切り捨てる。これをくり返すと、整数の列ができます。": 7.71,
+"この列の中に、素数ではない数（\\c{hit}{合成数}）は、無限にたくさん現れるのでしょうか？": 6.66,
+"この動画では、論文がこの問いに答えた方法を、高校数学の言葉で順番に見ていきます。": 6.37,
+"第1章で問題と結果を確かめ、第2章で証明のカギになる性質を学び、第3章で有限のグラフを使った証明の方法を見ます。": 10.6,
+"第1章では、どんな数列について何が証明されたのか、そしてその証明の作戦を見ます。": 8.08,
+"記号 $\\floor{x}$ は「\\b{床関数}」。$x$ を超えない最大の整数を表します。": 7.57,
+"数直線でいえば、$x$ のすぐ左（または $x$ 自身）にある整数です。例えば $\\floor{2.744} = 2$。": 12.22,
+"$x$ がちょうど整数なら、その数自身です。$\\floor{5} = 5$。": 5.69,
+"負の数では注意。$\\floor{-1.2}$ は $-1$ ではなく、左側の $-2$ になります。": 7.68,
+"正の数なら、要するに「\\c{th}{小数点以下を切り捨てる}」ことです。": 4.83,
+"この論文の主役は、この数列です。まず、正の実数 $ξ$（グザイ）を1つ決めます。": 6.81,
+"$ξ$ に $\\frac{7}{5} = 1.4$ を $n$ 回掛けて、小数点以下を切り捨てたものが、$n$ 番目の項 $Q_n$ です。": 9.34,
+"$ξ = 1$ なら $1,\\ 1.4,\\ 1.96,\\ 2.744,\\ …$ を切り捨てて、$1, 1, 1, 2, 3, 5, 7, 10, …$ となります。": 13.29,
+"項は毎回およそ 1.4 倍になり、どんどん大きくなっていきます。": 5.41,
+"$ξ$ は正の実数なら何でもかまいません。$ξ$ を変えると、数列も変わります。": 6.08,
+"定理は、\\b{すべての} $ξ > 0$ について同時に成り立つことを主張します。": 5.59,
+"でも正の実数は、数えきれないほどたくさんあります。1つずつ計算して確かめることはできません。": 6.85,
+"\\c{Q}{素数}は、1 と自分自身でしか割り切れない、1 より大きい整数。$2, 3, 5, 7, 11, 13, …$ です。": 10.7,
+"\\c{hit}{合成数}は、1 より大きい2つの整数の積で書ける数。点を並べると、長方形が作れます。": 8.58,
+"例えば $111 = 3 × 37$。3 で割り切れるので、111 は合成数です。": 8.79,
+"だから、項 $Q$ が 13 より大きく、$2, 3, 5, 11, 13$ のどれかで割り切れれば、$Q$ は必ず合成数です。": 9.55,
+"5つの素数を全部掛けると、$2 × 3 × 5 × 11 × 13 = 4290$ です。": 9.72,
+"$\\op{gcd}(Q, 4290) > 1$（$Q$ と 4290 の最大公約数が 1 より大きい）は、「$Q$ が5つの素数のどれかで割り切れる」と同じ意味です。": 16.37,
+"例えば 111 は 3 で割り切れるので $\\op{gcd} = 3$。79 はどれでも割り切れず $\\op{gcd} = 1$。このとき、79 と 4290 は「\\c{Q}{互いに素}」といいます。": 15.15,
+"「無限に多い」とは、どんなに大きな番号 $N$ を選んでも、その先に条件を満たす項が必ずある、ということです。": 10.09,
+"$N$ をどこまで右に動かしても、その右側に割り切れる項が見つかる。これを示せばよいのです。": 7.68,
+"記号で書くと「どんな $N$ に対しても、$n \\ge \\max(N, 1)$ で $\\op{gcd}(Q_n, 4290) > 1$ となる $n$ がある」です。": 14.67,
+"これが論文の主定理です。比 $\\frac{7}{5}$ では、どんな $ξ > 0$ でも、$2, 3, 5, 11, 13$ のどれかで割り切れる項が無限に現れます。": 12.26,
+"比 $\\frac{5}{2}$ では、2 から 31 までの素数のうち 5 を除いた 10 個で、同じことが成り立ちます。": 8.44,
+"(i) と (ii) の $n$ は別々に選びます。どちらも「すべての $ξ > 0$」についての主張です。": 8.02,
+"項はいくらでも大きくなるので、いつかは 13 を超えます（比 $\\frac{5}{2}$ なら 31）。": 8.39,
+"その先にも、定理1の素数で割り切れる項が、無限にあります。": 5.08,
+"割り切れる項は、割った素数より大きいので合成数。こうして「どんな $ξ > 0$ でも合成数の項が無限にある」と分かります。": 11.44,
+"比 $\\frac{7}{5}$ では、割り切れる項が「何番目までに」現れるかも分かります。$\\floor{ξ} = P$ が 13 より大きければ、$0 \\le n \\le 428 + 12\\,L(P)$ の範囲に必ずあります。": 16.09,
+"$L(P)$ は「5 を何乗すれば $P + 2$ 以上になるか」。$P$ が 10 倍になっても 1〜2 しか増えません。この定理の証明は、この動画では扱いません。": 12.91,
+"似た問題は以前から研究されていて、比 $\\frac{3}{2}$, $\\frac{4}{3}$, $\\frac{5}{4}$ では同じ種類の結果が知られていました。": 9.59,
+"$\\frac{7}{5}$ は「四捨五入」、$\\frac{5}{2}$ は「切り捨てて 1 を引く」形で知られていました。この論文は、\\b{切り捨てただけ}の数列で証明しました。": 10.53,
+"何が難しいのでしょう。まず、$ξ$ は数えきれないほど多く、全部は試せません。": 6.74,
+"次に、1つの $ξ$ でも数列は無限に続き、最後まで計算することはできません。": 6.53,
+"さらに、$ξ$ がほんの少し違うだけで先の項が変わります。例えば $ξ = 1$ と $ξ = 1.0001$ では、22 番目で差が出ます。数値計算の誤差も許されません。": 16.75,
+"そこで、個々の $ξ$ を計算するのではなく、どの $ξ$ にも当てはまる「\\c{ok}{有限個の条件}」だけを調べる方法を考えます。": 8.48,
+"証明には\\b{背理法}を使います。示したいことの否定を仮定して、矛盾を導く方法です。": 7.39,
+"仮定するのは「ある $ξ$ で、ある番号から先の項が、すべて 4290 と互いに素」ということ。": 8.66,
+"すると、その項の並びは、有限のグラフの上を無限に進み続ける道になります（第3章）。": 7.94,
+"ところが、繰り上がりは周期的にならない（第2章）ので、道はグラフの「周期的な部分」には留まれません。": 8.83,
+"その部分を消し、グラフを細かくする、をくり返します。グラフが空になれば道の行き場がなくなり、矛盾です。": 9.32,
+"第2章では、隣り合う2つの項を結ぶ整数の式と、そこから出てくる「周期的にならない」という性質を見ます。": 9.2,
+"第1章の作戦を思い出しましょう。ねらいは5つのステップで矛盾を導くことでした。": 6.72,
+"第2章で用意するのは、③で使う「武器」です。本物の数列は、周期的な部分には永遠にいられない。その理由になる性質を証明します。": 11.89,
+"そのためにまず、隣り合う2つの項を、整数だけの式で結びます。": 5.53,
+"実数のまま追いかけると、7/5 を掛けるたびに小数の桁が1つずつ増えていきます。誤差なしで扱い続けるのは大変です。": 9.6,
+"そこで、実数の細かい部分をまとめて1つの小さな整数 $c_n$ に押し込め、「整数だけの式」で次の項を決めたいのです。": 10.33,
+"例えば $Q_3 = 2$ なら、7 倍して 14、$c_3 = 1$ を足して 15、5 で割って $Q_4 = 3$。整数の計算だけで進みます。": 11.97,
+"$c_n$ がとれる値は少ししかないので、あとで「有限個の場合を全部調べる」ことにつなげられます。": 8.62,
+"ここからは、比を $r = \\frac{a}{b}$ と書きます。$a > b \\ge 2$ で、$a$ と $b$ は互いに素。$\\frac{7}{5}$ なら $a = 7$、$b = 5$ です。": 15.56,
+"各項 $x_n = ξ\\,r^{n}$ を、\\c{Q}{整数部分} $Q_n$ と\\c{th}{小数部分} $θ_n$（シータ）に分けます。$θ_n$ は 0 以上 1 未満です。": 12.77,
+"例えば $ξ = 1$、$n = 3$ では $x_3 = 2.744$ なので、$Q_3 = 2$、$θ_3 = 0.744$ です。": 14.97,
+"隣り合う2つの項には $x_{n+1} = \\frac{7}{5}\\,x_n$、つまり $5\\,x_{n+1} = 7\\,x_n$ という関係があります。": 13.7,
+"上の段は $x_3 = 2.744$ を7個、下の段は $x_4 = 3.8416$ を5個並べたもの。合計の長さはどちらも 19.208 で、ぴったり同じです。": 17.61,
+"それぞれを\\c{Q}{整数部分}と\\c{th}{小数部分}に分けて並べ直すと、整数部分の合計は 14 と 15。ちょうど 1 だけずれます。": 9.51,
+"このずれを「\\c{c}{繰り上がり}」$c_n$ と呼びます。小数部分があふれて、整数部分に繰り上がった分です。ここでは $c_3 = 1$。": 10.57,
+"式で書くと $c_n = b\\,Q_{n+1} - a\\,Q_n = a\\,θ_n - b\\,θ_{n+1}$。つまり $b\\,Q_{n+1} = a\\,Q_n + c_n$ で、$c_n$ が分かれば $Q_n$ から次の $Q_{n+1}$ が決まります。": 24.34,
+"$c_n$ は小数部分だけで $c_n = 7\\,θ_n - 5\\,θ_{n+1}$ とも書けます。": 9.02,
+"$θ$ は 0 以上 1 未満なので、$c_n$ は $-5$ より大きく $7$ より小さい。整数なので、$-4$ から $6$ までの \\b{11 通り}しかありません。": 13.12,
+"比 $\\frac{5}{2}$ なら $-1$ から $4$ までの 6 通り。実際の数列の繰り上がりも、ちゃんとこの範囲に収まっています。": 9.33,
+"繰り上がりは有限個の値しかとらない。これが、有限のグラフで扱える理由の1つです。": 7.01,
+"次に考えるのは「繰り上がりの列が、くり返しになるかどうか」です。なぜこれが大事なのでしょう。": 7.25,
+"第3章では、数列の動きを矢印の図で表します。もし数列が図の中の輪を回り続けたら、繰り上がりは $4, -2, 4, -2, …$ のようにくり返しになります。": 15.08,
+"逆に「繰り上がりは決してくり返しにならない」と分かっていれば、本物の数列はそんな輪に永遠にはいられません。輪ごと候補から消せるのです。": 11.25,
+"これが証明の武器になります。まずは「くり返し」の意味をはっきりさせましょう。": 5.72,
+"列が同じパターンのくり返しになるとき「周期的」といいます。ある番号 $N$ から先だけがくり返しになるときは「\\b{最終的に周期的}」といいます。": 13.19,
+"例えば $3, 1, 4, 2, 5, 2, 5, 2, 5, …$ は、$N = 3$ から先が長さ $L = 2$ のくり返しです。最初の部分はばらばらでもかまいません。": 15.06,
+"第2章の主役は、この性質です。\\b{補題4}：どんな $ξ > 0$ でも、繰り上がりの列は最終的に周期的になりません。": 10.89,
+"つまり、どんな $N$ と $L \\ge 1$ をとっても、「$n \\ge N$ でいつも $c_{n+L} = c_n$」は成り立ちません。この性質は、あとで矛盾を導くときに何度も使います。": 20.08,
+"ただし $b \\ge 2$ と、$a$ と $b$ が互いに素であることが必要です。$\\frac{7}{1}$ のような整数の比では、$ξ = 1$ のとき繰り上がりがずっと 0 になってしまいます。": 14.65,
+"補題4をどう証明するのか、先に道筋を見ておきましょう。背理法を使います。": 6.09,
+"もし繰り上がりがくり返すなら、同じ規則で進む2本の数列が作れます。その差は、番号が1つ進むたびに $\\frac{7}{5}$ 倍になります。": 10.82,
+"ところが、$\\frac{7}{5}$ 倍をくり返しても整数のままでいられるのは 0 だけ。すると差は 0、つまり項が同じ値に戻ってしまい、項がどんどん大きくなることと矛盾します。": 14.47,
+"そこで (1) で「$\\frac{7}{5}$ 倍をくり返して整数でいられるのは 0 だけ」を確かめ、(2) で全体を組み立てます。": 9.71,
+"まず準備です。整数の列 $D_0, D_1, D_2, …$ が $b\\,D_{k+1} = a\\,D_k$、つまり $D_{k+1} = \\frac{7}{5}\\,D_k$ を満たすとします。": 14.54,
+"例えば $D_0 = 250$ から始めると、350、490、686 と進み、次は 960.4 になって整数ではなくなります。": 14.05,
+"くり返し使うと $b^{k} D_k = a^{k} D_0$。$a^{k}$ と $b^{k}$ は互いに素なので、$D_0$ は $5^{k}$ で割り切れなければなりません。これが\\b{すべての} $k$ で必要です。": 15.41,
+"5、25、125、625、… のすべてで割り切れる整数は 0 だけ。つまり $D_0 = 0$ です。": 10.04,
+"では、繰り上がりが番号 $N$ から先、周期 $L$ でくり返すと仮定してみましょう（背理法）。": 8.59,
+"数列と、それを $L$ だけ先にずらした数列を並べます。周期性から、2つは\\c{c}{同じ繰り上がり}を使い、同じ規則 $b\\,Q_{n+1} = a\\,Q_n + c_n$ で進みます。": 14.5,
+"2つの差を $D_k = Q_{m+k+L} - Q_{m+k}$ とすると、繰り上がりが打ち消し合って $b\\,D_{k+1} = a\\,D_k$。さっきの準備から $D_0 = 0$ です。": 21.99,
+"つまり $Q_{m+L} = Q_m$。これがすべての $m \\ge N$ で成り立つので、$Q_N = Q_{N+L} = Q_{N+2L} = …$ となります。": 16.25,
+"でも項はどんどん大きくなるはず。\\c{bad}{矛盾}です！　だから繰り上がりは最終的に周期的になりません。": 7.4,
+"第3章では、数列の「状態」を有限個にまとめてグラフを作り、周期的な部分を取り除いていく方法を見ます。": 8.95,
+"第2章で武器ができました。第3章では、作戦の②から⑤までを実行します。": 6.87,
+"まず②：本物の数列を、有限のグラフの上の道として表します。どの $ξ$ でも使える、1枚のグラフです。": 10.32,
+"そのためには、無限にある数列の情報を、有限個の「状態」にまとめる必要があります。": 6.6,
+"第3章の目標は、「ある番号から先がずっと 4290 と互いに素」が、どの $ξ$ でも起こりえないと示すことです。": 9.97,
+"でも数列の情報は無限です。$Q_n$ はいくらでも大きくなり、$θ_n$ は無限に続く小数です。このままでは、有限の計算にのせられません。": 11.77,
+"そこで証明に必要な分だけを残します。4290 で割り切れるかどうかは、4290 で割った\\c{Q}{あまり}だけで決まります。": 9.58,
+"繰り上がり $c_n = 7θ_n - 5θ_{n+1}$ は小数部分で決まるので、$θ_n$ の\\c{th}{だいたいの位置}を残せば、繰り上がりの候補を絞れます。": 12.69,
+"この2つの組を「状態」と呼びます。状態は有限個しかありません。まずは「あまり」から見ていきましょう。": 8.7,
+"$Q \\bmod M$ は、$Q$ を $M$ で割ったあまりのこと。4319 を 4290 で割ったあまりは 29 なので、$4319 \\equiv 29\\ (\\op{mod}\\ 4290)$ と書きます。": 19.19,
+"$Q$ が 4290 と互いに素かどうかは、あまりだけで決まります。あまりは 0 から 4289 までの 4290 通り。右の図の1マスが1つのあまりです。": 14.96,
+"2 の倍数、3 の倍数、5 の倍数、11 の倍数、13 の倍数を順に消していくと……": 8.37,
+"残るのは 960 通り。この数を $φ(4290) = 960$ と書きます。「互いに素かどうか」は、有限個の場合分けで済むのです。": 13.67,
+"小数部分 $θ_n$ は 0 以上 1 未満の実数で、とりうる値は無限にあります。": 7.44,
+"そこで区間 $[0, 1)$ を $K$ 個の等しい小区間「\\c{th}{セル}」に分け、$θ_n$ がどのセルに入るかだけを記録します。": 11.04,
+"セルの番号は $\\floor{Kθ}$ で求まります。$K = 4$、$θ = 0.4$ なら $4 × 0.4 = 1.6$ なので、セル 1 です。": 12.81,
+"$K$ を大きくするほど、セルは細かくなります。この「細かさ」を、あとで少しずつ上げていきます。": 7.02,
+"番号 $n$ での数列の様子を、「\\c{Q}{あまり}」と「\\c{th}{セル番号}」の2つの整数の組で表します。これを\\b{状態}と呼びます。": 9.8,
+"例（$ξ = 2$、$M = 4290$、$K = 4$）：$x_8 = 29.5157…$ なら、あまりは 29、セルは $\\floor{4 × 0.5157…} = 2$ で、状態は $(29, 2)$。": 21.79,
+"次の $x_9 = 41.3220…$ は、状態 $(41, 1)$ です。": 8.53,
+"$Q_n$ が 4290 と互いに素なら、状態は $960 × K$ 通りのどれか。$K = 4$ なら 3840 通りです。無限にあった可能性が、\\b{有限個}にまとまりました。": 16.29,
+"状態は有限個になりました。次は、番号が1つ進むとき、状態がどう移り変わるかを矢印で表します。": 8.8,
+"番号 $n$ の状態から、番号 $n+1$ の状態へ矢印を引けば、数列の進み方は「矢印をたどる道」になります。$ξ$ が違えば、たどる道も違います。": 14.75,
+"いろいろな $ξ$ の矢印を全部まとめて、1枚の図にします。こうすると、どの $ξ$ も同じ1枚の図の上の道として扱えます。": 10.69,
+"ねらいは、この1枚の図を調べるだけで、すべての $ξ$ についての結論を出すことです。図の言葉を用意しましょう。": 9.29,
+"点（\\b{頂点}）と、向きのある矢印（\\b{辺}）の集まりを「有向グラフ」といいます。辺には\\c{c}{ラベル}として数（ここでは繰り上がり）を付けます。": 10.67,
+"矢印の向きに沿って頂点をたどる道を「\\b{ウォーク}」と呼びます。同じ頂点や辺を何度通ってもかまいません。": 8.06,
+"たどった辺のラベルを順に並べた列が、ウォークの「\\c{c}{出力}」です。": 4.8,
+"では、どの状態からどの状態へ矢印を引けばよいのでしょう。$ξ$ は分からないので、どれが本物の移り変わりかは分かりません。": 11.04,
+"大事なのは、本物の移り変わりを\\b{1つも描き忘れない}ことです。描き忘れると、本物の数列が図の外に逃げてしまい、証明が成り立ちません。": 11.54,
+"一方、本物でない矢印が\\b{混ざるのはかまいません}。あとで「本物がいられない場所」を消すだけなので、余分があっても結論は正しいままです。": 11.26,
+"そこで「本物の隣り合う2項なら必ず満たす条件」を書き出し、それを満たす矢印は全部引きます。それが次の3つの条件です。": 10.92,
+"では、どの状態からどの状態へ辺を引くのでしょう。状態 $(q, j)$ から $(z, k)$ へ、ラベル $e$ の辺を引くのは、次の3つが全部成り立つときです。": 11.94,
+"\\b{(E1)} ラベル $e$ が、繰り上がりのとりうる範囲に入っている。比 $\\frac{7}{5}$ なら $-4 \\le e \\le 6$。": 9.85,
+"\\b{(E2)} あまりが、式 $b\\,Q_{n+1} = a\\,Q_n + c_n$ と矛盾しない。$M$ で割ったあまりで確かめます。": 11.46,
+"\\b{(E3)} 2つのセルの小数部分で、繰り上がり $e$ が実際に起こりうる。": 6.04,
+"どれも、本物の数列の隣り合う2項が必ず満たす性質を、\\b{整数の計算だけ}で判定できる形に書いたものです。頂点は、4290 と互いに素な状態だけです。": 16.17,
+"(E3) を図で見てみましょう。説明用に $a = 5$、$b = 2$、$K = 4$ として、横軸を $u = Kθ_n$、縦軸を $v = Kθ_{n+1}$ にとります。": 16.95,
+"$θ_n$ がセル 1、$θ_{n+1}$ もセル 1 にあるとき、点 $(u, v)$ はこの正方形の中にあります。左と下の辺は含み、右と上の辺は含みません。": 12.86,
+"繰り上がりが $e$ になるには、$5u - 2v = 4e$ が成り立つ必要があります。これは1本の直線です。": 9.74,
+"$e = 1$ のとき、直線は正方形の中を通ります。だから、このセルの組で $e = 1$ は起こりえます。": 8.99,
+"$e = 2$ では、直線は正方形の右下の角にしか触れません。その角は正方形に含まれないので、起こりえません。$e = 0$ なら、直線は正方形から離れています。": 14.68,
+"(E3) の不等式は、この「直線が正方形を通るか」を整数だけで判定しています。この例では $1 < 4e < 8$ なので、$e = 1$ だけです。": 14.46,
+"実際の数列で確かめます。$ξ = 2$、比 $\\frac{7}{5}$、$K = 4$ で、状態 $(29, 2)$ から $(41, 1)$ へ。繰り上がりは $c_8 = 5 × 41 - 7 × 29 = 2$ です。": 22.75,
+"(E1) $-4 \\le 2 \\le 6$。(E2) $5 × 41 = 205$ と $7 × 29 + 2 = 205$ が一致。(E3) $4 < 8 < 16$。3つとも成り立ちます。": 20.41,
+"本物の数列の隣り合う状態は、いつもこの3つの条件を満たします。だから必ず、グラフの辺になっているのです。": 8.86,
+"(E2) から次のあまり $z$ を求めるには、$5z \\equiv 205\\ (\\op{mod}\\ 4290)$ を解きます。ところが 5 は 4290 を割り切るので、「5 で割る」ことはできません。": 14.55,
+"解は $z = 41, 899, 1757, 2615, 3473$ の5つ（858 ずつ違う）。本物の次のあまりは 41 ですが、グラフは可能性のある\\b{全部}に辺を引きます。": 19.2,
+"ただし 2615 は 5 で割り切れるので頂点になりません。さらに (E3) からセルも $k = 1, 2$ の2通りあり、ラベル 2 の辺は $4 × 2 = 8$ 本になります。": 16.06,
+"\\b{命題5}：番号 $n$ と $n+1$ の状態がどちらも頂点なら、ラベル $c_n$ の辺 $σ(n) \\to σ(n+1)$ が必ずあります。": 12.64,
+"$ξ = 2$ の数列で見てみましょう。4290 と互いに素な項（頂点）が続くあいだ、状態は辺をたどって進みます。割り切れる項が来ると、道は途切れます。": 14.03,
+"もし「ある番号から先がずっと互いに素」なら、状態の列は、この1つの有限グラフの上を\\b{無限に続くウォーク}になり、その出力は繰り上がりの列です。": 13.09,
+"しかも、どの $ξ$ でも使うのは同じ1つのグラフ。$ξ$ ごとに別のグラフを作る必要はありません。": 7.73,
+"グラフの上にはウォークがたくさんあります。そのすべてが本物の数列から来るわけではありません。": 6.72,
+"本物をすべて含むけれど、偽物も混ざってよい。このような大きめの集まりを「\\b{外側近似}」といいます。": 8.84,
+"証明で使うのは「数列ならウォーク」の向きだけ。逆の「ウォークなら数列」は仮定しません。偽物が混ざっていても、証明は正しいままです。": 11.08,
+"ここまでで②が終わりました。本物の数列は、1枚の有限グラフの上の道になります。": 6.83,
+"次は③です。第2章の武器を使って、本物の数列が永遠にはいられない場所を見つけ、グラフから消していきます。": 9.04,
+"ここからは、本物の数列の道が「永遠には続けられない」ことを示していきます。": 6.71,
+"グラフは有限なので、永遠に続く道は、どこかで同じ場所を何度も回ることになります。一度通ったら戻れない部分には、1回しかいられません。": 11.49,
+"だから調べるべきは「ぐるぐる回れる場所」です。それを見つける道具が、次の「強連結成分」です。": 8.35,
+"グラフを「お互いに行き来できる頂点のグループ」に分けます。これを\\b{強連結成分}、略して SCC といいます。": 9.12,
+"グループの間の辺は一方通行です。一度出たグループには、二度と戻れません。": 6.34,
+"グループの中に辺が少なくとも1本あるものを「\\b{巡回的な SCC}」と呼びます。1頂点なら、自分に戻る辺（自己ループ）があるものです。$G$ は巡回的ではありません。": 13.31,
+"\\b{補題6}：有限グラフの無限に続くウォークは、ある所から先、1つの巡回的な SCC の中だけを動きます。": 9.98,
+"理由：一度出た SCC には戻れず、SCC は有限個なので、SCC の間の移動は有限回で終わります。": 9.92,
+"最後に留まる SCC の中をずっと回り続けるので、その SCC には内部の辺があります。つまり巡回的です。": 9.61,
+"巡回的な SCC の中には、出力が必ずくり返しになるものと、そうでないものがあります。": 7.24,
+"左の輪は、どう回っても $2, 4, -2, 2, 4, -2, …$ とくり返すしかありません。右は分かれ道があるので、出力の並び方を変えられます。": 14.46,
+"必ずくり返しになる SCC なら、第2章の補題4により、本物の数列はそこに永遠にはいられません。だから、これを見分けたいのです。": 11.43,
+"見分ける道具は「時計」です。各頂点に時計の目盛りを付けて、目盛りごとに出てくるラベルが1つに決まれば、出力は時計の1周ごとにくり返します。": 12.88,
+"巡回的な SCC の中で、1つの頂点を「根」$ρ$ に選びます。各頂点 $v$ に、SCC の中で根から $v$ へ行く道（例えば最短の道）の長さ $h(v)$（辺の本数）を書き込みます。": 17.35,
+"SCC の中の各辺 $u \\to v$ について $|h(u) + 1 - h(v)|$ を計算し、その最大公約数を $d$ とします。この例では $d = 3$。": 15.05,
+"$h(v)$ を $d$ で割ったあまりを「\\b{位相}」と呼びます。すると、どの辺を1本進んでも位相は必ず1つ進みます。$0 \\to 1 \\to 2 \\to 0$ と、時計の針のように回るのです。": 15.6,
+"\\b{位相判定}：位相ごとに、その位相の頂点から出る内部の辺のラベルを全部集めます。": 7.36,
+"どの位相でも、集めたラベルが1種類だけなら、その SCC は「\\c{ok}{認証された}」といいます。": 7.09,
+"左の例では、位相 0 は $\\{2\\}$、位相 1 は $\\{4\\}$。どちらも1種類なので、認証されます。": 8.69,
+"右のように、ラベル 4 の辺 $u \\to v$ が1本加わると、位相 0 に $\\{2, 4\\}$ の2種類が入り、認証されません。": 9.25,
+"\\b{補題7}：認証された SCC の中だけを動く無限ウォークの出力は、周期 $d$ の周期的な列です。": 8.63,
+"辺を1本進むたびに位相は1つ進み、しかも位相ごとにラベルは1つに決まっています。だから辺を $d$ 本進むたびに、同じラベルがくり返し出てくるのです。": 13.78,
+"ここで第2章の補題4が効いてきます。本物の数列が、\\c{ok}{認証された} SCC に永遠に留まったとしましょう。": 9.7,
+"すると補題7から、繰り上がりは周期的になります。でも補題4によれば、それはありえません。": 6.63,
+"つまり本物の数列の尾部（ある番号から先の部分）は、\\c{bad}{認証されなかった}巡回的な SCC の中にしか残れません。": 9.57,
+"認証された SCC と、巡回的でない部分は消してかまいません。残った頂点の集まりを\\b{保持集合} $R_K(W)$ と呼びます（補題8）。": 11.66,
+"③で、本物がいられない SCC は消せるようになりました。でも、位相判定に合格しない SCC は残ります。": 9.24,
+"そこで④です。残った部分を、もっと細かいセルで調べ直します。": 5.35,
+"位相判定で消しきれない部分が残るのは、なぜでしょう。": 3.94,
+"セルが粗いと、小数部分の位置があいまいなので、(E3) を満たす矢印が多くなります。本物でない矢印も混ざり、出力の並び方が増えてしまいます。": 12.32,
+"セルを細かくすると、小数部分の位置がはっきりして (E3) が厳しくなり、本物でない矢印が減っていきます。": 8.45,
+"しかも本物の数列の状態は、必ず細かいセルのどれかに入るので、取りこぼしは起きません。本物は残したまま、偽物だけが減っていくのです。": 11.75,
+"保持集合に残った状態は、セルを細かくして調べ直します。セルを $f$ 等分することを\\b{細分}といいます。": 8.81,
+"$K = 4$ のセル 1 は、$f = 4$ で細分すると、$K = 16$ のセル 4, 5, 6, 7 に分かれます。$θ = 0.4$ なら $16 × 0.4 = 6.4$ なので、セル 6 です。": 16.85,
+"あまりは変わらず、セル番号だけが細かくなります。本物の数列の状態は、必ず元のセルの「子」のどれかに入ります（補題9）。": 10.88,
+"これで道具がそろいました。互いに素な状態すべて $W_0$ から始めます。": 6.51,
+"グラフを作り、SCC に分け、位相判定をして、認証されなかった部分 $U_0$ だけを残す。それを細分して $W_1$ とし、同じ手順をくり返します。": 12.56,
+"本物の数列の尾部は、各段で必ず残ります（補題8・9）。": 6.12,
+"もしある段で $U_s$ が空になったら？　尾部の行き場がなくなり、矛盾です。": 5.82,
+"\\b{定理10}：ある段で $U_s$ が空になれば、どんな $ξ > 0$ と $N$ に対しても、$n \\ge \\max(N, 1)$ で $\\op{gcd}(Q_n, M) > 1$ となる $n$ があります。": 17.76,
+"道具はすべてそろいました。あとは⑤：実際に計算して、何も残らなくなるかを確かめるだけです。": 8.58,
+"もし残りが空になれば、定理10により、どの $ξ$ でも割り切れる項が無限にあることが証明されます。": 7.31,
+"いよいよ比 $\\frac{7}{5}$ の実際の計算です。$M = 4290$、最初は $K = 32$。横がセル（小数部分）、縦があまり。30720 個の頂点が並びます。": 17.85,
+"辺は 55440 本。SCC に分けると、巡回的な SCC は 17 個しかありません。ぐるぐる回れない残りの頂点は、まとめて消えます。": 13.11,
+"17 個のうち 16 個は位相判定で\\c{ok}{認証}されて消え、残ったのは 1363 頂点の SCC 1つだけ。": 9.99,
+"これを 4 等分に細分して $K = 128$。5452 頂点のうち、残るのは 952 個です。": 9.66,
+"$K = 512$ では 3808 頂点。今度は認証される SCC がなく、944 個が残りました。": 9.99,
+"そして $K = 2048$。3776 頂点の中の巡回的な SCC 15 個が、\\b{すべて}認証されました。": 10.09,
+"残りは 0！　定理10により、比 $\\frac{7}{5}$ の定理1 (i) が証明されました。": 7.13,
+"この画面の数字は、このページのプログラムが開くたびに計算し直したもので、論文の表1と一致しています。": 8.0,
+"消された（認証された）SCC の中のウォークが出せる出力は、この5種類の語のくり返しだけでした。": 9.03,
+"例えば $K = 32$ の2頂点の SCC、$(2323, 21)$ と $(4111, 5)$ の間では、繰り上がりは $4, -2, 4, -2, …$ とくり返すしかありません。": 16.31,
+"補題4により、本物の数列がこうした SCC に永遠に留まることはできません。だから消してよかったのです。": 9.57,
+"同じ方法を、すでに証明されている比 $\\frac{3}{2}$、$\\frac{4}{3}$、$\\frac{5}{4}$ にも使ってみました。どれも1段目で、すべての巡回的 SCC が認証されて計算が終わります。": 14.54,
+"これは新しい主張ではなく、方法とプログラムの点検です。数値はこのページが計算したもので、論文の表3と一致します。": 11.1,
+"無限に多い $ξ$ と、無限に続く数列。これを、\\b{有限のグラフの計算}と\\b{一般の定理}の組み合わせで扱いました。": 9.22,
+"状態を（あまり, セル）にまとめ、周期的な部分を位相判定で見つけて消し、セルを細かくする。比 $\\frac{7}{5}$ では4段目で空になり、定理1 (i) が証明されました。": 15.31,
+"比 $\\frac{5}{2}$ は素数が10個もあってグラフが大きくなりすぎるため、論文では第4章の「語ラベル法」で証明しています。その先は、論文と解説スライドでどうぞ。": 13.02
+};
+
 /* ---- player.js ---- */
 /* =====================================================================
    player: timeline, rendering loop, captions, controls
@@ -4231,6 +4440,7 @@ function plainOf(src) {
 }
 function autoDur(src) { const n = plainOf(src).length; return 1.5 + n / 6.6; }
 
+const NARR_OFS = 0.12, NARR_GAP = 0.3; // audio starts NARR_OFS after the caption appears
 function buildTimeline() {
   arrangeScenes();
   let T = 0;
@@ -4238,7 +4448,13 @@ function buildTimeline() {
     s.idx = idx;
     s.B = []; let t = s.lead ?? 0.4;
     s.beatDur = [];
-    for (const [txt, d] of s.beats) { s.B.push(t); const dd = Math.max(d || 0, autoDur(txt)); s.beatDur.push(dd); t += dd; }
+    for (const [txt, d] of s.beats) {
+      s.B.push(t);
+      const nd = typeof NARR_DUR !== 'undefined' ? NARR_DUR[txt] : undefined;
+      // the caption lasts at least as long as its recorded narration (plus a short pause)
+      const dd = Math.max(d || 0, autoDur(txt), nd != null ? nd + NARR_OFS + NARR_GAP : 0);
+      s.beatDur.push(dd); t += dd;
+    }
     s.B.push(t);
     s.dur = t + (s.tail ?? 0.7);
     s.start = T; T += s.dur;
@@ -4344,9 +4560,27 @@ function toSpeech(src) {
   return out;
 }
 
+/* recorded narration: one MP3 aligned with the whole timeline; while it plays, it is the clock */
+const Track = (() => {
+  const src = window.NARR_SRC || 'paper-animation-ja-narration.mp3';
+  let el = null, ok = typeof NARR_DUR !== 'undefined', failed = false, onChange = () => {};
+  if (ok) {
+    el = new Audio(); el.preload = 'auto'; el.src = src;
+    try { el.preservesPitch = true; } catch (e) { /* older browsers */ }
+    el.addEventListener('error', () => { failed = true; onChange(); });
+    el.addEventListener('loadedmetadata', () => onChange());
+  }
+  return {
+    usable: () => ok && !failed,
+    fail: () => { if (failed) return; failed = true; try { el.pause(); } catch (e) { /* ignore */ } onChange(); },
+    el: () => el,
+    onChange: fn => { onChange = fn; },
+  };
+})();
+
 const Narr = (() => {
   const ok = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
-  let voice = null, on = false, speaking = false, token = 0, safety = 0, onChange = () => {};
+  let voice = null, on = true, speaking = false, token = 0, safety = 0, onChange = () => {};
   function pick() {
     if (!ok) return null;
     let vs = []; try { vs = speechSynthesis.getVoices().filter(v => /^ja/i.test(v.lang)); } catch (e) { return null; }
@@ -4354,11 +4588,11 @@ const Narr = (() => {
     for (const p of pref) { const v = vs.find(v => v.name.includes(p)); if (v) return v; }
     return vs[0] || null;
   }
-  function refresh() { voice = pick(); if (!voice && on) { on = false; cancel(); } onChange(); }
+  function refresh() { voice = pick(); onChange(); }
   if (ok) { refresh(); try { speechSynthesis.addEventListener('voiceschanged', refresh); } catch (e) { speechSynthesis.onvoiceschanged = refresh; } }
   function cancel() { token++; speaking = false; if (ok) { try { speechSynthesis.cancel(); } catch (e) { /* ignore */ } } }
   function speak(src, rate) {
-    if (!ok || !on || !voice) return;
+    if (!ok || !on || !voice || Track.usable()) return;
     cancel();
     const my = token; const text = toSpeech(src);
     const parts = text.split(/(?<=[。！？])/).map(x => x.trim()).filter(Boolean);
@@ -4377,9 +4611,9 @@ const Narr = (() => {
   }
   return {
     available: () => ok && !!voice,
-    isOn: () => on,
-    set: v => { on = !!v && ok && !!voice; if (!on) cancel(); onChange(); },
-    busy: () => { if (speaking && performance.now() > safety) speaking = false; return on && speaking; },
+    isOn: () => on && !!voice,
+    set: v => { on = !!v; if (!on) cancel(); onChange(); },
+    busy: () => { if (speaking && performance.now() > safety) speaking = false; return on && !!voice && speaking && !Track.usable(); },
     speak, cancel,
     onChange: fn => { onChange = fn; fn(); },
   };
@@ -4461,6 +4695,7 @@ function arrangeScenes() {
 const Player = (() => {
   const $ = id => document.getElementById(id);
   let canvas, ctx, g, TOTAL = 0, T = 0, playing = false, speed = 1, last = 0, dirty = true, captionsOn = true;
+  let soundOn = true, holdSince = 0, audioBlocked = false, audioBroken = false;
   let scale = 1, curBeatKey = '', dragging = false, wasPlaying = false, ready = false;
 
   function locate(TT) {
@@ -4535,12 +4770,21 @@ const Player = (() => {
   function frame(now) {
     if (playing) {
       const dt = Math.min(0.1, (now - last) / 1000); let nt = T + dt * speed;
-      if (Narr.busy()) { // wait for the narration of the current caption before moving on
+      const a = Track.usable() ? Track.el() : null;
+      if (a && !audioBroken && !(a.duration && T >= a.duration - 0.05)) {
+        if (!a.paused && !a.seeking && a.readyState >= 3) { nt = a.currentTime; holdSince = 0; }
+        else if (a.paused && !audioBlocked) { nt = T; audioPlay(); } // resumed after an ended/stalled state
+        else { // buffering: keep picture and sound together by waiting
+          if (!holdSince) holdSince = now;
+          if (now - holdSince < 10000) nt = T; else audioBroken = true;
+        }
+        if (audioBlocked) nt = T + dt * speed;
+      } else if (Narr.busy()) { // wait for the narration of the current caption before moving on
         const { s, t } = locate(T); const b = beatIndex(s, t); const end = s.start + s.B[b + 1] - 0.05;
         if (nt > end) nt = Math.max(T, end);
       }
       T = nt;
-      if (T >= TOTAL) { T = TOTAL - 0.001; playing = false; Narr.cancel(); }
+      if (T >= TOTAL) { T = TOTAL - 0.001; playing = false; Narr.cancel(); const a = Track.el(); if (a) a.pause(); }
       dirty = true;
     }
     last = now;
@@ -4551,9 +4795,26 @@ const Player = (() => {
     requestAnimationFrame(frame);
   }
 
-  function seek(TT) { T = clamp(TT, 0, TOTAL - 0.001); dirty = true; Narr.cancel(); if (playing) curBeatKey = ''; }
-  function play() { if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; $('bigplay').hidden = true; speakCurrent(); }
-  function pause() { playing = false; dirty = true; Narr.cancel(); }
+  function seek(TT) {
+    T = clamp(TT, 0, TOTAL - 0.001); dirty = true; Narr.cancel(); if (playing) curBeatKey = '';
+    const a = Track.usable() ? Track.el() : null;
+    if (a) {
+      try { a.currentTime = T; } catch (e) { /* not seekable yet */ }
+      // a host without range requests cannot seek the track: fall back to speech synthesis
+      if (a.readyState >= 1 && a.duration) {
+        let can = false; for (let i = 0; i < a.seekable.length; i++) if (a.seekable.start(i) <= T && T <= a.seekable.end(i) + 0.5) can = true;
+        if (!can) Track.fail();
+      }
+    }
+  }
+  function audioPlay() {
+    const a = Track.usable() ? Track.el() : null; if (!a) return;
+    a.playbackRate = speed; a.muted = !soundOn;
+    if (Math.abs(a.currentTime - T) > 0.25) { try { a.currentTime = T; } catch (e) { /* ignore */ } }
+    const pr = a.play(); if (pr && pr.catch) pr.catch(() => { audioBlocked = true; });
+  }
+  function play() { if (T >= TOTAL - 0.01) T = 0; playing = true; last = performance.now(); dirty = true; holdSince = 0; audioBlocked = false; $('bigplay').hidden = true; audioPlay(); speakCurrent(); }
+  function pause() { playing = false; dirty = true; Narr.cancel(); const a = Track.el(); if (a) a.pause(); }
   function toggle() { playing ? pause() : play(); }
   function beatStep(dir) {
     const { s, t } = locate(T); const b = beatIndex(s, t);
@@ -4602,14 +4863,19 @@ const Player = (() => {
     $('bFwd').addEventListener('click', () => beatStep(1));
     $('bPrev').addEventListener('click', () => sceneStep(-1));
     $('bNext').addEventListener('click', () => sceneStep(1));
-    $('speed').addEventListener('change', e => { speed = +e.target.value; if (playing) speakCurrent(); });
-    $('bVoice').addEventListener('click', () => { if (!Narr.available()) return; Narr.set(!Narr.isOn()); if (playing) speakCurrent(); });
-    Narr.onChange(() => {
-      const b = $('bVoice'); const av = Narr.available(), on = Narr.isOn();
+    $('speed').addEventListener('change', e => { speed = +e.target.value; const a = Track.el(); if (a) a.playbackRate = speed; if (playing) speakCurrent(); });
+    $('bVoice').addEventListener('click', () => {
+      if (Track.usable()) { soundOn = !soundOn; const a = Track.el(); a.muted = !soundOn; syncVoiceBtn(); return; }
+      if (!Narr.available()) return; soundOn = !soundOn; Narr.set(soundOn); if (playing) speakCurrent();
+    });
+    function syncVoiceBtn() {
+      const b = $('bVoice'); const rec = Track.usable(); const av = rec || Narr.available(); const on = av && soundOn;
       b.disabled = !av; b.setAttribute('aria-pressed', String(on));
       b.innerHTML = on ? ICON.voiceOn : ICON.voiceOff;
-      b.title = av ? (on ? '読み上げ：オン（V）' : '読み上げ：オフ（V）') : 'この端末には日本語の音声がないため、読み上げは使えません';
-    });
+      b.title = av ? (on ? '音声：オン（V）' : '音声：ミュート中（V）') : 'この端末には日本語の音声がないため、読み上げは使えません';
+    }
+    Narr.onChange(syncVoiceBtn);
+    Track.onChange(() => { if (!Track.usable()) { Narr.set(soundOn); if (playing) speakCurrent(); } syncVoiceBtn(); });
     $('bCC').addEventListener('click', () => { captionsOn = !captionsOn; $('player').classList.toggle('no-cc', !captionsOn); $('bCC').setAttribute('aria-pressed', String(captionsOn)); });
     $('bFull').addEventListener('click', () => {
       const p = $('player');
@@ -4683,7 +4949,8 @@ const Player = (() => {
       total: () => TOTAL, scenes: SCENES, seek: TT => { T = TT; dirty = true; },
       renderAt: TT => { const r = renderAt(TT); updateCaption(r.s, r.t); return { idx: r.s.idx, t: r.t }; },
       ready: () => ready, caption: () => $('capText').textContent,
-      speech: () => SCENES.map(sc => sc.beats.map(b => toSpeech(b[0]))), state: () => ({ T, playing, narr: Narr.isOn(), busy: Narr.busy() }),
+      speech: () => SCENES.map(sc => sc.beats.map(b => toSpeech(b[0]))), state: () => ({ T, playing, narr: Narr.isOn(), busy: Narr.busy(), track: Track.usable(), at: Track.el() ? Track.el().currentTime : null, muted: Track.el() ? Track.el().muted : null, rs: Track.el() ? Track.el().readyState : null, blocked: audioBlocked }),
+      seekTo: TT => seek(TT), setSpeed: v => { const e = $('speed'); e.value = String(v); e.dispatchEvent(new Event('change')); },
       play, pause,
     };
   }

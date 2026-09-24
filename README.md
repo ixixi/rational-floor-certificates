@@ -27,7 +27,7 @@ scope and limitations of the certificate method.
 | Finite computations | [supplement/COMPUTATION.md](supplement/COMPUTATION.md) |
 | Lean scope and checking instructions | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md) |
 | Japanese explanatory slides for readers with high-school mathematics (PowerPoint, 99 slides) | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
-| Japanese animated explainer of chapters 1–3 of the slides (HTML with JavaScript; open in a web browser) | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [watch online](https://ixixi.github.io/rational-floor-certificates/) |
+| Japanese animated explainer of chapters 1–3 of the slides (HTML with JavaScript; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/) |
 
 The complete finite reproduction runs two implementations and compares their
 newly generated data element by element. The small reference file
@@ -83,7 +83,7 @@ DOI（Zenodo）: [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.228875
 | 有限計算 | [supplement/COMPUTATION.md](supplement/COMPUTATION.md#japanese) |
 | Lean の形式化範囲と検査手順 | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) |
 | 高校数学の知識で読める解説スライド（PowerPoint、99 枚） | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
-| 解説スライド第1〜3章のアニメーション版（JavaScript を使う HTML。ブラウザで開く） | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/) |
+| 解説スライド第1〜3章のアニメーション版（JavaScript を使う HTML。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/) |
 
 有限計算の完全な再現では、二つの実装を実行し、新しく生成したデータを全要素で比較します。
 小さな基準ファイル [checks/reference.json](checks/reference.json) に固定された照合基準を
