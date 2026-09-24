@@ -7,9 +7,9 @@
       "sha256": "1bc9e9715ca99e66de507eb240df1b71670263b182f9a0fc575131c13ebb5ea3"
     },
     {
-      "bytes": 1044,
+      "bytes": 1802,
       "path": ".github/workflows/pages.yml",
-      "sha256": "994fae6c451c4eb52ec98e025400ae92619ec7e7dc500d531aeefbc3b2317f35"
+      "sha256": "d4fcab46e529c4527e1a115a75e927ab4cdd7f974185a5475691afa54526f183"
     },
     {
       "bytes": 80,
@@ -32,9 +32,9 @@
       "sha256": "9a46f10600e1fecadc30583d617801d45633bc07afed8bda64c8533902f2e338"
     },
     {
-      "bytes": 7774,
+      "bytes": 7800,
       "path": "README.md",
-      "sha256": "3c567e8a572383a6a292afac92d909c773a649570ca2cc898b65d6b208c26363"
+      "sha256": "d41522b1deed3024d92c0859a5b03e95ce2da7647f92048b89d3e12f551bb26b"
     },
     {
       "bytes": 9387,
@@ -1111,5 +1111,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "84a4eea8634eb596fa96444773432ce5f7116feca6bf58b7fbdca205e448df6c"
+  "source_sha256": "6efa4fc9d93b5a3e23fd2745d5d87bc40c53f0d615729cb6bcb2dcb82c41b3c3"
 }

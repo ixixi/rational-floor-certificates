@@ -28,10 +28,25 @@ jobs:
       - uses: actions/checkout@v4
       - name: Assemble site
         run: |
-          mkdir -p _site
-          cp slides/paper-animation-ja.html _site/index.html
-          cp slides/paper-animation-ja.html _site/paper-animation-ja.html
-          cp slides/paper-animation-ja-narration.mp3 _site/paper-animation-ja-narration.mp3
+          # the Japanese explainer lives under ja/explainer/; the top page is kept free for a future project page
+          mkdir -p _site/ja/explainer
+          cp slides/paper-animation-ja.html _site/ja/explainer/index.html
+          cp slides/paper-animation-ja-narration.mp3 _site/ja/explainer/paper-animation-ja-narration.mp3
+          # until the project page exists, the top page only points to the explainer
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="ja">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Rational floor certificates</title>
+          <meta http-equiv="refresh" content="0; url=ja/explainer/">
+          </head>
+          <body>
+          <p><a href="ja/explainer/">日本語の解説アニメーション</a> · <a href="https://github.com/ixixi/rational-floor-certificates">GitHub</a></p>
+          </body>
+          </html>
+          HTML
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
