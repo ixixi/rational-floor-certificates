@@ -26,6 +26,7 @@ scope and limitations of the certificate method.
 | Figure sources and regeneration | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md) |
 | Finite computations | [supplement/COMPUTATION.md](supplement/COMPUTATION.md) |
 | Lean scope and checking instructions | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md) |
+| Japanese explanatory slides for readers with high-school mathematics (PowerPoint, 99 slides) | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 
 The complete finite reproduction runs two implementations and compares their
 newly generated data element by element. The small reference file
@@ -80,6 +81,7 @@ DOI（Zenodo）: [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.228875
 | 図のソースと再生成 | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md#japanese) |
 | 有限計算 | [supplement/COMPUTATION.md](supplement/COMPUTATION.md#japanese) |
 | Lean の形式化範囲と検査手順 | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) |
+| 高校数学の知識で読める解説スライド（PowerPoint、99 枚） | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 
 有限計算の完全な再現では、二つの実装を実行し、新しく生成したデータを全要素で比較します。
 小さな基準ファイル [checks/reference.json](checks/reference.json) に固定された照合基準を
