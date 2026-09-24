@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - slides/paper-animation-ja.html
+      - slides/paper-animation-ja-narration.mp3
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -30,6 +31,7 @@ jobs:
           mkdir -p _site
           cp slides/paper-animation-ja.html _site/index.html
           cp slides/paper-animation-ja.html _site/paper-animation-ja.html
+          cp slides/paper-animation-ja-narration.mp3 _site/paper-animation-ja-narration.mp3
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
