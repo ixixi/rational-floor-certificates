@@ -27,9 +27,9 @@
       "sha256": "9a46f10600e1fecadc30583d617801d45633bc07afed8bda64c8533902f2e338"
     },
     {
-      "bytes": 6907,
+      "bytes": 7267,
       "path": "README.md",
-      "sha256": "ff5d564c6d116a2abb51bdc7542a3d143b41494ce0250a2dc1d334e1b1ed64c9"
+      "sha256": "c524afd4b8c5b2ad14c434bfc01f925799524a1f01a8d32fbe6e7188fbec775f"
     },
     {
       "bytes": 9387,
@@ -100,6 +100,11 @@
       "bytes": 686,
       "path": "requirements-pdf.txt",
       "sha256": "f129c1fdc6d3ac2779156096968025ac7f138fd0dfd9a8ddc15df9cf084087a7"
+    },
+    {
+      "bytes": 241550,
+      "path": "slides/paper-animation-ja.html",
+      "sha256": "7f08b321665e17299a66d94c4f2812e1a23866836eae7642743fd0387dd3fdc0"
     },
     {
       "bytes": 13373600,
@@ -1096,5 +1101,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "9d2b9e10911a03370297b7dd7784cd0def6c9543ba72ecbd98a128a6e686b4b7"
+  "source_sha256": "f548babd32b64bed5150dc72fe5edd0919a0ee19bd985837eb61138dfc27f68b"
 }
