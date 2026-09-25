@@ -34,7 +34,7 @@
     {
       "bytes": 15985,
       "path": "README.md",
-      "sha256": "80fce64f99ba50de8f2035e3077a58d0d484f92d6e3223fe20733c052e477410"
+      "sha256": "16f4756a02fc08d44fa6cf2b7b9772b11fbe2a014d13811f65aaf2cdaa604a18"
     },
     {
       "bytes": 9387,
@@ -67,14 +67,14 @@
       "sha256": "46768b4a18361c00226584a7eb1640641410b4c88c4acc04cd642e9838da50a1"
     },
     {
-      "bytes": 892977,
+      "bytes": 904203,
       "path": "paper-en.pdf",
-      "sha256": "bbcdaae89f24b195e424f68aa6bd0c6df8465db2975d6d1349b0ed43faaa6b23"
+      "sha256": "8a0da9fddd0456b13dd701f0ebb97af550186ee8c152aca0c2a12064f89b7622"
     },
     {
-      "bytes": 1163336,
+      "bytes": 1176463,
       "path": "paper-ja.pdf",
-      "sha256": "4d84f8ee83c57d9dec20c01ed535f87b16d81d4cebef114795b9386bfee0a23a"
+      "sha256": "22808480da863a9ce9e2f78435e28fd664493ef4edf72e326ce4cec55ef68e99"
     },
     {
       "bytes": 6011,
@@ -107,9 +107,9 @@
       "sha256": "f129c1fdc6d3ac2779156096968025ac7f138fd0dfd9a8ddc15df9cf084087a7"
     },
     {
-      "bytes": 3810,
+      "bytes": 3899,
       "path": "site/README.md",
-      "sha256": "92bc6c2cf55a768d04225424606a2d4a106e3135a66a88d62ef91c85e7afc962"
+      "sha256": "cf11230f01a248963b6494f682cda28f517369b3e87fae687a749c3cd6b3c941"
     },
     {
       "bytes": 3073,
@@ -127,14 +127,14 @@
       "sha256": "68ba764845bd3cce856514d5f2c3ed51caa195a74c24ea6ef3218618291ccaa7"
     },
     {
-      "bytes": 244325,
+      "bytes": 255565,
       "path": "site/index.html",
-      "sha256": "71b2b17bb1b95562dd5b2afd651c738d507994bac6a1f191c742b7e085397a72"
+      "sha256": "c60c2d8dc85e2c2f1bb1d1567e2ad89b9b9ba4b96968c1b33dfd841f0734a924"
     },
     {
-      "bytes": 411499,
+      "bytes": 423988,
       "path": "site/ja/index.html",
-      "sha256": "307d3909673179168b3ce65cd46b4a478d4cbc06e3973f31ea3e3b11232a03e7"
+      "sha256": "bc1c3b9eff73b1f67492ef09c97b567d20aa4be01a547b6b5265097fdd0dc090"
     },
     {
       "bytes": 3912,
@@ -147,9 +147,9 @@
       "sha256": "750a81e5fc0bb0f44bbfdaedbb956861a25b9a9f7c81091c0b1866115be4da7b"
     },
     {
-      "bytes": 20719,
+      "bytes": 20721,
       "path": "site/og-frontier-en.png",
-      "sha256": "559fc32e32f87c591d729685de3599fd682ef6082de4f43c6a11dfd9155a0517"
+      "sha256": "b527e4014dcca06a904df2e229ac9710ea8a55ee5f743fde715056795bcd6e3a"
     },
     {
       "bytes": 21549,
@@ -159,12 +159,12 @@
     {
       "bytes": 201771,
       "path": "site/og-one-step-en.png",
-      "sha256": "0cab8e232fafd35783c25c4db3e3d761db38b00bcb506df4897f7feb0fde1446"
+      "sha256": "55d1f172e65d6732df1e0469d13e494a358e740381ae91543a425202316a3502"
     },
     {
-      "bytes": 200305,
+      "bytes": 200312,
       "path": "site/og-one-step-ja.png",
-      "sha256": "0ab1a30dfd92fe3b0a5f73ed40f12be3d87d8bfadbab445838436078deac4e5e"
+      "sha256": "cfc81cd99127c7435f2a61e79a43ec1755ead332bfe5903460b71ba26c8250b0"
     },
     {
       "bytes": 117014,
@@ -187,54 +187,54 @@
       "sha256": "66285547841f98358eb9125b99b86f2299844c635e8fbaf8b50eb2bb2ab98b57"
     },
     {
-      "bytes": 25693,
+      "bytes": 25700,
       "path": "site/og-word-label-en.png",
-      "sha256": "9d530e434585b4edaf2cae51911c970748be6706107548b24c6a5742b94a50d6"
+      "sha256": "77e280a268e5c9f703f1d6b0fcce805cb4c32154697399bbb978feedcf9b8161"
     },
     {
-      "bytes": 24168,
+      "bytes": 24153,
       "path": "site/og-word-label-ja.png",
-      "sha256": "e060f9645b25da1ff3a0a794ac39255cfafc4d2099aea34a82f08e983b471d4d"
+      "sha256": "6c832afa542a3620b3852df15e96e6fa1b2226e1c08e46fe393aee8b2301aa38"
     },
     {
-      "bytes": 9185184,
+      "bytes": 9323568,
       "path": "slides/frontier-animation-en-narration.mp3",
-      "sha256": "b20c44b0ab9a777cbc7ce081bcc6382ad4f26b08fa747fcb8caa06b8e76f8307"
+      "sha256": "b49e1cfa29718e7529be505439e2f13ef094550ae3a7042d8efe6df22e766b59"
     },
     {
-      "bytes": 607164,
+      "bytes": 618210,
       "path": "slides/frontier-animation-en.html",
-      "sha256": "8bd082390180163efc7da2e60ade7238c7fcc416de7ecc07064639a5466c692e"
+      "sha256": "b34709e24a3083f06bfb3479fb7d9ac7d86090978df389642443e218c9d988bb"
     },
     {
-      "bytes": 11471328,
+      "bytes": 11671200,
       "path": "slides/frontier-animation-ja-narration.mp3",
-      "sha256": "7e460a4cf5ca3570760d7428526c167ec8472dbb11a575261e6eea31710b59af"
+      "sha256": "12c376326f4148fc56af6134e3c6895b0b1d6cd26afb776725ee3a487ff44750"
     },
     {
-      "bytes": 1185101,
+      "bytes": 1205099,
       "path": "slides/frontier-animation-ja.html",
-      "sha256": "ac1265fd7729448c153b188fcd6f72395a1e35b6faa90ce373429808a010f4cd"
+      "sha256": "033d63818b846b64c7a26a2da2a38d79ce1a2e4e86629f431eec1a2c108140b5"
     },
     {
-      "bytes": 7330176,
+      "bytes": 8168688,
       "path": "slides/one-step-animation-en-narration.mp3",
-      "sha256": "daebe512794ec5cac28df69e806e5130fe056b7a9ef196c2af4a1b2ee0a40d47"
+      "sha256": "050f3fa9cda30b45351ae6f37bcebe61a0c2ea56b28ea84c02fda42ccccd5d3f"
     },
     {
-      "bytes": 431796,
+      "bytes": 470625,
       "path": "slides/one-step-animation-en.html",
-      "sha256": "78994259395281ab7be498a744d62819f17567d2f428b761ed56599db1de4361"
+      "sha256": "cae510849db60d6ee733a36b647181cce4ab0870ee268c0b928fafdb4970507a"
     },
     {
-      "bytes": 8901648,
+      "bytes": 9975312,
       "path": "slides/one-step-animation-ja-narration.mp3",
-      "sha256": "48acc96ce32a5e6f0030b936012945d6ed9809309625a415f7191f6ad97f1ff1"
+      "sha256": "6ad56ae454478d110b038525bfd38eb125dfc4dc0817649737a8f5d3e6875d25"
     },
     {
-      "bytes": 856579,
+      "bytes": 945110,
       "path": "slides/one-step-animation-ja.html",
-      "sha256": "b5226367fac61b5087c0606073d9b7d6950af060704ecfd3b55e334f8997bae8"
+      "sha256": "4e4052bed86e8e52fccc89d3daa12ecd431fb171673c2a1f8d9fba9da7f94cd6"
     },
     {
       "bytes": 9571788,
@@ -272,24 +272,24 @@
       "sha256": "9e3caf4710ced1743793f2120a4fa3c74c2351296b99af8d7db1258b911c9ac0"
     },
     {
-      "bytes": 8238240,
+      "bytes": 8499888,
       "path": "slides/word-label-animation-en-narration.mp3",
-      "sha256": "43a7416e3a9c9a5482cc8e5d415f09e545d2de9ec0a31fee195b7629adf8e95c"
+      "sha256": "f6aa3d29b622159865b3f0cede1cbf4b0806d11f045e608397287405aa97a28a"
     },
     {
-      "bytes": 536945,
+      "bytes": 550115,
       "path": "slides/word-label-animation-en.html",
-      "sha256": "ec7a1e6acc8514b14c727ab1996eb0c8fc88e536bbd6a168edfbc9ea4cfe5067"
+      "sha256": "391f3b0be8015e25e6959046ec1b533bbe4216c7c686aa5655ce0fc19a4eb185"
     },
     {
-      "bytes": 10195488,
+      "bytes": 10535904,
       "path": "slides/word-label-animation-ja-narration.mp3",
-      "sha256": "2f1eb35b96d8b0bb9ca7ec08e96a966801b8acf6f0b8f28c160ebbdb5973526f"
+      "sha256": "419170fb52370e48bf42996c6ec4d95b84a0f1d520ea3c33bffde6e07b878467"
     },
     {
-      "bytes": 986359,
+      "bytes": 1007345,
       "path": "slides/word-label-animation-ja.html",
-      "sha256": "1b6d8392c7e9c5d54ee10d1224afb4a7a071f3c564bd1c88b2a43a98ae9c8ea3"
+      "sha256": "af68be589f7594b25093dbd9add466e084cfb768549c5848deff69a16cb73e70"
     },
     {
       "bytes": 4190,
@@ -407,14 +407,14 @@
       "sha256": "f573182971d816deda843b1f6b953ca5a05b59bfe7860b8fd9f5bb9e0b0458a8"
     },
     {
-      "bytes": 306999,
+      "bytes": 312861,
       "path": "sources/paper-ja.tex",
-      "sha256": "c18308c2e1590ad7f81a6ef927b6b41d8cbaac5308797cda1ffe2259335c80e2"
+      "sha256": "08cd4b39166bf75f06bf550cd708e09243b826ecb04d3ae653bf524a065393c4"
     },
     {
-      "bytes": 261178,
+      "bytes": 266085,
       "path": "sources/paper.tex",
-      "sha256": "7827cda807fbaebae9cdddd29e1b00124919087141e66aaa1f8ad4c45f7a2354"
+      "sha256": "bbb86f176abef882bff8271140b436504d3075063c03a3fc79beb9fd614567c7"
     },
     {
       "bytes": 5790,
@@ -1257,9 +1257,9 @@
       "sha256": "f64a1ef0ec9ca0f261fb5be9524a445ddc533d33ef43db158ffca7e1b0cec5a9"
     },
     {
-      "bytes": 204832,
+      "bytes": 209329,
       "path": "supplement/manuscript/paper.md",
-      "sha256": "fbe87483ecdb61ce3fe45585ba6001091d01abc711e74d53ae0945c553b19e78"
+      "sha256": "c99e85556116464bff7d54e424cdf050f32b6aef8ebfbd366ed44045a1cde830"
     },
     {
       "bytes": 8046,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "69311a16d264bd8e340eb5699228311079801059f445a487f107229471104cfb"
+  "source_sha256": "97b3b8a31ee8db512d9ca2dd26c068cc85658039fb7b671a014e9ca9586dbe2c"
 }

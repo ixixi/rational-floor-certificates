@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Composite terms in ⌊ξ(7/5)ⁿ⌋ and ⌊ξ(5/2)ⁿ⌋ | Rational floor certificates</title>
-<meta name="description" content="For every real ξ &gt; 0, the integer parts ⌊ξ(7/5)ⁿ⌋ and ⌊ξ(5/2)ⁿ⌋ contain infinitely many composite numbers. The project page of the paper “Finite graph certificates for composite terms in rational floor sequences”: the results, how the finite-graph certificates work, how they were verified (two independent implementations and Lean), an interactive calculator, animated explainers, the paper and the code.">
+<meta name="description" content="For every real ξ &gt; 0, the integer parts ⌊ξ(7/5)ⁿ⌋ and ⌊ξ(5/2)ⁿ⌋ contain infinitely many composite numbers. The project page of the paper “Finite graph certificates for composite terms in rational floor sequences”: the results, what was known before and what is new, how the finite-graph certificates work, how they were verified (two independent implementations and Lean), an interactive calculator, animated explainers, the paper and the code.">
 <link rel="canonical" href="https://ixixi.github.io/rational-floor-certificates/">
 <link rel="alternate" hreflang="en" href="https://ixixi.github.io/rational-floor-certificates/">
 <link rel="alternate" hreflang="ja" href="https://ixixi.github.io/rational-floor-certificates/ja/">
@@ -79,7 +79,8 @@ i.xi { font-size: 1.04em; padding-right: .04em; }
 .nav .l.cur { color: var(--ink); background: #171a20; box-shadow: inset 0 -2px 0 var(--q); }
 .nav .lang { margin-left: 6px; padding: 5px 12px; border: 1px solid var(--line2); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 14px; white-space: nowrap; transition: border-color .2s, background .2s; }
 .nav .lang:hover { border-color: var(--q); background: rgba(88, 196, 221, .08); color: var(--ink); }
-@media (max-width: 1060px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+@media (max-width: 1260px) { .nav .l { padding: 6px 7px; font-size: 14px; } }
+@media (max-width: 1100px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; padding-block: clamp(36px, 6vw, 76px) clamp(40px, 6vw, 80px); border-bottom: 1px solid var(--line); isolation: isolate; }
@@ -172,6 +173,49 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 .facts li::before { content: ""; position: absolute; left: 3px; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--q); opacity: .8; transform: rotate(45deg); }
 .cor { margin-top: 20px; display: grid; gap: 10px; padding: 18px 22px; border-radius: var(--r1); border: 1px dashed var(--line2); background: rgba(131, 193, 103, .03); }
 .cor p { margin: 0; color: var(--ink2); }
+
+/* what was known, what is new */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.origs { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0 0 12px; }
+h2 + .origs { margin: -6px 0 22px; }
+.orig { display: inline-flex; align-items: center; gap: 7px; padding: 2px 11px; border-radius: 999px; border: 1px solid; font-family: var(--sans); font-size: 13px; font-weight: 600; line-height: 1.55; letter-spacing: .01em; text-decoration: none; }
+.orig::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.orig.new { color: var(--g); background: rgba(131, 193, 103, .1); border-color: rgba(131, 193, 103, .42); }
+.orig.old { color: var(--ink2); background: rgba(185, 188, 194, .06); border-color: var(--line2); }
+.orig.ref { color: var(--q); background: rgba(88, 196, 221, .08); border-color: rgba(88, 196, 221, .38); }
+.orig.ref::before { content: "↓"; width: auto; height: auto; background: none; font-size: 12px; }
+a.orig.ref:hover { color: #9fe0ee; background: rgba(88, 196, 221, .16); }
+.orig.lg { font-size: 14px; padding: 3px 13px; }
+.kn-h { margin: 0 0 16px; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.tl li { display: grid; grid-template-columns: 3.1em minmax(0, 1fr); gap: 12px; color: var(--ink2); font-size: 15.5px; line-height: 1.6; }
+.tl .yr { font-family: var(--mono); font-size: 13.5px; font-weight: 600; color: var(--t); padding-top: .12em; }
+.tl b { color: var(--ink); }
+.kn .facts li b { color: var(--ink); }
+.rel { margin-top: clamp(40px, 6vw, 72px); }
+.rel h3.sub { margin-top: 0; }
+.rel .intro { margin-bottom: 22px; }
+.cmpw { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r1); background: var(--panel); scrollbar-width: thin; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.55; }
+.cmp th, .cmp td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.cmp tbody tr:last-child th, .cmp tbody tr:last-child td { border-bottom: 0; }
+.cmp thead th { font-size: 13px; font-weight: 700; letter-spacing: .05em; color: var(--ink3); background: #0a0b0e; }
+.cmp thead th:last-child { color: var(--g); }
+.cmp tbody th { width: 24%; color: var(--ink); font-weight: 600; }
+.cmp td { width: 38%; color: var(--ink2); }
+.cmp td.us { color: var(--ink); background: rgba(131, 193, 103, .045); }
+.rel .note { margin: 12px 2px 0; font-size: 14.5px; color: var(--ink3); }
+@media (max-width: 700px) {
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: auto; }
+  .cmp tbody tr { border-bottom: 1px solid var(--line); padding: 8px 0 10px; }
+  .cmp tbody tr:last-child { border-bottom: 0; }
+  .cmp tbody th, .cmp td { width: auto; border: 0; padding: 3px 14px; }
+  .cmp tbody th { padding-top: 6px; }
+  .cmp td::before { content: attr(data-h); display: block; font-size: 12px; font-weight: 700; letter-spacing: .05em; color: var(--ink3); }
+  .cmp td.us { background: none; }
+  .cmp td.us::before { color: var(--g); }
+}
 
 /* explorer */
 .explorer { padding: clamp(16px, 2.2vw, 24px); }
@@ -339,7 +383,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
       <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0d1626"/><path d="M16 12v39h10M48 12v39H38" fill="none" stroke="#5eaeff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 27.5v9" stroke="#ffb454" stroke-width="3" stroke-linecap="round" stroke-dasharray="3.5 4"/><circle cx="32" cy="20" r="6.5" fill="#ffb454"/><circle cx="32" cy="45" r="4.5" fill="#5eaeff"/></svg>
       <span>Rational floor certificates</span>
     </a>
-    <ul><li><a class="l" href="#result">Result</a></li><li><a class="l" href="#try">Try it</a></li><li><a class="l" href="#method">Method</a></li><li><a class="l" href="#waiting">Waiting time</a></li><li><a class="l" href="#limits">Limits</a></li><li><a class="l" href="#verification">Verification</a></li><li><a class="l" href="#explainers">Videos</a></li><li><a class="l" href="#paper">Paper</a></li></ul>
+    <ul><li><a class="l" href="#result">Result</a></li><li><a class="l" href="#context">Known & new</a></li><li><a class="l" href="#try">Try it</a></li><li><a class="l" href="#method">Method</a></li><li><a class="l" href="#waiting">Waiting time</a></li><li><a class="l" href="#limits">Limits</a></li><li><a class="l" href="#verification">Verification</a></li><li><a class="l" href="#explainers">Videos</a></li><li><a class="l" href="#paper">Paper</a></li></ul>
     <a class="lang" href="ja/" hreflang="ja" lang="ja">日本語</a>
   </div>
 </nav>
@@ -370,7 +414,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
   <div class="wrap">
     <p class="kicker"><span class="no">01</span>The result</p>
     <h2>Two theorems about integer parts of powers</h2>
-    <p class="intro">In 1967 Forman and Shapiro proved that <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> and <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> contain infinitely many composite numbers, by arguments that also work after multiplying by any <i>ξ</i> &gt; 0; Dubickas and Novikas added 5/4. For 7/5 they treated the nearest integers, and for 5/2 a shifted sequence. This work proves the statements for the plain integer parts.</p>
+    <p class="intro">In 1967 Forman and Shapiro proved that <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> and <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> contain infinitely many composite numbers, by arguments that also work after multiplying by any <i>ξ</i> &gt; 0; Dubickas and Novikas added 5/4. For 7/5 they treated the nearest integers, and for 5/2 a shifted sequence. This work proves the statements for the plain integer parts. <a href="#context">What was known, and what is new →</a></p>
     <div class="grid2 thms">
       <article class="card thm rv">
         <p class="thm-h"><span class="tag">Theorem 1 (i)</span><span class="ratio">7/5</span></p>
@@ -394,9 +438,41 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
   </div>
 </section>
 
+<section class="sec" id="context">
+  <div class="wrap">
+    <p class="kicker"><span class="no">02</span>In context</p>
+    <h2>What was known, and what is new</h2>
+    <p class="intro">Composite numbers in sequences like these have been studied since 1967. On the left, the earlier results this work builds on or is compared with; on the right, what this paper adds.</p>
+    <div class="grid2 kn">
+      <article class="card rv">
+        <p class="kn-h"><span class="orig old lg">Known before</span></p>
+        <ol class="tl">
+          <li><span class="yr">1967</span><div><b>Forman &amp; Shapiro</b> — <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> and <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> contain infinitely many composite numbers; the argument also works after multiplying by any <i>ξ</i> &gt; 0.</div></li>
+          <li><span class="yr">2005</span><div><b>Dubickas &amp; Novikas</b> — Explicit sets of primes that divide infinitely many terms for every <i>ξ</i>: for 3/2, 4/3 and 5/4, for the nearest integers to <span class="m"><i>ξ</i>(7/5)<sup><i>n</i></sup></span>, and for <span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋ − 1</span>. They also settled the integer bases 2 to 6. Their paper already contains the fact that this work prunes with: the carries of a true sequence are never periodic.</div></li>
+          <li><span class="yr">2006</span><div><b>Dubickas</b> — Named such a set of primes <i>unavoidable</i>. Among integer bases, none exists for 5, nor for any <i>b</i> ≥ 3 with <i>b</i> − 1 not squarefree; he conjectured that none exists for any integer base other than 2, 3, 4 and 6.</div></li>
+          <li><span class="yr">2009</span><div><b>Dubickas</b> — A return theorem: a sequence given by a suitable integer recurrence repeats periodically modulo every <i>q</i> coprime to one fixed coefficient. So it keeps returning to multiples of each of its large prime terms; in particular, a periodic pattern of digits forces composite terms.</div></li>
+          <li><span class="yr">2022</span><div><b>Dubickas &amp; Jonuška</b> — For base 7, their theorem implies that for every finite set of primes some <i>ξ</i> makes no term divisible by any of them: no unavoidable set exists.</div></li>
+          <li><span class="yr">2026</span><div><b>Stephan</b> (preprint) — <span class="m">⌊<i>ξ</i>7<sup><i>n</i></sup>⌋</span> contains infinitely many composite numbers for every <i>ξ</i> &gt; 0, the smallest integer base that was open. The proof uses a finite graph certificate closely related to the one here, checked in Lean. <a href="#stephan">Compared below</a>.</div></li>
+        </ol>
+      </article>
+      <article class="card rv">
+        <p class="kn-h"><span class="orig new lg">New in this paper</span></p>
+        <ul class="facts">
+          <li><b>Theorem 1.</b> For the plain integer parts <span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> and <span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span>: fixed sets of primes (unavoidable sets) that divide infinitely many terms for every <i>ξ</i>, and hence infinitely many composite terms (Corollary 2). Before, 7/5 had been treated only with nearest integers, and 5/2 only with a shift.</li>
+          <li><b>The certificates.</b> Finite graphs of residues and fractional-part cells for a rational base, pruned with the nonperiodicity of the carries; and the word-labelled method, which contracts paths exactly and checks the primes at every intermediate term.</li>
+          <li><b>Theorem 3.</b> An explicit waiting time for 7/5.</li>
+          <li><b>The method itself.</b> A normal form, two obstructions, and a lower bound for the extra primes a certificate needs.</li>
+          <li><b>Further results.</b> Recurrent carries force composites (Theorem 46, a return argument in the spirit of Dubickas’s 2009 theorem); checks up to a height for 6/5 and 9/7; a halting problem for (6<i>t</i>+3)/(6<i>t</i>+1).</li>
+          <li><b>Verification.</b> Two independently written implementations, compared element by element, and a Lean formalization of Theorem 1 and Corollary 2.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="try">
   <div class="wrap">
-    <p class="kicker"><span class="no">02</span>Try it</p>
+    <p class="kicker"><span class="no">03</span>Try it</p>
     <h2>Choose your own <i class="xi">ξ</i></h2>
     <p class="intro">Type any positive number. The page computes the terms exactly, and marks each composite term with the smallest certificate prime that divides it. No list of terms can prove the theorem — that is what the finite certificate is for — but you can watch the marked terms keep coming.</p>
     <div class="explorer card">
@@ -416,7 +492,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="method">
   <div class="wrap">
-    <p class="kicker"><span class="no">03</span>The method</p>
+    <p class="kicker"><span class="no">04</span>The method</p>
     <h2>Trap the exceptions in a finite graph, then prune it to nothing</h2>
     <p class="intro">Suppose, for contradiction, that from some point on no term of <span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> is divisible by 2, 3, 5, 11 or 13. Call the terms from that point on an <i>exceptional tail</i>. (Its terms need not be prime: 323 = 17 × 19 is divisible by none of the five.) The proof shows, in three steps, that no exceptional tail exists.</p>
     <div class="steps">
@@ -428,13 +504,15 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
       </div>
       <div class="step rv">
         <div class="st-t"><span class="sn">2</span><h3>A finite graph traps every exceptional tail</h3>
+          <p class="origs"><span class="orig new">New for rational bases</span><a class="orig ref" href="#stephan">Compare: Stephan, base 7</a></p>
           <p>A state records the residue of a term modulo 4290 and which of <i>K</i> equal cells contains its fractional part; an edge is a legal step with its carry. Every exceptional tail becomes an infinite walk in this finite graph — for 7/5 it starts with 960 × 32 = 30,720 states.</p></div>
         <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvGraph" role="img" aria-label="A small directed graph: a token walks along its edges, then the graph is pruned until nothing is left"></canvas>
           <figcaption>An exceptional tail, if there were one, would walk forever (yellow). Pruning the components that cannot host a true sequence leaves nothing.</figcaption></figure>
       </div>
       <div class="step rv">
         <div class="st-t"><span class="sn">3</span><h3>Prune until nothing is left</h3>
-          <p>An infinite walk eventually stays inside one strongly connected component. If every walk there would make the carries periodic — impossible for a true sequence, by an elementary nonperiodicity lemma — the component is removed. What remains is refined, each cell split into four, and the test is repeated. For 7/5, the fourth stage keeps nothing: no exceptional tail exists.</p></div>
+          <p class="origs"><span class="orig old">Nonperiodicity lemma: Dubickas–Novikas 2005</span><span class="orig new">Pruning certificate: new</span></p>
+          <p>An infinite walk eventually stays inside one strongly connected component. If every walk there would make the carries periodic — impossible for a true sequence, by an elementary nonperiodicity lemma already in Dubickas–Novikas (2005) — the component is removed. What remains is refined, each cell split into four, and the test is repeated. For 7/5, the fourth stage keeps nothing: no exceptional tail exists.</p></div>
         <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvStages75" role="img" aria-label="The four stages for 7/5: of 30,720 vertices, 1,363 are kept, and 1,363 × 4 = 5,452 form the next stage; of these, 952 are kept, and 952 × 4 = 3,808; of these, 944 are kept, and 944 × 4 = 3,776; of these, none are kept"></canvas>
           <figcaption>The four stages for 7/5 (Table 1 of the paper). Each whole bar is all the vertices of a stage, and its yellow left end is the single component that is kept; everything else is removed. Every kept vertex is then split into four finer cells, so the next stage has exactly four times as many vertices. At <i>K</i> = 2048 nothing is kept.</figcaption></figure>
       </div>
@@ -442,18 +520,36 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
     <div class="two rv">
       <div>
         <h3>Five halves: words on the edges</h3>
+        <p class="origs"><span class="orig new">New</span></p>
         <p>For <span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span> a direct graph over all ten primes would have 30,656,102,400 states. The word-labelled method starts instead from four vertices and just three carries, −1, 1 and 3 (a term not divisible by 2 is odd, and the carry after an odd term is odd), lets each edge carry a whole word of carries, contracts deterministic paths exactly, and adds one prime at a time — checking the remainder at every intermediate term of every word. The largest graph it builds has 2,856,938 vertices, and its output is empty. The same method also gives a second proof for 7/5.</p>
       </div>
       <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvStages52" role="img" aria-label="Input vertices of the ten stages for 5/2 on a logarithmic scale, from 4 to 2,856,938, and an empty output"></canvas>
         <figcaption>Input vertices at the ten stages for 5/2 (Table 6, logarithmic scale), with the prime added at each stage.</figcaption></figure>
+    </div>
+    <div class="rel rv" id="stephan">
+      <h3 class="sub">A close relative: Stephan’s proof for base 7</h3>
+      <p class="intro">In August 2026, shortly before this paper, Ralf Stephan posted a preprint proving that <span class="m">⌊<i>ξ</i>7<sup><i>n</i></sup>⌋</span> contains infinitely many composite numbers for every <i>ξ</i> &gt; 0. His method shares several ingredients with this one: a finite graph of residues (modulo 2 · 3 · 5 · … · 31), built by adding one prime at a time; rank functions that a checker verifies in place of proving graph algorithms correct; and a Lean verification that runs the finite computation with native_decide. The difference is what happens to periodic behaviour.</p>
+      <div class="cmpw"><table class="cmp">
+        <thead><tr><th scope="col"><span class="sr">Aspect</span></th><th scope="col">Stephan (2026) · base 7</th><th scope="col">This paper · 7/5 and 5/2</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">States of the graph</th><td data-h="Stephan">residues</td><td class="us" data-h="This paper">residues and fractional-part cells; every true sequence gives a walk, but a walk need not be a sequence</td></tr>
+          <tr><th scope="row">Parts in which every walk is periodic</th><td data-h="Stephan">kept: periodic digit patterns really occur, with no term divisible by a prime up to 31</td><td class="us" data-h="This paper">deleted: the carries of a true sequence are never periodic</td></tr>
+          <tr><th scope="row">What is left</th><td data-h="Stephan">a core of 371,702 states</td><td class="us" data-h="This paper">nothing</td></tr>
+          <tr><th scope="row">Why composites follow</th><td data-h="Stephan">Dubickas’s return theorem (2009): a periodic digit pattern forces composite terms</td><td class="us" data-h="This paper">a fixed set of primes divides infinitely many terms</td></tr>
+          <tr><th scope="row">A fixed set of primes that works for every <i>ξ</i></th><td data-h="Stephan">none exists for base 7 (Dubickas–Jonuška 2022)</td><td class="us" data-h="This paper">{2, 3, 5, 11, 13} for 7/5, and {2, 3, 7, 11, …, 31} for 5/2</td></tr>
+          <tr><th scope="row">Lean</th><td data-h="Stephan">every numbered statement; the finite computation by native_decide</td><td class="us" data-h="This paper">Theorem 1 and Corollary 2; the 7/5 one-step certificate in the kernel, the word-labelled runs by native_decide</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Stephan’s computation is not used in any proof of this paper; the paper’s introduction compares the two methods. <a href="https://www.researchgate.net/publication/412294027_On_the_composites_among_x7" target="_blank" rel="noopener">Stephan’s preprint</a> · <a href="https://github.com/rwst/On-Composites" target="_blank" rel="noopener">its Lean files</a></p>
     </div>
   </div>
 </section>
 
 <section class="sec" id="waiting">
   <div class="wrap">
-    <p class="kicker"><span class="no">04</span>Waiting time</p>
+    <p class="kicker"><span class="no">05</span>Waiting time</p>
     <h2>How long until the next composite?</h2>
+    <p class="origs"><span class="orig new">New in this paper</span></p>
     <div class="two wide rv">
       <div>
         <p class="lead2"><span class="tag t">Theorem 3</span> If <span class="m"><i>P</i> = ⌊<i>ξ</i>⌋ &gt; 13</span>, then some <span class="m">0 ≤ <i>n</i> ≤ 428 + 12<i>L</i>(<i>P</i>)</span> has <span class="m">gcd(⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋, 4290) &gt; 1</span>, and that term is composite.</p>
@@ -468,8 +564,9 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="limits">
   <div class="wrap">
-    <p class="kicker"><span class="no">05</span>Reach and limits</p>
+    <p class="kicker"><span class="no">06</span>Reach and limits</p>
     <h2>What the method can and cannot do</h2>
+    <p class="origs"><span class="orig new">New in this paper</span></p>
     <p class="intro">The paper also proves theorems about the certificate method itself, for a general base <i>a</i>/<i>b</i>.</p>
     <div class="grid3">
       <article class="card rv"><h3>A normal form</h3><p>With its operations fixed precisely, a finite certificate exists exactly when, for some cell count and some finite set of primes not dividing 2<i>ab</i>, every cyclic component of one explicit graph passes the phase test. Contraction, prime powers and the primes dividing 2<i>ab</i> never enlarge what can be certified.</p></article>
@@ -489,12 +586,12 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="open">
   <div class="wrap">
-    <p class="kicker"><span class="no">06</span>Further results and open problems</p>
+    <p class="kicker"><span class="no">07</span>Further results and open problems</p>
     <h2>Beyond the two theorems</h2>
     <div class="grid3">
-      <article class="card rv"><h3>Recurrent carries</h3><p>For any coprime <i>a</i> &gt; <i>b</i> ≥ 2: if the carry sequence of an orbit has a recurrent tail, the orbit has infinitely many composite terms (Theorem 46).</p></article>
-      <article class="card rv"><h3>Checked up to a height</h3><p>If <span class="m">6 &lt; ⌊<i>ξ</i>⌋ ≤ 5<sup>40</sup></span>, one of the first 41 terms of <span class="m">⌊<i>ξ</i>(6/5)<sup><i>j</i></sup>⌋</span> is composite; if <span class="m">9 &lt; ⌊<i>ξ</i>⌋ ≤ 7<sup>18</sup></span>, one of the first 19 terms of <span class="m">⌊<i>ξ</i>(9/7)<sup><i>j</i></sup>⌋</span> is (Theorem 47).</p></article>
-      <article class="card rv"><h3>A halting problem</h3><p>For the family (6<i>t</i>+3)/(6<i>t</i>+1), which contains 9/7, the statement for all coefficients reduces to whether an explicit integer program always halts (Theorem 58).</p></article>
+      <article class="card rv"><h3>Recurrent carries</h3><p class="origs"><span class="orig new">New</span><span class="orig old">In the spirit of Dubickas 2009</span></p><p>For any coprime <i>a</i> &gt; <i>b</i> ≥ 2: if the carry sequence of an orbit has a recurrent tail, the orbit has infinitely many composite terms (Theorem 46).</p></article>
+      <article class="card rv"><h3>Checked up to a height</h3><p class="origs"><span class="orig new">New</span></p><p>If <span class="m">6 &lt; ⌊<i>ξ</i>⌋ ≤ 5<sup>40</sup></span>, one of the first 41 terms of <span class="m">⌊<i>ξ</i>(6/5)<sup><i>j</i></sup>⌋</span> is composite; if <span class="m">9 &lt; ⌊<i>ξ</i>⌋ ≤ 7<sup>18</sup></span>, one of the first 19 terms of <span class="m">⌊<i>ξ</i>(9/7)<sup><i>j</i></sup>⌋</span> is (Theorem 47).</p></article>
+      <article class="card rv"><h3>A halting problem</h3><p class="origs"><span class="orig new">New</span></p><p>For the family (6<i>t</i>+3)/(6<i>t</i>+1), which contains 9/7, the statement for all coefficients reduces to whether an explicit integer program always halts (Theorem 58).</p></article>
     </div>
     <h3 class="sub">Five open problems</h3>
     <ol class="open rv">
@@ -509,7 +606,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="verification">
   <div class="wrap">
-    <p class="kicker"><span class="no">07</span>Verification</p>
+    <p class="kicker"><span class="no">08</span>Verification</p>
     <h2>Checked twice: by independent programs, and by Lean</h2>
     <figure class="fig wide rv" style="--ar: 3 / 1; --arm: 16 / 10"><canvas id="cvVerify" role="img" aria-label="Two programs A and B whose outputs agree, and the Lean kernel accepting the proof"></canvas></figure>
     <div class="grid2">
@@ -553,7 +650,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="explainers">
   <div class="wrap">
-    <p class="kicker"><span class="no">08</span>Explainer videos</p>
+    <p class="kicker"><span class="no">09</span>Explainer videos</p>
     <h2>Animated explainers, narrated</h2>
     <p class="intro">Four animations walk through the paper, each in English and Japanese; a longer Japanese explainer covers the basics at high-school level.</p>
     <div class="vids"><article class="vid rv">
@@ -561,7 +658,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="en/one-step/">The one-step method</a></h3>
         <p>Why every <span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> has infinitely many terms divisible by 2, 3, 5, 11 or 13: a finite graph, pruned stage by stage until nothing is left.</p>
-        <p class="langs"><a class="pill" href="en/one-step/">English · 20 min</a><a class="pill ghost" href="ja/one-step/" hreflang="ja" lang="ja">日本語 · 約25分</a></p>
+        <p class="langs"><a class="pill" href="en/one-step/">English · 23 min</a><a class="pill ghost" href="ja/one-step/" hreflang="ja" lang="ja">日本語 · 約28分</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -569,7 +666,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="en/word-label/">The word-labelled method</a></h3>
         <p><span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span> and ten primes: a four-vertex graph whose edges carry words, lifted one prime at a time.</p>
-        <p class="langs"><a class="pill" href="en/word-label/">English · 23 min</a><a class="pill ghost" href="ja/word-label/" hreflang="ja" lang="ja">日本語 · 約28分</a></p>
+        <p class="langs"><a class="pill" href="en/word-label/">English · 24 min</a><a class="pill ghost" href="ja/word-label/" hreflang="ja" lang="ja">日本語 · 約29分</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -577,7 +674,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="en/frontier/">Waiting times, limits, and open problems</a></h3>
         <p>When the next composite comes, how far the certificate method can reach and what stops it, and what is still open.</p>
-        <p class="langs"><a class="pill" href="en/frontier/">English · 25 min</a><a class="pill ghost" href="ja/frontier/" hreflang="ja" lang="ja">日本語 · 約32分</a></p>
+        <p class="langs"><a class="pill" href="en/frontier/">English · 26 min</a><a class="pill ghost" href="ja/frontier/" hreflang="ja" lang="ja">日本語 · 約32分</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -602,7 +699,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="paper">
   <div class="wrap">
-    <p class="kicker"><span class="no">09</span>Paper, code, citation</p>
+    <p class="kicker"><span class="no">10</span>Paper, code, citation</p>
     <h2>Read, reproduce, cite</h2>
     <div class="res">
       <a href="https://github.com/ixixi/rational-floor-certificates/blob/main/paper-en.pdf" target="_blank" rel="noopener" class="rsc rv"><b>Paper (English)</b><span>PDF</span></a>
@@ -629,7 +726,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="about">
   <div class="wrap narrow">
-    <p class="kicker"><span class="no">10</span>Provenance</p>
+    <p class="kicker"><span class="no">11</span>Provenance</p>
     <h2>How this work was made</h2>
     <div class="about rv">
       <p>The paper’s acknowledgments describe its provenance in detail. It grew out of the author’s question whether every Mills number is irrational — a question the paper does not resolve.</p>

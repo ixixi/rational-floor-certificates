@@ -44,6 +44,17 @@ even for simple nonintegral bases. A useful way to prove that a sequence
 contains infinitely many composite terms is to exhibit a fixed finite set of
 primes such that infinitely many terms have a divisor in that set. Once the
 terms exceed all those primes, divisibility implies compositeness.
+Following Dubickas [Dub06, §2](#ref-dub06), such a set is called
+*unavoidable* with respect to a base \(b\) if it has this property for
+\(\lfloor\xi b^n\rfloor\) and every \(\xi>0\). Among integer bases, such
+sets exist for \(b\in\{2,3,4,6\}\); none exists for \(b=5\)
+([DN](#ref-dn), as recalled in [Dub06, §2](#ref-dub06)) or
+for any \(b\ge3\) with \(b-1\) not squarefree
+([Dub06, Theorem 4](#ref-dub06)), and none is expected for the
+other integer bases ([Dub06, Conjecture 3](#ref-dub06)). In this
+terminology, the results recalled next give unavoidable sets for the
+rational bases \(3/2\), \(4/3\), and \(5/4\), and Theorem 1 gives
+unavoidable sets for \(7/5\) and \(5/2\).
 
 In 1967, Forman and Shapiro [FS](#ref-fs) proved that the integer
 parts of the powers of \(3/2\) and \(4/3\) contain infinitely many
@@ -195,20 +206,60 @@ prime-avoiding orbit: every such orbit gives a walk, while a walk need
 not represent an orbit. This distinction allows finite certificates
 without requiring a finite automaton for the full representation language.
 
-A related computational approach appears in Stephan's preprint
-[S26, §4](#ref-s26), which reports finite graph certificates, eventual
-periodicity, and a Lean verification for the integer base \(7\). Its
-computation is a methodological comparison, not a dependency of the proofs
-given here. The nonintegral base here permits eventual periodicity itself
-to be excluded.
-For comparison, [DJ22, Theorem 1.2, p.167](#ref-dj22) implies that for the
-integer base \(7\), every finite set of primes can be avoided by all terms
-for a suitable positive coefficient. That result does not apply to \(7/5\)
-or \(5/2\). The specific contributions here are
-the finite certificates for the unshifted \(7/5\) and \(5/2\) sequences
-with their exact verification, the word-labelled contraction with prime
-conditions imposed at every intermediate time, the waiting-time bound,
-and the structural results described next.
+Stephan's preprint [S26](#ref-s26), dated August 15, 2026, proves
+the case \(b=7\) of [Dub06, Conjecture 2](#ref-dub06): for every
+\(\xi>0\), the sequence \(\lfloor\xi7^n\rfloor\) contains infinitely many
+composite terms; by the same certificate, there is no infinite right
+truncatable prime in base \(7\). Its method is closely related to the one
+used here. The vertices of its graph are the residues modulo
+\(M=\prod_{p\le31}p\) that are coprime to \(M\), with an edge for each
+appended digit. The certificate states that, after the states not lying on
+bi-infinite paths are discarded, no strongly connected component contains
+two distinct cycles. Every infinite path is then ultimately periodic, and
+an ultimately periodic digit word gives infinitely many composite terms by
+a return theorem of Dubickas [Dub09, Theorem 4](#ref-dub09),
+recalled after Theorem 46 below. The certificate is reached through a
+ladder of moduli that adjoins one prime at a time, using projections and
+rank functions, and it is verified in Lean, where the finite computation
+is evaluated by `native_decide` ([S26, §§4–6
+and Appendix A](#ref-s26)).
+
+The present work shares several ingredients with [S26](#ref-s26):
+finite residue graphs in which every hypothetical prime-avoiding orbit
+gives an infinite walk, the lifting of a certified graph by one new prime
+at a time (Section 4.4), rank functions that a checker verifies in
+place of a formal proof of graph algorithms (Sections 6.2 and 9.4), and a
+Lean verification whose word-labelled finite evaluations are likewise
+accepted through `native_decide` (Section 9.4). The
+constructions differ in three respects. First, the graph of
+[S26](#ref-s26) consists of residues alone. For a nonintegral base
+not every carry word is realized by an orbit; the states here also record
+fractional cells, and the graphs are outer approximations: every orbit
+gives a walk, but a walk need not represent an orbit. Second, both
+certificates single out components in which every infinite walk has a
+periodic label sequence (simple cycles in [S26](#ref-s26);
+components passing the phase criterion of Lemma 7 here), but they treat
+them in opposite ways. In base \(7\), such components carry actual
+prime-avoiding orbits: the core of the graph of [S26](#ref-s26)
+at the modulus \(M\) still has 371702 states, and
+[DJ22, Theorem 1.2, p.167](#ref-dj22) implies that every finite
+set of primes can be avoided by all terms for a suitable positive
+coefficient, so no unavoidable set exists; [S26](#ref-s26) keeps
+these components and applies the return theorem to their periodic words.
+For a nonintegral base, Lemma 4 shows that no orbit remains in such a
+component, so it is deleted; the certificates here reduce the graph to
+the empty graph and thereby yield the unavoidable sets of Theorem 1. The
+result of [DJ22](#ref-dj22) does not apply to \(7/5\) or \(5/2\).
+Third, the word-labelled contraction with prime conditions imposed at
+every intermediate time, the waiting-time bound of Theorem 3, and the
+normal-form and obstruction theorems of Sections 7 and 8 are not part of
+[S26](#ref-s26). The computation of [S26](#ref-s26) is a
+methodological comparison, not a dependency of the proofs given here.
+The specific contributions here are the finite certificates for the
+unshifted \(7/5\) and \(5/2\) sequences with their exact verification,
+the word-labelled contraction with prime conditions imposed at every
+intermediate time, the waiting-time bound, and the structural results
+described next.
 
 **Scope of the method.** Sections 7 and 8 study what this certificate
 method can and cannot do. With the operations fixed precisely (initial
@@ -3351,6 +3402,20 @@ The recurrence assumption concerns the carry word itself. Confinement
 of a walk to a strongly connected component does not imply recurrence
 of its output.
 
+Theorem 46 is a return argument in the spirit of a theorem of Dubickas
+[Dub09, Theorem 4](#ref-dub09): if integers \(x_n\) satisfy
+\(x_{n+d}=kx_n+F(x_{n+1},\ldots,x_{n+d-1})\) with an integer \(k\ne0\)
+and \(F\in\mathbb Z[z_1,\ldots,z_{d-1}]\), then \((x_n)\) is purely
+periodic modulo every \(q\) with \(\gcd(k,q)=1\), and it contains
+infinitely many composite terms if \(|x_n|\to\infty\). Stephan
+[S26, Proposition 3.1](#ref-s26) applies the case \(d=1\) to
+ultimately periodic digit words in an integer base. For a nonintegral
+base the carry word is never eventually periodic (Lemma 4). In
+Theorem 46 the letters act on \(\mathbb Z/M\) by the affine permutations
+\(x\mapsto b^{-1}(ax+c)\), the word is only assumed to be recurrent,
+and the finite-prefix copying lemma (Lemma 49) replaces periodicity in
+producing a return to the initial residue (Theorem 50).
+
 **Finite-height results.** For the bases \(6/5\) and \(9/7\), a sieve
 over carry words combined with exact interval and divisor tests covers
 all initial integers up to an explicit height.
@@ -5325,9 +5390,9 @@ This project began with the author's interest in Mills' constant, the least real
 
 The author thanks GPT-6 Astra, accessed as GPT-6 Pro in ChatGPT and also used in Codex, as the principal AI system in this work. The author also thanks Claude Fable 5.1 for limited assistance through Claude Code with some tasks during preparation of the paper when Codex's weekly usage limit was reached. After the initial conjecture, all mathematical development, identification of results suitable for publication, proof attempts, computation programs, exposition, and Lean formalization were performed by AI systems. The author supplied no mathematically substantive instructions or advice for these tasks. The author's requests for formalization and for an automated workflow in Codex, in which drafting agents and critic agents iterated before typesetting, specified tasks and a procedure without contributing mathematical content. These exchanges were automated critiques, not independent review by human mathematicians.
 
-The author's sole mathematical contribution to this process was the initial conjecture that every Mills number, not only the least one, is irrational. Beyond that conjecture, the author made no mathematical contribution and supplied no ideas for proofs, mathematical arguments, calculations, or mathematical assessment of the results. The author's subsequent involvement consisted of nonmathematical requests to continue working, identify publishable material, write the paper, and produce Lean proofs, together with the decision to release the work. At the time of release, the author has not developed a substantive understanding of the detailed mathematical content and cannot give an adequate independent explanation of its arguments. The author has not personally verified the mathematical proofs. The author's belief that the results are likely to be correct and mathematically worthwhile is not a report of verification. Readers should assess the arguments, reproducible computations, and formal artifacts themselves; the coverage and trust assumptions of the Lean proofs are specified in Section 9.4.
+The author's sole mathematical contribution to this process was the initial conjecture that every Mills number, not only the least one, is irrational. Beyond that conjecture, the author made no mathematical contribution and supplied no ideas for proofs, mathematical arguments, calculations, or mathematical assessment of the results. The author's subsequent involvement consisted of nonmathematical requests to continue working, identify publishable material, write the paper, and produce Lean proofs, together with the decision to release the work. The author has not personally verified the mathematical proofs. The author's belief that the results are likely to be correct and mathematically worthwhile is not a report of verification. Readers should assess the arguments, reproducible computations, and formal artifacts themselves; the coverage and trust assumptions of the Lean proofs are specified in Section 9.4.
 
-The author expects that research in which a human poses an initial question and AI carries out all subsequent mathematical or technical work will become increasingly common in mathematics and other disciplines, including cases in which the initiating human neither provides substantive guidance nor fully understands the resulting work. This is the author's personal expectation, not a conclusion established by the mathematical results here. This account makes the provenance of the work, the contributions of the AI systems, and the limits of the author's contribution and understanding explicit.
+The author expects that research in which a human poses an initial question and AI carries out all subsequent mathematical or technical work will become increasingly common in mathematics and other disciplines, including cases in which the initiating human neither provides substantive guidance nor fully understands the resulting work. This is the author's personal expectation, not a conclusion established by the mathematical results here. This account makes the provenance of the work, the contributions of the AI systems, and the limits of the author's contribution explicit.
 <!-- END PUBLIC ADDITION acknowledgments -->
 
 ## References
@@ -5355,10 +5420,21 @@ Normality Conjecture on Rational Base Number Systems*, arXiv:2510.11723
 Jacobsthal's function*, arXiv:1306.1064 [math.NT], version 1, June 5,
 2013. [Preprint](https://arxiv.org/abs/1306.1064v1).
 
+<a id="ref-dub06"></a>
+**[Dub06]** Artūras Dubickas, *Truncatable primes and unavoidable sets of
+divisors*, Acta Mathematica Universitatis Ostraviensis **14**
+(2006), 21–25.
+[Author's copy](https://klevas.mif.vu.lt/~dubickas/files/dvifai/cekko1.pdf).
+
 <a id="ref-dub08"></a>
 **[Dub08]** Artūras Dubickas, *On the powers of 3/2 and other rational
 numbers*, Mathematische Nachrichten **281** (2008), no. 7, 951–958.
 [Published article](https://doi.org/10.1002/mana.200510651).
+
+<a id="ref-dub09"></a>
+**[Dub09]** Artūras Dubickas, *Prime and composite integers close to powers of
+a number*, Monatshefte für Mathematik **158** (2009), no. 3,
+271–284. [Published article](https://doi.org/10.1007/s00605-008-0042-6).
 
 <a id="ref-dj22"></a>
 **[DJ22]** Artūras Dubickas and Lukas Jonuška, *Divisibility of integers
@@ -5408,7 +5484,8 @@ published in International Mathematics Research Notices **2017**, no. 2,
 <a id="ref-s26"></a>
 **[S26]** Ralf Stephan, *On the composites among [ξ 7ⁿ]*, author-uploaded
 preprint dated August 15, 2026.
-[Preprint](https://www.researchgate.net/publication/412294027_On_the_composites_among_x7).
+[Preprint](https://www.researchgate.net/publication/412294027_On_the_composites_among_x7);
+[Lean files](https://github.com/rwst/On-Composites).
 
 <a id="ref-tz14"></a>
 **[TZ14]** Terence Tao and Tamar Ziegler, *Narrow progressions in the
