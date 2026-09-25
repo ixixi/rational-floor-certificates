@@ -7,9 +7,9 @@
       "sha256": "1bc9e9715ca99e66de507eb240df1b71670263b182f9a0fc575131c13ebb5ea3"
     },
     {
-      "bytes": 6717,
+      "bytes": 6128,
       "path": ".github/workflows/pages.yml",
-      "sha256": "425ec6e89e1ecc3a00660f4d051f7b9cf2822ea99de87d67e26fda748f128abf"
+      "sha256": "7dbe7123f170ffcfa382fd0f27c294cc68fd025999ef93f364c32690fd12abd6"
     },
     {
       "bytes": 80,
@@ -32,9 +32,9 @@
       "sha256": "9a46f10600e1fecadc30583d617801d45633bc07afed8bda64c8533902f2e338"
     },
     {
-      "bytes": 15725,
+      "bytes": 16152,
       "path": "README.md",
-      "sha256": "7d258a612f2279583684e082247b8f72bafe2b5f13368f8a5139ec16d3bd504e"
+      "sha256": "671e8cfbbe641b5322b0d37c8f85283311a06f8f7913391b5ce4afaaeb37064b"
     },
     {
       "bytes": 9387,
@@ -107,9 +107,9 @@
       "sha256": "f129c1fdc6d3ac2779156096968025ac7f138fd0dfd9a8ddc15df9cf084087a7"
     },
     {
-      "bytes": 2871,
+      "bytes": 3810,
       "path": "site/README.md",
-      "sha256": "cd4a1baa34157a2705c83147e3dbbcea81a9ad3d388d6ecba4119591cc862bc2"
+      "sha256": "92bc6c2cf55a768d04225424606a2d4a106e3135a66a88d62ef91c85e7afc962"
     },
     {
       "bytes": 3073,
@@ -125,6 +125,16 @@
       "bytes": 465,
       "path": "site/favicon.svg",
       "sha256": "68ba764845bd3cce856514d5f2c3ed51caa195a74c24ea6ef3218618291ccaa7"
+    },
+    {
+      "bytes": 241020,
+      "path": "site/index.html",
+      "sha256": "53ab32af33e35072c25ef598c76e3692c9e1f22c88b4beaa25c6fa096b8b9d34"
+    },
+    {
+      "bytes": 401928,
+      "path": "site/ja/index.html",
+      "sha256": "6f2656bdcb89bbf00bf9cbbfc2e3dabcd78dc7010364c747a2430ac2fb908e5b"
     },
     {
       "bytes": 3912,
@@ -155,6 +165,16 @@
       "bytes": 200305,
       "path": "site/og-one-step-ja.png",
       "sha256": "0ab1a30dfd92fe3b0a5f73ed40f12be3d87d8bfadbab445838436078deac4e5e"
+    },
+    {
+      "bytes": 117014,
+      "path": "site/og-project-en.png",
+      "sha256": "59dfae9811b3477efed80011ae018b232597097b898436288fa93fac86408c4f"
+    },
+    {
+      "bytes": 118279,
+      "path": "site/og-project-ja.png",
+      "sha256": "75065f8bc703ff20ff42a9d5b2294134e107c623b13e210c8fb0ac79af252827"
     },
     {
       "bytes": 18769,
@@ -1261,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "5d6d7e735b105af9e2f4188e2a3b51c456acf2976278d03177674ae310c7f79b"
+  "source_sha256": "24075d4d1e6f1e1200660a4dd025500a8ea042c38797ed6799edf1580674d2f5"
 }

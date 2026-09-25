@@ -4,6 +4,10 @@ Files copied into the GitHub Pages site by `.github/workflows/pages.yml`.
 
 | File | Published as | Purpose |
 | --- | --- | --- |
+| `index.html` | `/` | The project page in English: the results, the method, the waiting time, the reach and limits, the verification, a calculator for the terms, the explainer videos and the citation. A single self-contained file: the figures are drawn by the canvas engine of the explainer animations, and their formulas and labels are typeset in advance (the glyph outlines are embedded) |
+| `ja/index.html` | `/ja/` | The same page in Japanese |
+| `og-project-en.png` | `/og.png` | Open Graph / Twitter card image (1200×630) of the English project page; drawn by the page itself (`window.__pp.og()` in `index.html`) and reduced to a 256-color palette |
+| `og-project-ja.png` | `/ja/og.png` | Open Graph / Twitter card image (1200×630) of the Japanese project page; drawn the same way from `ja/index.html` and reduced to a 256-color palette |
 | `favicon.svg`, `favicon.ico`, `apple-touch-icon.png` | `/favicon.svg`, `/favicon.ico`, `/apple-touch-icon.png` | Site icon (a floor bracket ⌊ ⌋ with a value dropping to the integer below it) |
 | `og-explainer-ja.png` | `/ja/explainer/og.png` | Open Graph / Twitter card image (1200×630) of the Japanese explainer |
 | `og-explainer-ja.html` | — | Source of `og-explainer-ja.png` (rendered at 1200×630 in a browser with the fonts loaded) |
@@ -17,3 +21,5 @@ Files copied into the GitHub Pages site by `.github/workflows/pages.yml`.
 | `og-verification-ja.png` | `/ja/verification/og.png` | Open Graph / Twitter card image (1200×630) of the Japanese animation of verification and Lean; drawn the same way from `slides/verification-animation-ja.html` and reduced to a 128-color palette |
 
 `favicon.ico` holds 16, 32 and 48 px PNG renderings of `favicon.svg`; `apple-touch-icon.png` is a 180 px rendering with square corners.
+
+The workflow also writes `/en/index.html`, a redirect to the English project page at `/`.
