@@ -1,5 +1,7 @@
 # Finite graph certificates for composite terms in rational floor sequences
 
+**Project page:** [ixixi.github.io/rational-floor-certificates](https://ixixi.github.io/rational-floor-certificates/) · **プロジェクトページ:** [ixixi.github.io/rational-floor-certificates/ja/](https://ixixi.github.io/rational-floor-certificates/ja/)
+
 [English](#english) · [日本語](#japanese)
 
 <a id="english"></a>
@@ -7,9 +9,6 @@
 ## English
 
 DOI (Zenodo): [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.22887589).
-
-Project page, with an overview, a calculator for the sequences and the animated explainers:
-[ixixi.github.io/rational-floor-certificates](https://ixixi.github.io/rational-floor-certificates/).
 
 This repository contains the paper, its computation programs, and its Lean
 formalization. For every real number ξ > 0, the paper proves that each sequence
@@ -75,9 +74,6 @@ Repository: [ixixi/rational-floor-certificates](https://github.com/ixixi/rationa
 **有理数を底とする床関数列の合成数項に対する有限グラフ証明書**
 
 DOI（Zenodo）: [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.22887589)。
-
-概要、数列を計算して試せるページ、解説アニメーションをまとめたプロジェクトページ:
-[ixixi.github.io/rational-floor-certificates/ja/](https://ixixi.github.io/rational-floor-certificates/ja/)。
 
 このリポジトリには、論文、計算プログラム、Lean による形式証明を収録しています。
 論文では、任意の実数 ξ > 0 に対し、二つの数列 ⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ が

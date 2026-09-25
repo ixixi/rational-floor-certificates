@@ -32,9 +32,9 @@
       "sha256": "9a46f10600e1fecadc30583d617801d45633bc07afed8bda64c8533902f2e338"
     },
     {
-      "bytes": 16152,
+      "bytes": 15987,
       "path": "README.md",
-      "sha256": "671e8cfbbe641b5322b0d37c8f85283311a06f8f7913391b5ce4afaaeb37064b"
+      "sha256": "27cc178b73cc0ba4905adf62d7681ed9a788ba4f4e5ee41f55ef93279bd3f7df"
     },
     {
       "bytes": 9387,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "24075d4d1e6f1e1200660a4dd025500a8ea042c38797ed6799edf1580674d2f5"
+  "source_sha256": "a3180c816b7a4d3ec706524727d3defd545a592089fcfc16bb85d6e7c4656128"
 }
