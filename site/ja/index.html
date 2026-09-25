@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ に現れる合成数｜有理数の底の床関数列</title>
-<meta name="description" content="どんな正の実数 ξ についても、⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ には合成数が無限に現れます。論文「Finite graph certificates for composite terms in rational floor sequences」のプロジェクトページ。結果、有限グラフの証明書のしくみ、検証（独立な二つの実装と Lean）、自分で試せる計算、解説アニメーション、論文とコード。">
+<meta name="description" content="どんな正の実数 ξ についても、⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ には合成数が無限に現れます。論文「Finite graph certificates for composite terms in rational floor sequences」のプロジェクトページ。結果、先行研究との関係（何が既知で何が新しいか）、有限グラフの証明書のしくみ、検証（独立な二つの実装と Lean）、自分で試せる計算、解説アニメーション、論文とコード。">
 <link rel="canonical" href="https://ixixi.github.io/rational-floor-certificates/ja/">
 <link rel="alternate" hreflang="en" href="https://ixixi.github.io/rational-floor-certificates/">
 <link rel="alternate" hreflang="ja" href="https://ixixi.github.io/rational-floor-certificates/ja/">
@@ -28,7 +28,7 @@
 <meta name="twitter:title" content="⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ に現れる合成数｜有理数の底の床関数列">
 <meta name="twitter:description" content="正の数 ξ に 7/5 を掛けて整数部分を残し続けると、合成数は決して尽きない。有限グラフの証明書、独立な二つの実装、Lean、そして解説アニメーション。">
 <meta name="twitter:image" content="https://ixixi.github.io/rational-floor-certificates/ja/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","name":"Finite graph certificates for composite terms in rational floor sequences","author":{"@type":"Person","name":"Yuri Odagiri"},"datePublished":"2026","identifier":"https://doi.org/10.5281/zenodo.22887589","url":"https://ixixi.github.io/rational-floor-certificates/ja/","codeRepository":"https://github.com/ixixi/rational-floor-certificates","inLanguage":["en","ja"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","name":"Finite graph certificates for composite terms in rational floor sequences","author":{"@type":"Person","name":"Yuri Odagiri"},"datePublished":"2026","identifier":"https://doi.org/10.5281/zenodo.22962354","url":"https://ixixi.github.io/rational-floor-certificates/ja/","codeRepository":"https://github.com/ixixi/rational-floor-certificates","inLanguage":["en","ja"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -79,7 +79,8 @@ i.xi { font-size: 1.04em; padding-right: .04em; }
 .nav .l.cur { color: var(--ink); background: #171a20; box-shadow: inset 0 -2px 0 var(--q); }
 .nav .lang { margin-left: 6px; padding: 5px 12px; border: 1px solid var(--line2); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 14px; white-space: nowrap; transition: border-color .2s, background .2s; }
 .nav .lang:hover { border-color: var(--q); background: rgba(88, 196, 221, .08); color: var(--ink); }
-@media (max-width: 1060px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+@media (max-width: 1260px) { .nav .l { padding: 6px 7px; font-size: 14px; } }
+@media (max-width: 1100px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
 
 /* ---------- hero ---------- */
 .hero { position: relative; overflow: hidden; padding-block: clamp(36px, 6vw, 76px) clamp(40px, 6vw, 80px); border-bottom: 1px solid var(--line); isolation: isolate; }
@@ -172,6 +173,49 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 .facts li::before { content: ""; position: absolute; left: 3px; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--q); opacity: .8; transform: rotate(45deg); }
 .cor { margin-top: 20px; display: grid; gap: 10px; padding: 18px 22px; border-radius: var(--r1); border: 1px dashed var(--line2); background: rgba(131, 193, 103, .03); }
 .cor p { margin: 0; color: var(--ink2); }
+
+/* what was known, what is new */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.origs { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0 0 12px; }
+h2 + .origs { margin: -6px 0 22px; }
+.orig { display: inline-flex; align-items: center; gap: 7px; padding: 2px 11px; border-radius: 999px; border: 1px solid; font-family: var(--sans); font-size: 13px; font-weight: 600; line-height: 1.55; letter-spacing: .01em; text-decoration: none; }
+.orig::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.orig.new { color: var(--g); background: rgba(131, 193, 103, .1); border-color: rgba(131, 193, 103, .42); }
+.orig.old { color: var(--ink2); background: rgba(185, 188, 194, .06); border-color: var(--line2); }
+.orig.ref { color: var(--q); background: rgba(88, 196, 221, .08); border-color: rgba(88, 196, 221, .38); }
+.orig.ref::before { content: "↓"; width: auto; height: auto; background: none; font-size: 12px; }
+a.orig.ref:hover { color: #9fe0ee; background: rgba(88, 196, 221, .16); }
+.orig.lg { font-size: 14px; padding: 3px 13px; }
+.kn-h { margin: 0 0 16px; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.tl li { display: grid; grid-template-columns: 3.1em minmax(0, 1fr); gap: 12px; color: var(--ink2); font-size: 15.5px; line-height: 1.6; }
+.tl .yr { font-family: var(--mono); font-size: 13.5px; font-weight: 600; color: var(--t); padding-top: .12em; }
+.tl b { color: var(--ink); }
+.kn .facts li b { color: var(--ink); }
+.rel { margin-top: clamp(40px, 6vw, 72px); }
+.rel h3.sub { margin-top: 0; }
+.rel .intro { margin-bottom: 22px; }
+.cmpw { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r1); background: var(--panel); scrollbar-width: thin; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.55; }
+.cmp th, .cmp td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.cmp tbody tr:last-child th, .cmp tbody tr:last-child td { border-bottom: 0; }
+.cmp thead th { font-size: 13px; font-weight: 700; letter-spacing: .05em; color: var(--ink3); background: #0a0b0e; }
+.cmp thead th:last-child { color: var(--g); }
+.cmp tbody th { width: 24%; color: var(--ink); font-weight: 600; }
+.cmp td { width: 38%; color: var(--ink2); }
+.cmp td.us { color: var(--ink); background: rgba(131, 193, 103, .045); }
+.rel .note { margin: 12px 2px 0; font-size: 14.5px; color: var(--ink3); }
+@media (max-width: 700px) {
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: auto; }
+  .cmp tbody tr { border-bottom: 1px solid var(--line); padding: 8px 0 10px; }
+  .cmp tbody tr:last-child { border-bottom: 0; }
+  .cmp tbody th, .cmp td { width: auto; border: 0; padding: 3px 14px; }
+  .cmp tbody th { padding-top: 6px; }
+  .cmp td::before { content: attr(data-h); display: block; font-size: 12px; font-weight: 700; letter-spacing: .05em; color: var(--ink3); }
+  .cmp td.us { background: none; }
+  .cmp td.us::before { color: var(--g); }
+}
 
 /* explorer */
 .explorer { padding: clamp(16px, 2.2vw, 24px); }
@@ -339,7 +383,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
       <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0d1626"/><path d="M16 12v39h10M48 12v39H38" fill="none" stroke="#5eaeff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 27.5v9" stroke="#ffb454" stroke-width="3" stroke-linecap="round" stroke-dasharray="3.5 4"/><circle cx="32" cy="20" r="6.5" fill="#ffb454"/><circle cx="32" cy="45" r="4.5" fill="#5eaeff"/></svg>
       <span>有理数の底の床関数列</span>
     </a>
-    <ul><li><a class="l" href="#result">結果</a></li><li><a class="l" href="#try">試す</a></li><li><a class="l" href="#method">しくみ</a></li><li><a class="l" href="#waiting">待ち時間</a></li><li><a class="l" href="#limits">限界</a></li><li><a class="l" href="#verification">検証</a></li><li><a class="l" href="#explainers">動画</a></li><li><a class="l" href="#paper">論文</a></li></ul>
+    <ul><li><a class="l" href="#result">結果</a></li><li><a class="l" href="#context">既存と新規</a></li><li><a class="l" href="#try">試す</a></li><li><a class="l" href="#method">しくみ</a></li><li><a class="l" href="#waiting">待ち時間</a></li><li><a class="l" href="#limits">限界</a></li><li><a class="l" href="#verification">検証</a></li><li><a class="l" href="#explainers">動画</a></li><li><a class="l" href="#paper">論文</a></li></ul>
     <a class="lang" href="../" hreflang="en" lang="en">English</a>
   </div>
 </nav>
@@ -356,7 +400,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
         <a class="btn" href="#try">ξ を選んで試す</a>
         <a class="btn" href="#explainers">解説動画を見る</a>
       </div>
-      <p class="meta">Yuri Odagiri · 2026 · DOI <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">10.5281/zenodo.22887589</a> · <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">GitHub</a></p>
+      <p class="meta">Yuri Odagiri · 2026 · DOI <a href="https://doi.org/10.5281/zenodo.22962354" target="_blank" rel="noopener">10.5281/zenodo.22962354</a> · <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">GitHub</a></p>
     </div>
     <figure class="hero-fig" aria-label="アニメーション：ξ = π, e, √2, φ の数列の項を一つずつ示し、合成数には、それを割り切る証明書の素数を添えます。">
       <canvas id="cvHero" role="img" aria-label="数列の項を一つずつ示すアニメーション"></canvas>
@@ -370,7 +414,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
   <div class="wrap">
     <p class="kicker"><span class="no">01</span>結果</p>
     <h2>累乗の整数部分についての二つの定理</h2>
-    <p class="intro">1967 年、Forman と Shapiro は <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> と <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> に合成数が無限にあることを証明しました。その議論は、どんな <i>ξ</i> &gt; 0 を掛けても成り立ちます。のちに Dubickas と Novikas が 5/4 を加えました。7/5 については最も近い整数、5/2 については 1 だけずらした数列が扱われていました。本研究は、ずらさない整数部分そのものについて証明します。</p>
+    <p class="intro">1967 年、Forman と Shapiro は <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> と <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> に合成数が無限にあることを証明しました。その議論は、どんな <i>ξ</i> &gt; 0 を掛けても成り立ちます。のちに Dubickas と Novikas が 5/4 を加えました。7/5 については最も近い整数、5/2 については 1 だけずらした数列が扱われていました。本研究は、ずらさない整数部分そのものについて証明します。<a href="#context">これまでに分かっていたこと、この論文で新しいこと →</a></p>
     <div class="grid2 thms">
       <article class="card thm rv">
         <p class="thm-h"><span class="tag">定理 1 (i)</span><span class="ratio">7/5</span></p>
@@ -394,9 +438,41 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
   </div>
 </section>
 
+<section class="sec" id="context">
+  <div class="wrap">
+    <p class="kicker"><span class="no">02</span>位置づけ</p>
+    <h2>これまでに分かっていたこと、この論文で新しいこと</h2>
+    <p class="intro">この種の数列に現れる合成数は、1967 年から研究されてきました。左は、本研究が土台にしている、あるいは比較している先行研究です。右は、この論文が新しく加えたものです。</p>
+    <div class="grid2 kn">
+      <article class="card rv">
+        <p class="kn-h"><span class="orig old lg">これまでに分かっていたこと</span></p>
+        <ol class="tl">
+          <li><span class="yr">1967</span><div><b>Forman &amp; Shapiro</b> — <span class="m">⌊(3/2)<sup><i>n</i></sup>⌋</span> と <span class="m">⌊(4/3)<sup><i>n</i></sup>⌋</span> に合成数が無限にあることを証明しました。その議論は、どんな <i>ξ</i> &gt; 0 を掛けても成り立ちます。</div></li>
+          <li><span class="yr">2005</span><div><b>Dubickas &amp; Novikas</b> — どんな <i>ξ</i> に対しても無限に多くの項を割り切る、具体的な素数の集合を与えました。対象は 3/2、4/3、5/4 と、<span class="m"><i>ξ</i>(7/5)<sup><i>n</i></sup></span> に最も近い整数、そして <span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋ − 1</span> です。整数の底 2〜6 も解決しました。本研究が刈り込みに使う事実、つまり本物の数列の繰り上がりは周期的にならないことも、すでにこの論文に含まれています。</div></li>
+          <li><span class="yr">2006</span><div><b>Dubickas</b> — このような素数の集合を<i>回避不能</i>（unavoidable）と名づけました。整数の底では、5 のときと、<i>b</i> − 1 が平方因子をもつ <i>b</i> ≥ 3 のときには存在しません。2, 3, 4, 6 以外の整数の底では存在しない、と予想しました。</div></li>
+          <li><span class="yr">2009</span><div><b>Dubickas</b> — 戻ってくる定理：適当な整数の漸化式で決まる数列は、ある決まった係数と互いに素などんな <i>q</i> を法としても、周期的にくり返します。そのため数列は、自分の大きな素数の項の倍数に何度も戻ってきます。特に、桁が周期的にくり返すと、合成数の項が必ず現れます。</div></li>
+          <li><span class="yr">2022</span><div><b>Dubickas &amp; Jonuška</b> — 底 7 では、その定理から、どんな有限個の素数の集合に対しても、どの項もそのどの素数でも割り切れないような <i>ξ</i> があることが従います。つまり回避不能な集合は存在しません。</div></li>
+          <li><span class="yr">2026</span><div><b>Stephan</b> （プレプリント） — どんな <i>ξ</i> &gt; 0 に対しても <span class="m">⌊<i>ξ</i>7<sup><i>n</i></sup>⌋</span> に合成数が無限にあることを証明しました。未解決だった最小の整数の底です。証明には本研究と近い有限グラフの証明書を使い、Lean で検証しています。<a href="#stephan">下で比較します</a>。</div></li>
+        </ol>
+      </article>
+      <article class="card rv">
+        <p class="kn-h"><span class="orig new lg">この論文で新しいこと</span></p>
+        <ul class="facts">
+          <li><b>定理 1。</b> ずらさない整数部分 <span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> と <span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span> について、無限に多くの項を割り切る決まった素数の集合（回避不能な集合）を与え、そこから合成数が無限にあることを導きます（系 2）。これまで 7/5 は最も近い整数、5/2 は 1 だけずらした数列しか扱われていませんでした。</li>
+          <li><b>証明書。</b> 有理数の底に対して、余りと小数部分のセルからなる有限のグラフを作り、繰り上がりが周期的にならないことを使って刈り込みます。語ラベル法では、道を正確に縮約し、語の途中のどの項でも素数を確かめます。</li>
+          <li><b>定理 3。</b> 7/5 の待ち時間の具体的な上限。</li>
+          <li><b>方法そのもの。</b> 正規形、二つの障害、そして証明書に必要な追加の素数の下限。</li>
+          <li><b>追加の結果。</b> 再帰的な繰り上がりは合成数を生む（定理46。Dubickas の 2009 年の定理と同じ発想の、戻ってくる議論）。6/5 と 9/7 の高さまでの確認。(6<i>t</i>+3)/(6<i>t</i>+1) の停止問題。</li>
+          <li><b>検証。</b> 別々に書いた二つの実装の出力を全要素で比較し、定理 1 と系 2 を Lean で形式化しました。</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="try">
   <div class="wrap">
-    <p class="kicker"><span class="no">02</span>試してみる</p>
+    <p class="kicker"><span class="no">03</span>試してみる</p>
     <h2>自分で <i class="xi">ξ</i> を選ぶ</h2>
     <p class="intro">好きな正の数を入力してください。各項を厳密に計算し、合成数には、それを割り切る最小の証明書の素数を添えます。項をいくら並べても定理の証明にはなりません（それを担うのが有限の証明書です）。それでも、印のついた項が現れ続ける様子は確かめられます。</p>
     <div class="explorer card">
@@ -416,7 +492,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="method">
   <div class="wrap">
-    <p class="kicker"><span class="no">03</span>しくみ</p>
+    <p class="kicker"><span class="no">04</span>しくみ</p>
     <h2>例外を有限のグラフに閉じ込め、何も残らないまで刈り込む</h2>
     <p class="intro">仮に、<span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> のある項から先に、2, 3, 5, 11, 13 のどれでも割り切れない項しか現れないとしましょう。その先の項の並びを「例外のしっぽ」と呼びます（その項が素数とは限りません。たとえば 323 = 17 × 19 は、5つのどれでも割り切れません）。証明は、例外のしっぽが存在しないことを、次の三段階で示します。</p>
     <div class="steps">
@@ -428,13 +504,15 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
       </div>
       <div class="step rv">
         <div class="st-t"><span class="sn">2</span><h3>有限のグラフが例外のしっぽを閉じ込める</h3>
+          <p class="origs"><span class="orig new">有理数の底では新規</span><a class="orig ref" href="#stephan">比較：Stephan の底 7</a></p>
           <p>状態は、項の 4290 を法とする余りと、小数部分が <i>K</i> 等分したどのセルに入るかを記録します。辺は、繰り上がりを添えた、規則にかなう一歩です。例外のしっぽは、どれもこの有限のグラフの中の無限の道になります。7/5 では、状態は最初 960 × 32 = 30,720 個です。</p></div>
         <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvGraph" role="img" aria-label="小さな有向グラフ。点が辺をたどって歩き、そのあとグラフは何も残らなくなるまで刈り込まれる"></canvas>
           <figcaption>例外のしっぽがあれば、グラフの中を永遠に歩き続けます（黄色）。本物の数列が住めない成分を刈り込むと、何も残りません。</figcaption></figure>
       </div>
       <div class="step rv">
         <div class="st-t"><span class="sn">3</span><h3>何も残らないまで刈り込む</h3>
-          <p>無限に続く道は、やがてひとつの強連結成分の中にとどまります。その中のどの道でも繰り上がりが周期的になってしまうなら、その成分は取り除けます。本物の数列の繰り上がりは周期的にならないことが、初等的な非周期性の補題で分かっているからです。残った部分はセルを四つに分けて細かくし、判定をくり返します。7/5 では第4段階で何も残らず、例外のしっぽは存在しません。</p></div>
+          <p class="origs"><span class="orig old">非周期性の補題：Dubickas–Novikas 2005</span><span class="orig new">刈り込みの証明書：新規</span></p>
+          <p>無限に続く道は、やがてひとつの強連結成分の中にとどまります。その中のどの道でも繰り上がりが周期的になってしまうなら、その成分は取り除けます。本物の数列の繰り上がりは周期的にならないことが、Dubickas–Novikas（2005）にすでにある初等的な非周期性の補題で分かっているからです。残った部分はセルを四つに分けて細かくし、判定をくり返します。7/5 では第4段階で何も残らず、例外のしっぽは存在しません。</p></div>
         <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvStages75" role="img" aria-label="7/5 の4段階：頂点 30,720 のうち 1,363 を残し、1,363 × 4 = 5,452 が次の段階になる。そのうち 952 を残して 952 × 4 = 3,808、そのうち 944 を残して 944 × 4 = 3,776。そこでは何も残らない"></canvas>
           <figcaption>7/5 の4段階（論文の表1）。棒全体がその段階のすべての頂点で、左端の黄色が残す一つの成分です。ほかはすべて取り除かれます。残った頂点はそれぞれセルを4つに分けるので、次の段階の頂点はちょうど4倍になります。<i>K</i> = 2048 では何も残りません。</figcaption></figure>
       </div>
@@ -442,18 +520,36 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
     <div class="two rv">
       <div>
         <h3>5/2：辺に語を載せる</h3>
+        <p class="origs"><span class="orig new">新規</span></p>
         <p><span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span> で 10 個の素数すべてを一度に入れたグラフを直接作ると、状態は 30,656,102,400 個になります。語ラベル法は代わりに、4 頂点と、−1, 1, 3 の3つだけの繰り上がりから始めます（2 で割り切れない項は奇数で、奇数の項の次の繰り上がりは奇数になるため）。辺に繰り上がりの語をまるごと載せ、枝分かれのない道を正確に縮約し、素数をひとつずつ加えます。そのたびに、語の途中のどの項でも余りを確かめます。作るグラフの最大は 2,856,938 頂点で、最後の出力は空になります。同じ方法で 7/5 の別証明も得られます。</p>
       </div>
       <figure class="fig" style="--ar: 16 / 9; --arm: 4 / 3"><canvas id="cvStages52" role="img" aria-label="5/2 の10段階の入力頂点数（対数目盛り）。4 から 2,856,938 まで増え、最後の出力は空"></canvas>
         <figcaption>5/2 の10段階の入力頂点数（表6、対数目盛り）と、各段階で加える素数。</figcaption></figure>
+    </div>
+    <div class="rel rv" id="stephan">
+      <h3 class="sub">近い親戚：Stephan による底 7 の証明</h3>
+      <p class="intro">この論文の少し前、2026 年 8 月に、Ralf Stephan は、どんな <i>ξ</i> &gt; 0 に対しても <span class="m">⌊<i>ξ</i>7<sup><i>n</i></sup>⌋</span> に合成数が無限にあることを証明したプレプリントを公開しました。その方法は本研究といくつかの要素を共有しています。余り（2 · 3 · 5 · … · 31 を法とする）の有限のグラフを素数ひとつずつ加えて組み立てること、グラフのアルゴリズムの正しさを証明する代わりに検査器でランク関数を確かめること、そして有限の計算を native_decide で実行する Lean による検証です。違いは、周期的なふるまいの扱いにあります。</p>
+      <div class="cmpw"><table class="cmp">
+        <thead><tr><th scope="col"><span class="sr">観点</span></th><th scope="col">Stephan（2026）・底 7</th><th scope="col">この論文・7/5 と 5/2</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">グラフの状態</th><td data-h="Stephan">余り</td><td class="us" data-h="この論文">余りと小数部分のセル。本物の数列はどれも道になるが、道が数列になるとは限らない</td></tr>
+          <tr><th scope="row">どの道も周期的になる部分</th><td data-h="Stephan">残す。桁が周期的にくり返し、どの項も 31 以下の素数で割り切れない数列が実際にある</td><td class="us" data-h="この論文">取り除く。本物の数列の繰り上がりは周期的にならない</td></tr>
+          <tr><th scope="row">最後に残るもの</th><td data-h="Stephan">371,702 状態の核</td><td class="us" data-h="この論文">何も残らない</td></tr>
+          <tr><th scope="row">合成数が出る理由</th><td data-h="Stephan">Dubickas の戻ってくる定理（2009）：桁が周期的にくり返すと、合成数の項が必ず現れる</td><td class="us" data-h="この論文">決まった素数の集合が、無限に多くの項を割り切る</td></tr>
+          <tr><th scope="row">どの <i>ξ</i> にも通用する素数の集合</th><td data-h="Stephan">底 7 では存在しない（Dubickas–Jonuška 2022）</td><td class="us" data-h="この論文">7/5 は {2, 3, 5, 11, 13}、5/2 は {2, 3, 7, 11, …, 31}</td></tr>
+          <tr><th scope="row">Lean</th><td data-h="Stephan">番号付きのすべての主張。有限の計算は native_decide</td><td class="us" data-h="この論文">定理 1 と系 2。7/5 の 1 ステップの証明書はカーネルで、語ラベル法の実行は native_decide で</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Stephan の計算は、この論文のどの証明にも使っていません。二つの方法の比較は論文の序論にあります。<a href="https://www.researchgate.net/publication/412294027_On_the_composites_among_x7" target="_blank" rel="noopener">Stephan のプレプリント</a>・<a href="https://github.com/rwst/On-Composites" target="_blank" rel="noopener">その Lean ファイル</a></p>
     </div>
   </div>
 </section>
 
 <section class="sec" id="waiting">
   <div class="wrap">
-    <p class="kicker"><span class="no">04</span>待ち時間</p>
+    <p class="kicker"><span class="no">05</span>待ち時間</p>
     <h2>次の合成数まで、どれだけ待つか</h2>
+    <p class="origs"><span class="orig new">この論文で新規</span></p>
     <div class="two wide rv">
       <div>
         <p class="lead2"><span class="tag t">定理 3</span> <span class="m"><i>P</i> = ⌊<i>ξ</i>⌋ &gt; 13</span> ならば、<span class="m">0 ≤ <i>n</i> ≤ 428 + 12<i>L</i>(<i>P</i>)</span> のどれかで <span class="m">gcd(⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋, 4290) &gt; 1</span> となり、その項は合成数です。</p>
@@ -468,8 +564,9 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="limits">
   <div class="wrap">
-    <p class="kicker"><span class="no">05</span>届く範囲と限界</p>
+    <p class="kicker"><span class="no">06</span>届く範囲と限界</p>
     <h2>この方法にできること、できないこと</h2>
+    <p class="origs"><span class="orig new">この論文で新規</span></p>
     <p class="intro">論文は、一般の底 <i>a</i>/<i>b</i> について、証明書の方法そのものについての定理も証明しています。</p>
     <div class="grid3">
       <article class="card rv"><h3>正規形</h3><p>操作を正確に定めると、有限の証明書が存在するのは、あるセル数と、2<i>ab</i> を割らない素数のある有限集合について、ある一つのグラフのすべての巡回成分が位相判定を通るときに限ります。縮約、素数のべき、2<i>ab</i> を割る素数は、証明できる範囲を広げません。</p></article>
@@ -489,12 +586,12 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="open">
   <div class="wrap">
-    <p class="kicker"><span class="no">06</span>追加の結果と未解決問題</p>
+    <p class="kicker"><span class="no">07</span>追加の結果と未解決問題</p>
     <h2>二つの定理の先へ</h2>
     <div class="grid3">
-      <article class="card rv"><h3>再帰的な繰り上がり</h3><p>互いに素な <i>a</i> &gt; <i>b</i> ≥ 2 について、軌道の繰り上がりの列が再帰的なしっぽをもつなら、その軌道には合成数が無限にあります（定理46）。</p></article>
-      <article class="card rv"><h3>高さまでの確認</h3><p><span class="m">6 &lt; ⌊<i>ξ</i>⌋ ≤ 5<sup>40</sup></span> なら <span class="m">⌊<i>ξ</i>(6/5)<sup><i>j</i></sup>⌋</span> の最初の 41 項のどれかが、<span class="m">9 &lt; ⌊<i>ξ</i>⌋ ≤ 7<sup>18</sup></span> なら <span class="m">⌊<i>ξ</i>(9/7)<sup><i>j</i></sup>⌋</span> の最初の 19 項のどれかが合成数です（定理47）。</p></article>
-      <article class="card rv"><h3>停止問題</h3><p>9/7 を含む分数の族 (6<i>t</i>+3)/(6<i>t</i>+1) では、すべての係数についての主張が、ある整数プログラムが必ず止まるかどうかに帰着します（定理58）。</p></article>
+      <article class="card rv"><h3>再帰的な繰り上がり</h3><p class="origs"><span class="orig new">新規</span><span class="orig old">Dubickas 2009 と同じ発想</span></p><p>互いに素な <i>a</i> &gt; <i>b</i> ≥ 2 について、軌道の繰り上がりの列が再帰的なしっぽをもつなら、その軌道には合成数が無限にあります（定理46）。</p></article>
+      <article class="card rv"><h3>高さまでの確認</h3><p class="origs"><span class="orig new">新規</span></p><p><span class="m">6 &lt; ⌊<i>ξ</i>⌋ ≤ 5<sup>40</sup></span> なら <span class="m">⌊<i>ξ</i>(6/5)<sup><i>j</i></sup>⌋</span> の最初の 41 項のどれかが、<span class="m">9 &lt; ⌊<i>ξ</i>⌋ ≤ 7<sup>18</sup></span> なら <span class="m">⌊<i>ξ</i>(9/7)<sup><i>j</i></sup>⌋</span> の最初の 19 項のどれかが合成数です（定理47）。</p></article>
+      <article class="card rv"><h3>停止問題</h3><p class="origs"><span class="orig new">新規</span></p><p>9/7 を含む分数の族 (6<i>t</i>+3)/(6<i>t</i>+1) では、すべての係数についての主張が、ある整数プログラムが必ず止まるかどうかに帰着します（定理58）。</p></article>
     </div>
     <h3 class="sub">五つの未解決問題</h3>
     <ol class="open rv">
@@ -509,7 +606,7 @@ h3.sub { margin: clamp(40px, 6vw, 64px) 0 16px; font-size: 24px; }
 
 <section class="sec" id="verification">
   <div class="wrap">
-    <p class="kicker"><span class="no">07</span>検証</p>
+    <p class="kicker"><span class="no">08</span>検証</p>
     <h2>二重の確認：独立なプログラムと Lean</h2>
     <figure class="fig wide rv" style="--ar: 3 / 1; --arm: 16 / 10"><canvas id="cvVerify" role="img" aria-label="出力が一致する二つのプログラム A と B、そして証明を受け入れる Lean のカーネル"></canvas></figure>
     <div class="grid2">
@@ -553,7 +650,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="explainers">
   <div class="wrap">
-    <p class="kicker"><span class="no">08</span>解説動画</p>
+    <p class="kicker"><span class="no">09</span>解説動画</p>
     <h2>ナレーション付きの解説アニメーション</h2>
     <p class="intro">四本のアニメーションで論文を順にたどります（それぞれ英語版と日本語版）。高校数学の言葉で基本を解説する、日本語の長めの動画もあります。</p>
     <div class="vids"><article class="vid rv">
@@ -561,7 +658,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="../ja/one-step/">1ステップ法</a></h3>
         <p>どの <span class="m">⌊<i>ξ</i>(7/5)<sup><i>n</i></sup>⌋</span> にも、2, 3, 5, 11, 13 のどれかで割り切れる項が無限にある理由。有限のグラフを、何も残らなくなるまで段階ごとに刈り込みます。</p>
-        <p class="langs"><a class="pill" href="../ja/one-step/">日本語 · 約25分</a><a class="pill ghost" href="../en/one-step/" hreflang="en" lang="en">English · 20 min</a></p>
+        <p class="langs"><a class="pill" href="../ja/one-step/">日本語 · 約28分</a><a class="pill ghost" href="../en/one-step/" hreflang="en" lang="en">English · 23 min</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -569,7 +666,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="../ja/word-label/">語ラベル法</a></h3>
         <p><span class="m">⌊<i>ξ</i>(5/2)<sup><i>n</i></sup>⌋</span> と 10 個の素数。辺に語を載せた 4 頂点のグラフを、素数ひとつずつ持ち上げていきます。</p>
-        <p class="langs"><a class="pill" href="../ja/word-label/">日本語 · 約28分</a><a class="pill ghost" href="../en/word-label/" hreflang="en" lang="en">English · 23 min</a></p>
+        <p class="langs"><a class="pill" href="../ja/word-label/">日本語 · 約29分</a><a class="pill ghost" href="../en/word-label/" hreflang="en" lang="en">English · 24 min</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -577,7 +674,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
       <div class="vb">
         <h3><a href="../ja/frontier/">待ち時間・限界・未解決問題</a></h3>
         <p>次の合成数はいつ現れるのか、証明書の方法はどこまで届き何がそれを止めるのか、そして何がまだ分かっていないのか。</p>
-        <p class="langs"><a class="pill" href="../ja/frontier/">日本語 · 約32分</a><a class="pill ghost" href="../en/frontier/" hreflang="en" lang="en">English · 25 min</a></p>
+        <p class="langs"><a class="pill" href="../ja/frontier/">日本語 · 約32分</a><a class="pill ghost" href="../en/frontier/" hreflang="en" lang="en">English · 26 min</a></p>
       </div>
     </article>
 <article class="vid rv">
@@ -602,26 +699,26 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="paper">
   <div class="wrap">
-    <p class="kicker"><span class="no">09</span>論文・コード・引用</p>
+    <p class="kicker"><span class="no">10</span>論文・コード・引用</p>
     <h2>読む・再現する・引用する</h2>
     <div class="res">
       <a href="https://github.com/ixixi/rational-floor-certificates/blob/main/paper-en.pdf" target="_blank" rel="noopener" class="rsc rv"><b>論文（英語）</b><span>PDF</span></a>
       <a href="https://github.com/ixixi/rational-floor-certificates/blob/main/paper-ja.pdf" target="_blank" rel="noopener" class="rsc rv"><b>論文（日本語）</b><span>PDF</span></a>
-      <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener" class="rsc rv"><b>DOI</b><span>10.5281/zenodo.22887589</span></a>
+      <a href="https://doi.org/10.5281/zenodo.22962354" target="_blank" rel="noopener" class="rsc rv"><b>DOI</b><span>10.5281/zenodo.22962354</span></a>
       <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener" class="rsc rv"><b>ソースコード</b><span>GitHub</span></a>
       <a href="https://github.com/ixixi/rational-floor-certificates/tree/main/supplement/lean" target="_blank" rel="noopener" class="rsc rv"><b>Lean による形式化</b><span>supplement/lean</span></a>
       <a href="https://github.com/ixixi/rational-floor-certificates/tree/main/supplement/computations" target="_blank" rel="noopener" class="rsc rv"><b>有限の計算</b><span>実装 A と B</span></a>
     </div>
     <div class="cite card rv">
       <div class="cite-h"><h3>引用</h3><button type="button" class="btn sm" id="copyBib">BibTeX をコピー</button></div>
-      <p>Yuri Odagiri. <i>Finite graph certificates for composite terms in rational floor sequences.</i> 2026. <a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">doi:10.5281/zenodo.22887589</a></p>
+      <p>Yuri Odagiri. <i>Finite graph certificates for composite terms in rational floor sequences.</i> 2026. <a href="https://doi.org/10.5281/zenodo.22962354" target="_blank" rel="noopener">doi:10.5281/zenodo.22962354</a></p>
       <pre class="bib"><code id="bib">@misc{odagiri2026finite,
   author    = {Odagiri, Yuri},
   title     = {Finite graph certificates for composite terms in rational floor sequences},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.22887589},
-  url       = {https://doi.org/10.5281/zenodo.22887589}
+  doi       = {10.5281/zenodo.22962354},
+  url       = {https://doi.org/10.5281/zenodo.22962354}
 }</code></pre>
     </div>
   </div>
@@ -629,11 +726,11 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 
 <section class="sec" id="about">
   <div class="wrap narrow">
-    <p class="kicker"><span class="no">10</span>成り立ち</p>
+    <p class="kicker"><span class="no">11</span>成り立ち</p>
     <h2>この研究の成り立ち</h2>
     <div class="about rv">
       <p>論文の謝辞には、その成り立ちが詳しく書かれています。出発点は「すべてのミルズ数は無理数ではないか」という著者の問いで、本稿はその問いを解決するものではありません。</p>
-      <p>最初の予想のあと、数学的な展開、計算プログラム、文章、そして Lean による形式化は、すべて AI システムが行いました。途中の検討は AI による自動的な批評で、人間の数学者による独立した査読ではありません。著者は証明を自ら検証しておらず、議論、再現可能な計算、形式証明を、読者自身が評価するよう求めています。</p>
+      <p>最初の予想のあと、数学的な展開、計算プログラム、文章、そして Lean による形式化は、すべて AI システムが行いました。途中の検討は AI による自動的な批評で、人間の数学者による独立した査読ではありません。著者は論文の数学的な議論を完全には検証していませんが、Lean による形式証明が検査を通ることは自分で確認しています。議論、再現可能な計算、形式証明は、読者自身が評価するよう求めています。</p>
       <p>解説アニメーションとこのページも、AI の支援を受けて作成しました。</p>
       <p><a href="https://github.com/ixixi/rational-floor-certificates/blob/main/paper-ja.pdf" target="_blank" rel="noopener">論文の開示の全文を読む →</a></p>
     </div>
@@ -644,7 +741,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full</code></pre>
 <footer class="foot">
   <div class="wrap">
     <p><b>有理数の底の床関数列</b> · Yuri Odagiri, <i>Finite graph certificates for composite terms in rational floor sequences</i> (2026)</p>
-    <p><a href="https://doi.org/10.5281/zenodo.22887589" target="_blank" rel="noopener">DOI 10.5281/zenodo.22887589</a> · <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">GitHub</a> · <a href="../" hreflang="en" lang="en">English</a></p>
+    <p><a href="https://doi.org/10.5281/zenodo.22962354" target="_blank" rel="noopener">DOI 10.5281/zenodo.22962354</a> · <a href="https://github.com/ixixi/rational-floor-certificates" target="_blank" rel="noopener">GitHub</a> · <a href="../" hreflang="en" lang="en">English</a></p>
   </div>
 </footer>
 <script>
