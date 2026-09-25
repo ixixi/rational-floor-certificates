@@ -1,6 +1,8 @@
 # Finite graph certificates for composite terms in rational floor sequences
 
-**Project page:** [ixixi.github.io/rational-floor-certificates](https://ixixi.github.io/rational-floor-certificates/) · **プロジェクトページ:** [ixixi.github.io/rational-floor-certificates/ja/](https://ixixi.github.io/rational-floor-certificates/ja/)
+**Project page:** [ixixi.github.io/rational-floor-certificates](https://ixixi.github.io/rational-floor-certificates/)
+
+**プロジェクトページ:** [ixixi.github.io/rational-floor-certificates/ja/](https://ixixi.github.io/rational-floor-certificates/ja/)
 
 [English](#english) · [日本語](#japanese)
 
