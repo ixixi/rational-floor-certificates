@@ -14,6 +14,14 @@ on:
       - slides/word-label-animation-en-narration.mp3
       - slides/word-label-animation-ja.html
       - slides/word-label-animation-ja-narration.mp3
+      - slides/frontier-animation-en.html
+      - slides/frontier-animation-en-narration.mp3
+      - slides/frontier-animation-ja.html
+      - slides/frontier-animation-ja-narration.mp3
+      - slides/verification-animation-en.html
+      - slides/verification-animation-en-narration.mp3
+      - slides/verification-animation-ja.html
+      - slides/verification-animation-ja-narration.mp3
       - site/**
       - .github/workflows/pages.yml
   workflow_dispatch:
@@ -62,6 +70,26 @@ jobs:
           cp slides/word-label-animation-ja.html _site/ja/word-label/index.html
           cp slides/word-label-animation-ja-narration.mp3 _site/ja/word-label/word-label-animation-ja-narration.mp3
           cp site/og-word-label-ja.png _site/ja/word-label/og.png
+          # the English animation of waiting times, limits and open problems lives under en/frontier/
+          mkdir -p _site/en/frontier
+          cp slides/frontier-animation-en.html _site/en/frontier/index.html
+          cp slides/frontier-animation-en-narration.mp3 _site/en/frontier/frontier-animation-en-narration.mp3
+          cp site/og-frontier-en.png _site/en/frontier/og.png
+          # the Japanese version of the same animation lives under ja/frontier/
+          mkdir -p _site/ja/frontier
+          cp slides/frontier-animation-ja.html _site/ja/frontier/index.html
+          cp slides/frontier-animation-ja-narration.mp3 _site/ja/frontier/frontier-animation-ja-narration.mp3
+          cp site/og-frontier-ja.png _site/ja/frontier/og.png
+          # the English animation of verification and Lean lives under en/verification/
+          mkdir -p _site/en/verification
+          cp slides/verification-animation-en.html _site/en/verification/index.html
+          cp slides/verification-animation-en-narration.mp3 _site/en/verification/verification-animation-en-narration.mp3
+          cp site/og-verification-en.png _site/en/verification/og.png
+          # the Japanese version of the same animation lives under ja/verification/
+          mkdir -p _site/ja/verification
+          cp slides/verification-animation-ja.html _site/ja/verification/index.html
+          cp slides/verification-animation-ja-narration.mp3 _site/ja/verification/verification-animation-ja-narration.mp3
+          cp site/og-verification-ja.png _site/ja/verification/og.png
           # icons shared by the whole site
           cp site/favicon.svg site/favicon.ico site/apple-touch-icon.png _site/
           # until the project page exists, the top page only points to the explainer
@@ -78,7 +106,7 @@ jobs:
           <meta http-equiv="refresh" content="0; url=ja/explainer/">
           </head>
           <body>
-          <p><a href="ja/explainer/">日本語の解説アニメーション</a> · <a href="ja/one-step/">1ステップ法（日本語アニメーション）</a> · <a href="en/one-step/">The one-step method (English animation)</a> · <a href="ja/word-label/">語ラベル法（日本語アニメーション）</a> · <a href="en/word-label/">The word-labelled method (English animation)</a> · <a href="https://github.com/ixixi/rational-floor-certificates">GitHub</a></p>
+          <p><a href="ja/explainer/">日本語の解説アニメーション</a> · <a href="ja/one-step/">1ステップ法（日本語アニメーション）</a> · <a href="en/one-step/">The one-step method (English animation)</a> · <a href="ja/word-label/">語ラベル法（日本語アニメーション）</a> · <a href="en/word-label/">The word-labelled method (English animation)</a> · <a href="ja/frontier/">待ち時間・限界・未解決問題（日本語アニメーション）</a> · <a href="en/frontier/">Waiting times, limits, and open problems (English animation)</a> · <a href="ja/verification/">検証と Lean（日本語アニメーション）</a> · <a href="en/verification/">Verification and Lean (English animation)</a> · <a href="https://github.com/ixixi/rational-floor-certificates">GitHub</a></p>
           </body>
           </html>
           HTML
