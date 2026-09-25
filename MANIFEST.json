@@ -127,14 +127,14 @@
       "sha256": "68ba764845bd3cce856514d5f2c3ed51caa195a74c24ea6ef3218618291ccaa7"
     },
     {
-      "bytes": 243230,
+      "bytes": 244325,
       "path": "site/index.html",
-      "sha256": "c2b985bfb6b1ca65e472e200cb7f456eeca6c4482f4ea9df3decfaf76ca71e62"
+      "sha256": "71b2b17bb1b95562dd5b2afd651c738d507994bac6a1f191c742b7e085397a72"
     },
     {
-      "bytes": 403167,
+      "bytes": 411499,
       "path": "site/ja/index.html",
-      "sha256": "9cc0467da8817500e6c4de2be283e15bb43d211e3f9d023b3fdadc79f874f94c"
+      "sha256": "307d3909673179168b3ce65cd46b4a478d4cbc06e3973f31ea3e3b11232a03e7"
     },
     {
       "bytes": 3912,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "cb191326d54798c8e577e7e6c822970868edb9c91acdeeafa9b43767c56b0b88"
+  "source_sha256": "69311a16d264bd8e340eb5699228311079801059f445a487f107229471104cfb"
 }
