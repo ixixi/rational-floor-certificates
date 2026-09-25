@@ -1750,6 +1750,7 @@ scene({
   beats: [
     ['似た問題は以前から研究されていて、比 $\\frac{3}{2}$, $\\frac{4}{3}$, $\\frac{5}{4}$ では同じ種類の結果が知られていました。', 8],
     ['$\\frac{7}{5}$ は「四捨五入」、$\\frac{5}{2}$ は「切り捨てて 1 を引く」形で知られていました。この論文は、\\b{切り捨てただけ}の数列で証明しました。', 10],
+    ['比が整数の $7$ の場合は、2026 年に Stephan が、この論文と近い方法で証明しています。', 9],
   ],
   draw(g, t, B) {
     const cols = [160, 400, 800, 1230];
@@ -1762,21 +1763,22 @@ scene({
       ['5/2', '$\\floor{x_n} - 1$', '$\\{2, 3, 5\\}$', 'Dubickas–Novikas', 1],
       ['7/5', '$\\floor{x_n}$', '$\\{2, 3, 5, 11, 13\\}$', 'この論文　定理1 (i)', 2],
       ['5/2', '$\\floor{x_n}$', '$\\{2, 3, 7, 11, …, 31\\}$', 'この論文　定理1 (ii)', 2],
+      ['7', '$\\floor{x_n}$', '決まった集合はない', '合成数：Stephan (2026)', 3],
     ];
     const ha = ep(t, 0.2, 0.5);
     head.forEach((h, k) => g.text(h, cols[k], 220, { size: 28, color: COL.ink3, weight: 700, alpha: ha }));
     g.line(130, 245, 1790, 245, { color: COL.faint, lw: 2, alpha: ha });
     rows.forEach((r, k) => {
-      const ts = r[4] === 2 ? B[1] + 1.2 + (k - 5) * 0.5 : r[4] === 1 ? B[1] + (k - 3) * 0.4 : 0.5 + k * 0.4;
+      const ts = r[4] === 3 ? B[2] + 0.3 : r[4] === 2 ? B[1] + 1.2 + (k - 5) * 0.5 : r[4] === 1 ? B[1] + (k - 3) * 0.4 : 0.5 + k * 0.4;
       const a = ep(t, ts, 0.5); if (a <= 0) return;
-      const y = 320 + k * 100;
+      const y = 310 + k * 88;
       g.save(a);
       if (r[4] === 2) g.box(130, y - 50, 1660, 88, { fill: rgba(COL.ok, 0.1), stroke: rgba(COL.ok, 0.8), lw: 2.5, r: 14 });
       const colr = r[4] === 2 ? COL.ink : COL.ink2;
-      g.rich(`$\\frac{${r[0].split('/')[0]}}{${r[0].split('/')[1]}}$`, cols[0] + 20, y + 12, { size: 38, align: 'c', color: colr });
+      g.rich(r[0].includes('/') ? `$\\frac{${r[0].split('/')[0]}}{${r[0].split('/')[1]}}$` : `$${r[0]}$`, cols[0] + 20, y + 12, { size: 38, align: 'c', color: colr });
       g.rich(r[1], cols[1], y + 10, { size: 32, color: r[4] === 1 ? COL.th : colr });
       g.rich(r[2], cols[2], y + 10, { size: 32, color: colr });
-      g.rich(r[3], cols[3], y + 10, { size: 29, color: r[4] === 2 ? COL.ok : COL.ink3, weight: r[4] === 2 ? 700 : 500 });
+      g.rich(r[3], cols[3], y + 10, { size: 29, color: r[4] === 2 ? COL.ok : r[4] === 3 ? COL.ink2 : COL.ink3, weight: r[4] === 2 ? 700 : 500 });
       g.restore();
     });
     const na = ep(t, B[1] + 0.5, 0.6);
@@ -2187,6 +2189,7 @@ scene({
     ['第2章の主役は、この性質です。\\b{補題4}：どんな $ξ > 0$ でも、繰り上がりの列は最終的に周期的になりません。', 8],
     ['つまり、どんな $N$ と $L \\ge 1$ をとっても、「$n \\ge N$ でいつも $c_{n+L} = c_n$」は成り立ちません。この性質は、あとで矛盾を導くときに何度も使います。', 10],
     ['ただし $b \\ge 2$ と、$a$ と $b$ が互いに素であることが必要です。$\\frac{7}{1}$ のような整数の比では、$ξ = 1$ のとき繰り上がりがずっと 0 になってしまいます。', 11],
+    ['補題4 そのものは、この論文で初めて示されたものではなく、数学者の Dubickas と Novikas による 2005 年の論文にすでにあります。この論文で新しいのは、これを第3章の有限グラフと組み合わせて、証明を有限の計算にする方法です。', 23],
   ],
   draw(g, t, B) {
     const a = ep(t, 0.2, 0.7);
@@ -2222,7 +2225,7 @@ scene({
       if (doneA > 0) g.rich('どのずらし方でも、どこかで食い違う', 960, y + 220, { size: 32, align: 'c', color: COL.bad, alpha: doneA * (1 - ep(t, B[2], 0.4)) });
     }
     // exception
-    const ea = ep(t, B[2] + 0.3, 0.6);
+    const ea = ep(t, B[2] + 0.3, 0.6) * (1 - ep(t, B[3], 0.5));
     if (ea > 0) {
       g.save(ea);
       g.box(160, 800, 1600, 220, { fill: rgba(COL.bad, 0.07), stroke: rgba(COL.bad, 0.6), lw: 2.5, r: 22 });
@@ -2230,6 +2233,15 @@ scene({
       g.rich('反例：比 $\\frac{7}{1}$、$ξ = 1$ では $x_n = 7^{n}$ が整数なので $θ_n = 0$、繰り上がりは', 200, 930, { size: 32 });
       tape(g, 330, 985, [0, 0, 0, 0, 0, 0, 0, 0], { s: 44, gap: 8, alphaOf: i => ep(t, B[2] + 1.0 + i * 0.1, 0.3) });
       g.text('… ずっと 0（周期的）', 760, 998, { size: 28, color: COL.ink2, alpha: ep(t, B[2] + 1.8, 0.4) });
+      g.restore();
+    }
+    // where the lemma comes from, and what is new
+    const oa = ep(t, B[3] + 0.3, 0.6);
+    if (oa > 0) {
+      g.save(oa);
+      g.box(160, 800, 1600, 220, { fill: rgba(COL.ok, 0.07), stroke: rgba(COL.ok, 0.6), lw: 2.5, r: 22 });
+      g.rich('補題4 の出典：Dubickas と Novikas（2005 年）', 200, 870, { size: 32, color: COL.ink2, weight: 700 });
+      g.rich('この論文で新しいこと：第3章の有限グラフと組み合わせて、証明を有限の計算にする方法', 200, 950, { size: 32, color: COL.ok, alpha: ep(t, B[3] + 12.9, 0.6) });   // with 「この論文で新しいのは」 (13.1 s into the beat)
       g.restore();
     }
   },
@@ -4247,6 +4259,8 @@ scene({
 /* ---- narration.js ---- */
 /* narration lengths (s) per caption, measured from the Gemini TTS clips */
 const NARR_DUR = {
+"比が整数の $7$ の場合は、2026 年に Stephan が、この論文と近い方法で証明しています。": 8.82,
+"補題4 そのものは、この論文で初めて示されたものではなく、数学者の Dubickas と Novikas による 2005 年の論文にすでにあります。この論文で新しいのは、これを第3章の有限グラフと組み合わせて、証明を有限の計算にする方法です。": 22.54,
 "ある数に $\\frac{7}{5}$ を掛けては、小数点以下を切り捨てる。これをくり返すと、整数の列ができます。": 7.71,
 "この列の中に、素数ではない数（\\c{hit}{合成数}）は、無限にたくさん現れるのでしょうか？": 6.66,
 "この動画では、論文がこの問いに答えた方法を、高校数学の言葉で順番に見ていきます。": 6.37,
