@@ -127,14 +127,14 @@
       "sha256": "68ba764845bd3cce856514d5f2c3ed51caa195a74c24ea6ef3218618291ccaa7"
     },
     {
-      "bytes": 241020,
+      "bytes": 241304,
       "path": "site/index.html",
-      "sha256": "53ab32af33e35072c25ef598c76e3692c9e1f22c88b4beaa25c6fa096b8b9d34"
+      "sha256": "bd7ce3b4db117db7b5b9de3a69cb9d100eddc2dc250b59b6baf33c3805f00115"
     },
     {
-      "bytes": 401928,
+      "bytes": 402237,
       "path": "site/ja/index.html",
-      "sha256": "6f2656bdcb89bbf00bf9cbbfc2e3dabcd78dc7010364c747a2430ac2fb908e5b"
+      "sha256": "8b03f47cc78bf1106d442c330b8a354157762fbf71c407eec304fb5ea4795838"
     },
     {
       "bytes": 3912,
@@ -197,24 +197,24 @@
       "sha256": "e060f9645b25da1ff3a0a794ac39255cfafc4d2099aea34a82f08e983b471d4d"
     },
     {
-      "bytes": 9151056,
+      "bytes": 9185184,
       "path": "slides/frontier-animation-en-narration.mp3",
-      "sha256": "64811811c2dd9dd118bd9af525f130114fe014858703b7676096322b8a8234d5"
+      "sha256": "b20c44b0ab9a777cbc7ce081bcc6382ad4f26b08fa747fcb8caa06b8e76f8307"
     },
     {
-      "bytes": 606473,
+      "bytes": 607164,
       "path": "slides/frontier-animation-en.html",
-      "sha256": "464df16f1b5315138ec8d272bbfab895512aa8ca64a4af0d2305276c7eb4715f"
+      "sha256": "8bd082390180163efc7da2e60ade7238c7fcc416de7ecc07064639a5466c692e"
     },
     {
-      "bytes": 11441088,
+      "bytes": 11471328,
       "path": "slides/frontier-animation-ja-narration.mp3",
-      "sha256": "c5a9eb4437c111da88f1cb1b47f45f59c0042748afd758e933c037a60bd91223"
+      "sha256": "7e460a4cf5ca3570760d7428526c167ec8472dbb11a575261e6eea31710b59af"
     },
     {
-      "bytes": 1184344,
+      "bytes": 1185101,
       "path": "slides/frontier-animation-ja.html",
-      "sha256": "575c61b706314b402a7fd3719a1909747e7e856e98f8f8fa9a6559532b812611"
+      "sha256": "ac1265fd7729448c153b188fcd6f72395a1e35b6faa90ce373429808a010f4cd"
     },
     {
       "bytes": 7330176,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "134fe3ae08a0759166b9785c3581db1b09983ccf19bd92b1c4fcbbb2e9dd0057"
+  "source_sha256": "1001dea1ea8aaa9277da05c91b9f4cbdb196f2f0b382e66b00990c09f2efb712"
 }
