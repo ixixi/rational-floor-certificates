@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: "Odagiri"
     given-names: "Yuri"
-version: "1.0.0"
-date-released: "2026-09-22"
+version: "2.1.0"
+date-released: "2026-09-25"
 repository-code: "https://github.com/ixixi/rational-floor-certificates"
 url: "https://github.com/ixixi/rational-floor-certificates"
 
@@ -17,6 +17,6 @@ preferred-citation:
       given-names: "Yuri"
   title: "Finite graph certificates for composite terms in rational floor sequences"
   year: 2026
-  doi: "10.5281/zenodo.22887589"
+  doi: "10.5281/zenodo.22962354"
   publisher:
     name: "Zenodo"

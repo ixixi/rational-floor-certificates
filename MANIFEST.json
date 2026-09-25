@@ -1,5 +1,5 @@
 {
-  "doi": "10.5281/zenodo.22887589",
+  "doi": "10.5281/zenodo.22962354",
   "files": [
     {
       "bytes": 37,
@@ -19,7 +19,7 @@
     {
       "bytes": 761,
       "path": "CITATION.cff",
-      "sha256": "6bb1eb87d9dfa1775abe33cbfeb682328b2cea98b63e3827995cb14dc60faaab"
+      "sha256": "945e4fdf129d84fc99b69e5d74b7b89e41a3944b6678fd501654984c6dfbaacf"
     },
     {
       "bytes": 1500,
@@ -34,7 +34,7 @@
     {
       "bytes": 15985,
       "path": "README.md",
-      "sha256": "16f4756a02fc08d44fa6cf2b7b9772b11fbe2a014d13811f65aaf2cdaa604a18"
+      "sha256": "e9c3a6a4865398c4e737865c1a99a0a6af2f343ea2259db7bbecc8ee1f792027"
     },
     {
       "bytes": 9387,
@@ -67,14 +67,14 @@
       "sha256": "46768b4a18361c00226584a7eb1640641410b4c88c4acc04cd642e9838da50a1"
     },
     {
-      "bytes": 904306,
+      "bytes": 904767,
       "path": "paper-en.pdf",
-      "sha256": "66b781b67f12047fd7187eb23cac7dcf9ffbb5aedcfb1f2a9dd18868ad1a60ca"
+      "sha256": "3c8fe5e1c111fe6f4e36a2a347450091007fa90ae92ef471900a115e536f9e4b"
     },
     {
-      "bytes": 1176542,
+      "bytes": 1176809,
       "path": "paper-ja.pdf",
-      "sha256": "b4da75abca2c446220fcd86b4f32ae0a22fa7a69efd37767e93369e6b156a8d7"
+      "sha256": "4e200c00900b171e7d4354361595cf890fff8a663bb2608a868c477185d8f7e8"
     },
     {
       "bytes": 6011,
@@ -129,12 +129,12 @@
     {
       "bytes": 255655,
       "path": "site/index.html",
-      "sha256": "b090ee74ba1899441acc37d32816b51722cfae1f8504f1d41db64bdac1c88403"
+      "sha256": "7bb3d7713775774b7f56ce4bed9b7e2bbece1ebfe82ca878ee44ae8aced1248b"
     },
     {
       "bytes": 424107,
       "path": "site/ja/index.html",
-      "sha256": "656eb6ed6a46307e5590354cc222b61866493be08e4973660a8613a0bc04652e"
+      "sha256": "baf382cd0abdabd984fe99aa29d7a3d7c8b64fa32e52482dbe2c135ce0861f38"
     },
     {
       "bytes": 3912,
@@ -204,7 +204,7 @@
     {
       "bytes": 618210,
       "path": "slides/frontier-animation-en.html",
-      "sha256": "b34709e24a3083f06bfb3479fb7d9ac7d86090978df389642443e218c9d988bb"
+      "sha256": "bb64b8d53b64fee46da3d41924d2e897120ca90304a35b7546a36253fb626bbf"
     },
     {
       "bytes": 11671200,
@@ -214,7 +214,7 @@
     {
       "bytes": 1205099,
       "path": "slides/frontier-animation-ja.html",
-      "sha256": "033d63818b846b64c7a26a2da2a38d79ce1a2e4e86629f431eec1a2c108140b5"
+      "sha256": "bdde035d55a5c980cb89a0041db5e422fa1c2e92f7d8c7ced4ca4efe3156024a"
     },
     {
       "bytes": 8168688,
@@ -222,9 +222,9 @@
       "sha256": "050f3fa9cda30b45351ae6f37bcebe61a0c2ea56b28ea84c02fda42ccccd5d3f"
     },
     {
-      "bytes": 470625,
+      "bytes": 470621,
       "path": "slides/one-step-animation-en.html",
-      "sha256": "cae510849db60d6ee733a36b647181cce4ab0870ee268c0b928fafdb4970507a"
+      "sha256": "1136f4dbb2438b27b6c8e0a0a4e0931d554d24d418c7e601754f424539285b13"
     },
     {
       "bytes": 9975312,
@@ -232,9 +232,9 @@
       "sha256": "6ad56ae454478d110b038525bfd38eb125dfc4dc0817649737a8f5d3e6875d25"
     },
     {
-      "bytes": 945110,
+      "bytes": 945106,
       "path": "slides/one-step-animation-ja.html",
-      "sha256": "4e4052bed86e8e52fccc89d3daa12ecd431fb171673c2a1f8d9fba9da7f94cd6"
+      "sha256": "76b1f97375638dd10ca6c8f8bda5d0e813f80763c5c67d7dd80b61d1364f0d66"
     },
     {
       "bytes": 14551562,
@@ -244,12 +244,12 @@
     {
       "bytes": 340738,
       "path": "slides/paper-animation-ja.html",
-      "sha256": "3353397f2d8fd3f21be1f6bf120625ee8cb0fa05f54b3a677c18d641a7f44407"
+      "sha256": "b3d018aee099fae822b8bfd8b7c5c1a587e6b766fd53cbf4ffad8a464b7b5a09"
     },
     {
-      "bytes": 13224966,
+      "bytes": 13224967,
       "path": "slides/paper-explained-ja.pptx",
-      "sha256": "9ac465e43646b1ab7cc6da454545848bed26414a67c60602a78e737713012901"
+      "sha256": "e42b8a5c44f2d160c99ce5e5f488ef5ad51bf65b04785cff42dfb1a13403c2e5"
     },
     {
       "bytes": 5269104,
@@ -257,9 +257,9 @@
       "sha256": "4e16b068384889cf4139b33c81a4f9f2f71d60c68dbb1fd55f43bf29dcaf1685"
     },
     {
-      "bytes": 553590,
+      "bytes": 553665,
       "path": "slides/verification-animation-en.html",
-      "sha256": "fe70059ba5aa2edf4e0b93ccba5d33061b6a3d108a9a2d8ad197021f4efa7867"
+      "sha256": "0cee2db4bc968eea1f8adb180fee799a0029810307fd1c2587380b873222bea3"
     },
     {
       "bytes": 6659136,
@@ -269,7 +269,7 @@
     {
       "bytes": 1228790,
       "path": "slides/verification-animation-ja.html",
-      "sha256": "9e3caf4710ced1743793f2120a4fa3c74c2351296b99af8d7db1258b911c9ac0"
+      "sha256": "37c8dd7ca9beec2a3154fc94b1033835e8f62451f80cec972bdb0a07c417d92e"
     },
     {
       "bytes": 8499888,
@@ -277,9 +277,9 @@
       "sha256": "f6aa3d29b622159865b3f0cede1cbf4b0806d11f045e608397287405aa97a28a"
     },
     {
-      "bytes": 550115,
+      "bytes": 550113,
       "path": "slides/word-label-animation-en.html",
-      "sha256": "391f3b0be8015e25e6959046ec1b533bbe4216c7c686aa5655ce0fc19a4eb185"
+      "sha256": "179c6ffd4cc8202d800c09371632fc1afe87f7abc979a899a1830058a6b6c694"
     },
     {
       "bytes": 10535904,
@@ -287,9 +287,9 @@
       "sha256": "419170fb52370e48bf42996c6ec4d95b84a0f1d520ea3c33bffde6e07b878467"
     },
     {
-      "bytes": 1007345,
+      "bytes": 1007343,
       "path": "slides/word-label-animation-ja.html",
-      "sha256": "af68be589f7594b25093dbd9add466e084cfb768549c5848deff69a16cb73e70"
+      "sha256": "84b5f080defe9c694108acd9ceb3d83462788f87be8b9b5178451be38a89452c"
     },
     {
       "bytes": 4190,
@@ -409,12 +409,12 @@
     {
       "bytes": 312954,
       "path": "sources/paper-ja.tex",
-      "sha256": "3e370e8d61ef4d8b600f6c64b951efc1867cb8e4bdee27f7859ac33a4898ec92"
+      "sha256": "c2cb0adb46cff3bfd2f6b853190697aabac4a5a32dfffd93b1ce8886b752875a"
     },
     {
       "bytes": 266179,
       "path": "sources/paper.tex",
-      "sha256": "c79e68a9eb854fdf8d35723816d8f39c0f39706b2eae9d55e5764abf59fd8bfe"
+      "sha256": "171fbdf0852d97dd5a6b04c7831cc537dfac5a739647824dcf8619375721d9fd"
     },
     {
       "bytes": 5790,
@@ -1259,7 +1259,7 @@
     {
       "bytes": 209423,
       "path": "supplement/manuscript/paper.md",
-      "sha256": "08808ecbe0ef0c2dd772e823f01e532b52e0b4aa8da2eac4ca6e97793ef110f8"
+      "sha256": "82dce1a678481f6e5b3d6af8a84223e26bd32c796dabe3c9c91b2689a142e27e"
     },
     {
       "bytes": 8046,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "4813ff976461e9e607fbbcaad0b3e6e7f47e49a8ea0938c3b98d7b5d117b5952"
+  "source_sha256": "3e77845de248e4d27b033d1df93ce6ec7bce7ee422e0d3966141b8f3d2d8e659"
 }

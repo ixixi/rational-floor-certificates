@@ -10,7 +10,7 @@
 
 ## English
 
-DOI (Zenodo): [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.22887589).
+DOI (Zenodo): [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.22962354).
 
 This repository contains the paper, its computation programs, and its Lean
 formalization. For every real number ξ > 0, the paper proves that each sequence
@@ -75,7 +75,7 @@ Repository: [ixixi/rational-floor-certificates](https://github.com/ixixi/rationa
 
 **有理数を底とする床関数列の合成数項に対する有限グラフ証明書**
 
-DOI（Zenodo）: [10.5281/zenodo.22887589](https://doi.org/10.5281/zenodo.22887589)。
+DOI（Zenodo）: [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.22962354)。
 
 このリポジトリには、論文、計算プログラム、Lean による形式証明を収録しています。
 論文では、任意の実数 ξ > 0 に対し、二つの数列 ⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ が
