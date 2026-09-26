@@ -533,7 +533,8 @@ class G {
     c.closePath(); c.fill();
     return { mid: B(0.5), B };
   }
-  /** curly brace spanning (x0,y0)->(x1,y1); the tip points to the right of the direction of travel */
+  /** curly brace spanning (x0,y0)->(x1,y1); the tip points to the right of the direction of travel
+   *  (drawn left to right it points down, bottom to top it points right), and the ends curl the other way */
   brace(x0, y0, x1, y1, o = {}) {
     const a = this._a(o); const p = o.p ?? 1; if (a <= 0.003 || p <= 0) return;
     const L = Math.hypot(x1 - x0, y1 - y0); if (L < 2) return;
@@ -1451,9 +1452,9 @@ scene({
     if (ba > 0) {
       const T3 = TX(E3);
       const Lb = texBox(T3, P.x, P.y, P, ['a', 'c']), Rb = texBox(T3, P.x, P.y, P, ['b', 'd']);
-      g.brace(Lb.x1, Lb.y1 + 24, Lb.x0, Lb.y1 + 24, { p: sp(t, B[4] + 0.2, 0.8), alpha: ba, color: C.Q });
+      g.brace(Lb.x0, Lb.y1 + 24, Lb.x1, Lb.y1 + 24, { p: sp(t, B[4] + 0.2, 0.8), alpha: ba, color: C.Q });
       g.tex(txt('a whole number', '整数'), Lb.cx, Lb.y1 + 110, { size: 44, color: C.Q, alpha: ba * sp(t, B[4] + 0.6, 0.6) });
-      g.brace(Rb.x1, Rb.y1 + 24, Rb.x0, Rb.y1 + 24, { p: sp(t, S.at(4, JA ? '右辺も' : 'so the right'), 0.8), alpha: ba, color: C.T });
+      g.brace(Rb.x0, Rb.y1 + 24, Rb.x1, Rb.y1 + 24, { p: sp(t, S.at(4, JA ? '右辺も' : 'so the right'), 0.8), alpha: ba, color: C.T });
       g.tex(txt('so this is too', 'だから、これも整数'), Rb.cx, Rb.y1 + 110, { size: 44, color: C.T, alpha: ba * sp(t, S.at(4, JA ? '右辺も' : 'so the right') + 0.3, 0.6) });
     }
     const na = sp(t, k4 + 0.7, 0.8) * (1 - sp(t, B[5], 0.6));
