@@ -531,7 +531,8 @@ class G {
     c.closePath(); c.fill();
     return { mid: B(0.5), B };
   }
-  /** curly brace spanning (x0,y0)->(x1,y1); the tip points to the right of the direction of travel */
+  /** curly brace spanning (x0,y0)->(x1,y1); the tip points to the right of the direction of travel
+   *  (drawn left to right it points down, bottom to top it points right), and the ends curl the other way */
   brace(x0, y0, x1, y1, o = {}) {
     const a = this._a(o); const p = o.p ?? 1; if (a <= 0.003 || p <= 0) return;
     const L = Math.hypot(x1 - x0, y1 - y0); if (L < 2) return;
@@ -937,7 +938,7 @@ function card(g, x, y, w, h, o = {}) {
 /** a horizontal bracket under [x0, x1] with a label */
 function underBrace(g, x0, x1, y, label, o = {}) {
   const a = o.alpha ?? 1; if (a <= 0.003) return;
-  g.brace(x1, y, x0, y, { color: o.color || C.greyA, alpha: a, p: o.p ?? 1, depth: o.depth });
+  g.brace(x0, y, x1, y, { color: o.color || C.greyA, alpha: a, p: o.p ?? 1, depth: o.depth });
   if (label) g.tex(label, (x0 + x1) / 2, y + (o.dy ?? 62), { size: o.size || 40, color: o.labelColor || o.color || C.greyA, alpha: a * (o.labelA ?? 1) });
 }
 
@@ -1254,7 +1255,7 @@ scene({
       });
       const ha = g5 * sp(t, S.at(5, JA ? 'さんの倍数' : 'multiple'), 0.6);
       g.tex('3 \\mid 705{,}413{,}991', x0 + 330, y0 + 13 * rh, { size: 30, color: C.P, align: 'l', alpha: ha });
-      g.brace(x0 + 300, y0 - 16, x0 + 300, y0 + 12 * rh + 16, { color: C.Q, alpha: g5 * sp(t, run + 12 * per, 0.5), depth: 18 });
+      g.brace(x0 + 300, y0 + 12 * rh + 16, x0 + 300, y0 - 16, { color: C.Q, alpha: g5 * sp(t, run + 12 * per, 0.5), depth: 18 });
       g.tex(JA ? '@j $13$ 項すべて $4290$ と互いに素' : '13 \\text{ terms coprime to } 4290', x0 + 340, y0 + 6 * rh, { size: 30, color: C.Q, align: 'l', alpha: g5 * sp(t, run + 12 * per + 0.2, 0.5) });
       // histogram of the worst waits (log scale)
       const hx0 = 1060, hx1 = 1760, hy0 = 950, hH = 420;
@@ -1330,7 +1331,7 @@ scene({
       const xs = vals.map((v, i) => 300 + i * 190);
       vals.forEach((v, i) => g.tex(`\\cQ{${v}}`, xs[i], 520, { size: 56, alpha: fa * (i >= 3 ? 1 : 0.5) }));
       g.tex(JA ? '@j $N \\le n \\le N + 428 + 12\\,L(Q_N)$ に合成数' : '\\text{a composite } Q_n \\text{ with } N \\le n \\le N + 428 + 12\\,L(Q_N)', 960, 700, { size: 48, color: C.T, alpha: fa * sp(t, S.at(4, JA ? '歩以内' : 'comes within'), 0.6) });
-      g.brace(xs[6] + 40, 580, xs[3] - 40, 580, { color: C.T, alpha: fa * sp(t, S.at(4, JA ? '歩以内' : 'comes within'), 0.6), p: sp(t, S.at(4, JA ? '歩以内' : 'comes within'), 0.8) });
+      g.brace(xs[3] - 40, 580, xs[6] + 40, 580, { color: C.T, alpha: fa * sp(t, S.at(4, JA ? '歩以内' : 'comes within'), 0.6), p: sp(t, S.at(4, JA ? '歩以内' : 'comes within'), 0.8) });
       g.tex(JA ? '@j 間隔は項の対数程度まで' : '\\text{gaps grow at most like } \\log Q_N', 960, 830, { size: 44, color: C.greyA, alpha: fa * sp(t, S.at(4, JA ? '間隔' : 'the gaps'), 0.6) });
     }
   },
@@ -1404,7 +1405,7 @@ scene({
       const gt = i => S.at(3, JA ? ['ろっぴゃく', 'はっぴゃく', 'せんにひゃく', 'せんななひゃく', 'にせんよんひゃくいち。'][i] : ['six twenty-five,', 'eight seventy-five', 'twelve twenty-five', 'seventeen fifteen', 'twenty-four oh one.'][i]);
       gaps.forEach((v, i) => {
         const x = (xs[i] + xs[i + 1]) / 2, ai = ea * sp(t, gt(i) - 0.1, 0.4);
-        g.brace(xs[i + 1] - 10, y + 50, xs[i] + 10, y + 50, { color: C.greyC, alpha: ai * 0.8, depth: 16 });
+        g.brace(xs[i] + 10, y + 50, xs[i + 1] - 10, y + 50, { color: C.greyC, alpha: ai * 0.8, depth: 16 });
         g.num(String(v), x, y + 120, { size: 50, color: C.greyA, alpha: ai });
         const fa = ea * sp(t, S.at(3, JA ? '一歩ごと' : 'Each step') + i * 0.35, 0.5);
         g.tex(fac[i], x, y + 200, { size: 44, color: C.T, alpha: fa });
@@ -1439,7 +1440,7 @@ scene({
       g.tex('\\cC{c_n}', 150, y - 80, { size: 44, alpha: rh });
       g.tex('\\cQ{Q_n}', 150, y, { size: 44, alpha: rh });
       const da = rh * sp(t, S.at(6, JA ? '最初の差' : 'first gap'), 0.6);
-      g.brace(xs[1] - 10, y + 40, xs[0] + 10, y + 40, { color: C.greyC, alpha: da, depth: 16 });
+      g.brace(xs[0] + 10, y + 40, xs[1] - 10, y + 40, { color: C.greyC, alpha: da, depth: 16 });
       g.tex('D_0 = 3{,}555{,}000 = \\cT{5^4} \\cdot 5688', 960, 620, { size: 60, alpha: da });
       g.tex(JA ? '@j $5688$ は $5$ で割り切れない $\\;\\Rightarrow\\;$ 同じ繰り上がりは $5$ 歩まで' : '5 \\nmid 5688 \\;\\Rightarrow\\; \\text{at most five equal carries}', 960, 760, { size: 46, color: C.T, alpha: rh * sp(t, S.at(6, JA ? 'ご歩たつと' : 'The fives run out'), 0.6) });
       const x5 = (xs[5] + xs[6]) / 2;
@@ -2180,7 +2181,7 @@ scene({
       }
       // highlight the longest runs (pairs)
       const ra = ja * sp(t, S.at(2, JA ? 'みっつ以上' : 'never come'), 0.6);
-      for (const [a0, a1] of [[5, 6], [9, 10], [20, 21], [24, 25]]) { const xa = x0 + (a0 - 1) * dx, xb = x0 + (a1 - 1) * dx; g.brace(xb + 24, y + 40, xa - 24, y + 40, { color: C.T, alpha: ra, depth: 14 }); }
+      for (const [a0, a1] of [[5, 6], [9, 10], [20, 21], [24, 25]]) { const xa = x0 + (a0 - 1) * dx, xb = x0 + (a1 - 1) * dx; g.brace(xa - 24, y + 40, xb + 24, y + 40, { color: C.T, alpha: ra, depth: 14 }); }
       g.tex(JA ? '@j $3$ の倍数か $5$ の倍数は、多くても $2$ 個しか続かない $\\;\\Rightarrow\\; J(15) = 3$' : '\\text{multiples of } 3 \\text{ or } 5: \\text{ at most two in a row} \\;\\Rightarrow\\; J(15) = 3', 960, 640, { size: 42, color: C.T, alpha: ra });
     }
     // the budget
