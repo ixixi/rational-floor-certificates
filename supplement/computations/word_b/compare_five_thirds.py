@@ -19,6 +19,7 @@ vertex, edge, letter and maximum-word-length counts in the two JSON records must
 With --elementwise the two canonical texts are also compared byte for byte (element by element).
 """
 import argparse, filecmp, json, os, subprocess, sys
+from concurrent.futures import ThreadPoolExecutor
 
 
 def canon(binary, path, text_out=None):
@@ -41,6 +42,7 @@ def main():
     ap.add_argument("--a-json", required=True)
     ap.add_argument("--stages", type=int, required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--jobs", type=int, default=2, help="canonicalisations run in parallel (default 2)")
     ap.add_argument("--elementwise", metavar="DIR",
                     help="also write both canonical texts to DIR, compare them byte for byte, then delete them")
     args = ap.parse_args()
@@ -80,7 +82,10 @@ def main():
                 os.makedirs(args.elementwise, exist_ok=True)
                 tb = os.path.join(args.elementwise, f"B_{k}_{side}.canon")
                 ta = os.path.join(args.elementwise, f"A_{k}_{side}.canon")
-            cb, ca = canon(args.canon, bpath, tb), canon(args.canon, apath, ta)
+            with ThreadPoolExecutor(max_workers=max(1, min(2, args.jobs))) as pool:
+                fb = pool.submit(canon, args.canon, bpath, tb)
+                fa = pool.submit(canon, args.canon, apath, ta)
+                cb, ca = fb.result(), fa.result()
             same = all(cb[f] == ca[f] for f in ("vertices", "edges", "letters", "max_word_length", "D", "sha256"))
             row[side] = {"B": cb, "A": ca, "equal": same}
             if args.elementwise:

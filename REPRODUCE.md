@@ -21,8 +21,10 @@ standard library. PDF rebuilding additionally uses the locked `pdf` extra.
 Lean has a separate pinned toolchain and checking procedure in
 [FORMALIZATION.md](supplement/FORMALIZATION.md).
 
-The finite runner enforces limits of 600 seconds per command, 1800 seconds
-overall, and 8 GiB of memory.
+The finite runner enforces limits of 600 seconds per command and 8 GiB of
+memory, and an overall limit of 1800 seconds for `check` and 3600 seconds for
+`recompute`. The full run includes the 5/3 computation and writes about 10 GB
+of graph data to the output directory.
 
 ### Verify the downloaded files
 
@@ -40,8 +42,9 @@ python3 -B reproduce.py check --output /tmp/floor-paper-check
 ```
 
 This runs unit checks, selected small examples and comparisons, the 7/5 word
-case, and selected appendix checks. It does not run the full 5/2 word chain
-or all appendix computations. Use it to check the environment before the
+case, the first five stages of the 5/3 computation with their comparisons,
+the 5/3 obstruction check, and selected appendix checks. It does not run the
+full 5/2 or 5/3 word chains or all appendix computations. Use it to check the environment before the
 complete reproduction.
 
 ### Recompute all finite results
@@ -56,6 +59,10 @@ new outputs element by element, and checks the fixed reference digests in
 under `supplement/computations/`. Large graph outputs and execution logs are
 created in the specified output directory. The scope and comparison
 principles are described in [COMPUTATION.md](supplement/COMPUTATION.md).
+For 5/3 it runs implementation B and the supplied producer through all ten
+stages, compares all 20 stage graphs, checks that both final output graphs are
+empty, and checks the obstruction for the primes up to 23; the outcome is
+recorded under `five_thirds` in `finite/receipt.json` and `record.json`.
 
 Read `record.json` in the output directory for the overall result and
 `finite/receipt.json` for the finite runner's result. The overall status is
@@ -127,7 +134,9 @@ Docker 構築手順、前提の診断方法を収録しています。有限計�
 Lean のツールチェーンと検査手順は
 [FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) に記載しています。
 
-有限計算の実行上限は、コマンドごとに 600 秒、全体で 1800 秒、メモリは 8 GiB です。
+有限計算の実行上限は、コマンドごとに 600 秒、メモリは 8 GiB、全体では `check` が 1800 秒、
+`recompute` が 3600 秒です。完全な実行には 5/3 の計算が含まれ、出力ディレクトリに約 10 GB の
+グラフデータを書き出します。
 
 ### 取得したファイルを照合する
 
@@ -144,8 +153,9 @@ python3 -B reproduce.py verify
 python3 -B reproduce.py check --output /tmp/floor-paper-check
 ```
 
-単体検査、選択した小例と比較、7/5 の語の事例、および付録の一部の検査を実行します。
-5/2 の語の全段階や、付録の全計算は実行しません。完全な再現の前に、環境を
+単体検査、選択した小例と比較、7/5 の語の事例、5/3 の計算の最初の5段階とその照合、
+5/3 の障害の検査、および付録の一部の検査を実行します。
+5/2 と 5/3 の語の全段階や、付録の全計算は実行しません。完全な再現の前に、環境を
 確認するためのコマンドです。
 
 ### 有限計算全体を再実行する
@@ -159,6 +169,9 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full
 計算ソースは `supplement/computations/` にあります。大きなグラフ出力と実行ログは、
 指定した出力ディレクトリに生成します。対象範囲と比較の考え方は
 [COMPUTATION.md](supplement/COMPUTATION.md#japanese) に記載しています。
+5/3 については、実装 B と同梱の生成プログラムで全10段を計算し、全20個の段階グラフを照合し、
+両方の最後の出力グラフが空であることと、23 以下の素数に対する障害を検査します。結果は
+`finite/receipt.json` と `record.json` の `five_thirds` に記録します。
 
 全体の結果は出力ディレクトリの `record.json`、有限計算の実行結果は
 `finite/receipt.json` で確認できます。全体の状態は `PASS`、`FAIL`、`inconclusive`

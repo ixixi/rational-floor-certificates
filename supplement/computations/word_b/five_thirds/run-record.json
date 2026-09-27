@@ -66,5 +66,6 @@
  "provenance": {
   "clean_room": "The in-direction (two-direction) extension of wgb.cpp was written from the lemma 'Two-direction exact contraction' and the iteration rule in the handoff manuscript (manuscript/addition_body.tex), without opening certificate53.cpp, audit_basic.hpp or reference53.py. Those files were only compiled and executed as black boxes until the comparison was complete. The dump format was read from the handoff README/PROOF_JA.md and the recorded small dumps, and the producer's invocation from its driver reproduce.py and handoff.py.",
   "authors": "wgb.cpp was written earlier by a different programmer from the mathematical specification; the --bidir, --no-graphs and --count-next-lift options, canon_wordgraph.cpp and compare_five_thirds.py were added in a separate AI-assisted session (Claude Code). The producer and its checker were written in another AI session (the handoff)."
- }
+ },
+ "sources_sha256_note": "SHA-256 values of the sources used for the recorded runs. compare_five_thirds.py was afterwards given the --jobs option (two canonicalisations in parallel) for the reproduction entry point; its comparison logic is unchanged."
 }
