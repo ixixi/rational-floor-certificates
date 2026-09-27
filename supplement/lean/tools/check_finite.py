@@ -11,6 +11,9 @@ import time
 ROOT=Path(__file__).resolve().parents[2]
 LIMIT_SECONDS=1200
 LIMIT_RSS=8*1024**3
+# Separate limits, set from measurement, for the 5/3 module whose native
+# evaluation is much larger than the other finite checks (see FORMALIZATION.md).
+MODULE_LIMITS={'MathPaper.Word.FiveThirds':(3600, 32*1024**3)}
 PAGE_SIZE=os.sysconf('SC_PAGE_SIZE')
 
 def group_rss(group):
@@ -38,12 +41,13 @@ results=[]
 for module in modules:
     log=ROOT/f'build/lean-finite-{run_id}-{module.rsplit(".",1)[-1]}.log'
     start=time.monotonic();peak=0;reason='exit'
+    limit_seconds,limit_rss=MODULE_LIMITS.get(module,(LIMIT_SECONDS,LIMIT_RSS))
     with log.open('w') as stream:
         proc=subprocess.Popen(['lake','build',module],cwd=ROOT/'lean',stdout=stream,stderr=subprocess.STDOUT,start_new_session=True)
         while proc.poll() is None:
             rss=group_rss(proc.pid);peak=max(peak,rss)
-            if rss > LIMIT_RSS or time.monotonic()-start > LIMIT_SECONDS:
-                reason='rss_limit' if rss>LIMIT_RSS else 'time_limit'
+            if rss > limit_rss or time.monotonic()-start > limit_seconds:
+                reason='rss_limit' if rss>limit_rss else 'time_limit'
                 os.killpg(proc.pid,signal.SIGTERM)
                 try: proc.wait(timeout=5)
                 except subprocess.TimeoutExpired:
@@ -51,7 +55,8 @@ for module in modules:
                 break
             time.sleep(0.25)
     row={'module':module,'returncode':proc.returncode,'reason':reason,
-         'seconds':round(time.monotonic()-start,3),'peak_group_rss_bytes':peak,'log':str(log.relative_to(ROOT))}
+         'seconds':round(time.monotonic()-start,3),'peak_group_rss_bytes':peak,'log':str(log.relative_to(ROOT)),
+         'limits':{'seconds':limit_seconds,'group_rss_bytes':limit_rss}}
     results.append(row)
     (ROOT/f'build/lean-finite-run-{run_id}.json').write_text(json.dumps({'limits':{'seconds_per_module':LIMIT_SECONDS,'group_rss_bytes':LIMIT_RSS},'results':results},indent=2)+'\n')
     print(json.dumps(row),flush=True)
