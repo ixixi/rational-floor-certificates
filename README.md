@@ -33,7 +33,7 @@ scope and limitations of the certificate method.
 | Figure sources and regeneration | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md) |
 | Finite computations | [supplement/COMPUTATION.md](supplement/COMPUTATION.md) |
 | Lean scope and checking instructions | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md) |
-| 5/3 computation: supplied producer and checker, implementation B records, obstruction for the primes up to 23 | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
+| 5/3 computation: producer with embedded checker, implementation B records, obstruction for the primes up to 23 | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
 | Exploratory records of the 5/3 addition (not used by the theorems) | [supplement/computations/exploratory](supplement/computations/exploratory/) |
 | Japanese explanatory slides for readers with high-school mathematics (PowerPoint, 99 slides) | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 | Japanese animated explainer of chapters 1–3 of the slides (HTML with JavaScript; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/ja/explainer/) |
@@ -47,8 +47,8 @@ scope and limitations of the certificate method.
 | Japanese version of the same animation (HTML with JavaScript, about 20 minutes; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/verification-animation-ja.html](slides/verification-animation-ja.html) · [slides/verification-animation-ja-narration.mp3](slides/verification-animation-ja-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/ja/verification/) |
 
 The complete finite reproduction runs two implementations and compares their
-newly generated data element by element; for 5/3 these are the supplied producer
-with its embedded checker and a separately written extension of implementation B. The small reference file
+newly generated data element by element; for 5/3 these are the producer
+with its embedded checker, which first computed the certificate, and a separately written extension of implementation B. The small reference file
 [checks/reference.json](checks/reference.json) supplies fixed comparison
 criteria; large execution outputs are generated locally. The `check` command
 is a preflight, while `recompute` runs the full finite reproduction. See
@@ -103,7 +103,7 @@ DOI（Zenodo）: [10.5281/zenodo.22995171](https://doi.org/10.5281/zenodo.229951
 | 図のソースと再生成 | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md#japanese) |
 | 有限計算 | [supplement/COMPUTATION.md](supplement/COMPUTATION.md#japanese) |
 | Lean の形式化範囲と検査手順 | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) |
-| 5/3 の計算（同梱の生成プログラムと検査器、実装 B の記録、23 以下の素数に対する障害） | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
+| 5/3 の計算（検査器を組み込んだ生成プログラム、実装 B の記録、23 以下の素数に対する障害） | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
 | 5/3 の追加の探索記録（定理には用いない） | [supplement/computations/exploratory](supplement/computations/exploratory/) |
 | 高校数学の知識で読める解説スライド（PowerPoint、99 枚） | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 | 解説スライド第1〜3章のアニメーション版（JavaScript を使う HTML。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/ja/explainer/) |
@@ -117,7 +117,7 @@ DOI（Zenodo）: [10.5281/zenodo.22995171](https://doi.org/10.5281/zenodo.229951
 | 同じアニメーションの日本語版（JavaScript を使う HTML、約20分。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/verification-animation-ja.html](slides/verification-animation-ja.html) · [slides/verification-animation-ja-narration.mp3](slides/verification-animation-ja-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/ja/verification/) |
 
 有限計算の完全な再現では、二つの実装を実行し、新しく生成したデータを全要素で比較します。
-5/3 では、同梱の生成プログラム（検査器を組み込んだもの）と、実装 B を別に拡張したものが二つの実装です。
+5/3 では、証明書を最初に計算した生成プログラム（検査器を組み込んだもの）と、実装 B を別に拡張したものが二つの実装です。
 小さな基準ファイル [checks/reference.json](checks/reference.json) に固定された照合基準を
 収録し、大きな実行出力は利用者の環境で生成します。`check` は事前確認、`recompute` は
 有限計算全体の再実行です。依存ソフトウェア、コマンド、資源上限は

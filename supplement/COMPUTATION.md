@@ -21,7 +21,7 @@ The source directories are:
 | [computations/implementation_b](computations/implementation_b/) | Independent implementation and comparisons for the one-step method |
 | [computations/word_a](computations/word_a/) | First implementation of word-labelled graphs and the associated finite computations |
 | [computations/word_b](computations/word_b/) | Independent implementation and checks for word-labelled graphs and the associated finite computations |
-| [computations/five_thirds](computations/five_thirds/) | Producer with embedded checker, small Python reference, and recorded runs for the 5/3 certificate (Appendix F), as supplied with the research notes for this addition |
+| [computations/five_thirds](computations/five_thirds/) | First implementation of the 5/3 certificate (Appendix F): producer with embedded checker, small Python reference, and recorded runs |
 | [computations/word_b/five_thirds](computations/word_b/five_thirds/) | Records of implementation B's two-direction 5/3 run, the forward-only comparison, and the stage-by-stage comparison with the producer |
 | [computations/additional_obstructions](computations/additional_obstructions/) | Direct checker and witness for the 5/3 return-word obstruction with the primes up to 23 (Corollary 78) |
 | [computations/exploratory](computations/exploratory/) | Exploratory records of the addition: a smaller interval-based 7/5 certificate and base searches; not used by the paper's theorems |
@@ -69,7 +69,7 @@ of in-degree-one chains. It is computed by two implementations.
 
 - *Producer.* [five_thirds/certificate53.cpp](computations/five_thirds/certificate53.cpp)
   with its embedded checker [audit_basic.hpp](computations/five_thirds/audit_basic.hpp)
-  was supplied with the research notes for this addition. The checker verifies
+  is the program with which the certificate was first computed. The checker verifies
   the initial edges, every lifted edge by a forward residue-set calculation,
   sufficient rank and all-letter phase conditions on every edge, and every
   contracted edge. It is compiled into the same program and shares its
@@ -127,7 +127,7 @@ not run by the reproduction commands.
 | [computations/implementation_b](computations/implementation_b/) | 一段階グラフ法の独立実装と比較処理 |
 | [computations/word_a](computations/word_a/) | 語ラベル付きグラフと関連する有限計算の第 1 実装 |
 | [computations/word_b](computations/word_b/) | 語ラベル付きグラフと関連する有限計算の独立実装・検査 |
-| [computations/five_thirds](computations/five_thirds/) | 5/3 の証明書（付録F）の生成プログラムと組込み検査器、小規模の Python 参照実装、実行記録（この追加の研究ノートに同梱されていたもの） |
+| [computations/five_thirds](computations/five_thirds/) | 5/3 の証明書（付録F）の第 1 実装：生成プログラムと組込み検査器、小規模の Python 参照実装、実行記録 |
 | [computations/word_b/five_thirds](computations/word_b/five_thirds/) | 実装 B による 5/3 の両方向の計算、前向きのみの計算との比較、生成プログラムとの段ごとの照合の記録 |
 | [computations/additional_obstructions](computations/additional_obstructions/) | 23 以下の素数に対する 5/3 の帰還語障害（系78）の直接検査器と証拠 |
 | [computations/exploratory](computations/exploratory/) | この追加の探索記録（区間伝播を用いた小さな 7/5 の証明書、底の探索）。論文の定理には用いない |
@@ -167,7 +167,7 @@ Lean の検査は [FORMALIZATION.md](FORMALIZATION.md#japanese) の手順で別�
 
 - *生成プログラム。* [five_thirds/certificate53.cpp](computations/five_thirds/certificate53.cpp)
   と組込み検査器 [audit_basic.hpp](computations/five_thirds/audit_basic.hpp) は、
-  この追加の研究ノートに同梱されていたものです。検査器は、初期辺、前向きの剰余集合の計算による
+  証明書を最初に計算したプログラムです。検査器は、初期辺、前向きの剰余集合の計算による
   すべての持ち上げ辺、すべての辺の順位と全文字の位相の十分条件、およびすべての縮約辺を検査します。
   同じプログラムに組み込まれ、表現を共有します。
   [reference53.py](computations/five_thirds/reference53.py) は、最初の5段階（素数 17 まで）を
