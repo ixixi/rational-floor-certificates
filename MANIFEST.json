@@ -202,9 +202,9 @@
       "sha256": "b49e1cfa29718e7529be505439e2f13ef094550ae3a7042d8efe6df22e766b59"
     },
     {
-      "bytes": 618210,
+      "bytes": 618317,
       "path": "slides/frontier-animation-en.html",
-      "sha256": "bb64b8d53b64fee46da3d41924d2e897120ca90304a35b7546a36253fb626bbf"
+      "sha256": "b01b18d75af5bcff7e0fa4a26e4dce861ba99a3a64922f9885445c9e6355540d"
     },
     {
       "bytes": 11671200,
@@ -212,9 +212,9 @@
       "sha256": "12c376326f4148fc56af6134e3c6895b0b1d6cd26afb776725ee3a487ff44750"
     },
     {
-      "bytes": 1205099,
+      "bytes": 1205206,
       "path": "slides/frontier-animation-ja.html",
-      "sha256": "bdde035d55a5c980cb89a0041db5e422fa1c2e92f7d8c7ced4ca4efe3156024a"
+      "sha256": "9a5a31f38a7e3c3e6b7d15ce80fa4c4ee0a2babd9721d941089c0f98960b6e1b"
     },
     {
       "bytes": 8168688,
@@ -222,9 +222,9 @@
       "sha256": "050f3fa9cda30b45351ae6f37bcebe61a0c2ea56b28ea84c02fda42ccccd5d3f"
     },
     {
-      "bytes": 470621,
+      "bytes": 470728,
       "path": "slides/one-step-animation-en.html",
-      "sha256": "1136f4dbb2438b27b6c8e0a0a4e0931d554d24d418c7e601754f424539285b13"
+      "sha256": "68eac9846f9da5ab600c961f722ed3dbfe1d791037f7e7d16f0454929af6ec0a"
     },
     {
       "bytes": 9975312,
@@ -232,9 +232,9 @@
       "sha256": "6ad56ae454478d110b038525bfd38eb125dfc4dc0817649737a8f5d3e6875d25"
     },
     {
-      "bytes": 945106,
+      "bytes": 945213,
       "path": "slides/one-step-animation-ja.html",
-      "sha256": "76b1f97375638dd10ca6c8f8bda5d0e813f80763c5c67d7dd80b61d1364f0d66"
+      "sha256": "6cecb92d75139901f2d23e9b754806ecaecda3684ae16681d5a24809dbfe681a"
     },
     {
       "bytes": 14551562,
@@ -257,9 +257,9 @@
       "sha256": "4e16b068384889cf4139b33c81a4f9f2f71d60c68dbb1fd55f43bf29dcaf1685"
     },
     {
-      "bytes": 553665,
+      "bytes": 553772,
       "path": "slides/verification-animation-en.html",
-      "sha256": "0cee2db4bc968eea1f8adb180fee799a0029810307fd1c2587380b873222bea3"
+      "sha256": "b8ba6f778902b9d1bc8721aac54e942e7b72f1d63386bc0391619f256867887a"
     },
     {
       "bytes": 6659136,
@@ -267,9 +267,9 @@
       "sha256": "375b35692fabc3dca7e8db229b25fc8140dbaf5120a63e48ef5623c385bfd5f5"
     },
     {
-      "bytes": 1228790,
+      "bytes": 1228897,
       "path": "slides/verification-animation-ja.html",
-      "sha256": "37c8dd7ca9beec2a3154fc94b1033835e8f62451f80cec972bdb0a07c417d92e"
+      "sha256": "08beec3fa0de0457563f647a7a34ad58c4ac1eea1130a7168f8dc0d21ac9dfae"
     },
     {
       "bytes": 8499888,
@@ -277,9 +277,9 @@
       "sha256": "f6aa3d29b622159865b3f0cede1cbf4b0806d11f045e608397287405aa97a28a"
     },
     {
-      "bytes": 550113,
+      "bytes": 550220,
       "path": "slides/word-label-animation-en.html",
-      "sha256": "179c6ffd4cc8202d800c09371632fc1afe87f7abc979a899a1830058a6b6c694"
+      "sha256": "b5d319cb9fe10bb834836f524e0a49d0bb45aa8443aa2f0ced17a11435462f8c"
     },
     {
       "bytes": 10535904,
@@ -287,9 +287,9 @@
       "sha256": "419170fb52370e48bf42996c6ec4d95b84a0f1d520ea3c33bffde6e07b878467"
     },
     {
-      "bytes": 1007343,
+      "bytes": 1007450,
       "path": "slides/word-label-animation-ja.html",
-      "sha256": "84b5f080defe9c694108acd9ceb3d83462788f87be8b9b5178451be38a89452c"
+      "sha256": "4fde26d955c403afd054bda9455dc562571e78a4fa8de6505a61157937815e3a"
     },
     {
       "bytes": 4190,
@@ -1281,5 +1281,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "3e77845de248e4d27b033d1df93ce6ec7bce7ee422e0d3966141b8f3d2d8e659"
+  "source_sha256": "0ad32cb85860e7f79d88931aef2bc47b8837209c70809de13da0d6ae1b46cf10"
 }
