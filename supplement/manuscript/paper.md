@@ -1553,7 +1553,7 @@ stage \(9\) is empty: all 1084 cyclic SCCs of \(G_9^{\rm in}\) are
 certified. Edges are counted as sets of triples (Section 4.1); the
 multiplicities with which contracted chains produce the same triple carry
 no proof content and are recorded in Appendix A for comparison with the
-supplied research notes.
+original research notes.
 
 **Table 6.** The word method for \(5/2\) with \(K=4\),
 \(\mathcal C=\{-1,1,3\}\). Columns as in Table 4.
@@ -3147,7 +3147,7 @@ lists by \((j,e)\), and computes SCCs by an iterative form of Tarjan's
 algorithm [T, §4](#ref-t). Both classify all unit residues by
 \(bz\bmod M\) to solve (E2). B was developed from the mathematical
 specification and a common output schema, without reading or importing
-A or the supplied baseline program; its design, source, and outputs were
+A or the original baseline program; its design, source, and outputs were
 fixed before the comparison with A.
 
 The validation checks every vertex and labelled edge. It recomputes
@@ -3172,13 +3172,13 @@ The computations of Tables 4, 6, and 7 were performed by two
 implementations with disjoint scientific cores.
 
 *Implementation A* ([`word_a`](../../supplement/COMPUTATION.md)) is a
-provenance-tracked working copy of the programs supplied with the
-research notes on which this paper is based (C++ constructions driven by
+provenance-tracked working copy of the programs written in the original
+research on which this paper is based (C++ constructions driven by
 Python, with a Python third check for the first five stages of
 Table 6), together with a driver that fixes resource limits, records
 inputs and outputs, and writes the graphs in a normalized text format.
-The supplied programs contain two constructions labelled "A" and "B";
-these share a common origin, file formats, and conventions, and their
+These programs contain two constructions labelled "A" and "B";
+the two share a common origin, file formats, and conventions, and their
 mutual agreement is a consistency check within one lineage, not the
 independent verification described next. The scientific cores are retained in the public sources. The provenance and
 packaging changes are described in the [computation guide](../../supplement/COMPUTATION.md); the [source manifest](../../MANIFEST.json)
@@ -3190,8 +3190,8 @@ specification equivalent to Section 4 and the
 comparison contract
 [`word-schema.md`](../../supplement/computations/word-schema.md),
 which fixes the definitions, the text format, and the normalization
-only, without reading the supplied programs, implementation A, or the
-research notes' tables. It consists of a C++17 production program and a
+only, without reading the original programs, implementation A, or the
+tables of the original research notes. It consists of a C++17 production program and a
 separately written literal Python reference program (direct inequality
 tests for all \((j,c,k)\), forward iteration for all starting residues,
 Kosaraju's algorithm, and Kahn's algorithm for acyclicity), whose
@@ -3219,7 +3219,7 @@ roots or paths differ.
 
 *Environment and limits.* A ran under Python 3.10.12 with g++ 11.4.0
 on Linux, with wall-time and address-space limits of 600 s and 4 GiB per
-supplied construction for Table 6 (1500 s overall) and 300 s and 4 GiB
+construction for Table 6 (1500 s overall) and 300 s and 4 GiB
 otherwise. B ran its C++ program under limits of 3600 s and 8 GiB
 (Table 6), 300 s and 4 GiB (Table 4), and 600 s and 4 GiB (Table 7),
 its Python reference under 1800 s and 8 GiB, and the comparison under
@@ -3487,7 +3487,7 @@ with the backward passes of Appendix F.3 added to the contraction
 conditions.
 
 *The producer* (`supplement/computations/five_thirds/`) is the
-program supplied with the research notes for this addition. It is a
+program with which the certificate for \(5/3\) was first computed. It is a
 C++17 program that enumerates the initial edges, lifts every edge for
 every starting residue, computes SCCs, applies the phase test, and
 contracts in both directions, the backward pass being computed by
@@ -3666,7 +3666,7 @@ chosen output location. Reaching a resource limit is recorded as
 
 **Word-labelled computations, implementation A.** The public driver
 `supplement/computations/word_a/run_word.py`
-applies resource limits, runs the supplied scientific constructions, writes
+applies resource limits, runs the original scientific constructions, writes
 normalized graphs, and runs the same-lineage post-checks. The cases
 `five-halves`, `cross-75`, and `q75` regenerate the data of Tables 6, 4,
 and 7, respectively. The [reproduction guide](../../REPRODUCE.md) gives the complete commands;
@@ -3676,7 +3676,7 @@ Regeneration therefore uses the distributed sources.
 
 **Edge multiplicities.** In Tables 4 and 6 edges are counted as distinct
 triples. Counting contracted chains with multiplicity, and propagating
-the multiplicity through lifting as the supplied research notes do,
+the multiplicity through lifting as the original research notes do,
 gives for the ten stages of Table 6 the input edge counts 12, 17, 58,
 167, 820, 7083, 60242, 315483, 1685458, 3754612 and the output edge
 counts 12, 12, 20, 85, 529, 4256, 18069, 80704, 201199, 0; for Table 4
@@ -5060,7 +5060,7 @@ the terms for \(k\ne0\).
 
 The counts of Tables 11–13 and the list of \(4592\) survivors were
 produced by implementation A of Section 9.3, that is, by the two
-same-lineage constructions supplied with the research notes, which track
+same-lineage constructions of the original programs, which track
 the exact interval in different coordinates (the current fractional
 interval with the seed lifted digit by digit, and the initial interval
 with common denominator \(a^N\) with the seed solved at the leaves) and
@@ -5078,7 +5078,7 @@ the [computation guide](../../supplement/COMPUTATION.md).
 
 Independently of these, implementation B of Section 9.3 (a different
 programmer, code written from the specification of Lemmas 64–66 and not
-from the supplied programs) re-enumerated the sieve for both bases,
+from the original programs) re-enumerated the sieve for both bases,
 recomputed the seeds, the root rejections and the survivor list, checked
 every survivor's divisor equality and every small-prime witness, and
 recomputed the constants of Table 11 as least integers from its own
@@ -5829,7 +5829,7 @@ from Lemma 74 and Table 17.
 
 ### F.5 The prime pool through 23
 
-The supplied return-word witness has
+The return-word witness used here has
 \[
 m=7\cdot11\cdot13\cdot17\cdot19\cdot23=7436429,\qquad q=3684006,
 \qquad I=[2/5,1/2],

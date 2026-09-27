@@ -59,7 +59,7 @@ new outputs element by element, and checks the fixed reference digests in
 under `supplement/computations/`. Large graph outputs and execution logs are
 created in the specified output directory. The scope and comparison
 principles are described in [COMPUTATION.md](supplement/COMPUTATION.md).
-For 5/3 it runs implementation B and the supplied producer through all ten
+For 5/3 it runs implementation B and the producer through all ten
 stages, compares all 20 stage graphs, checks that both final output graphs are
 empty, and checks the obstruction for the primes up to 23; the outcome is
 recorded under `five_thirds` in `finite/receipt.json` and `record.json`.
@@ -169,7 +169,7 @@ python3 -B reproduce.py recompute --output /tmp/floor-paper-full
 計算ソースは `supplement/computations/` にあります。大きなグラフ出力と実行ログは、
 指定した出力ディレクトリに生成します。対象範囲と比較の考え方は
 [COMPUTATION.md](supplement/COMPUTATION.md#japanese) に記載しています。
-5/3 については、実装 B と同梱の生成プログラムで全10段を計算し、全20個の段階グラフを照合し、
+5/3 については、実装 B と生成プログラムで全10段を計算し、全20個の段階グラフを照合し、
 両方の最後の出力グラフが空であることと、23 以下の素数に対する障害を検査します。結果は
 `finite/receipt.json` と `record.json` の `five_thirds` に記録します。
 
