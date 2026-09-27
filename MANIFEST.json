@@ -67,14 +67,14 @@
       "sha256": "46768b4a18361c00226584a7eb1640641410b4c88c4acc04cd642e9838da50a1"
     },
     {
-      "bytes": 947048,
+      "bytes": 947506,
       "path": "paper-en.pdf",
-      "sha256": "ef348498b0c72aef403c6c4871de710bed9131c2ca363a5607335b3b86dec6ac"
+      "sha256": "72259336c7df7c4102659cc29572dfcadff675a2c2491a59f4e7dc88172a74b9"
     },
     {
-      "bytes": 1241825,
+      "bytes": 1242758,
       "path": "paper-ja.pdf",
-      "sha256": "ddcceff96e0ba5f58238f10d84c7ed8f1780f099489ed48e1928f93a9ffdb3b2"
+      "sha256": "7df47f148ceaf44fee663c162d9ee7b2b19acfa1b25baa4ad052d202912c9f93"
     },
     {
       "bytes": 6011,
@@ -407,14 +407,14 @@
       "sha256": "f573182971d816deda843b1f6b953ca5a05b59bfe7860b8fd9f5bb9e0b0458a8"
     },
     {
-      "bytes": 345450,
+      "bytes": 346342,
       "path": "sources/paper-ja.tex",
-      "sha256": "38165a33a49dabf2c2e4409679e836a5eb7ca53d89166845773ee6095bd5948a"
+      "sha256": "d31916a32b66f1207278b45d6486a6c70de3011d5c1af31ef10c042a8840a93d"
     },
     {
-      "bytes": 295081,
+      "bytes": 295950,
       "path": "sources/paper.tex",
-      "sha256": "6132e17487af9ef9d99c9b62481ebc26b8f8ac9401bd9413a28e2f1990ef35cc"
+      "sha256": "11c0f33aafdcb2afce3c575f0fa773abdbfd035b5736b32a0571c296ede46157"
     },
     {
       "bytes": 13526,
@@ -1567,9 +1567,9 @@
       "sha256": "f64a1ef0ec9ca0f261fb5be9524a445ddc533d33ef43db158ffca7e1b0cec5a9"
     },
     {
-      "bytes": 234888,
+      "bytes": 235757,
       "path": "supplement/manuscript/paper.md",
-      "sha256": "985cb1689a0b71ac3c15532856f8b7aa5fda130fd1c86e9b8cdf925759edd727"
+      "sha256": "7a92c9cdb7e05a14d2f464423f80b41da88c98d85a99fac27ecb3dfccfe15961"
     },
     {
       "bytes": 8046,
@@ -1591,5 +1591,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "73d7416710006142b42ff3316ec71af8e04c37585c5608f1030eb8d1192a7e1f"
+  "source_sha256": "7b12ae50dcd25d8b3c2b6851fdc6ffc549a4d319fc2ce9a22730ea0b680357f4"
 }
