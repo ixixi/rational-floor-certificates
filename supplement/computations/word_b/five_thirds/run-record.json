@@ -1,0 +1,70 @@
+{
+ "schema_version": 1,
+ "date": "2026-09-27",
+ "purpose": "Phase 1 of the 5/3 addition: independent second implementation (implementation B with two-direction contraction) through all ten stages and stage-by-stage comparison with the handoff producer.",
+ "environment": {
+  "os": "Ubuntu 22.04.4 LTS on WSL2",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900KF",
+  "memory_gib": 62,
+  "gxx": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "python": "3.10.12"
+ },
+ "sources_sha256": {
+  "supplement/computations/word_b/wgb.cpp": "e47353f4e0e1ccfcf47928aa2973895ac42cd599a0d5129e71cb8dd379b97b35",
+  "supplement/computations/word_b/canon_wordgraph.cpp": "157f2fab6c33ec99e142cb96be8aadb23d8fd20d0944314e1ef77e1334c7a3dd",
+  "supplement/computations/word_b/compare_five_thirds.py": "4a76631c9573489e752bfd90b8a8d16ddb6bd0528159d33c8884e5ee536ee219",
+  "supplement/computations/five_thirds/certificate53.cpp": "ff22591e0f9c83dc6cf01a4621918c3dcae15e247c628ba5721f0156f4806e94",
+  "supplement/computations/five_thirds/audit_basic.hpp": "6de11edc90cdcfffd973264b02ae784a4b30f8d9e52eca287d4b80c5d576db08"
+ },
+ "runs": {
+  "b_two_direction": {
+   "command": "g++ -O2 -std=c++17 -o wgb supplement/computations/word_b/wgb.cpp; wgb pipeline --a 5 --b 3 --K 3 --carries -2,2,4 --primes 7,11,13,17,19,23,29,31,37 --bidir --out OUT",
+   "output": "stages-two-direction.jsonl",
+   "exit_code": 0,
+   "final_output_empty": true,
+   "wall_clock": "2:58.10",
+   "max_rss_kib": 2541756
+  },
+  "producer": {
+   "command": "g++ -O3 -std=c++17 supplement/computations/five_thirds/certificate53.cpp -o certificate53; BIDIR=1 certificate53 5 3 3 7,11,13,17,19,23,29,31,37 25000000 PREFIX",
+   "output": "producer-full-result.json",
+   "exit_code": 0,
+   "status": "success",
+   "wall_clock": "3:04.79",
+   "max_rss_kib": 2658564
+  },
+  "comparison": {
+   "command": "compare_five_thirds.py --canon canon_wordgraph --b-dir OUT --b-json stages-two-direction.jsonl --a-prefix PREFIX --a-json producer-full-result.json --stages 10 --out comparison.json --elementwise TMP",
+   "output": "comparison.json",
+   "exit_code": 0,
+   "status": "all_stages_match",
+   "canonical_texts_identical_bytes": true,
+   "compared_with_stage_multiplicity": {
+    "graphs": 20,
+    "vertices": 35289089,
+    "edges": 48786290,
+    "letters": 1245585922
+   },
+   "wall_clock": "3:42.62",
+   "max_rss_kib": 1995712
+  },
+  "b_forward_only": {
+   "command": "wgb pipeline --a 5 --b 3 --K 3 --carries -2,2,4 --primes 7,11,13,17,19,23,29,31,37 --out OUT --no-graphs --stop-after 8 --count-next-lift (under ulimit -v 20000000)",
+   "output": "stages-forward-only.jsonl",
+   "exit_code": 0,
+   "note": "Existing pipeline (no in-direction contraction) through prime 31; the lift to 37 was counted, not formed.",
+   "wall_clock": "4:05.99",
+   "max_rss_kib": 8942768
+  },
+  "b_default_pipeline_regression": {
+   "command": "previous and extended wgb, pipeline mode without new options, for 5/2 (K=4, primes 3..31) and 7/5 (K=2048, primes 3,11,13)",
+   "result": "all stage graph files byte-identical; JSON lines identical apart from timing fields"
+  }
+ },
+ "normalisation": "canon_wordgraph CANON1. B's vertices (q, cell) are ordered by (cell, q mod p_1, ..., q mod p_k) for the primes in the order used; the producer's vertex indices are used as dumped (its dump has cell bounds only). Edges are distinct (u, v, word) triples sorted by u, v and word. The two canonical texts are compared byte for byte and by SHA-256.",
+ "provenance": {
+  "clean_room": "The in-direction (two-direction) extension of wgb.cpp was written from the lemma 'Two-direction exact contraction' and the iteration rule in the handoff manuscript (manuscript/addition_body.tex), without opening certificate53.cpp, audit_basic.hpp or reference53.py. Those files were only compiled and executed as black boxes until the comparison was complete. The dump format was read from the handoff README/PROOF_JA.md and the recorded small dumps, and the producer's invocation from its driver reproduce.py and handoff.py.",
+  "authors": "wgb.cpp was written earlier by a different programmer from the mathematical specification; the --bidir, --no-graphs and --count-next-lift options, canon_wordgraph.cpp and compare_five_thirds.py were added in a separate AI-assisted session (Claude Code). The producer and its checker were written in another AI session (the handoff)."
+ }
+}

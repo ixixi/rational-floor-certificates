@@ -1,0 +1,44 @@
+{
+  "status": "all_elements_match",
+  "compared_graphs": 10,
+  "vertices": 5834,
+  "edges": 13260,
+  "letters": 52757,
+  "stages": [
+    {
+      "p": 0,
+      "vin": 3,
+      "ein": 6,
+      "vout": 2,
+      "eout": 5
+    },
+    {
+      "p": 7,
+      "vin": 12,
+      "ein": 24,
+      "vout": 7,
+      "eout": 17
+    },
+    {
+      "p": 11,
+      "vin": 70,
+      "ein": 141,
+      "vout": 38,
+      "eout": 93
+    },
+    {
+      "p": 13,
+      "vin": 456,
+      "ein": 903,
+      "vout": 218,
+      "eout": 573
+    },
+    {
+      "p": 17,
+      "vin": 3482,
+      "ein": 7203,
+      "vout": 1546,
+      "eout": 4295
+    }
+  ]
+}

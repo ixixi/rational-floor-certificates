@@ -1,0 +1,57 @@
+{
+  "M": 30,
+  "K": 1,
+  "numerator_bound_exclusive": 60,
+  "tested_reduced_bases": 1027,
+  "successes": [
+    {
+      "a": 4,
+      "b": 3,
+      "vertices": 8,
+      "edges": 12,
+      "cyclic_components": [
+        {
+          "residues": [
+            1
+          ],
+          "period": 1,
+          "phase_labels": [
+            [
+              -1
+            ]
+          ],
+          "passes": true
+        },
+        {
+          "residues": [
+            13,
+            17
+          ],
+          "period": 2,
+          "phase_labels": [
+            [
+              -1
+            ],
+            [
+              1
+            ]
+          ],
+          "passes": true
+        },
+        {
+          "residues": [
+            29
+          ],
+          "period": 1,
+          "phase_labels": [
+            [
+              1
+            ]
+          ],
+          "passes": true
+        }
+      ]
+    }
+  ],
+  "scope": "Exact finite-parameter phase-test classification; not arithmetic impossibility for rejected bases"
+}
