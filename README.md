@@ -14,8 +14,11 @@ DOI (Zenodo): [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.22962354)
 
 This repository contains the paper, its computation programs, and its Lean
 formalization. For every real number ξ > 0, the paper proves that each sequence
-⌊ξ(7/5)ⁿ⌋ and ⌊ξ(5/2)ⁿ⌋ has infinitely many composite terms. The proof uses finite
-labelled graphs to certify repeated divisibility by a fixed set of primes.
+⌊ξ(7/5)ⁿ⌋, ⌊ξ(5/2)ⁿ⌋, and ⌊ξ(5/3)ⁿ⌋ has infinitely many composite terms. The proof
+uses finite labelled graphs to certify repeated divisibility by a fixed set of
+primes. For 5/3 infinitely many terms are divisible by at least one of 2, 3, 7, 11,
+13, 17, 19, 23, 29, 31, 37 (Theorem 1(iii) and Appendix F of the paper); this
+certificate also contracts chains of in-degree one exactly.
 The paper also gives an explicit waiting-time bound for 7/5 and studies the
 scope and limitations of the certificate method.
 
@@ -30,6 +33,8 @@ scope and limitations of the certificate method.
 | Figure sources and regeneration | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md) |
 | Finite computations | [supplement/COMPUTATION.md](supplement/COMPUTATION.md) |
 | Lean scope and checking instructions | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md) |
+| 5/3 computation: supplied producer and checker, implementation B records, obstruction for the primes up to 23 | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
+| Exploratory records of the 5/3 addition (not used by the theorems) | [supplement/computations/exploratory](supplement/computations/exploratory/) |
 | Japanese explanatory slides for readers with high-school mathematics (PowerPoint, 99 slides) | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 | Japanese animated explainer of chapters 1–3 of the slides (HTML with JavaScript; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/ja/explainer/) |
 | English animated explainer of the one-step method (Sections 3 and 5.1; HTML with JavaScript, about 23 minutes; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/one-step-animation-en.html](slides/one-step-animation-en.html) · [slides/one-step-animation-en-narration.mp3](slides/one-step-animation-en-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/en/one-step/) |
@@ -42,7 +47,8 @@ scope and limitations of the certificate method.
 | Japanese version of the same animation (HTML with JavaScript, about 18 minutes; open in a web browser) and its narration (MP3, Gemini 3.8 Flash TTS; keep it next to the HTML) | [slides/verification-animation-ja.html](slides/verification-animation-ja.html) · [slides/verification-animation-ja-narration.mp3](slides/verification-animation-ja-narration.mp3) · [watch online](https://ixixi.github.io/rational-floor-certificates/ja/verification/) |
 
 The complete finite reproduction runs two implementations and compares their
-newly generated data element by element. The small reference file
+newly generated data element by element; for 5/3 these are the supplied producer
+with its embedded checker and a separately written extension of implementation B. The small reference file
 [checks/reference.json](checks/reference.json) supplies fixed comparison
 criteria; large execution outputs are generated locally. The `check` command
 is a preflight, while `recompute` runs the full finite reproduction. See
@@ -56,9 +62,10 @@ Lean and Mathlib are pinned separately in the formalization directory. Start wit
 
 The Lean sources cover the main divisibility and compositeness statements.
 The one-step 7/5 proof checks its finite certificates in the Lean kernel.
-The word-labelled proofs use kernel-checked soundness theorems and
-`native_decide` for finite evaluation, adding trust in Lean's compiler and
-native evaluation. The precise coverage is described in
+The word-labelled proofs, including the one for 5/3, use kernel-checked
+soundness theorems and `native_decide` for finite evaluation, adding trust in
+Lean's compiler and native evaluation. The 5/3 evaluation runs a precompiled
+pipeline and needs about 13 GiB of memory and ten minutes. The precise coverage is described in
 [FORMALIZATION.md](supplement/FORMALIZATION.md).
 
 [MANIFEST.json](MANIFEST.json) and [SHA256SUMS](SHA256SUMS) identify the bundled
@@ -78,9 +85,11 @@ Repository: [ixixi/rational-floor-certificates](https://github.com/ixixi/rationa
 DOI（Zenodo）: [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.22962354)。
 
 このリポジトリには、論文、計算プログラム、Lean による形式証明を収録しています。
-論文では、任意の実数 ξ > 0 に対し、二つの数列 ⌊ξ(7/5)ⁿ⌋ と ⌊ξ(5/2)ⁿ⌋ が
+論文では、任意の実数 ξ > 0 に対し、三つの数列 ⌊ξ(7/5)ⁿ⌋、⌊ξ(5/2)ⁿ⌋、⌊ξ(5/3)ⁿ⌋ が
 それぞれ無限に多くの合成数項を持つことを証明します。有限個の素数のいずれかによる
 整除が繰り返し起こることを、有限ラベル付きグラフで認証する方法を用います。
+5/3 では、2、3、7、11、13、17、19、23、29、31、37 のどれかで割り切れる項が無限に現れます
+（論文の定理1(iii)と付録F）。この証明書では、入次数1の鎖も厳密に縮約します。
 さらに、7/5 に対する明示的な待ち時間上界と、この認証法の適用範囲および限界を示します。
 
 | 内容 | ファイル |
@@ -94,6 +103,8 @@ DOI（Zenodo）: [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.229623
 | 図のソースと再生成 | [sources/figures/illustrations/README.md](sources/figures/illustrations/README.md#japanese) |
 | 有限計算 | [supplement/COMPUTATION.md](supplement/COMPUTATION.md#japanese) |
 | Lean の形式化範囲と検査手順 | [supplement/FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) |
+| 5/3 の計算（同梱の生成プログラムと検査器、実装 B の記録、23 以下の素数に対する障害） | [supplement/computations/five_thirds](supplement/computations/five_thirds/) · [supplement/computations/word_b/five_thirds](supplement/computations/word_b/five_thirds/) · [supplement/computations/additional_obstructions](supplement/computations/additional_obstructions/) |
+| 5/3 の追加の探索記録（定理には用いない） | [supplement/computations/exploratory](supplement/computations/exploratory/) |
 | 高校数学の知識で読める解説スライド（PowerPoint、99 枚） | [slides/paper-explained-ja.pptx](slides/paper-explained-ja.pptx) |
 | 解説スライド第1〜3章のアニメーション版（JavaScript を使う HTML。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/paper-animation-ja.html](slides/paper-animation-ja.html) · [slides/paper-animation-ja-narration.mp3](slides/paper-animation-ja-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/ja/explainer/) |
 | 1ステップ法（第3節・第5.1節）の英語の解説アニメーション（JavaScript を使う HTML、約23分。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/one-step-animation-en.html](slides/one-step-animation-en.html) · [slides/one-step-animation-en-narration.mp3](slides/one-step-animation-en-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/en/one-step/) |
@@ -106,6 +117,7 @@ DOI（Zenodo）: [10.5281/zenodo.22962354](https://doi.org/10.5281/zenodo.229623
 | 同じアニメーションの日本語版（JavaScript を使う HTML、約18分。ブラウザで開く）とナレーション音声（MP3。Gemini 3.8 Flash TTS で作成。HTML と同じフォルダに置く） | [slides/verification-animation-ja.html](slides/verification-animation-ja.html) · [slides/verification-animation-ja-narration.mp3](slides/verification-animation-ja-narration.mp3) · [オンラインで見る](https://ixixi.github.io/rational-floor-certificates/ja/verification/) |
 
 有限計算の完全な再現では、二つの実装を実行し、新しく生成したデータを全要素で比較します。
+5/3 では、同梱の生成プログラム（検査器を組み込んだもの）と、実装 B を別に拡張したものが二つの実装です。
 小さな基準ファイル [checks/reference.json](checks/reference.json) に固定された照合基準を
 収録し、大きな実行出力は利用者の環境で生成します。`check` は事前確認、`recompute` は
 有限計算全体の再実行です。依存ソフトウェア、コマンド、資源上限は
@@ -119,8 +131,9 @@ Lean と Mathlib は形式証明ディレクトリで別に固定しています
 
 Lean ソースは、主結果の整除定理と合成数に関する系を形式化しています。
 7/5 の一段階証明では、有限証明書も Lean カーネル内で検査します。
-語ラベル付きグラフによる証明では、健全性定理をカーネルで検査し、有限評価に
+5/3 を含む語ラベル付きグラフによる証明では、健全性定理をカーネルで検査し、有限評価に
 `native_decide` を用いるため、Lean のコンパイラとネイティブ評価も信頼対象に含まれます。
+5/3 の評価はプリコンパイルしたパイプラインで実行し、約 13 GiB のメモリと約10分を要します。
 正確な範囲は [FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) を参照してください。
 
 [MANIFEST.json](MANIFEST.json) と [SHA256SUMS](SHA256SUMS) は同梱ファイルを識別します。

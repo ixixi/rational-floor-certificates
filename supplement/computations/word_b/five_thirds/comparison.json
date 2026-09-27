@@ -1,0 +1,1086 @@
+{
+ "status": "all_stages_match",
+ "stages": [
+  {
+   "stage": 0,
+   "prime": 0,
+   "counts": {
+    "prime": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 3,
+     "A": 3,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 6,
+     "A": 6,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 1,
+     "A": 1,
+     "equal": true
+    },
+    "certified": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 3,
+     "A": 3,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 2,
+     "A": 2,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 5,
+     "A": 5,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 7,
+     "A": 7,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 2,
+     "A": 2,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 3,
+     "edges": 6,
+     "duplicate_rows": 0,
+     "letters": 6,
+     "max_word_length": 1,
+     "D": 3,
+     "sha256": "90f21a81d83942b7e0b0d6e7c01c9ca589023564ec43a438eb97a6535e0fd364"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 3,
+     "edges": 6,
+     "duplicate_rows": 0,
+     "letters": 6,
+     "max_word_length": 1,
+     "D": 3,
+     "sha256": "90f21a81d83942b7e0b0d6e7c01c9ca589023564ec43a438eb97a6535e0fd364"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 2,
+     "edges": 5,
+     "duplicate_rows": 0,
+     "letters": 7,
+     "max_word_length": 2,
+     "D": 3,
+     "sha256": "7c5f9ba779b398d382b5734ed0dcb4c012ae6c5ddc1c11cc54a1d18c6f491dd1"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 2,
+     "edges": 5,
+     "duplicate_rows": 0,
+     "letters": 7,
+     "max_word_length": 2,
+     "D": 3,
+     "sha256": "7c5f9ba779b398d382b5734ed0dcb4c012ae6c5ddc1c11cc54a1d18c6f491dd1"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 1,
+   "prime": 7,
+   "counts": {
+    "prime": {
+     "B": 7,
+     "A": 7,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 12,
+     "A": 12,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 24,
+     "A": 24,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 2,
+     "A": 2,
+     "equal": true
+    },
+    "certified": {
+     "B": 1,
+     "A": 1,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 9,
+     "A": 9,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 7,
+     "A": 7,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 17,
+     "A": 17,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 31,
+     "A": 31,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 5,
+     "A": 5,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 12,
+     "edges": 24,
+     "duplicate_rows": 0,
+     "letters": 33,
+     "max_word_length": 2,
+     "D": 3,
+     "sha256": "508429d3d5d7a424912f2da82b2b523580c2458f4bb00a96340571a83d42a2c6"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 12,
+     "edges": 24,
+     "duplicate_rows": 0,
+     "letters": 33,
+     "max_word_length": 2,
+     "D": 3,
+     "sha256": "508429d3d5d7a424912f2da82b2b523580c2458f4bb00a96340571a83d42a2c6"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 7,
+     "edges": 17,
+     "duplicate_rows": 0,
+     "letters": 31,
+     "max_word_length": 5,
+     "D": 3,
+     "sha256": "e2d68610e32da33df7c04069f7128a4c573d95d928314f0d921d97f72abae6ac"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 7,
+     "edges": 17,
+     "duplicate_rows": 0,
+     "letters": 31,
+     "max_word_length": 5,
+     "D": 3,
+     "sha256": "e2d68610e32da33df7c04069f7128a4c573d95d928314f0d921d97f72abae6ac"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 2,
+   "prime": 11,
+   "counts": {
+    "prime": {
+     "B": 11,
+     "A": 11,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 70,
+     "A": 70,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 141,
+     "A": 141,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 2,
+     "A": 2,
+     "equal": true
+    },
+    "certified": {
+     "B": 1,
+     "A": 1,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 57,
+     "A": 57,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 38,
+     "A": 38,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 93,
+     "A": 93,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 234,
+     "A": 234,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 10,
+     "A": 10,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 70,
+     "edges": 141,
+     "duplicate_rows": 0,
+     "letters": 245,
+     "max_word_length": 5,
+     "D": 3,
+     "sha256": "226704be0b9c68c65f689461fff338945774662ce0d675693346bf45a077afcd"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 70,
+     "edges": 141,
+     "duplicate_rows": 0,
+     "letters": 245,
+     "max_word_length": 5,
+     "D": 3,
+     "sha256": "226704be0b9c68c65f689461fff338945774662ce0d675693346bf45a077afcd"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 38,
+     "edges": 93,
+     "duplicate_rows": 0,
+     "letters": 234,
+     "max_word_length": 10,
+     "D": 3,
+     "sha256": "d1e5e9fa1b54dc8742905187571c22f936a1f8b66c2000cbc7a9288344454d29"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 38,
+     "edges": 93,
+     "duplicate_rows": 0,
+     "letters": 234,
+     "max_word_length": 10,
+     "D": 3,
+     "sha256": "d1e5e9fa1b54dc8742905187571c22f936a1f8b66c2000cbc7a9288344454d29"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 3,
+   "prime": 13,
+   "counts": {
+    "prime": {
+     "B": 13,
+     "A": 13,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 456,
+     "A": 456,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 903,
+     "A": 903,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 1,
+     "A": 1,
+     "equal": true
+    },
+    "certified": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 387,
+     "A": 387,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 218,
+     "A": 218,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 573,
+     "A": 573,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 2246,
+     "A": 2246,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 29,
+     "A": 29,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 456,
+     "edges": 903,
+     "duplicate_rows": 0,
+     "letters": 2006,
+     "max_word_length": 10,
+     "D": 3,
+     "sha256": "fbe64d4644868baf86c088649e81a191eef226b138de4c6b83c10c72d3f26750"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 456,
+     "edges": 903,
+     "duplicate_rows": 0,
+     "letters": 2006,
+     "max_word_length": 10,
+     "D": 3,
+     "sha256": "fbe64d4644868baf86c088649e81a191eef226b138de4c6b83c10c72d3f26750"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 218,
+     "edges": 573,
+     "duplicate_rows": 0,
+     "letters": 2246,
+     "max_word_length": 29,
+     "D": 3,
+     "sha256": "51714e3d65cab6ff2c09f648831ed43538aec5619550ed50ce33ae94c949f04b"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 218,
+     "edges": 573,
+     "duplicate_rows": 0,
+     "letters": 2246,
+     "max_word_length": 29,
+     "D": 3,
+     "sha256": "51714e3d65cab6ff2c09f648831ed43538aec5619550ed50ce33ae94c949f04b"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 4,
+   "prime": 17,
+   "counts": {
+    "prime": {
+     "B": 17,
+     "A": 17,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 3482,
+     "A": 3482,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 7203,
+     "A": 7203,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 1,
+     "A": 1,
+     "equal": true
+    },
+    "certified": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 2873,
+     "A": 2873,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 1546,
+     "A": 1546,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 4295,
+     "A": 4295,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 24399,
+     "A": 24399,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 47,
+     "A": 47,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 3482,
+     "edges": 7203,
+     "duplicate_rows": 0,
+     "letters": 23550,
+     "max_word_length": 29,
+     "D": 3,
+     "sha256": "7fbd555cb9fd0348d983a1233a062e8123211bd9953c83670fd7706deae508e1"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 3482,
+     "edges": 7203,
+     "duplicate_rows": 0,
+     "letters": 23550,
+     "max_word_length": 29,
+     "D": 3,
+     "sha256": "7fbd555cb9fd0348d983a1233a062e8123211bd9953c83670fd7706deae508e1"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 1546,
+     "edges": 4295,
+     "duplicate_rows": 0,
+     "letters": 24399,
+     "max_word_length": 47,
+     "D": 3,
+     "sha256": "ad27415b48eeada635d8461067d4c940b001ef9ed8ddf0c9fd1fac1082febb53"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 1546,
+     "edges": 4295,
+     "duplicate_rows": 0,
+     "letters": 24399,
+     "max_word_length": 47,
+     "D": 3,
+     "sha256": "ad27415b48eeada635d8461067d4c940b001ef9ed8ddf0c9fd1fac1082febb53"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 5,
+   "prime": 19,
+   "counts": {
+    "prime": {
+     "B": 19,
+     "A": 19,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 27603,
+     "A": 27603,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 57768,
+     "A": 57768,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 78,
+     "A": 78,
+     "equal": true
+    },
+    "certified": {
+     "B": 77,
+     "A": 77,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 21797,
+     "A": 21797,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 11127,
+     "A": 11127,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 32604,
+     "A": 32604,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 269405,
+     "A": 269405,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 87,
+     "A": 87,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 27603,
+     "edges": 57768,
+     "duplicate_rows": 0,
+     "letters": 270051,
+     "max_word_length": 47,
+     "D": 3,
+     "sha256": "6b1413b89cef2259c517a9180bab6b8350fff78b7bb91f8bc6f44fae168faa7c"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 27603,
+     "edges": 57768,
+     "duplicate_rows": 0,
+     "letters": 270051,
+     "max_word_length": 47,
+     "D": 3,
+     "sha256": "6b1413b89cef2259c517a9180bab6b8350fff78b7bb91f8bc6f44fae168faa7c"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 11127,
+     "edges": 32604,
+     "duplicate_rows": 0,
+     "letters": 269405,
+     "max_word_length": 87,
+     "D": 3,
+     "sha256": "61fafb359eaad0f5e3c82abc6396a2c52cddc20aed68172b52b61aa584a4b41e"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 11127,
+     "edges": 32604,
+     "duplicate_rows": 0,
+     "letters": 269405,
+     "max_word_length": 87,
+     "D": 3,
+     "sha256": "61fafb359eaad0f5e3c82abc6396a2c52cddc20aed68172b52b61aa584a4b41e"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 6,
+   "prime": 23,
+   "counts": {
+    "prime": {
+     "B": 23,
+     "A": 23,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 244045,
+     "A": 244045,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 503983,
+     "A": 503983,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 247,
+     "A": 247,
+     "equal": true
+    },
+    "certified": {
+     "B": 246,
+     "A": 246,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 176295,
+     "A": 176295,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 67809,
+     "A": 67809,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 215777,
+     "A": 215777,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 3130937,
+     "A": 3130937,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 122,
+     "A": 122,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 244045,
+     "edges": 503983,
+     "duplicate_rows": 0,
+     "letters": 3227412,
+     "max_word_length": 87,
+     "D": 3,
+     "sha256": "f7152b263e1331eaba3d1ec4934bca33faf5c17b53cb5452460dd310f1a2cefa"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 244045,
+     "edges": 503983,
+     "duplicate_rows": 0,
+     "letters": 3227412,
+     "max_word_length": 87,
+     "D": 3,
+     "sha256": "f7152b263e1331eaba3d1ec4934bca33faf5c17b53cb5452460dd310f1a2cefa"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 67809,
+     "edges": 215777,
+     "duplicate_rows": 0,
+     "letters": 3130937,
+     "max_word_length": 122,
+     "D": 3,
+     "sha256": "8c6f3bc269d62149c73737cd48c697086fdee9633e76cf8c5a12289575c57ce6"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 67809,
+     "edges": 215777,
+     "duplicate_rows": 0,
+     "letters": 3130937,
+     "max_word_length": 122,
+     "D": 3,
+     "sha256": "8c6f3bc269d62149c73737cd48c697086fdee9633e76cf8c5a12289575c57ce6"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 7,
+   "prime": 29,
+   "counts": {
+    "prime": {
+     "B": 29,
+     "A": 29,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 1882118,
+     "A": 1882118,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 3735784,
+     "A": 3735784,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 117,
+     "A": 117,
+     "equal": true
+    },
+    "certified": {
+     "B": 116,
+     "A": 116,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 1187270,
+     "A": 1187270,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 374123,
+     "A": 374123,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 1283571,
+     "A": 1283571,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 35506500,
+     "A": 35506500,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 243,
+     "A": 243,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 1882118,
+     "edges": 3735784,
+     "duplicate_rows": 0,
+     "letters": 38803667,
+     "max_word_length": 106,
+     "D": 3,
+     "sha256": "147a103f5fe6a784b0c5d0d0e8b4e84c239ae9fad082b0c9472dd53cbe8b0b2d"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 1882118,
+     "edges": 3735784,
+     "duplicate_rows": 0,
+     "letters": 38803667,
+     "max_word_length": 106,
+     "D": 3,
+     "sha256": "147a103f5fe6a784b0c5d0d0e8b4e84c239ae9fad082b0c9472dd53cbe8b0b2d"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 374123,
+     "edges": 1283571,
+     "duplicate_rows": 0,
+     "letters": 35506500,
+     "max_word_length": 243,
+     "D": 3,
+     "sha256": "1d1d301432ec7739f66b1a1614871d0853ac49c04dea565212449d5bbb514851"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 374123,
+     "edges": 1283571,
+     "duplicate_rows": 0,
+     "letters": 35506500,
+     "max_word_length": 243,
+     "D": 3,
+     "sha256": "1d1d301432ec7739f66b1a1614871d0853ac49c04dea565212449d5bbb514851"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 8,
+   "prime": 31,
+   "counts": {
+    "prime": {
+     "B": 31,
+     "A": 31,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 10869041,
+     "A": 10869041,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 18298921,
+     "A": 18298921,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 300,
+     "A": 300,
+     "equal": true
+    },
+    "certified": {
+     "B": 299,
+     "A": 299,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 4232762,
+     "A": 4232762,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 729480,
+     "A": 729480,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 2712521,
+     "A": 2712521,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 203040427,
+     "A": 203040427,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 702,
+     "A": 702,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 10869041,
+     "edges": 18298921,
+     "duplicate_rows": 0,
+     "letters": 307807711,
+     "max_word_length": 221,
+     "D": 3,
+     "sha256": "d32e3ffdc43764bdcb35c431fbb2f4c668943d14b680a5a2f565882374a0ad68"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 10869041,
+     "edges": 18298921,
+     "duplicate_rows": 0,
+     "letters": 307807711,
+     "max_word_length": 221,
+     "D": 3,
+     "sha256": "d32e3ffdc43764bdcb35c431fbb2f4c668943d14b680a5a2f565882374a0ad68"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 729480,
+     "edges": 2712521,
+     "duplicate_rows": 0,
+     "letters": 203040427,
+     "max_word_length": 702,
+     "D": 3,
+     "sha256": "6fdbf4ae2a801daa2cbaebcfdd303c4585fe39d5c5fd9d4114cd5ebe8e129bd9"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 729480,
+     "edges": 2712521,
+     "duplicate_rows": 0,
+     "letters": 203040427,
+     "max_word_length": 702,
+     "D": 3,
+     "sha256": "6fdbf4ae2a801daa2cbaebcfdd303c4585fe39d5c5fd9d4114cd5ebe8e129bd9"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  },
+  {
+   "stage": 9,
+   "prime": 37,
+   "counts": {
+    "prime": {
+     "B": 37,
+     "A": 37,
+     "equal": true
+    },
+    "in_vertices": {
+     "B": 21077909,
+     "A": 21077909,
+     "equal": true
+    },
+    "in_edges": {
+     "B": 21932101,
+     "A": 21932101,
+     "equal": true
+    },
+    "cyclic": {
+     "B": 14920,
+     "A": 14920,
+     "equal": true
+    },
+    "certified": {
+     "B": 14920,
+     "A": 14920,
+     "equal": true
+    },
+    "retained_vertices": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "out_vertices": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "out_edges": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "out_letters": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    },
+    "out_max_word_length": {
+     "B": 0,
+     "A": 0,
+     "equal": true
+    }
+   },
+   "in": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 21077909,
+     "edges": 21932101,
+     "duplicate_rows": 0,
+     "letters": 653477055,
+     "max_word_length": 334,
+     "D": 3,
+     "sha256": "551ee99d2c59d9c5fb1cd49235f29dd6e9966cc1b05525c377e3aeacfffc7167"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 21077909,
+     "edges": 21932101,
+     "duplicate_rows": 0,
+     "letters": 653477055,
+     "max_word_length": 334,
+     "D": 3,
+     "sha256": "551ee99d2c59d9c5fb1cd49235f29dd6e9966cc1b05525c377e3aeacfffc7167"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   },
+   "out": {
+    "B": {
+     "status": "ok",
+     "format": "WORDGRAPH2",
+     "vertices": 0,
+     "edges": 0,
+     "duplicate_rows": 0,
+     "letters": 0,
+     "max_word_length": 0,
+     "D": 3,
+     "sha256": "e03ac3fa8068f58265721da9ce6a119aee7f6ee15c372a34420e70c0f2e39221"
+    },
+    "A": {
+     "status": "ok",
+     "format": "compact",
+     "vertices": 0,
+     "edges": 0,
+     "duplicate_rows": 0,
+     "letters": 0,
+     "max_word_length": 0,
+     "D": 3,
+     "sha256": "e03ac3fa8068f58265721da9ce6a119aee7f6ee15c372a34420e70c0f2e39221"
+    },
+    "equal": true,
+    "canonical_texts_identical_bytes": true
+   }
+  }
+ ],
+ "normalisation": "canon_wordgraph CANON1: B vertices ordered by (cell, residues modulo the used primes in order); A vertex indices as dumped; edges sorted by (u, v, word); SHA-256 of the canonical text"
+}

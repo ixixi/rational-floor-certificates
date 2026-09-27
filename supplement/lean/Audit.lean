@@ -65,3 +65,28 @@ import MathPaper
 #print axioms MathPaper.seven_fifths_ok
 #print axioms MathPaper.seven_fifths_success_word
 #print axioms MathPaper.floor_seven_fifths_visits_word
+
+-- 5/3 addition: in-degree-one contraction and the two-direction pipeline use standard axioms;
+-- the concrete 5/3 pipeline adds its native_decide-generated evaluation axiom.
+#print axioms MathPaper.macroIn_recurrent
+#print axioms MathPaper.contractIn_tail
+#print axioms MathPaper.WordCertIn.stage_tail
+#print axioms MathPaper.StageReduce.tail
+#print axioms MathPaper.wordChainB_no_covering
+#print axioms MathPaper.word_finite_success_visits_B
+#print axioms MathPaper.word_finite_success_composite_B
+#print axioms WordExec.runWord_eq
+#print axioms WordExec.checkStage_sound
+#print axioms WordExec.liftArr_sound
+#print axioms WordExec.initialStage_sound
+#print axioms WordExec.contractInCheck_sound
+#print axioms WordExec.checkStageIn_sound
+#print axioms WordExec.compactStage_sem
+#print axioms WordExec.reduceStage_sound
+#print axioms WordExec.goB_sound
+#print axioms WordExec.wordPipelineBidir_sound
+#print axioms MathPaper.carry_alphabet_53
+#print axioms MathPaper.five_thirds_ok
+#print axioms MathPaper.five_thirds_success
+#print axioms MathPaper.floor_five_thirds_visits
+#print axioms MathPaper.floor_five_thirds_composite

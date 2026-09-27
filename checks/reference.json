@@ -66249,6 +66249,317 @@
     "differences": [],
     "task": "A/B appendix comparison"
   },
+  "five_thirds": {
+    "b_graphs": [
+      {
+        "bytes": 152,
+        "name": "stage0_input.txt",
+        "sha256": "f58d73cf0df9b63492c970616da0f8cd5377432ce90ce83b87e3f2fdde9c5f79"
+      },
+      {
+        "bytes": 139,
+        "name": "stage0_output.txt",
+        "sha256": "e515df8442b65d77da349d71e56f67168fccb9278cdc0e89e501b4a48ce69c03"
+      },
+      {
+        "bytes": 451,
+        "name": "stage1_input.txt",
+        "sha256": "2383cd0f519d40aee67e0e03c1d0aefa59c90eb140adaaad34aaced3f830459d"
+      },
+      {
+        "bytes": 346,
+        "name": "stage1_output.txt",
+        "sha256": "4e5f41a2f8801d1f02644cf5a9aefdf7af1e6266abf4a6aceeac44f5733fad9c"
+      },
+      {
+        "bytes": 2763,
+        "name": "stage2_input.txt",
+        "sha256": "c4187cfa88ebdbcb856c54e60b2ad51ec00c0b96f943a9b53edbc7a04fb164ed"
+      },
+      {
+        "bytes": 1959,
+        "name": "stage2_output.txt",
+        "sha256": "ea280502a62acb1e4a40745b26f987045568e5ac3f3605b6038196680711018c"
+      },
+      {
+        "bytes": 20662,
+        "name": "stage3_input.txt",
+        "sha256": "5cf5671e44549481771f36853d7231284b1f8fba92d63ae5c13e3d191457523e"
+      },
+      {
+        "bytes": 14818,
+        "name": "stage3_output.txt",
+        "sha256": "0566e8694b3d530027d3b74c6d38b7ce3141b2c75ac526fc1b81a79f1897742f"
+      },
+      {
+        "bytes": 206338,
+        "name": "stage4_input.txt",
+        "sha256": "fb672c8855f8b7cf6d40bc4dc6f875ac72d17288a5cf0835a7c910e068331a1f"
+      },
+      {
+        "bytes": 141786,
+        "name": "stage4_output.txt",
+        "sha256": "1f43cc851c4d98f511c0d90b7feabb627612a522f42d50f6ce49c3441cfa1c7a"
+      },
+      {
+        "bytes": 2020729,
+        "name": "stage5_input.txt",
+        "sha256": "ba41a2f8e9fa41d0be4e8f57776cde17a8dcd027734539f54bf42efbe1fc3d25"
+      },
+      {
+        "bytes": 1360728,
+        "name": "stage5_output.txt",
+        "sha256": "b97acc8ad8e57f8cee3446c3911ac83f32a84395cb0eff3b993bd7805753c046"
+      },
+      {
+        "bytes": 21137347,
+        "name": "stage6_input.txt",
+        "sha256": "a774c75e0bbc45d7b5439d636c5ecb9275af24ebd0de74129c43fb07f69eddce"
+      },
+      {
+        "bytes": 12636850,
+        "name": "stage6_output.txt",
+        "sha256": "46eb6989fdb650698812b63080568ce019a2cb64d30298af230c5d4176a5a7a3"
+      },
+      {
+        "bytes": 206880207,
+        "name": "stage7_input.txt",
+        "sha256": "1c863c73ed51ff371d458abeb46a286e030f487220e37da2069da904923446f8"
+      },
+      {
+        "bytes": 118148804,
+        "name": "stage7_output.txt",
+        "sha256": "b0ddefd5bfa9d5894d0fe2e6a58ee18acc4866d7f2984df33b4c6d409f517604"
+      },
+      {
+        "bytes": 1367865819,
+        "name": "stage8_input.txt",
+        "sha256": "4e397a6d9e2722fa1525b84071d15fd8e1db84285852a79f7d4081a75ee248cb"
+      },
+      {
+        "bytes": 549030427,
+        "name": "stage8_output.txt",
+        "sha256": "c3f9f55e71375fb233ddc3ec8f41dc30e89fab5ed6e5ad995eddd668198393f1"
+      },
+      {
+        "bytes": 2519309579,
+        "name": "stage9_input.txt",
+        "sha256": "01558c90a6e5c1b4d00959586680e6e1e182fc36faaf5e90126744e20372e37d"
+      },
+      {
+        "bytes": 97,
+        "name": "stage9_output.txt",
+        "sha256": "2f0ff7680837d2c23422122e5745444eb20cce2bc5361d919f89b91bec2438ce"
+      }
+    ],
+    "canonical_format": "canon_wordgraph CANON1",
+    "canonical_sha256": [
+      [
+        "90f21a81d83942b7e0b0d6e7c01c9ca589023564ec43a438eb97a6535e0fd364",
+        "7c5f9ba779b398d382b5734ed0dcb4c012ae6c5ddc1c11cc54a1d18c6f491dd1"
+      ],
+      [
+        "508429d3d5d7a424912f2da82b2b523580c2458f4bb00a96340571a83d42a2c6",
+        "e2d68610e32da33df7c04069f7128a4c573d95d928314f0d921d97f72abae6ac"
+      ],
+      [
+        "226704be0b9c68c65f689461fff338945774662ce0d675693346bf45a077afcd",
+        "d1e5e9fa1b54dc8742905187571c22f936a1f8b66c2000cbc7a9288344454d29"
+      ],
+      [
+        "fbe64d4644868baf86c088649e81a191eef226b138de4c6b83c10c72d3f26750",
+        "51714e3d65cab6ff2c09f648831ed43538aec5619550ed50ce33ae94c949f04b"
+      ],
+      [
+        "7fbd555cb9fd0348d983a1233a062e8123211bd9953c83670fd7706deae508e1",
+        "ad27415b48eeada635d8461067d4c940b001ef9ed8ddf0c9fd1fac1082febb53"
+      ],
+      [
+        "6b1413b89cef2259c517a9180bab6b8350fff78b7bb91f8bc6f44fae168faa7c",
+        "61fafb359eaad0f5e3c82abc6396a2c52cddc20aed68172b52b61aa584a4b41e"
+      ],
+      [
+        "f7152b263e1331eaba3d1ec4934bca33faf5c17b53cb5452460dd310f1a2cefa",
+        "8c6f3bc269d62149c73737cd48c697086fdee9633e76cf8c5a12289575c57ce6"
+      ],
+      [
+        "147a103f5fe6a784b0c5d0d0e8b4e84c239ae9fad082b0c9472dd53cbe8b0b2d",
+        "1d1d301432ec7739f66b1a1614871d0853ac49c04dea565212449d5bbb514851"
+      ],
+      [
+        "d32e3ffdc43764bdcb35c431fbb2f4c668943d14b680a5a2f565882374a0ad68",
+        "6fdbf4ae2a801daa2cbaebcfdd303c4585fe39d5c5fd9d4114cd5ebe8e129bd9"
+      ],
+      [
+        "551ee99d2c59d9c5fb1cd49235f29dd6e9966cc1b05525c377e3aeacfffc7167",
+        "e03ac3fa8068f58265721da9ce6a119aee7f6ee15c372a34420e70c0f2e39221"
+      ]
+    ],
+    "parameters": {
+      "K": 3,
+      "a": 5,
+      "b": 3,
+      "bidir_rounds": 10,
+      "carries": [
+        -2,
+        2,
+        4
+      ],
+      "primes": [
+        7,
+        11,
+        13,
+        17,
+        19,
+        23,
+        29,
+        31,
+        37
+      ]
+    },
+    "stages": [
+      {
+        "certified": 0,
+        "cyclic": 1,
+        "in_edges": 6,
+        "in_vertices": 3,
+        "out_edges": 5,
+        "out_max_word_length": 2,
+        "out_total_chars": 7,
+        "out_vertices": 2,
+        "prime": 0,
+        "rounds": 1,
+        "stage": 0,
+        "uncertified_vertices": 3
+      },
+      {
+        "certified": 1,
+        "cyclic": 2,
+        "in_edges": 24,
+        "in_vertices": 12,
+        "out_edges": 17,
+        "out_max_word_length": 5,
+        "out_total_chars": 31,
+        "out_vertices": 7,
+        "prime": 7,
+        "rounds": 2,
+        "stage": 1,
+        "uncertified_vertices": 9
+      },
+      {
+        "certified": 1,
+        "cyclic": 2,
+        "in_edges": 141,
+        "in_vertices": 70,
+        "out_edges": 93,
+        "out_max_word_length": 10,
+        "out_total_chars": 234,
+        "out_vertices": 38,
+        "prime": 11,
+        "rounds": 2,
+        "stage": 2,
+        "uncertified_vertices": 57
+      },
+      {
+        "certified": 0,
+        "cyclic": 1,
+        "in_edges": 903,
+        "in_vertices": 456,
+        "out_edges": 573,
+        "out_max_word_length": 29,
+        "out_total_chars": 2246,
+        "out_vertices": 218,
+        "prime": 13,
+        "rounds": 4,
+        "stage": 3,
+        "uncertified_vertices": 387
+      },
+      {
+        "certified": 0,
+        "cyclic": 1,
+        "in_edges": 7203,
+        "in_vertices": 3482,
+        "out_edges": 4295,
+        "out_max_word_length": 47,
+        "out_total_chars": 24399,
+        "out_vertices": 1546,
+        "prime": 17,
+        "rounds": 6,
+        "stage": 4,
+        "uncertified_vertices": 2873
+      },
+      {
+        "certified": 77,
+        "cyclic": 78,
+        "in_edges": 57768,
+        "in_vertices": 27603,
+        "out_edges": 32604,
+        "out_max_word_length": 87,
+        "out_total_chars": 269405,
+        "out_vertices": 11127,
+        "prime": 19,
+        "rounds": 7,
+        "stage": 5,
+        "uncertified_vertices": 21797
+      },
+      {
+        "certified": 246,
+        "cyclic": 247,
+        "in_edges": 503983,
+        "in_vertices": 244045,
+        "out_edges": 215777,
+        "out_max_word_length": 122,
+        "out_total_chars": 3130937,
+        "out_vertices": 67809,
+        "prime": 23,
+        "rounds": 10,
+        "stage": 6,
+        "uncertified_vertices": 176295
+      },
+      {
+        "certified": 116,
+        "cyclic": 117,
+        "in_edges": 3735784,
+        "in_vertices": 1882118,
+        "out_edges": 1283571,
+        "out_max_word_length": 243,
+        "out_total_chars": 35506500,
+        "out_vertices": 374123,
+        "prime": 29,
+        "rounds": 10,
+        "stage": 7,
+        "uncertified_vertices": 1187270
+      },
+      {
+        "certified": 299,
+        "cyclic": 300,
+        "in_edges": 18298921,
+        "in_vertices": 10869041,
+        "out_edges": 2712521,
+        "out_max_word_length": 702,
+        "out_total_chars": 203040427,
+        "out_vertices": 729480,
+        "prime": 31,
+        "rounds": 9,
+        "stage": 8,
+        "uncertified_vertices": 4232762
+      },
+      {
+        "certified": 14920,
+        "cyclic": 14920,
+        "in_edges": 21932101,
+        "in_vertices": 21077909,
+        "out_edges": 0,
+        "out_max_word_length": 0,
+        "out_total_chars": 0,
+        "out_vertices": 0,
+        "prime": 37,
+        "rounds": 0,
+        "stage": 9,
+        "uncertified_vertices": 0
+      }
+    ]
+  },
   "schema_version": 1,
   "step": {
     "five-fourths": {

@@ -49,6 +49,12 @@ GRAPH_ARGS = {
     "q75": ["q75", "--a", "7", "--b", "5", "--M", "429", "--K", "2048",
             "--carries", "-4,-2,2,4,6"],
 }
+FIVE_THIRDS_PRIMES = "7,11,13,17,19,23,29,31,37"
+FIVE_THIRDS_B = ["pipeline", "--a", "5", "--b", "3", "--K", "3", "--carries", "-2,2,4",
+                 "--primes", FIVE_THIRDS_PRIMES, "--bidir"]
+# Fields of the producer's stage records compared with its recorded run.
+FIVE_THIRDS_FIELDS = ("p", "vin", "ein", "cyclic", "certified", "retained",
+                      "vout", "eout", "letters", "maxlen")
 # Exact field names, not a general rule dropping time/hash/false-valued fields.
 # Summary prose is redundant with the retained structured results; f1 includes
 # elapsed time there. Compiler/binary identity is provenance, not mathematics.
@@ -170,6 +176,10 @@ class Replay:
                        "computations/word_a", "computations/word_b"):
             for p in sorted((ROOT / folder).rglob("*")):
                 if p.is_file() and "__pycache__" not in p.parts and p.suffix in (".py", ".cpp", ".h"):
+                    self.copy(p.relative_to(ROOT))
+        for folder in ("computations/five_thirds", "computations/additional_obstructions"):
+            for p in sorted((ROOT / folder).rglob("*")):
+                if p.is_file() and "__pycache__" not in p.parts:
                     self.copy(p.relative_to(ROOT))
         for name in ("main-stages.csv", "periodic-components.csv", "known-cases.csv"):
             self.copy(Path("evidence/expected") / name)
@@ -337,6 +347,90 @@ class Replay:
         if not ok:
             raise ValueError(f"Normalized {case} data differ from reference bytes")
 
+    def five_thirds(self, full):
+        """5/3: B's two-direction run, the handoff producer, stage-by-stage comparison,
+        and the companion obstruction.  The preflight stops B at prime 17 and compares
+        with the producer's recorded small dumps."""
+        ref = self.reference["five_thirds"]
+        summary = {"ran": True, "scope": "full" if full else "preflight"}
+        self.run("compile-five-thirds-tools", ["g++", "-O2", "-std=c++17", "computations/word_b/canon_wordgraph.cpp",
+                 "-o", "build/word-replay/canon_wordgraph"])
+        stages = 10 if full else 5
+        label = "five-thirds" if full else "five-thirds-small"
+        raw = f"computations/raw/word-b-{label}-replay"
+        (self.work / raw).mkdir(parents=True, exist_ok=False)
+        args = list(FIVE_THIRDS_B) + ([] if full else ["--stop-after", "4"])
+        directory = self.run("b-" + label, ["build/word-replay/wgb", *args, "--out", raw])
+        b_json = directory / "stdout.log"
+        lines = [json.loads(x) for x in b_json.read_text().splitlines() if x.strip()]
+        b_stages = [x for x in lines if x.get("event") == "stage"]
+        if len(b_stages) != stages:
+            raise ValueError("Incomplete 5/3 run of B")
+        for row, expected in zip(b_stages, ref["stages"]):
+            for key in ("in_vertices", "in_edges", "cyclic", "certified"):
+                if row[key] != expected[key]:
+                    raise ValueError(f"5/3 B stage {row['stage']} differs in {key}")
+        if full:
+            final = [x for x in lines if x.get("event") == "final"]
+            if len(final) != 1 or final[0].get("final_output_empty") is not True:
+                raise ValueError("5/3 B final output graph is not empty")
+            summary["b_final_output_empty"] = True
+            checks = []
+            for entry in ref["b_graphs"]:
+                path = self.work / raw / entry["name"]
+                checks.append({"name": entry["name"],
+                               "matches_reference_sha256": path.stat().st_size == entry["bytes"] and digest(path) == entry["sha256"]})
+            ok = len(checks) == 20 and all(c["matches_reference_sha256"] for c in checks)
+            save(self.out / "comparisons" / "graph-five-thirds-reference.json", {"status": "PASS" if ok else "MISMATCH", "files": checks})
+            if not ok:
+                raise ValueError("5/3 B graphs differ from reference bytes")
+            producer_dir = self.work / "computations/raw/five-thirds-producer-replay"
+            producer_dir.mkdir(parents=True, exist_ok=False)
+            self.run("compile-five-thirds-producer", ["g++", "-O3", "-std=c++17", "computations/five_thirds/certificate53.cpp",
+                     "-o", "build/word-replay/certificate53"])
+            directory = self.run("five-thirds-producer", ["build/word-replay/certificate53", "5", "3", "3", FIVE_THIRDS_PRIMES,
+                                 "25000000", str(producer_dir / "graph")], {"BIDIR": "1"})
+            produced = read(directory / "stdout.log")
+            recorded = read(self.work / "computations/five_thirds/recorded/full_result.json")
+            if produced.get("status") != "success" or len(produced["stages"]) != 10:
+                raise ValueError("5/3 producer did not certify")
+            for key in ("a", "b", "K", "D", "bidir", "splits"):
+                if produced.get(key) != recorded.get(key):
+                    raise ValueError(f"5/3 producer parameter differs: {key}")
+            for left, right in zip(produced["stages"], recorded["stages"]):
+                if any(left[key] != right[key] for key in FIVE_THIRDS_FIELDS):
+                    raise ValueError("5/3 producer stage data differ from its recorded run")
+            if produced["audit"] != recorded["audit"]:
+                raise ValueError("5/3 producer checker coverage differs from its recorded run")
+            last = produced["stages"][-1]
+            if not (last["p"] == 37 and last["retained"] == last["vout"] == last["eout"] == 0
+                    and last["cyclic"] == last["certified"] == 14920):
+                raise ValueError("5/3 producer final graph is not empty")
+            summary["producer_status"] = "success"
+            summary["producer_final_output_empty"] = True
+            prefix, a_json = producer_dir / "graph", directory / "stdout.log"
+        else:
+            prefix = self.work / "computations/five_thirds/recorded/small/graph"
+            a_json = self.work / "computations/five_thirds/recorded/small/cpp_result.json"
+            self.run("five-thirds-reference-small", self.python("computations/five_thirds/reproduce.py", "small",
+                     "--out", self.work / "computations/raw/five-thirds-small-reference-replay"))
+        output = self.work / f"computations/results/replay-compare-{label}.json"
+        self.run("compare-" + label, self.python("computations/word_b/compare_five_thirds.py", "--canon",
+                 "build/word-replay/canon_wordgraph", "--b-dir", raw, "--b-json", b_json,
+                 "--a-prefix", prefix, "--a-json", a_json, "--stages", stages, "--out", output))
+        report = read(output)
+        canonical = [[row["in"]["B"]["sha256"], row["out"]["B"]["sha256"]] for row in report["stages"]]
+        if report["status"] != "all_stages_match" or len(report["stages"]) != stages or canonical != ref["canonical_sha256"][:stages]:
+            raise ValueError("5/3 stage comparison incomplete or different from reference")
+        summary.update(stages_compared=stages, all_stages_match=True)
+        directory = self.run("five-thirds-obstruction", self.python("computations/additional_obstructions/check_return_obstruction.py",
+                             "computations/additional_obstructions/obstruction_53/return_obstruction.json"))
+        if read(directory / "stdout.log") != read(self.work / "computations/additional_obstructions/obstruction_53/verified.json"):
+            raise ValueError("5/3 obstruction check differs from its record")
+        summary["obstruction_prime_pool_23_verified"] = True
+        self.record["five_thirds"] = summary
+        self.write_receipt()
+
     def q75_checks(self):
         for a, b, modulus, cells, carries in ((7, 5, 6, 8, "-4,-2,2,4,6"),
                 (7, 5, 15, 8, "-4,-2,2,4,6"), (7, 5, 10, 8, "-4,-2,2,4,6"),
@@ -364,6 +458,7 @@ class Replay:
             self.historical_graphs(case)
             ref = self.graph_b(case, reference=True)
             self.graph_compare(case, b, ref, label=case + "-reference")
+        self.five_thirds(full=self.args.scope == "full")
         if self.args.scope == "preflight":
             b = self.graph_b("five-halves", small=True)
             ref = self.graph_b("five-halves", reference=True, small=True)

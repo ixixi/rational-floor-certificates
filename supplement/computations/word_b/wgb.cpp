@@ -5,12 +5,22 @@
 //
 // Modes:
 //   wgb pipeline --a A --b B --K K --carries c1,c2,... --primes p1,p2,... --out DIR [--stop-after k]
+//                [--bidir [--bidir-rounds R]] [--no-graphs] [--count-next-lift]
 //   wgb q75 --a A --b B --M M --K K --carries ... --out DIR
 //
 // Pipeline: G0_in = initial one-step graph (direct strict inequalities);
 //   for k = 0..s: G_k_out = Contract(Remove(G_k_in)); G_{k+1}_in = Lift_{p_{k+1}}(G_k_out).
 //   Writes stage<k>_input.txt / stage<k>_output.txt in the normalised WORDGRAPH 2 format
 //   and prints one JSON line per stage with the counts.
+//   --bidir (optional; off by default, so the default pipeline is unchanged): after Contract(Remove(.)),
+//   repeat "reverse -> Contract(Remove(.)) -> reverse back -> Contract(Remove(.))" at most R times
+//   (default 10) or until a round leaves the vertex count unchanged.  Reversal reverses every edge
+//   and the letter order of every word.  Stage JSON "out_*" fields then refer to the graph after all
+//   contractions; a further "bidir" JSON line reports the rounds.  --no-graphs skips the dumps.
+//   --count-next-lift with --stop-after k reports the size of the lift by the next prime without
+//   building it (edges counted with multiplicity before merging identical triples).
+//   The bidir extension was added later from the two-direction exact contraction lemma and its
+//   iteration rule in the 5/3 manuscript addition, without reading the other 5/3 implementations.
 // Q75: full one-step graph on V(M,K) (gcd(q,M)=1), blocks = SCCs, period/phase, rho/eta.
 
 #include <cstdio>
@@ -490,6 +500,83 @@ static Graph prune(const Graph& g, PruneStats& st) {
     return out;
 }
 
+// ---------------------------------------------------------------- reversal (two-direction contraction)
+// Reverse every edge and the letter order of every edge word; vertex names are unchanged.
+// Written from the specification of the two-direction exact contraction (reverse, remove and
+// out-contract, reverse back).  Reversal is an involution on word-labelled graphs.
+static Graph reverse_graph(const Graph& g) {
+    Graph r;
+    r.modulus = g.modulus; r.primes = g.primes; r.K = g.K;
+    r.vq = g.vq; r.vcell = g.vcell;
+    size_t m = g.ne();
+    r.eu.resize(m); r.ev.resize(m); r.ewoff.resize(m); r.ewlen.resize(m); r.emult.resize(m);
+    u64 total = 0;
+    for (size_t e = 0; e < m; ++e) total += g.ewlen[e];
+    r.chars.resize(total);
+    u64 off = 0;
+    for (size_t e = 0; e < m; ++e) {
+        r.eu[e] = g.ev[e]; r.ev[e] = g.eu[e];
+        u32 len = g.ewlen[e];
+        const int8_t* w = g.word(e);
+        for (u32 i = 0; i < len; ++i) r.chars[off + i] = w[len - 1 - i];
+        r.ewoff[e] = off; r.ewlen[e] = len; r.emult[e] = g.emult[e];
+        off += len;
+    }
+    normalize(r, false);
+    return r;
+}
+
+// Copy the words of the retained edges into a fresh array (drops unreferenced letters).
+static void compact_chars(Graph& g) {
+    u64 total = 0;
+    for (size_t e = 0; e < g.ne(); ++e) total += g.ewlen[e];
+    if (total == g.chars.size()) return;
+    vector<int8_t> nc(total);
+    u64 off = 0;
+    for (size_t e = 0; e < g.ne(); ++e) {
+        memcpy(nc.data() + off, g.word(e), g.ewlen[e]);
+        g.ewoff[e] = off; off += g.ewlen[e];
+    }
+    g.chars.swap(nc);
+}
+
+struct BidirStats {
+    u64 iterations = 0;                 // completed reverse/prune/reverse/prune rounds
+    vector<u64> vertices_after_round;   // output vertex count after each round
+    u64 first_out_vertices = 0, first_out_edges = 0, first_out_chars = 0;
+    u64 extra_cyclic = 0, extra_certified = 0;   // cyclic/certified blocks found in later removals
+    double t = 0;
+};
+
+// Implementation rule: one removal and out-contraction (already done by the caller); then repeat
+// "reverse -> removal and out-contraction -> reverse back -> removal and out-contraction" at most
+// max_rounds times, or until a round leaves the vertex count unchanged.
+static Graph bidir_contract(Graph g, int max_rounds, BidirStats& bs) {
+    double t0 = now_sec();
+    for (int it = 0; it < max_rounds; ++it) {
+        if (g.nv() == 0) break;
+        u64 before = g.nv();
+        Graph r = reverse_graph(g);
+        g = Graph();
+        PruneStats s1;
+        Graph rp = prune(r, s1);
+        r = Graph();
+        Graph back = reverse_graph(rp);
+        rp = Graph();
+        PruneStats s2;
+        g = prune(back, s2);
+        back = Graph();
+        compact_chars(g);
+        bs.extra_cyclic += s1.cyclic + s2.cyclic;
+        bs.extra_certified += s1.certified + s2.certified;
+        bs.iterations++;
+        bs.vertices_after_round.push_back(g.nv());
+        if (g.nv() == before) break;
+    }
+    bs.t = now_sec() - t0;
+    return g;
+}
+
 // ---------------------------------------------------------------- lift (W4)
 static bool is_prime(u64 p) { if (p < 2) return false; for (u64 d = 2; d * d <= p; ++d) if (p % d == 0) return false; return true; }
 
@@ -553,6 +640,41 @@ static Graph lift(const Graph& g, u64 p, u64 a, u64 b, LiftStats& ls) {
     return out;
 }
 
+// Size of the next lift without materializing it (--count-next-lift): the same candidate
+// test as lift(), counting kept edges, kept letters and the incident lifted vertices.
+static void count_lift(const Graph& g, u64 p, u64 a, u64 b) {
+    double t0 = now_sec();
+    u64 binv = 0;
+    for (u64 x = 1; x < p; ++x) if ((b % p) * x % p == 1) { binv = x; break; }
+    if (binv == 0) die("no inverse of b mod p");
+    u64 nprov = (u64)g.nv() * (p - 1);
+    vector<char> used(nprov, 0);
+    u64 candidates = 0, kept = 0, letters = 0, am = a % p;
+    for (size_t e = 0; e < g.ne(); ++e) {
+        const int8_t* w = g.word(e);
+        u32 len = g.ewlen[e];
+        for (u64 s = 1; s < p; ++s) {
+            candidates++;
+            u64 q = s; bool ok = true;
+            for (u32 i = 0; i < len; ++i) {
+                i64 t = (i64)(am * q) + (i64)w[i];
+                i64 tm = ((t % (i64)p) + (i64)p) % (i64)p;
+                q = (u64)tm * binv % p;
+                if (q == 0) { ok = false; break; }
+            }
+            if (!ok) continue;
+            kept++; letters += len;
+            used[(u64)g.eu[e] * (p - 1) + (s - 1)] = 1;
+            used[(u64)g.ev[e] * (p - 1) + (q - 1)] = 1;
+        }
+    }
+    u64 vertices = 0;
+    for (char c : used) vertices += c ? 1 : 0;
+    printf("{\"event\":\"lift_count\",\"prime\":%llu,\"lift_candidates\":%llu,\"in_vertices\":%llu,\"in_edges_multiset\":%llu,"
+           "\"in_total_chars_multiset\":%llu,\"t\":%.3f}\n", p, candidates, vertices, kept, letters, now_sec() - t0);
+    fflush(stdout);
+}
+
 // ---------------------------------------------------------------- CLI helpers
 static vector<int> parse_ints(const string& s) {
     vector<int> r; string cur;
@@ -566,19 +688,29 @@ static vector<u64> parse_u64s(const string& s) {
 
 static void run_pipeline(int argc, char** argv) {
     i64 a = 0, b = 0; u32 K = 0; vector<int> carries; vector<u64> primes; string outdir; int stop_after = -1;
+    bool bidir = false, write_graphs = true, count_next_lift = false; int bidir_rounds = 10;
     for (int i = 2; i < argc; ++i) {
         string k = argv[i]; string v = (i + 1 < argc) ? argv[i + 1] : "";
+        if (k == "--bidir") { bidir = true; continue; }
+        if (k == "--no-graphs") { write_graphs = false; continue; }
+        if (k == "--count-next-lift") { count_next_lift = true; continue; }
         if (k == "--a") a = stoll(v); else if (k == "--b") b = stoll(v); else if (k == "--K") K = (u32)stoul(v);
         else if (k == "--carries") carries = parse_ints(v); else if (k == "--primes") primes = parse_u64s(v);
         else if (k == "--out") outdir = v; else if (k == "--stop-after") stop_after = stoi(v);
+        else if (k == "--bidir-rounds") bidir_rounds = stoi(v);
         else die("unknown option " + k);
         ++i;
     }
+    if (bidir_rounds < 0) die("bad --bidir-rounds");
     if (!(a > b && b >= 2) || gcd64(a, b) != 1 || K < 1 || carries.empty() || outdir.empty()) die("bad parameters");
     for (int c : carries) if (!(1 - b <= c && c <= a - 1)) die("carry outside [1-b, a-1]");
     { string cs; for (size_t i = 0; i < carries.size(); ++i) { if (i) cs += ','; cs += to_string(carries[i]); }
-      printf("{\"event\":\"params\",\"a\":%lld,\"b\":%lld,\"K\":%u,\"carries\":\"%s\",\"primes\":\"%s\"}\n",
-             a, b, K, cs.c_str(), primes_str(primes).c_str()); }
+      if (bidir)
+          printf("{\"event\":\"params\",\"a\":%lld,\"b\":%lld,\"K\":%u,\"carries\":\"%s\",\"primes\":\"%s\",\"bidir\":true,\"bidir_rounds\":%d}\n",
+                 a, b, K, cs.c_str(), primes_str(primes).c_str(), bidir_rounds);
+      else
+          printf("{\"event\":\"params\",\"a\":%lld,\"b\":%lld,\"K\":%u,\"carries\":\"%s\",\"primes\":\"%s\"}\n",
+                 a, b, K, cs.c_str(), primes_str(primes).c_str()); }
     fflush(stdout);
     double tstart = now_sec();
     Graph gin = initial_graph(a, b, K, carries);
@@ -588,11 +720,21 @@ static void run_pipeline(int argc, char** argv) {
     for (size_t k = 0; k <= primes.size(); ++k) {
         double ts = now_sec();
         string fin = outdir + "/stage" + to_string(k) + "_input.txt";
-        write_graph(gin, fin, a, b);
+        if (write_graphs) write_graph(gin, fin, a, b);
+        u64 stage_modulus = gin.modulus;
         PruneStats st;
         Graph gout = prune(gin, st);
+        BidirStats bs;
+        if (bidir) {
+            gin = Graph();   // the input is no longer needed
+            compact_chars(gout);
+            bs.first_out_vertices = st.out_vertices; bs.first_out_edges = st.out_edges; bs.first_out_chars = st.out_chars;
+            gout = bidir_contract(std::move(gout), bidir_rounds, bs);
+            st.out_vertices = gout.nv(); st.out_edges = gout.ne(); st.out_max_wlen = 0; st.out_chars = 0; st.out_edges_multiset = 0;
+            for (size_t e = 0; e < gout.ne(); ++e) { if (gout.ewlen[e] > st.out_max_wlen) st.out_max_wlen = gout.ewlen[e]; st.out_chars += gout.ewlen[e]; st.out_edges_multiset += gout.emult[e]; }
+        }
         string fout = outdir + "/stage" + to_string(k) + "_output.txt";
-        write_graph(gout, fout, a, b);
+        if (write_graphs) write_graph(gout, fout, a, b);
         double te = now_sec();
         printf("{\"event\":\"stage\",\"stage\":%zu,\"prime\":%llu,\"modulus\":%llu,"
                "\"in_vertices\":%llu,\"in_edges\":%llu,\"in_max_word_length\":%llu,\"in_total_chars\":%llu,"
@@ -602,7 +744,7 @@ static void run_pipeline(int argc, char** argv) {
                "\"out_vertices\":%llu,\"out_edges\":%llu,\"out_max_word_length\":%llu,\"out_total_chars\":%llu,"
                "\"in_edges_multiset\":%llu,\"out_edges_multiset\":%llu,"
                "\"t_lift\":%.3f,\"t_scc\":%.3f,\"t_cert\":%.3f,\"t_contract\":%.3f,\"t_stage_total\":%.3f}\n",
-               k, k == 0 ? 0ull : primes[k - 1], gin.modulus,
+               k, k == 0 ? 0ull : primes[k - 1], stage_modulus,
                (u64)ls.in_vertices, (u64)ls.in_edges, ls.in_max_wlen, ls.in_chars,
                ls.candidates, ls.kept, ls.isolated_dropped,
                st.scc, st.scc_verified ? "true" : "false", st.cyclic, st.certified, st.uncertified, st.uncertified_vertices,
@@ -610,8 +752,21 @@ static void run_pipeline(int argc, char** argv) {
                st.out_vertices, st.out_edges, st.out_max_wlen, st.out_chars,
                ls.in_edges_multiset, st.out_edges_multiset,
                ls.t, st.t_scc, st.t_cert, st.t_contract, te - ts + ls.t);
+        if (bidir) {
+            string rounds;
+            for (size_t i = 0; i < bs.vertices_after_round.size(); ++i) { if (i) rounds += ','; rounds += to_string(bs.vertices_after_round[i]); }
+            printf("{\"event\":\"bidir\",\"stage\":%zu,\"first_out_vertices\":%llu,\"first_out_edges\":%llu,\"first_out_total_chars\":%llu,"
+                   "\"rounds\":%llu,\"vertices_after_round\":[%s],\"extra_cyclic\":%llu,\"extra_certified\":%llu,"
+                   "\"out_vertices\":%llu,\"out_edges\":%llu,\"out_max_word_length\":%llu,\"out_total_chars\":%llu,\"t_bidir\":%.3f}\n",
+                   k, bs.first_out_vertices, bs.first_out_edges, bs.first_out_chars,
+                   bs.iterations, rounds.c_str(), bs.extra_cyclic, bs.extra_certified,
+                   st.out_vertices, st.out_edges, st.out_max_wlen, st.out_chars, bs.t);
+        }
         fflush(stdout);
-        if ((int)k == stop_after) { printf("{\"event\":\"stopped\",\"after_stage\":%zu}\n", k); break; }
+        if ((int)k == stop_after) {
+            if (count_next_lift && k < primes.size()) count_lift(gout, primes[k], (u64)a, (u64)b);
+            printf("{\"event\":\"stopped\",\"after_stage\":%zu}\n", k); break;
+        }
         if (k == primes.size()) {
             printf("{\"event\":\"final\",\"final_output_empty\":%s,\"final_out_vertices\":%llu,\"final_out_edges\":%llu,\"t_total\":%.3f}\n",
                    (gout.nv() == 0 && gout.ne() == 0) ? "true" : "false", st.out_vertices, st.out_edges, now_sec() - tstart);

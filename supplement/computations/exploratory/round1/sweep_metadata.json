@@ -1,0 +1,79 @@
+{
+  "numerator_min": 3,
+  "numerator_max": 80,
+  "denominator_min": 2,
+  "reduced": true,
+  "initial_K": 4,
+  "candidates": 1886,
+  "prime_order": [
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37,
+    41,
+    43,
+    47,
+    53,
+    59,
+    61,
+    67
+  ],
+  "initial_primes": "All primes dividing 2ab; these are represented by the carry alphabet, not lifted.",
+  "skipped_lift_primes": "Any prime dividing 2ab",
+  "edge_cap": 100000,
+  "letter_cap": 30000000,
+  "word_cap": 12000,
+  "interval_round_limit": 300,
+  "interval_phase_repeat_limit": 50,
+  "timeout_seconds_per_base": 4,
+  "statuses": {
+    "success": 4,
+    "edge_cap": 1882
+  },
+  "successes": [
+    {
+      "a": 3,
+      "b": 2,
+      "lift_primes": [
+        5,
+        7,
+        11
+      ]
+    },
+    {
+      "a": 4,
+      "b": 3,
+      "lift_primes": [
+        5
+      ]
+    },
+    {
+      "a": 5,
+      "b": 4,
+      "lift_primes": [
+        3,
+        7,
+        11,
+        13
+      ]
+    },
+    {
+      "a": 7,
+      "b": 5,
+      "lift_primes": [
+        3,
+        11,
+        13
+      ]
+    }
+  ],
+  "important": "Every non-success in this sweep hit the edge cap. These are NOT impossibility results.",
+  "validation": "The new small 7/5 certificate has a separate exact Python reconstruction and all-element comparison. No such independent reconstruction is claimed for the entire sweep or the additional 5/2 run."
+}

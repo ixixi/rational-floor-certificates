@@ -1,0 +1,37 @@
+{
+  "status": "verified",
+  "base": "5/3",
+  "modulus": 7436429,
+  "residue": 3684006,
+  "interval": [
+    "2/5",
+    "1/2"
+  ],
+  "word_checks": [
+    {
+      "length": 119,
+      "unit_residues_checked": 120,
+      "suffix_endpoint_pairs_checked": 119,
+      "returns_to": 3684006
+    },
+    {
+      "length": 134,
+      "unit_residues_checked": 135,
+      "suffix_endpoint_pairs_checked": 134,
+      "returns_to": 3684006
+    }
+  ],
+  "excluded_prime_pool": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23
+  ],
+  "conclusion": "No certificate of the paper procedure, or its two-direction pseudo-orbit-sound extensions, using only these primes, at any cell count or prime-power exponents.",
+  "not_concluded": "No claim of a true prime-avoiding orbit or failure of infinitely many composite terms."
+}

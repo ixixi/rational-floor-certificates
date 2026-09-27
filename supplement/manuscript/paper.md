@@ -11,14 +11,19 @@ For every real number \(\xi>0\), we give computer-assisted proofs that
 \(2,3,5,11,13\) for infinitely many positive integers \(n\), and that
 \(\lfloor\xi(5/2)^n\rfloor\) is divisible by at least one of
 \(2,3,7,11,13,17,19,23,29,31\) for infinitely many positive integers
-\(n\). Consequently both sequences contain infinitely many composite
+\(n\), and that \(\lfloor\xi(5/3)^n\rfloor\) is divisible by at least one
+of \(2,3,7,11,13,17,19,23,29,31,37\) for infinitely many positive integers
+\(n\). Consequently all three sequences contain infinitely many composite
 terms. The proofs represent an orbit avoiding the given primes by a walk in
 a finite labelled graph whose vertices record residues and fractional
 cells and whose edges carry signed carries. Components whose output
 depends only on a cyclic phase are excluded by an elementary
 nonperiodicity lemma. In the word-labelled construction the edges carry
 finite carry words; deterministic paths are contracted exactly, and each
-new prime is imposed at every intermediate time of a word. For the ratio
+new prime is imposed at every intermediate time of a word. For
+\(5/3\) chains of in-degree one are also contracted exactly, which keeps
+the largest graph at about \(2.1\cdot10^7\) vertices instead of about
+\(3.1\cdot10^8\). For the ratio
 \(7/5\) we also prove an explicit waiting-time bound: if
 \(P=\lfloor\xi\rfloor>13\) then some term with index at most
 \(428+12L(P)\), \(L(P)=\min\{h\ge0:5^h\ge P+2\}\), is divisible by one
@@ -28,14 +33,18 @@ enlarge the class of finitely certifiable bases; the method cannot
 terminate when \(a\ge2\operatorname{rad}M\); and the product \(R\) of the
 auxiliary primes not dividing \(2ab\) must satisfy
 \(a\le2R\,J(N_0)\) for the Jacobsthal function \(J\), whence
-\(R\ge a^{1-o(1)}\) by an elementary bound. Every adopted finite
-computation was performed by two implementations with disjoint scientific
-cores, which agree element by element on all compared finite data.
-Lean proofs cover both divisibility theorems and their compositeness
+\(R\ge a^{1-o(1)}\) by an elementary bound. The base \(5/3\) belongs to
+the finitely certifiable class, and no certificate of this kind for
+\(5/3\) uses only primes up to \(23\). Every adopted finite
+computation, including the certificate computation for \(5/3\), was
+performed by two implementations with disjoint scientific cores, which
+agree element by element on all compared finite data; the \(5/3\)
+obstruction witness is checked by one direct program.
+Lean proofs cover all three divisibility theorems and their compositeness
 corollaries: the one-step proof for \(7/5\) is kernel-checked, and the
-word-labelled proofs combine kernel-checked soundness theorems with
-`native_decide` finite evaluations, which add trust in the compiler
-and native evaluation.
+word-labelled proofs, including the one for \(5/3\), combine kernel-checked
+soundness theorems with `native_decide` finite evaluations, which
+add trust in the compiler and native evaluation.
 
 ## 1. Introduction
 
@@ -54,7 +63,7 @@ for any \(b\ge3\) with \(b-1\) not squarefree
 other integer bases ([Dub06, Conjecture 3](#ref-dub06)). In this
 terminology, the results recalled next give unavoidable sets for the
 rational bases \(3/2\), \(4/3\), and \(5/4\), and Theorem 1 gives
-unavoidable sets for \(7/5\) and \(5/2\).
+unavoidable sets for \(7/5\), \(5/2\), and \(5/3\).
 
 In 1967, Forman and Shapiro [FS](#ref-fs) proved that the integer
 parts of the powers of \(3/2\) and \(4/3\) contain infinitely many
@@ -88,10 +97,17 @@ that, for every \(\xi>0\), the *shifted* sequence
 [N, Theorem 1.4, p.25](#ref-n); inside the proof, the same argument is
 noted to apply to \(\lfloor\xi(5/2)^n\rfloor-1+30k\) for every fixed
 integer \(k\) ([DN, p.646](#ref-dn), [N, p.26](#ref-n)).
+For the ratio \(5/3\), Novikas [N, Theorem 1.5(ii), p.26](#ref-n)
+states that, for every \(\xi>0\), the nearest integers
+\(\lfloor\xi(5/3)^n+1/2\rfloor\) include infinitely many terms divisible
+by \(2\) or \(3\).
 The rounding and shift conventions matter here. The present results
 concern the unshifted integer parts. For \(5/2\) the shift changes the
 alphabet of admissible carries, and our certificate uses a different
-prime set.
+prime set. For the unshifted integer parts with ratio \(5/3\), avoiding
+\(2\) and \(3\) leaves the carry alphabet \(\{-2,2,4\}\) (Lemma 74), and
+our certificate uses the further primes \(7,11,\ldots,37\); the
+nearest-integer result is not used.
 
 **Theorem 1 (Main Theorem).** For every \(\xi\in\mathbb R\) with
 \(\xi>0\) and every \(N\in\mathbb N\):
@@ -107,13 +123,23 @@ prime set.
 \[
 \begin{aligned}
 \gcd\!&\left(\left\lfloor\xi(5/2)^n\right\rfloor,40112098026\right)>1,\\
-40112098026&=2\cdot3\cdot7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31.
+40112098026&=2\cdot3\cdot7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31;
 \end{aligned}
 \tag{2}
 \]
 
-The indices in (i) and (ii) are quantified separately; no common index
-is asserted. The modulus in (2) does not contain the prime \(5\).
+(iii) there is an integer \(n\ge\max(N,1)\) such that
+\[
+\begin{aligned}
+\gcd\!&\left(\left\lfloor\xi(5/3)^n\right\rfloor,1484147626962\right)>1,\\
+1484147626962&=2\cdot3\cdot7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31\cdot37.
+\end{aligned}
+\tag{2a}
+\]
+
+The indices in (i), (ii), and (iii) are quantified separately; no common
+index is asserted. The moduli in (2) and (2a) do not contain the prime
+\(5\).
 
 Here and below \(\mathbb N=\{0,1,2,\ldots\}\), and for an integer \(q\)
 we use \(\gcd(q,M)=\gcd(|q|,M)\). The formulation with arbitrary \(N\)
@@ -123,7 +149,7 @@ A positive integer is *composite* if it equals \(uv\) with integers
 
 **Corollary 2.** For every \(\xi>0\), each of the sequences
 \[
-\bigl(\lfloor\xi(7/5)^n\rfloor\bigr)_{n\ge1}\qquad \text{and}\qquad \bigl(\lfloor\xi(5/2)^n\rfloor\bigr)_{n\ge1}
+\bigl(\lfloor\xi(7/5)^n\rfloor\bigr)_{n\ge1},\qquad \bigl(\lfloor\xi(5/2)^n\rfloor\bigr)_{n\ge1},\qquad \text{and}\qquad \bigl(\lfloor\xi(5/3)^n\rfloor\bigr)_{n\ge1}
 \]
 contains infinitely
 many composite terms.
@@ -191,7 +217,8 @@ the fractional cells; it proves (1). The word-labelled construction (Section 4)
 labels edges by finite carry words, contracts deterministic paths without
 changing their output, and lifts the graph by one new prime at a time
 while checking the residues at every intermediate time of each word; it
-proves (2) and gives a second proof of (1). A finite rank certificate on
+proves (2) and gives a second proof of (1). With the additional exact
+contraction of in-degree-one chains (Appendix F) it proves (2a). A finite rank certificate on
 the complete one-step graph, combined with a finite version of the
 nonperiodicity lemma, gives Theorem 3 (Section 6).
 
@@ -249,14 +276,14 @@ these components and applies the return theorem to their periodic words.
 For a nonintegral base, Lemma 4 shows that no orbit remains in such a
 component, so it is deleted; the certificates here reduce the graph to
 the empty graph and thereby yield the unavoidable sets of Theorem 1. The
-result of [DJ22](#ref-dj22) does not apply to \(7/5\) or \(5/2\).
+result of [DJ22](#ref-dj22) does not apply to \(7/5\), \(5/2\), or \(5/3\).
 Third, the word-labelled contraction with prime conditions imposed at
 every intermediate time, the waiting-time bound of Theorem 3, and the
 normal-form and obstruction theorems of Sections 7 and 8 are not part of
 [S26](#ref-s26). The computation of [S26](#ref-s26) is a
 methodological comparison, not a dependency of the proofs given here.
 The specific contributions here are the finite certificates for the
-unshifted \(7/5\) and \(5/2\) sequences with their exact verification,
+unshifted \(7/5\), \(5/2\), and \(5/3\) sequences with their exact verification,
 the word-labelled contraction with prime conditions imposed at every
 intermediate time, the waiting-time bound, and the structural results
 described next.
@@ -283,13 +310,18 @@ not dividing \(2ab\), \(N_0\) is the product of the odd primes dividing
 theorems are statements about the non-termination of a fixed procedure.
 They are not counterexamples to any arithmetic statement, and they do not
 assert that any base fails to have infinitely many composite terms.
+Appendix F shows that \(5/3\) belongs to the certifiable class and that
+every certificate of this kind for \(5/3\) uses a prime at least \(29\).
 
 **Verification.** Every adopted finite computation was carried out by two
 implementations whose scientific cores (edge enumeration, component
 decomposition, certification, contraction, lifting) were written
 separately from the mathematical specification; their complete graph
-data were compared element by element. Section 9 describes their
-provenance and the comparison. Lean proofs establish both parts of
+data were compared element by element. For \(5/3\) the two
+implementations are a C++ producer with an embedded checker and a
+separately written extension of the second word-labelled implementation.
+Section 9 describes their
+provenance and the comparison. Lean proofs establish all three parts of
 Theorem 1 and Corollary 2. The one-step proof for \(7/5\) uses a
 kernel-checked finite certificate; the word-labelled proofs use
 kernel-checked soundness theorems and `native_decide` finite
@@ -303,7 +335,9 @@ certificates. Section 5 gives the finite calculations for (1) and (2).
 Section 6 proves Theorem 3. Sections 7 and 8 contain the structural and
 obstruction results. Section 9 describes the verification and the exact
 scope of the formalization. Section 10 states further results whose proofs are given in the
-appendices, and Section 11 lists open problems.
+appendices, and Section 11 lists open problems. Appendix F proves
+(2a), the \(5/3\) part of Corollary 2, and the related structural
+statements for \(5/3\).
 
 <!-- BEGIN PUBLIC ADDITION figure:certificate-flow -->
 The two finite certification procedures share the same tail-preservation argument, summarized below.
@@ -937,7 +971,9 @@ the time \(n_2\) existing by Lemma 15. ∎
 Contraction is used here only between removal and lifting; the cell count
 \(K\) is fixed at the initial stage of the word method, and cell
 coordinates enter only through the initial edges. We do not use, and do
-not claim, any refinement of cells after a contraction.
+not claim, any refinement of cells after a contraction. For the ratio
+\(5/3\) the in-direction counterpart of this contraction is also used;
+it is defined and proved exact in Appendix F.2 (Lemma 75).
 
 <!-- BEGIN PUBLIC ADDITION figure:word-contraction -->
 Contraction changes the segmentation of the output word while preserving every letter and its order.
@@ -1309,7 +1345,11 @@ periodic can remove such a component from the same finite graph.
 Further removal requires additional arithmetic or realizability
 information.
 
-## 5. The two rational bases
+## 5. The rational bases
+
+This section treats \(7/5\) and \(5/2\). The certificate for \(5/3\),
+which also uses the contraction of in-degree-one chains, is given in
+Appendix F.
 
 ### 5.1 The ratio 7/5 by the one-step method
 
@@ -1578,16 +1618,21 @@ primes \(3,7,11,13,17,19,23,29,31\), each distinct, coprime to
 M=2\cdot3\cdot7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31
 =40112098026
 \]
-is (2). ∎
+is (2).
+
+(iii) Part (iii) is proved in Appendix F.3 from Theorem 76 and Table 17. ∎
 
 **Proof of Corollary 2.** By (7), eventually \(Q_n>13\) for the
-sequence with ratio \(7/5\) and \(Q_n>31\) for the sequence with ratio
-\(5/2\). Given any lower bound on the index, apply Theorem 1 beyond both
+sequence with ratio \(7/5\), \(Q_n>31\) for the sequence with ratio
+\(5/2\), and \(Q_n>37\) for the sequence with ratio \(5/3\). Given any
+lower bound on the index, apply Theorem 1 beyond both
 that bound and the growth threshold. A prime divisor of the gcd in (1)
-lies in \(\{2,3,5,11,13\}\), and one of the gcd in (2) lies in
-\(\{2,3,7,11,13,17,19,23,29,31\}\); in either case it is a proper divisor
+lies in \(\{2,3,5,11,13\}\), one of the gcd in (2) lies in
+\(\{2,3,7,11,13,17,19,23,29,31\}\), and one of the gcd in (2a) lies in
+\(\{2,3,7,11,13,17,19,23,29,31,37\}\); in each case it is a proper divisor
 of \(Q_n\). Hence \(Q_n\) is composite, at arbitrarily large indices.
-This is Corollary 20 in both cases. ∎
+This is Corollary 20 in the first two cases, and the same argument with
+Theorem 76 in the third. ∎
 
 ## 6. Quantitative waiting time for 7/5
 
@@ -2420,7 +2465,8 @@ contains every prime dividing \(2ab\). For example, (1) uses
 \(M=4290\), which does not contain \(7\), while the normal form for
 \(7/5\) uses \(\{2,5,7\}\cup\{3,11,13\}\). Membership of
 \(3/2,4/3,5/4,7/5,5/2\) in \(\mathcal F_{\rm cert}\) follows from the
-certificates of Section 5 (Tables 1, 3, 4, 6); no other base is claimed
+certificates of Section 5 (Tables 1, 3, 4, 6), and membership of \(5/3\)
+is Corollary 77 in Appendix F; no other base is claimed
 to belong to it, and no simple inequality or congruence in \(a,b\)
 characterizes the class.
 
@@ -2443,6 +2489,8 @@ of such a witness is realized by a true orbit, in the form
 \(\exists\xi\ \forall N\). Procedures that use information available only
 for true orbits (integrality of \(Q_n\), forward realizability, or the
 recurrence hypothesis of Section 10) are not covered by these theorems.
+Corollary 78 in Appendix F.5 applies Lemma 69 to \(5/3\) with the primes
+up to \(23\).
 
 **Lemma 38 (type of the obstruction).** Let \(M\ge2\). If there is a
 right- or left-directed \(M\)-pseudo-orbit whose carry sequence is not
@@ -3048,14 +3096,14 @@ The repository README describes the contents; REPRODUCE.md and ENVIRONMENT.md ex
 
 ### 9.1 What the finite computations establish
 
-The table entries of Section 5 and Table 7 are summaries, not the
+The table entries of Section 5, Table 7, and Table 17 are summaries, not the
 certificates. The mathematical obligations discharged by the finite
 computations, and checked element by element by two implementations,
 are the following.
 
 1. *Initial coverage.* The initial vertex set is the full set of legal
    states (all of \(V(M,K_0)\) for Table 1 and for Table 7; all \(K\)
-   cells for Tables 4 and 6).
+   cells for Tables 4, 6, and 17).
 2. *Complete edge sets.* Every edge satisfying (E1)–(E3), or the initial
    inequalities of Theorem 19, is present; the lift of every edge is
    computed for every starting residue.
@@ -3073,9 +3121,10 @@ are the following.
 7. *Output-preserving contraction.* Macro vertices are exactly the
    vertices of out-degree at least two (plus anchors), each chain of
    out-degree-one vertices ends at a macro vertex, and macro words are the
-   concatenations of the chain words.
+   concatenations of the chain words; for the backward passes of
+   Table 17, the same holds with in-degrees and backward chains.
 8. *Final emptiness.* The last retained set (Table 1) or the last output
-   graph (Tables 4 and 6) is empty; for Table 7, no cyclic block is
+   graph (Tables 4, 6, and 17) is empty; for Table 7, no cyclic block is
    uncertified.
 
 The strongly connected components themselves are verified by sufficient
@@ -3191,7 +3240,7 @@ outputs of the programs.
 
 ### 9.4 The Lean formalization and its boundary
 
-A Lean formalization covers both parts of Theorem 1 and Corollary 2,
+A Lean formalization covers all three parts of Theorem 1 and Corollary 2,
 with different trust bases for the finite evaluations. It uses
 Lean 4.29.1 and Mathlib at commit
 `5e932f97dd25535344f80f9dd8da3aab83df0fe6`, with transitive dependencies
@@ -3231,8 +3280,10 @@ vertices, inclusion of all refined states at the next stage, and an empty
 final retained set. The following declarations, all with namespace prefix
 `MathPaper.`, identify the principal formal dependencies.
 
-**Table 8.** Principal Lean declarations. All names have prefix
-`MathPaper.`; `Pipe.` denotes the executable word-labelled pipeline.
+**Table 8.** Principal Lean declarations. All names except those beginning with
+`WordExec.` have prefix `MathPaper.`; `Pipe.` denotes the
+executable word-labelled pipeline, and `WordExec.` the precompiled
+two-direction pipeline.
 
 | Mathematical content | Lean declaration |
 | :--- | :--- |
@@ -3258,6 +3309,12 @@ final retained set. The following declarations, all with namespace prefix
 | Finite word-labelled evaluations | `five_halves_ok`, `seven_fifths_ok` |
 | Theorem 1(ii) and Corollary 2 for \(5/2\) | `floor_five_halves_visits`, `floor_five_halves_composite` |
 | Theorem 1(i), alternative word-labelled proof | `floor_seven_fifths_visits_word` |
+| Lemma 75(a), in-degree-one contraction | `macroIn_recurrent`, `contractIn_tail`, `WordCertIn.stage_tail` |
+| Theorem 76 in certificate form | `StageReduce.tail`, `word_finite_success_visits_B`, `word_finite_success_composite_B` |
+| Lemma 74 | `carry_alphabet_53` |
+| Two-direction pipeline soundness | `WordExec.checkStageIn_sound`, `WordExec.compactStage_sem`, `WordExec.wordPipelineBidir_sound` |
+| Finite two-direction evaluation | `five_thirds_ok` |
+| Theorem 1(iii) and Corollary 2 for \(5/3\) | `floor_five_thirds_visits`, `floor_five_thirds_composite` |
 
 The closed term `mainFiniteSuccess : FiniteSuccess 7 5 4290` discharges
 the certificate argument of the general reduction. The two one-step final theorems
@@ -3343,7 +3400,7 @@ the recorded dependencies. The added trust is in the compiler and native
 evaluation of the Lean pipeline, not in a Python or C++ success flag,
 exported graph, or hash. These final theorems take only \(\xi>0\) and
 \(N\), with no certificate argument, and give exactly the quantifiers
-and moduli of Theorem 1 and the \(5/2\) part of Corollary 2.
+and moduli of Theorem 1(i), (ii) and the \(5/2\) part of Corollary 2.
 
 The added modules, aggregate build, and axiom display were accepted.
 The [formalization guide](../../supplement/FORMALIZATION.md) records their coverage and axiom boundary. A separate
@@ -3358,6 +3415,52 @@ evaluation of a smaller pipeline instance stopped at opaque hashing
 operations, so neither word-labelled evaluation is claimed as a
 kernel-only finite computation.
 
+<!-- BEGIN PUBLIC ADDITION five-thirds:lean -->
+**The certificate for 5/3.** The in-degree-one contraction is
+formalized in the original direction, without reversal. In a retained block
+the checker verifies a macro-vertex set and, for every other vertex, a
+backward chain: a word read from a macro vertex and that vertex. The recorded
+chain lengths are bounded by a stated bound. Along a walk avoiding macro
+vertices the chain length increases strictly with every edge, so macro vertices
+recur, and consecutive visits delimit macro edges of the output graph with the
+same words. The formal proof uses neither SCCs nor the finiteness of the graph
+(`macroIn_recurrent`, `contractIn_tail`). A stage may consist
+of any finite sequence of checked forward and backward passes
+(`StageReduce`); between passes the words are compacted and the vertices
+renumbered, which preserves coverings through an arbitrary vertex map.
+
+The executable two-direction pipeline is the module `WordExec`. It
+contains copies of the data types, checker, auxiliary computations, lift, and
+initial graph of the pipeline above, and adds the in-direction checker and
+computation, the compaction, and the iteration rule of Appendix F.3. It does
+not import Mathlib, and it is precompiled, so that the finite evaluation runs
+compiled code. The kernel-checked theorem
+`WordExec.wordPipelineBidir_sound` proves that
+`WordExec.wordPipelineBidir a b K alphabet primes = true` implies
+`WordFiniteSuccessB a b K alphabet primes`, the certificate form of
+Theorem 76. The accepted finite evaluation is
+```lean
+WordExec.wordPipelineBidir 5 3 3 [-2, 2, 4] [7, 11, 13, 17, 19, 23, 29, 31, 37] = true
+```
+proved by `native_decide` with the generated axiom
+`five_thirds_ok._native.native_decide.ax_1_1`. With Lemma 74
+(`carry_alphabet_53`), the final theorems
+`floor_five_thirds_visits` and `floor_five_thirds_composite`
+take only \(\xi>0\) and \(N\) and give the quantifiers and modulus of (2a) and
+the \(5/3\) part of Corollary 2. Their axiom dependencies are the three
+standard axioms and this generated axiom; the theory and checker soundness use
+only the standard axioms. The trust base is therefore of the same kind as for
+\(5/2\), with the compiled code of `WordExec` evaluated natively. The
+evaluation took 657 s with a peak resident set of 12.7 GiB on the
+machine of Section 9.5, more than the harness limit of the other modules; the
+separate limit for this module is stated in the
+[formalization guide](../FORMALIZATION.md). The Lean pipeline uses
+the same iteration rule as the C++ implementations, and its per-stage counts
+agree with Table 17; they are diagnostics and not part of the proof.
+The independent audit of the word-labelled proof described below was made
+before this addition and does not cover the \(5/3\) modules.
+<!-- END PUBLIC ADDITION five-thirds:lean -->
+
 **Boundary.** The formalization establishes the arithmetic conclusions
 of Theorem 1 and Corollary 2 with the trust bases just stated. It does
 not formally identify the reported blocks as SCCs, prove that \(h\)
@@ -3371,8 +3474,78 @@ formalized. Positive periods are required by the checker, and lifting
 uses the forward recurrence. Theorem 3, Section 6 (including the
 waiting-time certificate of Table 7), Sections 7–8, and the further
 results of Section 10 and Appendices B–E also remain outside the
-formalization. Their evidence consists of the proofs in this paper and,
+formalization. In Appendix F, Lemma 75(b), Corollaries 77 and 78, and the
+counts of Tables 17 and 18 are not formalized. Their evidence consists of the proofs in this paper and,
 where finite computation is required, the recorded A/B comparisons.
+
+<!-- BEGIN PUBLIC ADDITION five-thirds:verification -->
+### 9.5 The computation for 5/3
+
+The calculation of Table 17 was performed by two implementations with
+disjoint scientific cores. The obligations of Section 9.1 apply to it,
+with the backward passes of Appendix F.3 added to the contraction
+conditions.
+
+*The producer* (`supplement/computations/five_thirds/`) is the
+program supplied with the research notes for this addition. It is a
+C++17 program that enumerates the initial edges, lifts every edge for
+every starting residue, computes SCCs, applies the phase test, and
+contracts in both directions, the backward pass being computed by
+reversal as in Lemma 75(b). An embedded checker, compiled into the same
+program, verifies during the full run the initial edges by direct
+inequalities, all lifted edges by a forward calculation of the surviving
+residue sets, sufficient rank and all-letter phase conditions on every
+edge (without assuming that the blocks are SCCs), and the reconstruction
+of every contracted edge. Counted with stage multiplicity, the full run
+checked \(44536828\) lifted edges, \(126567962\) rank, retention, and
+phase edges, \(1508656\) periodic-phase letters, and \(86280584\)
+contracted edges. The producer and its checker share representations
+and development lineage. A separate literal Python program of the same
+lineage reconstructs the first five stages, through the prime \(17\),
+and agrees on all ten of their input and output graphs (\(5834\)
+vertices, \(13260\) edges, and \(52757\) letters in total).
+
+*Implementation B* of Section 9.3 was extended by an option for
+backward passes: every edge and every word is reversed, removal and
+out-contraction are applied, and the result is reversed back, with the
+iteration rule of Appendix F.3. The extension was written from the
+statement of Lemma 75 and the iteration rule, without reading the
+producer, its checker, or its Python program; until the comparison was
+complete, these were only compiled and run. The default pipeline of B is
+unchanged: without the new option, all its graphs for Tables 4 and 6 are
+byte for byte identical to those of the previous version.
+
+*Comparison.* The producer writes the input and output graphs of each
+stage with its own vertex numbering, recording only the cells. B names a
+vertex by its residue and cell; its vertices are ordered by cell and then
+by the residues modulo the added primes in the order of addition. In
+this order, both graphs of each pair are written in a common canonical
+text (the vertex cells and the sorted word-labelled triples), and the
+two texts are compared byte for byte. All \(20\) graphs of Table 17
+agree, \(35289089\) vertices, \(48786290\) edges, and \(1245585922\)
+letters in total, as do the per-stage numbers of cyclic and certified
+components, retained vertices, letters, and maximal word lengths. B's
+graph files and the digests of the canonical texts are recorded in
+[checks/reference.json](../../checks/reference.json). B without backward passes gives
+the first columns of Table 18.
+
+*Environment and limits.* Both full runs used g++ 11.4.0 under Linux
+(WSL2) on one machine with 62 GiB of memory; B took 178 s with a peak
+resident set of 2.4 GiB, the producer 185 s with 2.5 GiB, and the
+comparison 223 s. The public entry point runs each command under the
+limits stated in the [reproduction guide](../../REPRODUCE.md). Wall times are recorded in the run records and are
+not performance claims.
+
+*Scope.* The independence concerns the scientific cores, as in
+Section 9.3. B's extension was written in a separate AI-assisted session
+from the same mathematical specification as the producer; no independent
+human review of the \(5/3\) computation is claimed. The companion
+obstruction of Appendix F.5 is checked by exact rational arithmetic from
+the recorded words, without a search graph, by one direct program; it
+has no second implementation. Section 9.4 describes the Lean formalization of Theorem 1(iii); its
+pipeline, which follows the same iteration rule, reproduces the per-stage
+counts of Table 17.
+<!-- END PUBLIC ADDITION five-thirds:verification -->
 
 ## 10. Further results deferred to the appendices
 
@@ -3436,13 +3609,15 @@ all-coefficient statement reduces to an exact integer halting problem
 along that family (Theorem 68, using known results on narrow arithmetic
 progressions of primes as external inputs), explicit return-word
 obstructions for \(9/7\) and \(6/5\) (Corollary 70), and the items
-deferred from Section 8.
+deferred from Section 8. Appendix F contains the \(5/3\) certificate
+used for Theorem 1(iii), together with Corollaries 77 and 78.
 
 ## 11. Open problems
 
 1. *Further bases and infinite families.* It remains to determine which
    further rational bases admit finite certificates and to construct a
-   uniform certificate for an infinite family. Theorem 44 gives a
+   uniform certificate for an infinite family. Appendix F adds \(5/3\) to
+   the bases known to belong to \(\mathcal F_{\rm cert}\). Theorem 44 gives a
    necessary budget of external primes, \(R\ge a^{1-o(1)}\), but no construction meeting it.
    Eliminating specific return words (Appendix E.3) and covering all
    recurrent components are different tasks.
@@ -3461,7 +3636,8 @@ deferred from Section 8.
    the class \(\mathcal F_{\rm cert}\) is open. Whether the halting
    program of Appendix C halts for every \(t\) (Theorem 58) is open.
 5. *Minimality and subsequences.* The certificates give finite prime
-   sets without establishing their minimality. Whether the conclusions
+   sets without establishing their minimality; for \(5/3\),
+   Corollary 78 shows only that some prime at least \(29\) is needed. Whether the conclusions
    hold along prescribed arithmetic progressions or sparse subsequences
    of indices, and what bounds hold for the density of prime terms,
    remain separate questions.
@@ -3533,6 +3709,20 @@ The reference data and artifact hashes are recorded in [checks/reference.json](.
 and the [source manifest](../../MANIFEST.json). Hashes identify finite artifacts; they do not
 replace element-wise comparison or the mathematical completeness arguments.
 
+**The ratio 5/3.** The common entry points include the computation of
+Section 9.5: the preflight runs implementation B through the prime \(17\) and
+compares it with the producer's recorded small graphs, and the full run executes
+both implementations through all ten stages, compares all \(20\) stage graphs,
+and records in its receipt that both final output graphs are empty. The
+companion obstruction of Appendix F.5 is checked in both the preflight and the full run. The following commands
+show the inputs; the output directories must not exist:
+
+```sh
+../certificate-manual/build/wgb pipeline --a 5 --b 3 --K 3 --carries -2,2,4 --primes 7,11,13,17,19,23,29,31,37 --bidir --out ../certificate-manual/OUT53
+python3 -B supplement/computations/five_thirds/reproduce.py all --out ../certificate-manual/PRODUCER53
+python3 -B supplement/computations/additional_obstructions/check_return_obstruction.py supplement/computations/additional_obstructions/obstruction_53/return_obstruction.json
+```
+
 **One-step computation.** The public reproduction procedure also
 regenerates the four cases of Tables 1–3 with both one-step implementations
 and compares their complete outputs. Run without Python optimization,
@@ -3556,11 +3746,15 @@ python3 supplement/lean/tools/check_finite.py \
   MathPaper.Word.Pipeline.Data MathPaper.Word.Pipeline.Check \
   MathPaper.Word.Pipeline.Compute MathPaper.Word.Pipeline.LiftArr \
   MathPaper.Word.Pipeline.Initial MathPaper.Word.Pipeline.Main \
-  MathPaper.Word.FiveHalves MathPaper.Word.SevenFifths MathPaper.Word
+  MathPaper.Word.FiveHalves MathPaper.Word.SevenFifths \
+  MathPaper.Word.InContract MathPaper.Word.Bidir WordExec \
+  MathPaper.Word.ExecSound MathPaper.Word.FiveThirds MathPaper.Word
 ```
 
-The `FiveHalves` and `SevenFifths` targets rerun the two finite
-`native_decide` evaluations when built from a fresh project cache.
+The `FiveHalves`, `SevenFifths`, and `FiveThirds` targets
+rerun the three finite `native_decide` evaluations when built from a
+fresh project cache; the last needs about 13 GiB of memory and
+11 minutes on the machine of Section 9.5.
 Then run the final targets, aggregate build, and `Audit.lean` axiom
 display as instructed in the [reproduction guide](../../REPRODUCE.md). Compare the dependencies with
 the declared axiom boundary in the [formalization guide](../../supplement/FORMALIZATION.md). The additional evaluation
@@ -5379,9 +5573,292 @@ the update; exactness follows by induction as in Proposition 57. ∎
 
 Whether adjoining this test changes the class of Theorem 37 is not
 determined here; an exploratory computation with it is not adopted,
-and the certificates of Section 5 do not use it. The witnesses of
+and the certificates of Section 5 and Appendix F do not use it. The witnesses of
 Theorem 42 and Lemma 69 pass this test at every intermediate time,
 which distinguishes them from spurious local paths.
+
+<!-- BEGIN PUBLIC ADDITION five-thirds:appendix -->
+## Appendix F. The ratio 5/3
+
+This appendix proves Theorem 1(iii). The certificate is a word-labelled
+certificate as in Section 4 with one additional operation, the exact
+contraction of in-degree-one chains (Section F.2). Section F.4 shows that
+\(5/3\) belongs to the class \(\mathcal F_{\rm cert}\) of Section 7.4,
+and Section F.5 records a companion obstruction for the primes up to
+\(23\). The verification of the finite calculation is described in
+Section 9.5.
+
+### F.1 The carry alphabet and the initial graph
+
+**Lemma 74.** Let \(a=5\), \(b=3\). If \(Q_n\) and \(Q_{n+1}\) are odd and
+\(3\nmid Q_n\), then
+\[
+c_n\in\{-2,2,4\}.
+\]
+Hence (H) holds with
+\[
+S_0=\{2,3\}\qquad \text{and}\qquad \mathcal C=\{-2,2,4\}.
+\]
+
+**Proof.** By (6), \(-2\le c_n\le4\). Since
+\(c_n=3Q_{n+1}-5Q_n\equiv Q_{n+1}+Q_n\pmod2\), the carry is even. If
+\(c_n=0\), then \(3Q_{n+1}=5Q_n\) and \(3\mid Q_n\). ∎
+
+No condition modulo \(5\) is used, and the modulus of (2a) does not
+contain the prime \(5\). The general alphabet of Section 7.1 is the same
+set: \(\mathcal C(5,3)=\{-2,2,4\}\).
+
+With \(K=3\), the initial graph \(G_0^{\rm in}\) of Theorem 19 has the
+vertices \(j\in\{0,1,2\}\) and the six edges \((j,(c),k)\) with
+\(c\in\{-2,2,4\}\) and
+\[
+5j-3(k+1)<3c<5(j+1)-3k,
+\]
+listed in Table 16.
+
+**Table 16.** The six initial edges for \(5/3\), \(K=3\), as pairs (carry, target cell).
+
+| Source cell \(j\) | Edges \((c,k)\) |
+| --- | --- |
+| 0 | \((-2,2)\) |
+| 1 | \((2,0),(2,1)\) |
+| 2 | \((2,1),(2,2),(4,0)\) |
+
+### F.2 Exact contraction of in-degree-one chains
+
+Let \(G'=R(G)\), with identical triples merged, and count in-degrees
+\(\deg^-(v)\) in \(G'\). Let \(B^-\) consist of all vertices of \(G'\)
+with \(\deg^-\ge2\), together with one anchor (the least vertex) in every
+component that contains no such vertex. For \(v\in B^-\) and each
+in-edge \(e=(u,w,v)\) of \(v\): while \(u\notin B^-\), take the unique
+in-edge \((u',w',u)\) of \(u\) and replace \(w\leftarrow w'w\),
+\(u\leftarrow u'\). When first \(u\in B^-\), record the macro edge
+\((u,w,v)\). The *in-contraction* \(P^-(G')\) has vertex set
+\(B^-\) and the set of these macro edges. For a word-labelled graph
+\(H\), let \(\operatorname{rev}(H)\) reverse every edge and the letter
+order of every word.
+
+**Lemma 75 (exact in-degree-one contraction).** (a) The backward iteration terminates, every infinite walk of \(G'\)
+visits \(B^-\) infinitely often, and each segment of the walk between
+consecutive visits to \(B^-\) is a macro edge of \(P^-(G')\), with the
+same word. Consequently, if \(G'\models n_1\), then
+\(P^-(G')\models n_2\), where \(n_2\) is the first time at or after
+\(n_1\) at which the covering walk visits \(B^-\).
+
+(b) If a cyclic SCC of \(\operatorname{rev}(G)\) satisfies (19) with
+\(h,\lambda,d\), then it satisfies (19) in \(G\) with \(h',\lambda',d\),
+\[
+h'(x)=-h(x),\qquad \lambda'_s=\lambda_{(-s-1)\bmod d}.
+\]
+Hence, by Theorem 21(a), a cyclic SCC of \(G\) passes the phase test if
+and only if it passes in \(\operatorname{rev}(G)\),
+\(R(\operatorname{rev}(G))=\operatorname{rev}(R(G))\), and
+\[
+\operatorname{rev}\bigl(P(R(\operatorname{rev}(G)))\bigr)=P^-(R(G)).
+\]
+
+**Proof.** (a) Every vertex of \(G'\) has \(\deg^-\ge1\), by the argument of
+Lemma 14(a), so a vertex outside \(B^-\) has exactly one in-edge. If the
+backward iteration did not terminate, it would visit only
+finitely many vertices of in-degree one and would enter a cycle \(Z\) of
+such vertices. The unique in-edge of every vertex of \(Z\) starts in
+\(Z\), so no edge enters \(Z\) from the rest of its component \(C\);
+strong connectivity gives \(C=Z\), and the anchor of \(C\) lies in
+\(B^-\cap Z\): a contradiction. Similarly, suppose that an infinite walk
+\((v_i,w_i)\) avoids \(B^-\) for \(i\ge i_0\). Then
+\((v_i,w_i,v_{i+1})\) is the unique in-edge of \(v_{i+1}\) for
+\(i\ge i_0\). Some vertex repeats, \(v_i=v_j\) with \(i_0<i<j\), and
+\(v_i,\ldots,v_{j-1}\) form a cycle of in-degree-one vertices whose
+in-edges lie on the cycle; as before it is a whole component and contains
+an anchor, a contradiction.
+
+Let \(i<j\) be consecutive visits to \(B^-\). For \(i<k<j\), the edge
+\((v_{k-1},w_{k-1},v_k)\) is the unique in-edge of \(v_k\). Starting from
+the in-edge \((v_{j-1},w_{j-1},v_j)\) of \(v_j\in B^-\), the backward
+iteration therefore passes through \(v_{j-1},\ldots,v_{i+1}\) and stops
+at \(v_i\), recording the macro edge
+\((v_i,w_i\cdots w_{j-1},v_j)\). The walk of macro edges between the
+successive visits has the same output, and the covering statement follows
+as in Proposition 16.
+
+(b) Let \((v,\operatorname{rev}(w),u)\) be an internal edge of the SCC
+in \(\operatorname{rev}(G)\), so that \(h(u)\equiv h(v)+|w|\pmod d\) and
+\(w_{|w|-1-i}=\lambda_{(h(v)+i)\bmod d}\). Then
+\(h'(v)\equiv h'(u)+|w|\), and for \(0\le i<|w|\),
+\[
+w_i=\lambda_{(h(v)+|w|-1-i)\bmod d}=\lambda_{(h(u)-1-i)\bmod d}
+=\lambda'_{(h'(u)+i)\bmod d}.
+\]
+The converse is the same computation applied to \(\operatorname{rev}(G)\),
+since \(\operatorname{rev}\) is an involution. By Theorem 21(a), passing
+the phase test does not depend on the choice of \(h\) among functions
+satisfying (19), so the test gives the same result in both graphs. Reversal preserves the
+strongly connected components and their cyclicity. Hence the retained
+components of \(G\) and \(\operatorname{rev}(G)\) coincide, and
+\(R(\operatorname{rev}(G))=\operatorname{rev}(R(G))\). In
+\(\operatorname{rev}(R(G))\) out-degrees are in-degrees of \(R(G)\), the
+same anchors are chosen, and the forward iteration of Section 4.3 is the
+backward iteration above with reversed words. ∎
+
+Part (a) is the in-direction counterpart of Lemma 15 and
+Proposition 16. By part (b), the implementations compute
+\(P^-(R(G))\) as "reverse, remove, out-contract, reverse back"; the
+graphs of Table 17 therefore rely on part (b) as well. The proofs below use
+part (a) for right-directed walks, and the Lean proof of Theorem 1(iii)
+checks the backward passes directly, without part (b).
+
+### F.3 The finite calculation
+
+For \(5/3\) the stage map \(G_k^{\rm out}=P(R(G_k^{\rm in}))\) of
+Theorem 19 is replaced by a finite sequence of passes. A *forward
+pass* maps \(H\) to \(P(R(H))\), and a *backward pass* maps \(H\) to
+\(P^-(R(H))\). Each stage applies one forward pass and then repeats a
+backward pass followed by a forward pass, at most ten times or until
+such a round leaves the number of vertices unchanged. The stopping rule
+is a choice of computation, not part of the soundness argument.
+
+**Theorem 76 (two-direction finite success).** Theorem 19 remains valid when each \(G_k^{\rm out}\) is obtained from
+\(G_k^{\rm in}\) by any finite sequence of forward and backward passes.
+
+**Proof.** In the proof of Theorem 19, Proposition 13 and Proposition 16 give the
+passage from a covering of \(G_k^{\rm in}\) to a covering of
+\(P(R(G_k^{\rm in}))\) from a later time. Proposition 13 and
+Lemma 75(a) give the same passage for a backward pass. Composing
+finitely many passes preserves a covering from a later time, and the
+remaining steps of the proof are unchanged. ∎
+
+The adopted execution uses \(K=3\), the alphabet of Lemma 74, and the
+nine primes
+\[
+p_1,\ldots,p_9=7,11,13,17,19,23,29,31,37.
+\]
+Table 17 lists its ten stages. The cyclic and certified columns refer to
+the first removal of each stage; the output columns refer to the graph
+after all passes of the stage. Edges are counted as distinct
+word-labelled triples. At stage \(9\) all \(14920\) cyclic SCCs of
+\(G_9^{\rm in}\) are certified, and the output graph is empty. No cell
+refinement, interval propagation, or floating-point pruning is used; the
+cell count remains \(3\).
+
+**Table 17.** The word method for \(5/3\) with \(K=3\), \(\mathcal C=\{-2,2,4\}\), forward and backward passes. Uncertified vertices refer to the first removal; rounds counts the backward--forward rounds.
+
+| \(k\) | \(p_k\) | Input vertices | Input edges | Cyclic SCCs | Certified | Uncertified vertices | Output vertices | Output edges | Max. word length (output) | Rounds |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | — | 3 | 6 | 1 | 0 | 3 | 2 | 5 | 2 | 1 |
+| 1 | 7 | 12 | 24 | 2 | 1 | 9 | 7 | 17 | 5 | 2 |
+| 2 | 11 | 70 | 141 | 2 | 1 | 57 | 38 | 93 | 10 | 2 |
+| 3 | 13 | 456 | 903 | 1 | 0 | 387 | 218 | 573 | 29 | 4 |
+| 4 | 17 | 3482 | 7203 | 1 | 0 | 2873 | 1546 | 4295 | 47 | 6 |
+| 5 | 19 | 27603 | 57768 | 78 | 77 | 21797 | 11127 | 32604 | 87 | 7 |
+| 6 | 23 | 244045 | 503983 | 247 | 246 | 176295 | 67809 | 215777 | 122 | 10 |
+| 7 | 29 | 1882118 | 3735784 | 117 | 116 | 1187270 | 374123 | 1283571 | 243 | 10 |
+| 8 | 31 | 10869041 | 18298921 | 300 | 299 | 4232762 | 729480 | 2712521 | 702 | 9 |
+| 9 | 37 | 21077909 | 21932101 | 14920 | 14920 | 0 | 0 | 0 | — | 0 |
+
+Without backward passes, that is, with the stage map of Theorem 19, the
+same parameters give the input sizes of Table 18, computed by
+implementation B only as a diagnostic, not as part of the certificate.
+The lift to the prime
+\(37\) was counted without being formed: it would have \(313651296\)
+vertices and \(416687195\) lifted edges (counted before identical
+triples are merged). With backward passes the largest input graph has
+\(21077909\) vertices. A direct product of the unit residues modulo
+\(R_{53}\), the part of the modulus of (2a) prime to \(6\), with three
+cells would have
+\[
+3\varphi(247357937827)=413857382400
+\]
+vertices; neither staged construction forms it.
+
+**Table 18.** Input sizes for \(5/3\) with and without backward passes. Entries marked \* were counted but not formed; that edge count includes repeated triples.
+
+| \(k\) | \(p_k\) | Input vertices (forward only) | Input edges (forward only) | Input vertices (both directions) | Input edges (both directions) |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | — | 3 | 6 | 3 | 6 |
+| 1 | 7 | 12 | 24 | 12 | 24 |
+| 2 | 11 | 80 | 152 | 70 | 141 |
+| 3 | 13 | 600 | 1084 | 456 | 903 |
+| 4 | 17 | 5868 | 10376 | 3482 | 7203 |
+| 5 | 19 | 59041 | 102690 | 27603 | 57768 |
+| 6 | 23 | 678409 | 1152740 | 244045 | 503983 |
+| 7 | 29 | 7592055 | 12381638 | 1882118 | 3735784 |
+| 8 | 31 | 67194454 | 102086150 | 10869041 | 18298921 |
+| 9 | 37 | 313651296\* | 416687195\* | 21077909 | 21932101 |
+
+**Proof of Theorem 1(iii).** Table 17 verifies the hypotheses of Theorem 76 with \(S_0=\{2,3\}\),
+\(\mathcal C=\{-2,2,4\}\) (Lemma 74), \(K=3\), the nine primes
+\(7,11,13,17,19,23,29,31,37\), each distinct, coprime to \(15\), and not
+in \(S_0\), and an empty output graph at stage \(9\). Then (20) with
+\[
+M=6\cdot7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31\cdot37
+=1484147626962
+\]
+is (2a). ∎
+
+### F.4 Membership in the certifiable class
+
+Put
+\[
+R_{53}=7\cdot11\cdot13\cdot17\cdot19\cdot23\cdot29\cdot31\cdot37
+=247357937827.
+\]
+
+**Corollary 77.** \(5/3\in\mathcal F_{\rm cert}\): every cyclic SCC of
+\(G'(R_{53},3)\) passes the phase test.
+
+**Proof.** The graph \(G'(R_{53},3)\) uses the alphabet
+\(\mathcal C(5,3)=\{-2,2,4\}\). Suppose that some infinite walk of it has
+an output that is not eventually periodic. Its cells give a walk of
+\(G_0^{\rm in}\) with the same output. Its residues modulo each new prime
+are units at every time, so, by induction over the stages of Table 17,
+each lift keeps a tail of the projected walk. Lemma 30 (for phase removal,
+contraction, and lifting, which are walk-sound) and Lemma 75(a) keep a
+tail through every pass and every lift. The walk
+would survive in the empty output graph of stage \(9\), which is
+impossible. Hence every infinite walk inside a cyclic SCC of
+\(G'(R_{53},3)\) has eventually periodic output, and Theorem 21 shows
+that each such SCC passes the phase test. ∎
+
+This argument does not add in-contraction to the operations of
+Section 7.2; it proves a property of the complete graph of the normal
+form directly, without forming its \(413857382400\) vertices. By the
+remark after Theorem 37, the normal form yields the conclusion
+\(\gcd(Q_n,2\cdot3\cdot5\cdot R_{53})>1\) infinitely often, whose prime
+set contains \(5\); Theorem 1(iii) is the stronger statement obtained
+from Lemma 74 and Table 17.
+
+### F.5 The prime pool through 23
+
+The supplied return-word witness has
+\[
+m=7\cdot11\cdot13\cdot17\cdot19\cdot23=7436429,\qquad q=3684006,
+\qquad I=[2/5,1/2],
+\]
+and two words \(U,V\) over \(\{-2,2,4\}\) of lengths \(119\) and
+\(134\), recorded without abbreviation in
+`supplement/computations/additional_obstructions/`.
+
+**Corollary 78.** For \(5/3\), no execution of \(\mathfrak M_0\), or of an extension by
+pseudo-orbit-sound operations, succeeds when all moduli are composed of
+primes in \(\{2,3,5,7,11,13,17,19,23\}\), for any cell counts and prime
+powers. The same holds for executions that also use backward passes.
+
+**Proof.** The data satisfy the hypotheses of Lemma 69 with
+\((a,b)=(5,3)\). A direct check, independent of any search graph,
+verifies condition (1) at \(255\) residues, including the starting
+residue of each word, condition (2) at the endpoints of \(I\) for all \(253\) suffixes
+(the backward maps are increasing affine maps), \(UV\ne VU\), and
+\(\gcd(c,15)=1\), \(c\equiv0\pmod2\) for every letter. Lemma 69 gives the
+first statement. The pseudo-orbit it constructs gives a right-directed
+walk whose output is not eventually periodic at every stage, and
+Lemma 75(a) keeps a tail of such a walk through a backward pass. ∎
+
+Thus any certificate of this kind for \(5/3\) uses at least one prime
+\(p\ge29\). The corollary does not show that \(29\) suffices, that
+\(37\) is necessary, or that the prime set of (2a) is minimal. Like the
+other results of Section 8, it concerns the non-termination of a
+procedure and is not a counterexample to any arithmetic statement.
+<!-- END PUBLIC ADDITION five-thirds:appendix -->
 
 <!-- BEGIN PUBLIC ADDITION acknowledgments -->
 ## Acknowledgments and disclosure of AI involvement

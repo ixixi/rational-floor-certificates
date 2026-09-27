@@ -1,0 +1,208 @@
+{
+  "status": "verified_empty",
+  "a": 7,
+  "b": 5,
+  "initial_cells": 4,
+  "denominator": 17179869184,
+  "primes": [
+    2,
+    3,
+    5,
+    11,
+    13
+  ],
+  "stages": [
+    {
+      "prime": 0,
+      "input_vertices": 4,
+      "input_edges": 14,
+      "output_vertices": 4,
+      "output_edges": 14,
+      "interval_rounds": 1,
+      "interval_deletions": 0,
+      "cyclic_components": [
+        {
+          "vertices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "certified": false,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "prime": 3,
+      "input_vertices": 8,
+      "input_edges": 15,
+      "output_vertices": 5,
+      "output_edges": 12,
+      "interval_rounds": 2,
+      "interval_deletions": 0,
+      "cyclic_components": [
+        {
+          "vertices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "certified": false,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "prime": 11,
+      "input_vertices": 50,
+      "input_edges": 103,
+      "output_vertices": 5,
+      "output_edges": 10,
+      "interval_rounds": 103,
+      "interval_deletions": 46,
+      "cyclic_components": [
+        {
+          "vertices": [
+            19
+          ],
+          "certified": true,
+          "period": 1,
+          "phase_word": [
+            2
+          ]
+        },
+        {
+          "vertices": [
+            29
+          ],
+          "certified": true,
+          "period": 1,
+          "phase_word": [
+            2
+          ]
+        },
+        {
+          "vertices": [
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            18,
+            20,
+            21,
+            22,
+            24,
+            27,
+            28,
+            30,
+            31,
+            32,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "certified": false,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "prime": 13,
+      "input_vertices": 60,
+      "input_edges": 96,
+      "output_vertices": 0,
+      "output_edges": 0,
+      "interval_rounds": 0,
+      "interval_deletions": 0,
+      "cyclic_components": [
+        {
+          "vertices": [
+            0,
+            18,
+            24,
+            41,
+            51
+          ],
+          "certified": true,
+          "period": 8,
+          "phase_word": [
+            2,
+            2,
+            2,
+            2,
+            -4,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "vertices": [
+            5,
+            6,
+            12,
+            16,
+            29,
+            30,
+            36,
+            39,
+            57
+          ],
+          "certified": true,
+          "period": 13,
+          "phase_word": [
+            2,
+            2,
+            2,
+            -4,
+            2,
+            2,
+            2,
+            2,
+            2,
+            -4,
+            2,
+            2,
+            2
+          ]
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "stage_graphs": 8,
+    "vertices": 136,
+    "edges": 264,
+    "letters": 449
+  },
+  "formalization": "Not Lean-verified; exact executable finite computation."
+}

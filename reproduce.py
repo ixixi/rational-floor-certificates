@@ -134,12 +134,15 @@ def main():
               "commands": [], "status": "running"}
     dump(output / "record.json", record)
     python = [sys.executable, "-B"]
+    # The full run includes the 5/3 computation (two implementations through
+    # all ten stages), so its overall limit is 3600 seconds.
+    total = 3600 if args.mode == "recompute" else 1800
     commands = [
         (python + [str(PACKET / "replay.py"), "run", "--scope",
                    "full" if args.mode == "recompute" else "preflight",
                    "--out", str(output / "finite"), "--command-seconds", "600",
-                   "--total-seconds", "1800", "--memory-gib", "8"],
-         "finite-replay", 1860, 8 << 30),
+                   "--total-seconds", str(total), "--memory-gib", "8"],
+         "finite-replay", total + 60, 8 << 30),
     ]
     try:
         for command, name, seconds, memory in commands:
@@ -155,6 +158,10 @@ def main():
                 result["child_receipt_status"] = child_status
                 if child_status == "inconclusive":
                     result["status"] = "inconclusive"
+                try:
+                    record["five_thirds"] = json.loads(receipt.read_text()).get("five_thirds")
+                except (OSError, ValueError):
+                    record["five_thirds"] = None
             record["commands"].append(result)
             dump(output / "record.json", record)
             print(json.dumps({"step": name, "status": result["status"]}), flush=True)

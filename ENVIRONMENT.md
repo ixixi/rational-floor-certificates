@@ -104,8 +104,11 @@ outside the read-only source mount. They use the image's default root user,
 so result files may be root-owned on a native Linux host. TeX font caches are written inside the temporary container, under its own
 root home; they are not written into the read-only source mount. The build
 needs network access; finite computation, verification and PDF building do not.
-Allow at least 8 GiB of memory for full finite reproduction. TeX/font
-installation and Lean dependency caches can use several GiB of disk space.
+Allow at least 8 GiB of memory for full finite reproduction, and about 12 GB
+of free disk space in its output directory (the 5/3 stage graphs take about
+10 GB). TeX/font installation and Lean dependency caches can use several GiB of
+disk space. The Lean module for 5/3 needs more memory and time than the other
+modules; see [FORMALIZATION.md](supplement/FORMALIZATION.md).
 Base-digest pinning follows [Docker's guidance](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions);
 the dated packages are served by [Debian Snapshot](https://snapshot.debian.org/).
 
@@ -248,8 +251,11 @@ Linux ホストでは出力の所有者が root になる場合があります�
 一時コンテナ内の root のホームへ作られ、読み取り専用のソースには書き込みません。
 イメージ構築時には
 ネットワーク接続が必要ですが、有限計算、ファイル照合、PDF 生成時には不要です。
-全有限計算には最低 8 GiB のメモリを確保してください。TeX・フォントの導入と
+全有限計算には最低 8 GiB のメモリと、出力ディレクトリに約 12 GB の空き容量を確保してください
+（5/3 の段階グラフが約 10 GB を使います）。TeX・フォントの導入と
 Lean 依存キャッシュには数 GiB のディスク容量が必要になる場合があります。
+5/3 の Lean モジュールは、ほかのモジュールより多くのメモリと時間を要します。
+[FORMALIZATION.md](supplement/FORMALIZATION.md#japanese) を参照してください。
 ベースの固定方法は [Docker の説明](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions)、
 日付指定のパッケージは [Debian Snapshot](https://snapshot.debian.org/) によります。
 
