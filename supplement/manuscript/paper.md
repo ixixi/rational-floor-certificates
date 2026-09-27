@@ -1,7 +1,7 @@
 # Finite graph certificates for composite terms in rational floor sequences
 
 <!-- BEGIN PUBLIC ADDITION doi -->
-DOI: [10.5281/zenodo.22995171](https://doi.org/10.5281/zenodo.22995171)
+DOI: [10.5281/zenodo.22997709](https://doi.org/10.5281/zenodo.22997709)
 <!-- END PUBLIC ADDITION doi -->
 
 ## Abstract
