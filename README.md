@@ -12,6 +12,14 @@
 
 DOI (Zenodo): [10.5281/zenodo.22997709](https://doi.org/10.5281/zenodo.22997709).
 
+Preprint on Hexagon: [hexagon:2611.01039v1](https://hexagonmath.org/2611.01039v1).
+
+Palomar registry: [PALOMAR-2026-11-26-000026](https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-26-000026&version=1) records the
+compositeness statement for 7/5, checked without `native_decide`. Its Lean
+source is a port of the one-step 7/5 proof in this repository to the Lean
+module system, kept in
+[rational-floor-seven-fifths-lean](https://github.com/ixixi/rational-floor-seven-fifths-lean).
+
 This repository contains the paper, its computation programs, and its Lean
 formalization. For every real number ξ > 0, the paper proves that each sequence
 ⌊ξ(7/5)ⁿ⌋, ⌊ξ(5/2)ⁿ⌋, and ⌊ξ(5/3)ⁿ⌋ has infinitely many composite terms. The proof
@@ -83,6 +91,13 @@ Repository: [ixixi/rational-floor-certificates](https://github.com/ixixi/rationa
 **有理数を底とする床関数列の合成数項に対する有限グラフ証明書**
 
 DOI（Zenodo）: [10.5281/zenodo.22997709](https://doi.org/10.5281/zenodo.22997709)。
+
+Hexagon のプレプリント: [hexagon:2611.01039v1](https://hexagonmath.org/2611.01039v1)。
+
+Palomar レジストリ: [PALOMAR-2026-11-26-000026](https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-26-000026&version=1) に、
+7/5 の合成数に関する主張を登録しています。`native_decide` を使わずに検査されたものです。
+Lean ソースは、このリポジトリの 7/5 の一段階証明を Lean のモジュールシステムへ移植したもので、
+[rational-floor-seven-fifths-lean](https://github.com/ixixi/rational-floor-seven-fifths-lean) にあります。
 
 このリポジトリには、論文、計算プログラム、Lean による形式証明を収録しています。
 論文では、任意の実数 ξ > 0 に対し、三つの数列 ⌊ξ(7/5)ⁿ⌋、⌊ξ(5/2)ⁿ⌋、⌊ξ(5/3)ⁿ⌋ が
