@@ -17,9 +17,9 @@
       "sha256": "901b46117be28800c13c40129db75bd83fc4cd53f00cf3a1fb36a33e359fb749"
     },
     {
-      "bytes": 761,
+      "bytes": 1132,
       "path": "CITATION.cff",
-      "sha256": "e8c0161a09157588a5c72b348a9f852432a323119904dec4a0447392fa662d18"
+      "sha256": "b6485b4e8cb7c76013b5df5a765aaf958f706bbddfde120d0b8cb204efce7c37"
     },
     {
       "bytes": 1500,
@@ -32,9 +32,9 @@
       "sha256": "7a9e61a85f6f25e654a5e299c11afa95402664cb8e0a3e406d3a141d5c01eb0b"
     },
     {
-      "bytes": 18172,
+      "bytes": 19269,
       "path": "README.md",
-      "sha256": "807b29d56669515f5adce6151ca8fb9b5f87288e0465a5573955c29bcd68d092"
+      "sha256": "594bdb7b1ad52721d7645496adeec0975aed31af843146635b6af98e609e3359"
     },
     {
       "bytes": 10536,
@@ -127,14 +127,14 @@
       "sha256": "68ba764845bd3cce856514d5f2c3ed51caa195a74c24ea6ef3218618291ccaa7"
     },
     {
-      "bytes": 287308,
+      "bytes": 287689,
       "path": "site/index.html",
-      "sha256": "f9744dd2fd74a61aa3ba779f34efbc7162f153005adc4b27339a69dc712ce3f1"
+      "sha256": "7fb10fefcac49fcd630d63a8c99f8b7ea37477aa0036a0db16fd33d4a0b68cdf"
     },
     {
-      "bytes": 473855,
+      "bytes": 474253,
       "path": "site/ja/index.html",
-      "sha256": "bfed213f123b8e03dd863cffac9289a516ee81a8715ad0c295ab752bcef18733"
+      "sha256": "b937da77a10c104476d6d982035582065196fe780fb020afec74b68e7edb1121"
     },
     {
       "bytes": 3912,
@@ -1591,5 +1591,5 @@
   "schema_version": 1,
   "source_date_epoch": 1790034213,
   "source_hash_rule": "SHA-256 of UTF-8 JSON of files excluding PDFs, with sort_keys=True, separators=(comma,colon), ensure_ascii=False; MANIFEST.json and SHA256SUMS are excluded from files.",
-  "source_sha256": "fac227746da2270060764ba1398b1b20dd50e1c6c6bb40d52f89744db92d5340"
+  "source_sha256": "1e4d68c65c998f77ab9bd830d87c840cb8264919de00b55cde2db80999908a29"
 }
